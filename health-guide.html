@@ -3,10 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Health Guide | MediCare+</title>
+<title>Smart Symptom Guide | MediCare+</title>
 
 <style>
-* { box-sizing: border-box; font-family: Arial, sans-serif; }
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
 
 body {
   margin: 0;
@@ -23,7 +26,10 @@ header {
   align-items: center;
 }
 
-.logo { font-size: 24px; font-weight: bold; }
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
 
 .back {
   background: white;
@@ -35,47 +41,86 @@ header {
 }
 
 .container {
-  max-width: 950px;
+  max-width: 850px;
   margin: 30px auto;
   padding: 0 20px;
 }
 
-h1 { color: #1677c8; text-align: center; }
+.box {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+  color: #1677c8;
+}
+
+h1 {
+  text-align: center;
+}
 
 .subtitle {
   text-align: center;
   color: #666;
-  margin-bottom: 20px;
 }
 
 .warning {
   background: #fff3cd;
   padding: 15px;
   border-radius: 8px;
-  margin-bottom: 25px;
+  margin: 20px 0;
   font-size: 14px;
 }
 
-select {
+label {
+  display: block;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 6px;
+}
+
+input, select, textarea {
   width: 100%;
-  padding: 14px;
-  font-size: 16px;
+  padding: 12px;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 7px;
+  font-size: 15px;
 }
 
-.result {
+textarea {
+  resize: vertical;
+}
+
+button {
+  background: #1677c8;
+  color: white;
+  border: none;
+  padding: 13px 20px;
+  border-radius: 7px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 22px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+#assessment, #result {
   display: none;
-  background: white;
-  padding: 25px;
-  margin-top: 25px;
-  border-radius: 12px;
-  box-shadow: 0 3px 15px rgba(0,0,0,0.1);
 }
 
-.result h2 { color: #1677c8; }
+.question-box {
+  background: #f8fbfe;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+  border-left: 4px solid #1677c8;
+}
 
-.section {
+.result-section {
   background: #f8fbfe;
   padding: 15px;
   margin: 12px 0;
@@ -89,6 +134,12 @@ select {
   border-radius: 8px;
   margin-top: 15px;
 }
+
+.success {
+  background: #eaf7ee;
+  padding: 15px;
+  border-radius: 8px;
+}
 </style>
 </head>
 
@@ -101,206 +152,348 @@ select {
 
 <div class="container">
 
-<h1>❤️ Smart Health Guide</h1>
-<p class="subtitle">Select a health condition to view general health information.</p>
+<div class="box" id="patientForm">
+
+<h1>🩺 Smart Symptom Guide</h1>
+<p class="subtitle">Enter basic details and select your main health concern.</p>
 
 <div class="warning">
-⚠️ <strong>Important:</strong> This tool provides general educational information only. It does not diagnose diseases or prescribe medicines. If you are pregnant, have a serious medical condition, or have severe symptoms, please seek advice from a qualified healthcare professional.
+⚠️ <strong>Important:</strong> This is an educational demo tool and does not diagnose diseases or prescribe medicines. For severe symptoms or emergencies, contact a qualified healthcare professional or local emergency services.
 </div>
 
-<select id="condition" onchange="showInfo()">
-  <option value="">-- Select a Health Condition --</option>
-  <option value="bp">High Blood Pressure</option>
-  <option value="diabetes">Diabetes</option>
-  <option value="fever">Fever</option>
-  <option value="headache">Headache</option>
-  <option value="stomach">Stomach Pain</option>
-  <option value="cold">Common Cold</option>
-  <option value="cough">Cough</option>
-  <option value="asthma">Asthma</option>
-  <option value="diarrhea">Diarrhea</option>
-  <option value="vomiting">Vomiting</option>
-  <option value="acidity">Acidity / Indigestion</option>
-  <option value="anemia">Anemia</option>
-  <option value="uti">Urinary Tract Infection</option>
-  <option value="backpain">Back Pain</option>
-  <option value="jointpain">Joint Pain</option>
-  <option value="sleep">Sleep Problems</option>
-  <option value="allergy">Allergies</option>
-  <option value="rash">Skin Rash</option>
-  <option value="eye">Common Eye Problems</option>
-  <option value="tooth">Toothache</option>
+<label>👤 Your Name</label>
+<input type="text" id="name" placeholder="Enter your name" required>
+
+<label>🎂 Age</label>
+<input type="number" id="age" placeholder="Enter your age" min="0" max="120" required>
+
+<label>⚧️ Gender</label>
+<select id="gender" required>
+  <option value="">Select Gender</option>
+  <option>Female</option>
+  <option>Male</option>
+  <option>Other / Prefer not to say</option>
 </select>
 
-<div class="result" id="result"></div>
+<label>📋 Existing Medical Conditions (Optional)</label>
+<textarea id="history" rows="3" placeholder="Example: Diabetes, High BP, Asthma, or write None"></textarea>
+
+<label>⚠️ Known Allergies (Optional)</label>
+<input type="text" id="allergies" placeholder="Example: Medicine or food allergy">
+
+<label>🔍 Select Your Main Symptom</label>
+<select id="symptom" required>
+  <option value="">-- Select a Symptom --</option>
+  <option value="headache">🤕 Headache</option>
+  <option value="stomach">🤢 Stomach / Abdominal Pain</option>
+  <option value="fever">🤒 Fever</option>
+  <option value="cough">😮‍💨 Cough</option>
+  <option value="breathing">🫁 Breathing Difficulty</option>
+  <option value="vomiting">🤮 Nausea / Vomiting</option>
+  <option value="diarrhea">💩 Diarrhea</option>
+  <option value="fatigue">😴 Weakness / Fatigue</option>
+  <option value="dizziness">😵 Dizziness</option>
+  <option value="chest">❤️ Chest Pain / Discomfort</option>
+  <option value="acidity">🔥 Acidity / Heartburn</option>
+  <option value="bleeding">🩸 Unusual Bleeding</option>
+  <option value="joint">🦵 Joint Pain</option>
+  <option value="back">🦴 Back Pain</option>
+  <option value="bodypain">🌡️ Body Pain</option>
+  <option value="cold">🤧 Runny Nose / Sneezing</option>
+  <option value="rash">🧴 Skin Rash / Itching</option>
+  <option value="eye">👁️ Eye Pain / Redness</option>
+  <option value="tooth">🦷 Toothache</option>
+  <option value="urine">🚽 Burning or Pain While Urinating</option>
+</select>
+
+<button onclick="startAssessment()">Continue →</button>
 
 </div>
 
+
+<div class="box" id="assessment">
+
+<h2>📝 A Few More Questions</h2>
+<p id="questionIntro"></p>
+
+<div id="questions"></div>
+
+<button onclick="showResult()">View Health Guidance →</button>
+
+</div>
+
+
+<div class="box" id="result">
+
+<h2 id="resultTitle">Health Guidance</h2>
+
+<div id="urgentAlert"></div>
+
+<div class="result-section">
+<strong>🔎 Possible Causes</strong>
+<p id="causes"></p>
+</div>
+
+<div class="result-section">
+<strong>💡 General Guidance</strong>
+<p id="guidance"></p>
+</div>
+
+<div class="emergency">
+<strong>🚨 When to Seek Medical Help</strong>
+<p id="doctor"></p>
+</div>
+
+<div class="warning">
+⚠️ <strong>Remember:</strong> Many symptoms have multiple possible causes. This page cannot confirm a diagnosis. Do not start or stop prescription medicines based only on this information.
+</div>
+
+<button onclick="restart()">← Start Again</button>
+
+</div>
+
+</div>
+
+
 <script>
-const healthData = {
-bp: {
-title: "❤️ High Blood Pressure (Hypertension)",
-causes: "May be related to genetics, age, lifestyle, high salt intake, obesity, or other medical conditions.",
-symptoms: "Often has no symptoms. Some people may experience headache, dizziness or vision problems.",
-care: "Monitor blood pressure, follow a healthy lifestyle and take medicines only as prescribed by a healthcare professional.",
-doctor: "Seek medical advice for persistently high readings or concerning symptoms."
-},
-diabetes: {
-title: "🩸 Diabetes",
-causes: "A condition involving problems with blood glucose regulation.",
-symptoms: "May include increased thirst, frequent urination, fatigue and unexplained weight changes.",
-care: "Regular monitoring, healthy diet and treatment according to a healthcare professional's plan.",
-doctor: "Seek medical advice for symptoms of very high or low blood sugar."
-},
-fever: {
-title: "🤒 Fever",
-causes: "Can occur with infections and many other medical conditions.",
-symptoms: "Raised body temperature, chills, sweating and weakness.",
-care: "Rest, fluids and monitoring may help. Treatment depends on the cause.",
-doctor: "Seek medical advice for severe, persistent or concerning fever."
-},
+
+const symptomData = {
+
 headache: {
 title: "🤕 Headache",
-causes: "May be related to stress, dehydration, migraine, infection or other causes.",
-symptoms: "Pain or pressure in the head.",
-care: "Rest, hydration and identifying possible triggers may help.",
-doctor: "Seek urgent care for a sudden severe headache or headache with neurological symptoms."
+questions: ["When did the headache start?", "Is the pain mild, moderate or severe?", "Do you have vision changes, weakness or confusion?"],
+causes: "Headaches can have many causes, including stress, dehydration, lack of sleep, migraine, infections and other medical conditions.",
+guidance: "Rest, hydration and noting possible triggers may be helpful. Persistent or recurrent symptoms should be assessed by a healthcare professional.",
+doctor: "Seek urgent medical care for a sudden severe headache, confusion, fainting, weakness, difficulty speaking or significant vision changes."
 },
+
 stomach: {
 title: "🤢 Stomach / Abdominal Pain",
-causes: "May have many causes, including digestive problems, infections or other conditions.",
-symptoms: "Pain, cramps, bloating, nausea or other symptoms depending on the cause.",
-care: "Do not self-medicate without considering the cause. Pregnancy and severe symptoms require special attention.",
-doctor: "Urgent assessment may be needed for severe pain, bleeding, fainting or persistent vomiting."
+questions: ["Where is the pain located?", "When did the pain start?", "Do you have vomiting, fever, diarrhea or bleeding?"],
+causes: "Abdominal pain can have many causes, including digestive problems, infections, urinary conditions and other medical conditions. Pregnancy-related causes may also be relevant for some patients.",
+guidance: "The cause should be considered before taking medicines. Avoid self-treating severe or unexplained abdominal pain without medical advice.",
+doctor: "Seek urgent medical care for severe or worsening pain, fainting, bleeding, persistent vomiting, a rigid abdomen, or other serious symptoms."
 },
-cold: {
-title: "🤧 Common Cold",
-causes: "Usually caused by viral infections.",
-symptoms: "Runny nose, sore throat, sneezing and mild cough.",
-care: "Rest, fluids and general supportive care may help.",
-doctor: "Seek advice if symptoms are severe, prolonged or breathing is affected."
+
+fever: {
+title: "🤒 Fever",
+questions: ["How long have you had fever?", "Do you know your temperature?", "Do you have severe weakness, rash or breathing problems?"],
+causes: "Fever can occur with infections and many other medical conditions.",
+guidance: "Rest, adequate fluids and monitoring symptoms may help. The appropriate treatment depends on the underlying cause.",
+doctor: "Seek medical advice for severe, persistent or worsening fever, or if there are serious accompanying symptoms."
 },
+
 cough: {
 title: "😮‍💨 Cough",
-causes: "May occur due to infections, allergies, asthma or other conditions.",
-symptoms: "Dry or productive cough.",
-care: "Stay hydrated and avoid irritants. Treatment depends on the cause.",
-doctor: "Seek medical advice for persistent cough, breathing difficulty or coughing blood."
+questions: ["How long have you been coughing?", "Is the cough dry or with mucus?", "Do you have fever, chest pain or breathing difficulty?"],
+causes: "Cough may be related to infections, allergies, asthma, irritants or other conditions.",
+guidance: "Stay hydrated and avoid smoke or known irritants. Persistent cough should be evaluated.",
+doctor: "Seek urgent care for severe breathing difficulty, coughing blood, severe chest symptoms or rapidly worsening illness."
 },
-asthma: {
-title: "🫁 Asthma",
-causes: "A chronic airway condition that can be triggered by allergens, infections or exercise.",
-symptoms: "Wheezing, cough, chest tightness and shortness of breath.",
-care: "Follow an asthma action plan and use prescribed treatment as directed.",
-doctor: "Urgent care is needed for severe breathing difficulty."
+
+breathing: {
+title: "🫁 Breathing Difficulty",
+questions: ["Did the breathing difficulty start suddenly?", "Is it getting worse?", "Do you have chest discomfort, bluish lips or severe weakness?"],
+causes: "Breathing difficulty can have many causes involving the lungs, heart, allergies or other conditions.",
+guidance: "Breathing difficulty should not be ignored. Avoid relying on an online guide for severe symptoms.",
+doctor: "🚨 Severe or sudden breathing difficulty requires emergency medical assessment."
 },
+
+vomiting: {
+title: "🤮 Nausea / Vomiting",
+questions: ["How long have you been vomiting?", "Can you keep fluids down?", "Is there blood in the vomit or severe abdominal pain?"],
+causes: "Vomiting may occur due to infections, digestive conditions, pregnancy, food-related illness or other causes.",
+guidance: "Preventing dehydration is important. Small amounts of fluid may be tolerated by some people.",
+doctor: "Seek urgent care for blood in vomit, severe abdominal pain, confusion, severe dehydration or persistent vomiting."
+},
+
 diarrhea: {
 title: "💩 Diarrhea",
-causes: "May be caused by infections, food intolerance or other conditions.",
-symptoms: "Loose or frequent stools and abdominal cramps.",
-care: "Maintain hydration and monitor for dehydration.",
-doctor: "Seek advice for severe dehydration, blood in stool or persistent symptoms."
+questions: ["How long have symptoms been present?", "Is there blood in the stool?", "Are you able to drink enough fluids?"],
+causes: "Diarrhea may be caused by infections, food intolerance, medicines or other conditions.",
+guidance: "Maintaining hydration is important. Monitor for signs of dehydration.",
+doctor: "Seek medical advice for blood in stool, severe dehydration, severe pain or persistent symptoms."
 },
-vomiting: {
-title: "🤮 Vomiting",
-causes: "May occur due to infections, pregnancy, food-related illness or other conditions.",
-symptoms: "Nausea and vomiting.",
-care: "Small amounts of fluid may help prevent dehydration when tolerated.",
-doctor: "Seek medical advice for persistent vomiting, blood in vomit or severe weakness."
+
+fatigue: {
+title: "😴 Weakness / Fatigue",
+questions: ["When did the fatigue start?", "Is it affecting your daily activities?", "Do you have weight changes, fever or shortness of breath?"],
+causes: "Fatigue can be associated with poor sleep, stress, anemia, infections and many other medical conditions.",
+guidance: "Adequate rest, nutrition and hydration are important, but persistent fatigue may need medical assessment.",
+doctor: "Seek medical advice if fatigue is severe, persistent, sudden or associated with concerning symptoms."
 },
+
+dizziness: {
+title: "😵 Dizziness",
+questions: ["Did dizziness start suddenly?", "Have you fainted?", "Do you have weakness, speech problems or chest discomfort?"],
+causes: "Dizziness may have many causes, including dehydration, inner-ear problems, low blood pressure and other conditions.",
+guidance: "Sit or lie down if you feel faint to reduce the risk of falling and seek assessment if symptoms persist.",
+doctor: "Urgent medical care is needed for dizziness with fainting, weakness, difficulty speaking, severe headache or chest symptoms."
+},
+
+chest: {
+title: "❤️ Chest Pain / Discomfort",
+questions: ["When did the discomfort start?", "Is it severe or getting worse?", "Do you have sweating, nausea, faintness or breathing difficulty?"],
+causes: "Chest discomfort can have causes involving the heart, lungs, digestive system, muscles and other conditions.",
+guidance: "Do not attempt to diagnose the cause of significant chest pain using an online guide.",
+doctor: "🚨 New, severe, persistent or unexplained chest pain requires urgent medical assessment, especially with breathing difficulty, sweating or faintness."
+},
+
 acidity: {
-title: "🔥 Acidity / Indigestion",
-causes: "May be related to food, reflux or digestive issues.",
-symptoms: "Burning sensation, bloating or discomfort.",
-care: "Avoid known triggers and discuss recurring symptoms with a healthcare professional.",
-doctor: "Seek medical advice for severe or recurring symptoms."
+title: "🔥 Acidity / Heartburn",
+questions: ["When do symptoms usually occur?", "Are symptoms related to meals?", "Do you have difficulty swallowing, vomiting or weight loss?"],
+causes: "Symptoms may be related to acid reflux, diet or other digestive conditions.",
+guidance: "Avoid known triggers and seek professional advice if symptoms are frequent or recurring.",
+doctor: "Seek medical advice for severe symptoms, difficulty swallowing, vomiting blood, unexplained weight loss or persistent symptoms."
 },
-anemia: {
-title: "🩸 Anemia",
-causes: "May be caused by iron deficiency, blood loss or other medical conditions.",
-symptoms: "Fatigue, weakness, dizziness or shortness of breath.",
-care: "The cause should be identified before treatment.",
-doctor: "Consult a healthcare professional for proper testing and management."
+
+bleeding: {
+title: "🩸 Unusual Bleeding",
+questions: ["Where is the bleeding from?", "Is the bleeding heavy or increasing?", "Do you feel dizzy, faint or weak?"],
+causes: "Unusual bleeding can have many causes and requires appropriate assessment.",
+guidance: "Do not ignore unexplained or heavy bleeding.",
+doctor: "🚨 Heavy bleeding, fainting or signs of shock require emergency medical care."
 },
-uti: {
-title: "🦠 Urinary Tract Infection (UTI)",
-causes: "Usually caused by infection in the urinary system.",
-symptoms: "Burning while urinating, frequent urination or lower abdominal discomfort.",
-care: "Medical evaluation may be needed to identify and treat the infection.",
-doctor: "Seek prompt medical advice, especially during pregnancy or if fever occurs."
-},
-backpain: {
-title: "🦴 Back Pain",
-causes: "May result from muscle strain, posture problems or other conditions.",
-symptoms: "Pain or stiffness in the back.",
-care: "Gentle activity and proper posture may help depending on the cause.",
-doctor: "Seek urgent advice if there is weakness, numbness or bladder/bowel problems."
-},
-jointpain: {
+
+joint: {
 title: "🦵 Joint Pain",
-causes: "May be caused by injury, arthritis or inflammation.",
-symptoms: "Pain, stiffness or swelling.",
-care: "Avoid activities that worsen pain and seek assessment if persistent.",
-doctor: "Seek advice for severe swelling, redness or inability to use the joint."
+questions: ["Which joint is affected?", "Is there swelling or redness?", "Did the pain start after an injury?"],
+causes: "Joint pain may be related to injury, arthritis, inflammation, infection or other conditions.",
+guidance: "Avoid activities that significantly worsen pain and arrange assessment if symptoms persist.",
+doctor: "Seek prompt medical care for severe swelling, redness with fever, major injury or inability to use the joint."
 },
-sleep: {
-title: "😴 Sleep Problems",
-causes: "May be related to stress, lifestyle or medical conditions.",
-symptoms: "Difficulty falling asleep or staying asleep.",
-care: "Maintain a regular sleep routine and healthy sleep habits.",
-doctor: "Seek professional advice if sleep problems persist or affect daily life."
+
+back: {
+title: "🦴 Back Pain",
+questions: ["When did the pain start?", "Did it follow an injury?", "Do you have leg weakness, numbness or bladder/bowel problems?"],
+causes: "Back pain can result from muscle strain, posture issues, injury or other medical conditions.",
+guidance: "Gentle movement may help some types of back pain, but the cause should be considered.",
+doctor: "Seek urgent care for back pain with new weakness, numbness in the groin area, or bladder/bowel control problems."
 },
-allergy: {
-title: "🌸 Allergies",
-causes: "Immune reactions to substances such as pollen, foods or medicines.",
-symptoms: "Sneezing, itching, rash or watery eyes.",
-care: "Avoid known triggers and seek professional advice about appropriate management.",
-doctor: "Emergency care is needed for difficulty breathing or swelling of the face/throat."
+
+bodypain: {
+title: "🌡️ Body Pain",
+questions: ["How long have you had body pain?", "Do you also have fever?", "Is the pain severe or localized to one area?"],
+causes: "Body pain may occur with viral illnesses, physical exertion, inflammation and other conditions.",
+guidance: "Rest and monitoring may be helpful depending on the cause.",
+doctor: "Seek medical advice for severe, persistent or unexplained body pain."
 },
+
+cold: {
+title: "🤧 Runny Nose / Sneezing",
+questions: ["How long have symptoms been present?", "Do you have fever or breathing difficulty?", "Do symptoms occur around a known trigger?"],
+causes: "Symptoms may be related to viral infections, allergies or environmental irritants.",
+guidance: "Rest, fluids and avoiding known triggers may help depending on the cause.",
+doctor: "Seek medical advice if symptoms are severe, prolonged or associated with breathing problems."
+},
+
 rash: {
-title: "🧴 Skin Rash",
-causes: "May be caused by allergies, infections, irritation or other conditions.",
-symptoms: "Redness, itching or skin changes.",
-care: "Avoid scratching and identify possible irritants.",
-doctor: "Seek medical advice for severe, spreading or blistering rashes."
+title: "🧴 Skin Rash / Itching",
+questions: ["When did the rash start?", "Is it spreading quickly?", "Do you have fever, facial swelling or breathing difficulty?"],
+causes: "Rashes can be caused by allergies, irritation, infections and many other conditions.",
+guidance: "Avoid scratching and avoid possible new irritants when safe to do so.",
+doctor: "🚨 Seek emergency care for rash with breathing difficulty or swelling of the face/throat. Seek medical assessment for severe or rapidly spreading rashes."
 },
+
 eye: {
-title: "👁️ Common Eye Problems",
-causes: "Can include infection, allergy, strain or other eye conditions.",
-symptoms: "Redness, itching, pain or vision changes.",
-care: "Avoid rubbing the eyes and maintain eye hygiene.",
-doctor: "Urgent assessment is needed for sudden vision loss or severe eye pain."
+title: "👁️ Eye Pain / Redness",
+questions: ["Is there pain or only redness?", "Has your vision changed?", "Was there an injury or chemical exposure?"],
+causes: "Eye symptoms may be related to infection, allergy, irritation, injury or other eye conditions.",
+guidance: "Avoid rubbing the eye. Do not use unprescribed eye medicines without professional advice.",
+doctor: "Urgent assessment is needed for sudden vision changes, severe eye pain, significant injury or chemical exposure."
 },
+
 tooth: {
 title: "🦷 Toothache",
-causes: "May be due to tooth decay, infection or gum problems.",
-symptoms: "Tooth pain and sensitivity.",
-care: "Maintain oral hygiene and arrange dental assessment.",
-doctor: "Seek urgent dental/medical care for facial swelling, fever or severe symptoms."
+questions: ["How long have you had tooth pain?", "Is there swelling?", "Do you have fever or difficulty swallowing?"],
+causes: "Tooth pain may be caused by decay, infection, gum disease or injury.",
+guidance: "Maintain oral hygiene and arrange a dental assessment to identify the cause.",
+doctor: "Seek urgent dental or medical care for facial swelling, fever, difficulty swallowing or severe worsening symptoms."
+},
+
+urine: {
+title: "🚽 Burning or Pain While Urinating",
+questions: ["When did symptoms start?", "Do you have fever or back/flank pain?", "Is there blood in the urine?"],
+causes: "Symptoms can occur with urinary infections, irritation and other urinary or medical conditions.",
+guidance: "A healthcare professional may need to evaluate the cause, especially if symptoms persist.",
+doctor: "Seek prompt medical advice for fever, severe pain, blood in urine, or if you are pregnant."
 }
+
 };
 
-function showInfo() {
-  const selected = document.getElementById("condition").value;
-  const result = document.getElementById("result");
 
-  if (!selected) {
-    result.style.display = "none";
+let currentSymptom = "";
+
+function startAssessment() {
+  const name = document.getElementById("name").value.trim();
+  const age = document.getElementById("age").value;
+  const gender = document.getElementById("gender").value;
+  const symptom = document.getElementById("symptom").value;
+
+  if (!name || !age || !gender || !symptom) {
+    alert("Please fill in your Name, Age, Gender and Main Symptom.");
     return;
   }
 
-  const d = healthData[selected];
+  currentSymptom = symptom;
+  const data = symptomData[symptom];
 
-  result.innerHTML = `
-    <h2>${d.title}</h2>
-    <div class="section"><strong>Possible Causes:</strong><br>${d.causes}</div>
-    <div class="section"><strong>Common Symptoms:</strong><br>${d.symptoms}</div>
-    <div class="section"><strong>General Care:</strong><br>${d.care}</div>
-    <div class="emergency"><strong>⚠️ When to seek medical help:</strong><br>${d.doctor}</div>
-  `;
+  document.getElementById("patientForm").style.display = "none";
+  document.getElementById("assessment").style.display = "block";
 
-  result.style.display = "block";
+  document.getElementById("questionIntro").innerHTML =
+    "Please answer these questions about <strong>" + data.title + "</strong>. You can write your answers below.";
+
+  let questionsHTML = "";
+
+  data.questions.forEach((question, index) => {
+    questionsHTML += `
+      <div class="question-box">
+        <label>${index + 1}. ${question}</label>
+        <textarea rows="2" placeholder="Write your answer (optional)"></textarea>
+      </div>
+    `;
+  });
+
+  document.getElementById("questions").innerHTML = questionsHTML;
+
+  window.scrollTo(0, 0);
 }
+
+function showResult() {
+  const data = symptomData[currentSymptom];
+
+  document.getElementById("assessment").style.display = "none";
+  document.getElementById("result").style.display = "block";
+
+  document.getElementById("resultTitle").innerHTML = data.title + " – General Health Guidance";
+  document.getElementById("causes").textContent = data.causes;
+  document.getElementById("guidance").textContent = data.guidance;
+  document.getElementById("doctor").textContent = data.doctor;
+
+  const urgent = document.getElementById("urgentAlert");
+
+  if (["breathing", "chest", "bleeding"].includes(currentSymptom)) {
+    urgent.innerHTML = `
+      <div class="emergency">
+        <strong>🚨 Important Safety Alert</strong><br>
+        This symptom can sometimes be serious. If symptoms are severe, sudden, worsening, or accompanied by other warning signs, seek urgent medical care.
+      </div>`;
+  } else {
+    urgent.innerHTML = "";
+  }
+
+  window.scrollTo(0, 0);
+}
+
+function restart() {
+  document.getElementById("result").style.display = "none";
+  document.getElementById("patientForm").style.display = "block";
+  document.getElementById("symptom").value = "";
+  currentSymptom = "";
+  window.scrollTo(0, 0);
+}
+
 </script>
 
 </body>
