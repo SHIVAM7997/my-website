@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile | MediCare+</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f4f7fb;
+      color: #333;
+    }
+
+    header {
+      background: #1677c8;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .back {
+      background: white;
+      color: #1677c8;
+      padding: 9px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .profile-box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+    }
+
+    .profile-header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .avatar {
+      font-size: 65px;
+    }
+
+    h2 {
+      color: #1677c8;
+      margin-bottom: 5px;
+    }
+
+    .info {
+      border-top: 1px solid #eee;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 5px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .label {
+      font-weight: bold;
+      color: #555;
+    }
+
+    .value {
+      color: #777;
+    }
+
+    .demo-note {
+      margin-top: 25px;
+      padding: 12px;
+      background: #eef7ff;
+      border-radius: 7px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @media (max-width: 500px) {
+      .row {
+        flex-direction: column;
+        gap: 5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">✚ MediCare+</div>
+  <a href="dashboard.html" class="back">← Dashboard</a>
+</header>
+
+<div class="container">
+  <div class="profile-box">
+
+    <div class="profile-header">
+      <div class="avatar">👤</div>
+      <h2>Admin Patient</h2>
+      <p>Demo Patient Profile</p>
+    </div>
+
+    <div class="info">
+      <div class="row">
+        <span class="label">Full Name</span>
+        <span class="value">Admin Patient</span>
+      </div>
+
+      <div class="row">
+        <span class="label">Patient ID</span>
+        <span class="value">MC-2026-001</span>
+      </div>
+
+      <div class="row">
+        <span class="label">Age</span>
+        <span class="value">25 Years</span>
+      </div>
+
+      <div class="row">
+        <span class="label">Gender</span>
+        <span class="value">Not Specified</span>
+      </div>
+
+      <div class="row">
+        <span class="label">Email</span>
+        <span class="value">patient@medicareplus.demo</span>
+      </div>
+    </div>
+
+    <div class="demo-note">
+      ℹ️ This profile is for demonstration purposes only.
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
