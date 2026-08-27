@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard | MediCare+</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f4f7fb;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: #1677c8;
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logout {
+            background: white;
+            color: #1677c8;
+            padding: 9px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Main Content */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 35px auto;
+        }
+
+        .welcome {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .welcome h1 {
+            margin: 0 0 8px;
+            color: #1677c8;
+        }
+
+        .welcome p {
+            margin: 0;
+            color: #666;
+        }
+
+        /* Cards */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            margin: 8px 0;
+            color: #222;
+        }
+
+        .card p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .card button {
+            background: #1677c8;
+            color: white;
+            border: none;
+            padding: 9px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">✚ MediCare+</div>
+    <a href="index.html" class="logout">Logout</a>
+</header>
+
+<div class="container">
+
+    <div class="welcome">
+        <h1>Welcome, Admin! 👋</h1>
+        <p>Manage your health information and medical services from your dashboard.</p>
+    </div>
+
+    <div class="dashboard-grid">
+
+        <div class="card">
+            <div class="icon">👤</div>
+            <h3>My Profile</h3>
+            <p>View your personal information.</p>
+            <button onclick="showMessage('Profile section is available in the demo dashboard.')">View Profile</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">📅</div>
+            <h3>Appointments</h3>
+            <p>Check your upcoming appointments.</p>
+            <button onclick="showMessage('No upcoming appointments in this demo.')">View Appointments</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">📋</div>
+            <h3>Medical Records</h3>
+            <p>Access your health records securely.</p>
+            <button onclick="showMessage('Medical records are for demonstration purposes only.')">View Records</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">💊</div>
+            <h3>Prescriptions</h3>
+            <p>View your prescribed medicines.</p>
+            <button onclick="showMessage('No prescriptions available in this demo.')">View Prescriptions</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">❤️</div>
+            <h3>Health Information</h3>
+            <p>Learn useful health information.</p>
+            <button onclick="window.location.href='index.html'">Explore</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">☎️</div>
+            <h3>Contact Support</h3>
+            <p>Get help and support when needed.</p>
+            <button onclick="showMessage('For demo purposes, please contact MediCare+ support.')">Contact</button>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 MediCare+ | Demo Healthcare Website
+</footer>
+
+<script>
+    function showMessage(message) {
+        alert(message);
+    }
+</script>
+
+</body>
+</html>
