@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Support | MediCare+</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f4f7fb;
+      color: #333;
+    }
+
+    header {
+      background: #1677c8;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .back {
+      background: white;
+      color: #1677c8;
+      padding: 9px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 650px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #1677c8;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 13px;
+      background: #1677c8;
+      color: white;
+      border: none;
+      border-radius: 7px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #message {
+      text-align: center;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">✚ MediCare+</div>
+  <a href="dashboard.html" class="back">← Dashboard</a>
+</header>
+
+<div class="container">
+  <div class="box">
+
+    <h2>☎️ Contact Support</h2>
+    <p class="subtitle">We're here to help you with your questions.</p>
+
+    <form onsubmit="sendMessage(event)">
+      <label>Your Name</label>
+      <input type="text" required placeholder="Enter your name">
+
+      <label>Email Address</label>
+      <input type="email" required placeholder="Enter your email">
+
+      <label>Your Message</label>
+      <textarea rows="5" required placeholder="Write your message here..."></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+
+    <p id="message"></p>
+
+  </div>
+</div>
+
+<script>
+  function sendMessage(event) {
+    event.preventDefault();
+    document.getElementById("message").style.color = "green";
+    document.getElementById("message").innerHTML =
+      "✓ Your message has been sent successfully! (Demo)";
+  }
+</script>
+
+</body>
+</html>
