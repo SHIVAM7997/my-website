@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Appointment | MediCare+</title>
+  <style>
+    * { box-sizing: border-box; font-family: Arial, sans-serif; }
+
+    body {
+      margin: 0;
+      background: #f4f7fb;
+      color: #333;
+    }
+
+    header {
+      background: #1677c8;
+      color: white;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo { font-size: 24px; font-weight: bold; }
+
+    .back {
+      background: white;
+      color: #1677c8;
+      padding: 9px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .form-box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+    }
+
+    h2 { color: #1677c8; text-align: center; }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    textarea { resize: vertical; }
+
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 13px;
+      background: #1677c8;
+      color: white;
+      border: none;
+      border-radius: 7px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #message {
+      text-align: center;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">✚ MediCare+</div>
+  <a href="dashboard.html" class="back">← Dashboard</a>
+</header>
+
+<div class="container">
+  <div class="form-box">
+    <h2>📅 Book an Appointment</h2>
+
+    <form onsubmit="bookAppointment(event)">
+      <label>Patient Name</label>
+      <input type="text" required placeholder="Enter your name">
+
+      <label>Select Doctor</label>
+      <select required>
+        <option value="">-- Select Doctor --</option>
+        <option>Dr. Sharma - General Physician</option>
+        <option>Dr. Patel - Cardiologist</option>
+        <option>Dr. Singh - Orthopedic</option>
+      </select>
+
+      <label>Appointment Date</label>
+      <input type="date" required>
+
+      <label>Reason for Visit</label>
+      <textarea rows="4" placeholder="Describe your problem"></textarea>
+
+      <button type="submit">Book Appointment</button>
+    </form>
+
+    <p id="message"></p>
+  </div>
+</div>
+
+<script>
+  function bookAppointment(event) {
+    event.preventDefault();
+    document.getElementById("message").style.color = "green";
+    document.getElementById("message").innerHTML =
+      "✓ Appointment booked successfully! (Demo)";
+  }
+</script>
+
+</body>
+</html>
