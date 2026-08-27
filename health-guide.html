@@ -225,7 +225,7 @@ button:hover {
 
 <div class="box" id="result">
 
-<h2 id="resultTitle">Health Guidance</h2>
+<div class="success" id="patientSummary"></div>
 
 <div id="urgentAlert"></div>
 
@@ -462,7 +462,16 @@ function startAssessment() {
 
 function showResult() {
   const data = symptomData[currentSymptom];
+const name = document.getElementById("name").value;
+const age = document.getElementById("age").value;
+const gender = document.getElementById("gender").value;
 
+document.getElementById("patientSummary").innerHTML =
+  "<strong>👤 Patient Summary</strong><br>" +
+  "Name: " + name + "<br>" +
+  "Age: " + age + "<br>" +
+  "Gender: " + gender + "<br>" +
+  "Selected Concern: " + data.title;
   document.getElementById("assessment").style.display = "none";
   document.getElementById("result").style.display = "block";
 
