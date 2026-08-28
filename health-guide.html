@@ -8,9 +8,9 @@
 
 <style>
 *{
-  box-sizing:border-box;
   margin:0;
   padding:0;
+  box-sizing:border-box;
   font-family:Arial,Helvetica,sans-serif;
 }
 
@@ -42,20 +42,20 @@ header{
 
 .back{
   background:#1f6fae;
-  color:white;
+  color:#fff;
   text-decoration:none;
   padding:10px 16px;
   border-radius:9px;
   font-size:13px;
 }
 
-/* HERO */
 main{
   max-width:1150px;
   margin:auto;
   padding:30px 5% 50px;
 }
 
+/* HERO */
 .hero{
   background:linear-gradient(135deg,#eaf3f8,#ffffff);
   border:1px solid #dce8ee;
@@ -76,42 +76,39 @@ main{
 }
 
 .hero p{
-  max-width:650px;
+  max-width:680px;
   margin:auto;
   color:#71808d;
   line-height:1.7;
 }
 
-/* SECTION */
-.section-heading{
-  margin:30px 0 18px;
+/* GRID */
+.section-title{
+  margin-bottom:18px;
 }
 
-.section-heading h2{
+.section-title h2{
   font-size:24px;
   margin-bottom:6px;
 }
 
-.section-heading p{
+.section-title p{
   color:#71808d;
   font-size:14px;
 }
 
-/* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
   gap:18px;
 }
 
 .card{
-  background:white;
+  background:#fff;
   border:1px solid #e1e8ee;
   border-radius:18px;
   padding:22px;
   transition:.25s;
-  display:flex;
-  flex-direction:column;
 }
 
 .card:hover{
@@ -120,18 +117,18 @@ main{
 }
 
 .icon{
-  width:58px;
-  height:58px;
+  width:60px;
+  height:60px;
+  border-radius:17px;
   background:#edf5f9;
-  border-radius:16px;
   display:grid;
   place-items:center;
-  font-size:30px;
-  margin-bottom:15px;
+  font-size:32px;
+  margin-bottom:14px;
 }
 
 .card h3{
-  font-size:18px;
+  font-size:19px;
   margin-bottom:8px;
 }
 
@@ -139,19 +136,18 @@ main{
   font-size:13px;
   color:#71808d;
   line-height:1.6;
-  flex-grow:1;
+  min-height:45px;
 }
 
-/* EXPLORE BUTTON */
 .explore-btn{
   margin-top:16px;
+  width:100%;
   border:none;
   background:#1f6fae;
   color:white;
-  padding:10px 14px;
-  border-radius:8px;
+  padding:11px;
+  border-radius:9px;
   cursor:pointer;
-  font-size:13px;
   font-weight:bold;
 }
 
@@ -162,12 +158,11 @@ main{
 /* INFORMATION PANEL */
 .info-panel{
   display:none;
-  background:white;
+  background:#fff;
   border:1px solid #dce8ee;
   border-radius:20px;
   padding:25px;
-  margin-top:25px;
-  line-height:1.7;
+  margin-top:28px;
   animation:show .35s ease;
 }
 
@@ -176,37 +171,50 @@ main{
 }
 
 .info-panel h2{
-  margin-bottom:10px;
+  font-size:25px;
+  margin-bottom:20px;
 }
 
-.info-panel p{
+.info-box{
+  background:#f7fafc;
+  border-radius:12px;
+  padding:17px;
+  margin-bottom:13px;
+}
+
+.info-box h3{
+  font-size:16px;
+  margin-bottom:8px;
+}
+
+.info-box p,.info-box li{
   color:#526775;
-  margin-bottom:10px;
+  font-size:14px;
+  line-height:1.7;
 }
 
-.warning{
-  background:#fff5e8;
-  border-left:4px solid #e39b38;
-  padding:14px;
+.info-box ul{
+  padding-left:20px;
+}
+
+.emergency-box{
+  background:#fff1f1;
+  border-left:4px solid #d94b4b;
   border-radius:8px;
-  font-size:13px;
+  padding:15px;
   margin-top:15px;
-  color:#6d5737;
+  color:#704040;
+  font-size:13px;
+  line-height:1.6;
 }
 
-.tip-box{
-  margin-top:30px;
+.disclaimer{
+  margin-top:25px;
   background:#eaf3f8;
-  border-radius:20px;
-  padding:25px;
-}
-
-.tip-box h2{
-  margin-bottom:10px;
-}
-
-.tip-box p{
+  border-radius:18px;
+  padding:20px;
   color:#526775;
+  font-size:13px;
   line-height:1.7;
 }
 
@@ -223,17 +231,10 @@ footer{
 }
 
 @media(max-width:600px){
-  main{
-    padding:25px 5% 40px;
-  }
-
-  .hero h1{
-    font-size:26px;
-  }
-
-  .grid{
-    grid-template-columns:1fr;
-  }
+  main{padding:25px 5% 40px}
+  .hero h1{font-size:26px}
+  .grid{grid-template-columns:1fr}
+  .info-panel{padding:18px}
 }
 </style>
 </head>
@@ -247,33 +248,295 @@ footer{
 
 <main>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-icon">🏥</div>
+  <div class="hero-icon">📚</div>
   <h1>Health Education & Awareness</h1>
   <p>
-    Learn about important health topics, healthy habits and disease awareness.
-    Knowledge helps you make informed decisions about your health.
+    Learn about common health conditions, their risk factors, warning signs
+    and ways to support prevention and early care.
   </p>
 </section>
 
-<!-- DAILY HEALTH -->
-<section class="section-heading">
-  <h2>🌿 Everyday Healthy Living</h2>
-  <p>Simple topics to help support a healthy lifestyle.</p>
+<section class="section-title">
+  <h2>🩺 Important Health Awareness Topics</h2>
+  <p>Select any topic to learn about causes, warning signs and prevention.</p>
 </section>
 
 <section class="grid">
 
   <article class="card">
-    <div class="icon">🧼</div>
-    <h3>Hand Hygiene</h3>
-    <p>Learn why proper hand hygiene is important for preventing the spread of infections.</p>
-    <button class="explore-btn" onclick="showInfo('hand')">Explore →</button>
+    <div class="icon">❤️</div>
+    <h3>Heart Health</h3>
+    <p>Learn about heart health, risk factors, warning signs and healthy lifestyle habits.</p>
+    <button class="explore-btn" onclick="showInfo('heart')">Explore →</button>
   </article>
 
   <article class="card">
-    <div class="icon">🥗</div>
-    <h3>Healthy Nutrition</h3>
-    <p>Understand the importance of a balanced and nutritious diet for overall wellbeing.</p>
-    <button class="explore-btn" onclick="showInfo('nutrition')">Explore →</button>
+    <div class="icon">🩸</div>
+    <h3>Blood Pressure</h3>
+    <p>Understand blood pressure, common risk factors, categories and prevention.</p>
+    <button class="explore-btn" onclick="showInfo('bp')">Explore →</button>
+  </article>
+
+  <article class="card">
+    <div class="icon">🧠</div>
+    <h3>Stroke Awareness</h3>
+    <p>Learn possible warning signs of stroke and why quick emergency action matters.</p>
+    <button class="explore-btn" onclick="showInfo('stroke')">Explore →</button>
+  </article>
+
+  <article class="card">
+    <div class="icon">🎗️</div>
+    <h3>Cancer Awareness</h3>
+    <p>Understand cancer awareness, risk factors and the importance of screening.</p>
+    <button class="explore-btn" onclick="showInfo('cancer')">Explore →</button>
+  </article>
+
+  <article class="card">
+    <div class="icon">👁️</div>
+    <h3>Eye Health</h3>
+    <p>Learn about common eye-health risks and habits that help protect your vision.</p>
+    <button class="explore-btn" onclick="showInfo('eye')">Explore →</button>
+  </article>
+
+  <article class="card">
+    <div class="icon">🆘</div>
+    <h3>Basic First Aid</h3>
+    <p>Learn important safety principles and when emergency professional help is needed.</p>
+    <button class="explore-btn" onclick="showInfo('firstaid')">Explore →</button>
+  </article>
+
+</section>
+
+<!-- INFORMATION AREA -->
+<section class="info-panel" id="infoPanel">
+
+  <h2 id="infoTitle"></h2>
+
+  <div class="info-box">
+    <h3>📖 What is it?</h3>
+    <p id="what"></p>
+  </div>
+
+  <div class="info-box">
+    <h3>⚠️ Causes / Risk Factors</h3>
+    <ul id="causes"></ul>
+  </div>
+
+  <div class="info-box">
+    <h3>🔍 Common Warning Signs</h3>
+    <ul id="symptoms"></ul>
+  </div>
+
+  <div class="info-box">
+    <h3>🛡️ Prevention & Healthy Habits</h3>
+    <ul id="prevention"></ul>
+  </div>
+
+  <div class="emergency-box" id="emergency"></div>
+
+</section>
+
+<section class="disclaimer">
+  ⚠️ <strong>Health Education Notice:</strong> This page provides general health awareness only.
+  It cannot diagnose a disease or replace a doctor or qualified healthcare professional.
+  For severe, sudden or worsening symptoms, seek appropriate medical care.
+</section>
+
+</main>
+
+<footer>© 2026 ZevaCare | Health Education & Awareness</footer>
+
+<script>
+const healthData = {
+
+heart:{
+ title:"❤️ Heart Health",
+ what:"Heart health refers to keeping the heart and blood vessels functioning as well as possible. Heart disease can have different causes and types.",
+ causes:[
+  "High blood pressure",
+  "Diabetes",
+  "High cholesterol",
+  "Smoking or tobacco use",
+  "Physical inactivity",
+  "Unhealthy diet and excess body weight",
+  "Family history and increasing age"
+ ],
+ symptoms:[
+  "Chest discomfort or pressure",
+  "Shortness of breath",
+  "Unusual sweating or nausea",
+  "Pain that may spread to the arm, jaw, back or shoulder",
+  "Some heart conditions may have different or less typical symptoms"
+ ],
+ prevention:[
+  "Avoid tobacco products",
+  "Choose a balanced diet",
+  "Stay physically active according to your ability",
+  "Manage blood pressure, diabetes and cholesterol with professional guidance",
+  "Attend recommended health check-ups"
+ ],
+ emergency:"🚨 Sudden severe chest discomfort, severe breathing difficulty, fainting or other serious symptoms need urgent emergency medical assessment."
+},
+
+bp:{
+ title:"🩸 Blood Pressure Awareness",
+ what:"Blood pressure is the force of blood pushing against artery walls. High blood pressure often has no noticeable symptoms and needs proper measurement for diagnosis.",
+ causes:[
+  "Family history and increasing age",
+  "High salt intake and unhealthy diet",
+  "Excess body weight",
+  "Physical inactivity",
+  "Smoking and excessive alcohol use",
+  "Some medical conditions or medicines"
+ ],
+ symptoms:[
+  "High blood pressure often causes no symptoms",
+  "Very high blood pressure can sometimes be associated with severe symptoms",
+  "Only a proper blood pressure measurement can determine the reading"
+ ],
+ prevention:[
+  "Maintain a healthy lifestyle and balanced diet",
+  "Limit excess salt according to healthcare advice",
+  "Stay physically active",
+  "Avoid tobacco",
+  "Monitor blood pressure as recommended by a healthcare professional"
+ ],
+ emergency:"🚨 A very high reading with chest pain, severe headache, weakness, confusion, vision changes or breathing difficulty requires urgent medical assessment."
+},
+
+stroke:{
+ title:"🧠 Stroke Awareness",
+ what:"A stroke happens when blood flow to part of the brain is interrupted or bleeding occurs in the brain. It is a medical emergency.",
+ causes:[
+  "High blood pressure",
+  "Certain heart conditions",
+  "Diabetes",
+  "Smoking",
+  "High cholesterol",
+  "Other medical and individual risk factors"
+ ],
+ symptoms:[
+  "Sudden face weakness or drooping",
+  "Sudden weakness or numbness of an arm or leg, especially on one side",
+  "Sudden difficulty speaking or understanding speech",
+  "Sudden loss of balance or severe unexplained symptoms"
+ ],
+ prevention:[
+  "Control blood pressure with professional guidance",
+  "Avoid smoking",
+  "Manage diabetes and other health conditions",
+  "Follow a healthy lifestyle",
+  "Take prescribed medicines as directed by your doctor"
+ ],
+ emergency:"🚨 Possible stroke symptoms require immediate emergency medical help. Do not wait to see if symptoms improve."
+},
+
+cancer:{
+ title:"🎗️ Cancer Awareness",
+ what:"Cancer is a group of diseases involving abnormal cell growth. There are many types, and causes and risks can differ depending on the type.",
+ causes:[
+  "Tobacco use is a major risk factor for several cancers",
+  "Certain infections can increase the risk of some cancers",
+  "Radiation and environmental exposures in some situations",
+  "Family history or inherited factors",
+  "Age and other individual risk factors"
+ ],
+ symptoms:[
+  "Persistent or unexplained changes in the body should be assessed",
+  "A new or changing lump may need medical evaluation",
+  "Unexplained bleeding or persistent symptoms should not be ignored",
+  "Symptoms vary greatly and do not always mean cancer"
+ ],
+ prevention:[
+  "Avoid tobacco",
+  "Maintain a healthy lifestyle",
+  "Follow recommended vaccinations and screening where appropriate",
+  "Protect yourself from excessive sun exposure",
+  "Discuss individual screening needs with a healthcare professional"
+ ],
+ emergency:"⚠️ Persistent or concerning symptoms should be discussed with a qualified healthcare professional. Early assessment can be important."
+},
+
+eye:{
+ title:"👁️ Eye Health",
+ what:"Eye health includes protecting vision and identifying eye problems early. Different eye conditions can have different causes and treatments.",
+ causes:[
+  "Age-related changes",
+  "Diabetes and high blood pressure",
+  "Eye injury or infection",
+  "Family history of some eye diseases",
+  "Prolonged exposure to harmful sunlight"
+ ],
+ symptoms:[
+  "Blurred or reduced vision",
+  "Eye pain or severe redness",
+  "Sudden changes in vision",
+  "Flashes, new floaters or other concerning visual changes"
+ ],
+ prevention:[
+  "Have eye examinations as recommended",
+  "Use appropriate eye protection during risky activities",
+  "Protect eyes from excessive UV exposure",
+  "Manage diabetes and blood pressure",
+  "Avoid rubbing or using unprescribed medicines in the eyes"
+ ],
+ emergency:"🚨 Sudden vision loss, serious eye injury or severe eye pain needs urgent medical assessment."
+},
+
+firstaid:{
+ title:"🆘 Basic First Aid Awareness",
+ what:"First aid is the immediate assistance given to an injured or suddenly ill person until professional help is available. Practical skills should be learned through recognized first-aid training.",
+ causes:[
+  "Road or household accidents",
+  "Falls and injuries",
+  "Burns or cuts",
+  "Sudden medical emergencies",
+  "Other unexpected incidents"
+ ],
+ symptoms:[
+  "Severity depends on the emergency or injury",
+  "Heavy bleeding, unconsciousness or breathing difficulty are serious warning signs",
+  "Always assess the situation for danger before helping"
+ ],
+ prevention:[
+  "Learn first aid and CPR from a recognized training provider",
+  "Keep a basic first-aid kit available",
+  "Follow safety precautions at home and work",
+  "Do not attempt procedures you are not trained to perform"
+ ],
+ emergency:"🚨 If a person is unconscious, not breathing normally, has severe bleeding or another life-threatening emergency, contact local emergency services immediately."
+}
+
+};
+
+function showInfo(topic){
+
+ const data = healthData[topic];
+
+ document.getElementById("infoTitle").innerHTML=data.title;
+ document.getElementById("what").innerHTML=data.what;
+
+ const fillList=(id,items)=>{
+   document.getElementById(id).innerHTML=
+   items.map(item=>`<li>${item}</li>`).join("");
+ };
+
+ fillList("causes",data.causes);
+ fillList("symptoms",data.symptoms);
+ fillList("prevention",data.prevention);
+
+ document.getElementById("emergency").innerHTML=data.emergency;
+
+ const panel=document.getElementById("infoPanel");
+ panel.classList.add("show");
+
+ panel.scrollIntoView({
+   behavior:"smooth",
+   block:"start"
+ });
+}
+</script>
+
+</body>
+</html>
