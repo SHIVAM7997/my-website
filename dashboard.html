@@ -224,8 +224,18 @@ footer {
 
 <main>
 
-  <section class="welcome">
-    <h1>Welcome to ZevaCare 👋</h1>
+  <section class="welcome"><script>
+const savedProfile = localStorage.getItem("zevaCareProfile");
+
+if (savedProfile) {
+  const profile = JSON.parse(savedProfile);
+  if (profile.name) {
+    document.getElementById("welcomeMessage").textContent =
+      "Welcome, " + profile.name + "! 👋";
+  }
+}
+</script>
+    <h1 id="welcomeMessage">Welcome to ZevaCare 👋</h1>
     <p>Your healthcare information and support platform.</p>
   </section>
 
