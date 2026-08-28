@@ -3,124 +3,205 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MediCare+ | Your Health, Our Priority</title>
+
+  <title>ZevaCare | Health Information & Guidance</title>
 
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     body {
-      background: #f5f9fd;
-      color: #1f3449;
+      background: #f7fafc;
+      color: #1e293b;
     }
 
-    /* Navigation */
-    nav {
-      background: white;
-      padding: 16px 8%;
+    /* Header */
+    header {
+      background: #ffffff;
+      padding: 15px 8%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border-bottom: 1px solid #e8eef3;
     }
 
-    .logo {
-      font-size: 25px;
+    /* Logo */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .logo-mark {
+      width: 43px;
+      height: 43px;
+      border-radius: 11px;
+      background: #1769aa;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 27px;
       font-weight: bold;
-      color: #1677c8;
+    }
+
+    .brand-name {
+      font-size: 24px;
+      font-weight: 700;
+      color: #163a59;
+    }
+
+    .brand-name span {
+      color: #1769aa;
+    }
+
+    .tagline {
+      font-size: 11px;
+      color: #7a8794;
+      margin-top: 2px;
     }
 
     .login-btn {
-      text-decoration: none;
-      background: #1677c8;
+      background: #1769aa;
       color: white;
+      text-decoration: none;
       padding: 11px 22px;
-      border-radius: 8px;
-      font-weight: bold;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 600;
     }
 
-    /* Hero Section */
+    /* Hero */
     .hero {
-      min-height: 520px;
-      padding: 80px 10%;
+      min-height: 560px;
+      padding: 70px 10%;
       display: flex;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      background: linear-gradient(135deg, #e8f4ff, #ffffff);
+      justify-content: space-between;
+      gap: 60px;
+      background:
+        radial-gradient(circle at 90% 15%, #dceefa 0%, transparent 28%),
+        #f7fafc;
     }
 
-    .hero-content {
-      max-width: 750px;
+    .hero-text {
+      flex: 1;
+      max-width: 620px;
     }
 
-    .hero-icon {
-      font-size: 75px;
-      margin-bottom: 20px;
+    .small-title {
+      color: #1769aa;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
     }
 
     h1 {
       font-size: 52px;
-      color: #123b5d;
-      margin-bottom: 20px;
+      line-height: 1.12;
+      color: #163a59;
+      margin-bottom: 22px;
     }
 
     h1 span {
-      color: #1677c8;
+      color: #1769aa;
     }
 
-    .hero p {
-      font-size: 19px;
+    .hero-text p {
+      font-size: 18px;
       line-height: 1.7;
-      color: #5c6b78;
-      margin-bottom: 30px;
+      color: #617080;
+      max-width: 560px;
     }
 
-    .main-btn {
+    .hero-btn {
       display: inline-block;
-      text-decoration: none;
-      background: #1677c8;
+      margin-top: 30px;
+      padding: 15px 27px;
+      background: #1769aa;
       color: white;
-      padding: 15px 30px;
-      border-radius: 9px;
-      font-size: 17px;
+      text-decoration: none;
+      border-radius: 8px;
       font-weight: bold;
     }
 
-    .security-note {
-      margin-top: 22px;
-      color: #667788;
-      font-size: 14px;
+    .disclaimer {
+      margin-top: 18px;
+      font-size: 13px !important;
+      color: #7b8794 !important;
+    }
+
+    /* Health Card */
+    .hero-visual {
+      flex: 0.8;
+      min-width: 330px;
+    }
+
+    .health-card {
+      background: white;
+      border-radius: 22px;
+      padding: 38px;
+      box-shadow: 0 20px 50px rgba(22, 58, 89, 0.1);
+      text-align: center;
+      border: 1px solid #edf2f6;
+    }
+
+    .doctor-icon {
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 22px;
+      border-radius: 50%;
+      background: #eaf4fb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 55px;
+    }
+
+    .health-card h2 {
+      color: #163a59;
+      margin-bottom: 12px;
+      font-size: 25px;
+    }
+
+    .health-card p {
+      color: #687786;
+      line-height: 1.6;
+      font-size: 15px;
     }
 
     /* About */
     .about {
       background: white;
-      padding: 60px 10%;
+      padding: 70px 10%;
       text-align: center;
+      border-top: 1px solid #eef2f5;
     }
 
     .about h2 {
-      font-size: 30px;
-      color: #123b5d;
+      font-size: 32px;
+      color: #163a59;
       margin-bottom: 18px;
     }
 
     .about p {
-      max-width: 800px;
+      max-width: 780px;
       margin: auto;
-      line-height: 1.7;
-      color: #596b7b;
+      color: #657382;
+      line-height: 1.8;
+      font-size: 16px;
     }
 
     /* Footer */
     footer {
-      background: #123b5d;
-      color: white;
+      background: #163a59;
+      color: #dce6ee;
       text-align: center;
       padding: 25px;
       font-size: 14px;
@@ -128,25 +209,44 @@
 
     /* Mobile */
     @media (max-width: 768px) {
-      nav {
-        padding: 15px 6%;
+      header {
+        padding: 14px 6%;
+      }
+
+      .brand-name {
+        font-size: 21px;
+      }
+
+      .tagline {
+        display: none;
+      }
+
+      .login-btn {
+        padding: 10px 16px;
       }
 
       .hero {
-        padding: 70px 7%;
-        min-height: 500px;
+        flex-direction: column;
+        text-align: center;
+        padding: 65px 7%;
+        gap: 40px;
       }
 
       h1 {
-        font-size: 38px;
+        font-size: 39px;
       }
 
-      .hero p {
-        font-size: 17px;
+      .hero-text p {
+        font-size: 16px;
+      }
+
+      .hero-visual {
+        min-width: 100%;
+        width: 100%;
       }
 
       .about {
-        padding: 50px 7%;
+        padding: 55px 7%;
       }
     }
   </style>
@@ -154,47 +254,67 @@
 
 <body>
 
-  <!-- Navigation -->
-  <nav>
-    <div class="logo">✚ MediCare+</div>
-    <a href="login.html" class="login-btn">🔐 Login</a>
-  </nav>
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="logo-mark">+</div>
+      <div>
+        <div class="brand-name">Zeva<span>Care</span></div>
+        <div class="tagline">Health Information & Guidance</div>
+      </div>
+    </div>
 
-  <!-- Welcome Section -->
+    <a href="login.html" class="login-btn">Login</a>
+  </header>
+
+  <!-- Hero -->
   <section class="hero">
-    <div class="hero-content">
-      <div class="hero-icon">❤️‍🩹</div>
 
-      <h1>Your Health,<br><span>Our Priority.</span></h1>
+    <div class="hero-text">
+      <div class="small-title">Smart Healthcare Support</div>
+
+      <h1>Understand Your Health,<br><span>One Step at a Time.</span></h1>
 
       <p>
-        Welcome to MediCare+, a smart healthcare support platform designed
-        to provide easy access to healthcare information and helpful digital
-        health services.
+        ZevaCare is a digital healthcare information platform designed to
+        help users explore common health concerns and access useful health
+        guidance in one convenient place.
       </p>
 
-      <a href="login.html" class="main-btn">🔐 Login to Continue →</a>
+      <a href="login.html" class="hero-btn">Login to Continue →</a>
 
-      <p class="security-note">
-        🔒 Please login to access personalized healthcare services.
+      <p class="disclaimer">
+        For health information and awareness. Not a substitute for professional medical advice.
       </p>
     </div>
+
+    <div class="hero-visual">
+      <div class="health-card">
+        <div class="doctor-icon">🧑‍⚕️</div>
+        <h2>Health Support Made Simple</h2>
+        <p>
+          Access healthcare information and digital services through
+          a simple and easy-to-use platform.
+        </p>
+      </div>
+    </div>
+
   </section>
 
   <!-- About -->
   <section class="about">
-    <h2>About MediCare+</h2>
+    <h2>About ZevaCare</h2>
     <p>
-      MediCare+ is an educational healthcare platform created to demonstrate
-      how digital technology can support health awareness and access to general
-      health information. This platform does not replace professional medical
-      advice, diagnosis, or treatment.
+      ZevaCare is an educational healthcare platform that demonstrates how
+      digital technology can support health awareness and access to general
+      health information. The platform does not provide a medical diagnosis
+      or replace consultation with a qualified healthcare professional.
     </p>
   </section>
 
   <!-- Footer -->
   <footer>
-    © 2026 MediCare+ | Educational Healthcare Platform
+    © 2026 ZevaCare | Educational Healthcare Platform
   </footer>
 
 </body>
