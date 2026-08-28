@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Health Tracker | ZevaCare</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: #f4f7fb;
+  color: #263b4d;
+}
+
+header {
+  background: white;
+  padding: 16px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e1e8ee;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #1f6fae;
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.brand-name {
+  font-size: 22px;
+  font-weight: bold;
+  color: #20394f;
+}
+
+.brand-name span {
+  color: #1f6fae;
+}
+
+.back {
+  text-decoration: none;
+  color: #1f6fae;
+  font-weight: bold;
+}
+
+main {
+  max-width: 1100px;
+  margin: auto;
+  padding: 45px 7%;
+}
+
+.hero h1 {
+  font-size: 32px;
+  color: #20394f;
+  margin-bottom: 8px;
+}
+
+.hero p {
+  color: #6d7d8b;
+  margin-bottom: 30px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.box {
+  background: white;
+  border: 1px solid #e1e8ee;
+  border-radius: 16px;
+  padding: 26px;
+}
+
+.box h2 {
+  color: #20394f;
+  margin-bottom: 8px;
+}
+
+.box-description {
+  color: #71808d;
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+label {
+  display: block;
+  margin: 14px 0 6px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d9e2e9;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.btn {
+  width: 100%;
+  padding: 13px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 8px;
+  background: #1f6fae;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.records-section {
+  margin-top: 30px;
+  background: white;
+  border: 1px solid #e1e8ee;
+  border-radius: 16px;
+  padding: 26px;
+}
+
+.records-section h2 {
+  margin-bottom: 18px;
+  color: #20394f;
+}
+
+.empty {
+  color: #7a8995;
+  text-align: center;
+  padding: 25px;
+}
+
+.record {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px;
+  border-bottom: 1px solid #edf1f4;
+}
+
+.record:last-child {
+  border-bottom: none;
+}
+
+.record-info strong {
+  color: #263b4d;
+}
+
+.record-info span {
+  display: block;
+  font-size: 13px;
+  color: #748390;
+  margin-top: 4px;
+}
+
+.delete {
+  background: none;
+  border: none;
+  color: #b04a4a;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.note {
+  margin-top: 25px;
+  padding: 18px;
+  background: #edf4f9;
+  border-radius: 12px;
+  color: #627382;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #71808d;
+  font-size: 13px;
+}
+
+@media(max-width:650px) {
+  header {
+    padding: 14px 6%;
+  }
+
+  main {
+    padding: 35px 6%;
+  }
+
+  .hero h1 {
+    font-size: 27px;
+  }
+
+  .record {
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">
+    <div class="logo">+</div>
+    <div class="brand-name">Zeva<span>Care</span></div>
+  </div>
+  <a href="dashboard.html" class="back">← Dashboard</a>
+</header>
+
+<main>
+
+  <section class="hero">
+    <h1>My Health Tracker 📊</h1>
+    <p>Keep a personal record of selected health measurements and manage your reminders.</p>
+  </section>
+
+  <section class="grid">
+
+    <!-- Health Record -->
+    <div class="box">
+      <h2>📊 Add Health Record</h2>
+      <p class="box-description">Save a personal measurement for your own tracking and awareness.</p>
+
+      <label>Record Type</label>
+      <select id="recordType">
+        <option value="Weight">⚖️ Weight</option>
+        <option value="Blood Pressure">🩸 Blood Pressure</option>
+        <option value="Pulse">❤️ Pulse</option>
+      </select>
+
+      <label>Value</label>
+      <input type="text" id="recordValue" placeholder="Example: 65 kg or 120/80">
+
+      <button class="btn" onclick="addRecord()">Save Record</button>
+    </div>
+
+    <!-- Reminder -->
+    <div class="box">
+      <h2>🔔 Add Reminder</h2>
+      <p class="box-description">Create a personal reminder for your daily routine.</p>
+
+      <label>Reminder</label>
+      <select id="reminderType">
+        <option value="Drink Water 💧">Drink Water 💧</option>
+        <option value="Exercise 🚶">Exercise 🚶</option>
+        <option value="Medicine Reminder 💊">Medicine Reminder 💊</option>
+        <option value="Appointment 📅">Appointment 📅</option>
+      </select>
+
+      <label>Reminder Time</label>
+      <input type="time" id="reminderTime">
+
+      <button class="btn" onclick="addReminder()">Add Reminder</button>
+    </div>
+
+  </section>
+
+  <!-- Records -->
+  <section class="records-section">
+    <h2>📋 My Health Records</h2>
+    <div id="recordsList"></div>
+  </section>
+
+  <!-- Reminders -->
+  <section class="records-section">
+    <h2>🔔 My Reminders</h2>
+    <div id="remindersList"></div>
+  </section>
+
+  <div class="note">
+    <strong>Important:</strong> This tracker is for personal record keeping and general awareness only.
+    It does not diagnose a health condition or replace professional medical advice.
+    For urgent or concerning symptoms, seek appropriate medical care.
+    Reminders in this demo work only while you are using the website and are not guaranteed
+    to function as background alarms.
+  </div>
+
+</main>
+
+<footer>
+  © 2026 ZevaCare | Educational Healthcare Platform
+</footer>
+
+<script>
+let records = JSON.parse(localStorage.getItem("zevaCareRecords")) || [];
+let reminders = JSON.parse(localStorage.getItem("zevaCareReminders")) || [];
+
+function saveData() {
+  localStorage.setItem("zevaCareRecords", JSON.stringify(records));
+  localStorage.setItem("zevaCareReminders", JSON.stringify(reminders));
+}
+
+function addRecord() {
+  const type = document.getElementById("recordType").value;
+  const value = document.getElementById("recordValue").value.trim();
+
+  if (!value) {
+    alert("Please enter a value.");
+    return;
+  }
+
+  records.unshift({
+    id: Date.now(),
+    type: type,
+    value: value,
+    date: new Date().toLocaleString()
+  });
+
+  document.getElementById("recordValue").value = "";
+  saveData();
+  renderRecords();
+}
+
+function deleteRecord(id) {
+  records = records.filter(record => record.id !== id);
+  saveData();
+  renderRecords();
+}
+
+function renderRecords() {
+  const list = document.getElementById("recordsList");
+
+  if (records.length === 0) {
+    list.innerHTML = '<div class="empty">No health records added yet.</div>';
+    return;
+  }
+
+  list.innerHTML = records.map(record => `
+    <div class="record">
+      <div class="record-info">
+        <strong>${record.type}: ${record.value}</strong>
+        <span>${record.date}</span>
+      </div>
+      <button class="delete" onclick="deleteRecord(${record.id})">Delete</button>
+    </div>
+  `).join("");
+}
+
+function addReminder() {
+  const type = document.getElementById("reminderType").value;
+  const time = document.getElementById("reminderTime").value;
+
+  if (!time) {
+    alert("Please select a reminder time.");
+    return;
+  }
+
+  reminders.unshift({
+    id: Date.now(),
+    type: type,
+    time: time
+  });
+
+  document.getElementById("reminderTime").value = "";
+  saveData();
+  renderReminders();
+}
+
+function deleteReminder(id) {
+  reminders = reminders.filter(reminder => reminder.id !== id);
+  saveData();
+  renderReminders();
+}
+
+function renderReminders() {
+  const list = document.getElementById("remindersList");
+
+  if (reminders.length === 0) {
+    list.innerHTML = '<div class="empty">No reminders added yet.</div>';
+    return;
+  }
+
+  list.innerHTML = reminders.map(reminder => `
+    <div class="record">
+      <div class="record-info">
+        <strong>${reminder.type}</strong>
+        <span>⏰ ${reminder.time}</span>
+      </div>
+      <button class="delete" onclick="deleteReminder(${reminder.id})">Delete</button>
+    </div>
+  `).join("");
+}
+
+renderRecords();
+renderReminders();
+</script>
+
+</body>
+</html>
