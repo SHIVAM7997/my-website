@@ -1,159 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Profile | MediCare+</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Profile | ZevaCare</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
+<style>
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
 
-    body {
-      margin: 0;
-      background: #f4f7fb;
-      color: #333;
-    }
+body {
+  margin: 0;
+  background: #f5f8fb;
+  color: #243447;
+}
 
-    header {
-      background: #1677c8;
-      color: white;
-      padding: 18px 7%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+header {
+  background: white;
+  padding: 16px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e5ebf0;
+}
 
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-    }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-    .back {
-      background: white;
-      color: #1677c8;
-      padding: 9px 16px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-    }
+.logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: #1769aa;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: bold;
+}
 
-    .container {
-      max-width: 700px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
+.brand h2 {
+  color: #163a59;
+}
 
-    .profile-box {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.1);
-    }
+.brand span {
+  color: #1769aa;
+}
 
-    .profile-header {
-      text-align: center;
-      margin-bottom: 25px;
-    }
+.back-btn {
+  text-decoration: none;
+  color: #1769aa;
+  font-weight: bold;
+}
 
-    .avatar {
-      font-size: 65px;
-    }
+.container {
+  max-width: 650px;
+  margin: 45px auto;
+  padding: 0 20px;
+}
 
-    h2 {
-      color: #1677c8;
-      margin-bottom: 5px;
-    }
+.form-box {
+  background: white;
+  padding: 30px;
+  border-radius: 14px;
+  border: 1px solid #e5ebf0;
+}
 
-    .info {
-      border-top: 1px solid #eee;
-    }
+h1 {
+  color: #163a59;
+  margin-top: 0;
+}
 
-    .row {
-      display: flex;
-      justify-content: space-between;
-      padding: 15px 5px;
-      border-bottom: 1px solid #eee;
-    }
+.subtitle {
+  color: #687786;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
 
-    .label {
-      font-weight: bold;
-      color: #555;
-    }
+label {
+  display: block;
+  margin: 16px 0 7px;
+  font-weight: bold;
+  color: #34495e;
+}
 
-    .value {
-      color: #777;
-    }
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d8e1e8;
+  border-radius: 8px;
+  font-size: 15px;
+}
 
-    .demo-note {
-      margin-top: 25px;
-      padding: 12px;
-      background: #eef7ff;
-      border-radius: 7px;
-      text-align: center;
-      font-size: 14px;
-    }
+textarea {
+  resize: vertical;
+  min-height: 90px;
+}
 
-    @media (max-width: 500px) {
-      .row {
-        flex-direction: column;
-        gap: 5px;
-      }
-    }
-  </style>
+.save-btn {
+  width: 100%;
+  margin-top: 25px;
+  padding: 14px;
+  background: #1769aa;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.note {
+  margin-top: 18px;
+  font-size: 13px;
+  color: #74808b;
+  text-align: center;
+}
+
+@media(max-width: 600px) {
+  header {
+    padding: 14px 6%;
+  }
+
+  .container {
+    margin: 30px auto;
+  }
+
+  .form-box {
+    padding: 22px;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">✚ MediCare+</div>
-  <a href="dashboard.html" class="back">← Dashboard</a>
+  <div class="brand">
+    <div class="logo">+</div>
+    <h2>Zeva<span>Care</span></h2>
+  </div>
+  <a href="dashboard.html" class="back-btn">← Dashboard</a>
 </header>
 
 <div class="container">
-  <div class="profile-box">
+  <div class="form-box">
+    <h1>My Profile</h1>
+    <p class="subtitle">
+      Add your basic information to personalize your experience on ZevaCare.
+    </p>
 
-    <div class="profile-header">
-      <div class="avatar">👤</div>
-      <h2>Admin Patient</h2>
-      <p>Demo Patient Profile</p>
-    </div>
+    <form id="profileForm">
+      <label>Full Name</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
 
-    <div class="info">
-      <div class="row">
-        <span class="label">Full Name</span>
-        <span class="value">Admin Patient</span>
-      </div>
+      <label>Age</label>
+      <input type="number" id="age" min="0" max="120" placeholder="Enter your age" required>
 
-      <div class="row">
-        <span class="label">Patient ID</span>
-        <span class="value">MC-2026-001</span>
-      </div>
+      <label>Gender</label>
+      <select id="gender" required>
+        <option value="">Select gender</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+        <option>Prefer not to say</option>
+      </select>
 
-      <div class="row">
-        <span class="label">Age</span>
-        <span class="value">25 Years</span>
-      </div>
+      <label>Blood Group (Optional)</label>
+      <select id="bloodGroup">
+        <option value="">Select blood group</option>
+        <option>A+</option><option>A-</option>
+        <option>B+</option><option>B-</option>
+        <option>AB+</option><option>AB-</option>
+        <option>O+</option><option>O-</option>
+      </select>
 
-      <div class="row">
-        <span class="label">Gender</span>
-        <span class="value">Not Specified</span>
-      </div>
+      <label>Existing Health Conditions (Optional)</label>
+      <textarea id="condition" placeholder="Example: Diabetes, asthma, or leave blank"></textarea>
 
-      <div class="row">
-        <span class="label">Email</span>
-        <span class="value">patient@medicareplus.demo</span>
-      </div>
-    </div>
+      <button type="submit" class="save-btn">Save Profile</button>
+    </form>
 
-    <div class="demo-note">
-      ℹ️ This profile is for demonstration purposes only.
-    </div>
-
+    <p class="note">
+      Educational demo: Please avoid entering sensitive personal information.
+    </p>
   </div>
 </div>
+
+<script>
+const form = document.getElementById("profileForm");
+
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const profile = {
+    name: document.getElementById("name").value,
+    age: document.getElementById("age").value,
+    gender: document.getElementById("gender").value,
+    bloodGroup: document.getElementById("bloodGroup").value,
+    condition: document.getElementById("condition").value
+  };
+
+  localStorage.setItem("zevaCareProfile", JSON.stringify(profile));
+  alert("Profile saved successfully!");
+});
+</script>
 
 </body>
 </html>
