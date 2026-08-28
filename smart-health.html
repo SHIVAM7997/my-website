@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Health System | ZevaCare</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
+body{background:#f5f8fb;color:#263b4d}
+header{background:#fff;padding:15px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e1e8ee}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{width:43px;height:43px;background:#1f6fae;color:#fff;border-radius:12px;display:grid;place-items:center;font-size:25px;font-weight:bold}
+.brand-name{font-size:22px;font-weight:bold;color:#20394f}
+.brand-name span{color:#1f6fae}
+.back{background:#1f6fae;color:#fff;text-decoration:none;padding:10px 15px;border-radius:8px;font-size:13px;font-weight:bold}
+
+main{max-width:950px;margin:auto;padding:30px 5% 55px}
+.hero{text-align:center;margin-bottom:25px}
+.hero h1{color:#20394f;margin-bottom:10px}
+.hero p{color:#71808d;line-height:1.6;max-width:700px;margin:auto}
+
+.card{background:#fff;border:1px solid #e1e8ee;border-radius:18px;padding:24px;margin-bottom:20px}
+.card h2{font-size:19px;color:#20394f;margin-bottom:8px}
+.card-sub{font-size:13px;color:#71808d;margin-bottom:18px}
+
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+.full{grid-column:1/-1}
+
+label{font-size:13px;font-weight:bold;color:#405466;display:block;margin-bottom:6px}
+input,select,textarea{
+ width:100%;padding:12px;border:1px solid #d7e0e6;border-radius:9px;
+ font-size:14px;background:#fff;outline:none
+}
+input:focus,select:focus,textarea:focus{border-color:#1f6fae}
+textarea{resize:vertical;min-height:90px}
+
+.hidden{display:none!important}
+
+.symptoms{
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+ gap:10px
+}
+.symptom-item{
+ border:1px solid #dce5ea;border-radius:10px;padding:11px;
+ display:flex;align-items:center;gap:9px;background:#fafcfd;
+ cursor:pointer;font-size:13px
+}
+.symptom-item:hover{border-color:#1f6fae}
+.symptom-item input{width:auto;accent-color:#1f6fae}
+
+.question-box{
+ background:#f7fafc;border:1px solid #e0e8ed;border-radius:12px;
+ padding:18px;margin-top:15px
+}
+.question-box h3{font-size:16px;margin-bottom:14px;color:#20394f}
+
+.alert{
+ padding:15px;border-radius:10px;margin-bottom:15px;line-height:1.5;
+ font-size:14px
+}
+.warning{background:#fff4e5;border:1px solid #f0c36d;color:#704d00}
+.danger{background:#fff0f0;border:1px solid #f0aaaa;color:#8a1f1f}
+.success{background:#eef8f1;border:1px solid #b8dfc1;color:#24663a}
+
+button{
+ border:none;background:#1f6fae;color:white;padding:13px 20px;
+ border-radius:9px;font-size:14px;font-weight:bold;cursor:pointer
+}
+button:hover{opacity:.9}
+
+.result{display:none}
+.summary-box{background:#f7fafc;padding:18px;border-radius:12px;margin-bottom:15px}
+.summary-box p{margin:7px 0;font-size:14px;line-height:1.5}
+.guidance{background:#edf4f9;border-radius:12px;padding:18px;line-height:1.7;font-size:14px}
+.guidance h3{margin-bottom:8px}
+
+.disclaimer{font-size:12px;color:#71808d;line-height:1.6;margin-top:18px}
+
+@media(max-width:650px){
+ .grid{grid-template-columns:1fr}
+ .full{grid-column:auto}
+ header{padding:13px 5%}
+ main{padding:25px 5% 45px}
+ .symptoms{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="brand">
+   <div class="logo">+</div>
+   <div class="brand-name">Zeva<span>Care</span></div>
+ </div>
+ <a href="dashboard.html" class="back">← Dashboard</a>
+</header>
+
+<main>
+
+<section class="hero">
+ <h1>🩺 Smart Health System</h1>
+ <p>Share your symptoms and health information to receive general health guidance and important safety alerts.</p>
+</section>
+
+<form id="healthForm">
+
+<!-- PATIENT DETAILS -->
+<section class="card">
+ <h2>👤 Patient Details</h2>
+ <p class="card-sub">Please enter basic patient information.</p>
+
+ <div class="grid">
+  <div>
+   <label>Full Name</label>
+   <input type="text" id="name" required placeholder="Enter patient name">
+  </div>
+
+  <div>
+   <label>Age</label>
+   <input type="number" id="age" min="0" max="120" required placeholder="Enter age">
+  </div>
+
+  <div>
+   <label>Gender</label>
+   <select id="gender" required>
+    <option value="">Select gender</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+    <option value="Other">Other / Prefer not to say</option>
+   </select>
+  </div>
+ </div>
+
+ <!-- PREGNANCY: PROJECT RULE -->
+ <div id="pregnancyBox" class="question-box hidden">
+  <h3>👩 Pregnancy Information</h3>
+  <label>Is the patient currently pregnant?</label>
+  <select id="pregnancy">
+   <option value="">Select</option>
+   <option value="Yes">Yes</option>
+   <option value="No">No</option>
+   <option value="Not sure">Not sure</option>
+  </select>
+ </div>
+</section>
+
+<!-- MEDICAL HISTORY -->
+<section class="card">
+ <h2>📋 Medical History & Safety Information</h2>
+ <p class="card-sub">This information helps identify situations where professional medical advice may be important.</p>
+
+ <div class="grid">
+  <div>
+   <label>Do you have any existing medical condition?</label>
+   <select id="condition">
+    <option value="No">No</option>
+    <option value="Yes">Yes</option>
+    <option value="Not sure">Not sure</option>
+   </select>
+  </div>
+
+  <div>
+   <label>Any known medicine allergy or previous reaction?</label>
+   <select id="allergy">
+    <option value="No">No</option>
+    <option value="Yes">Yes</option>
+    <option value="Not sure">Not sure</option>
+   </select>
+  </div>
+
+  <div class="full">
+   <label>Existing condition, allergy, or important health information (if any)</label>
+   <textarea id="history" placeholder="Example: diabetes, asthma, known medicine allergy, etc."></textarea>
+  </div>
+
+  <div class="full">
+   <label>Regular medicines currently being taken (if any)</label>
+   <textarea id="regularMeds" placeholder="Enter medicine names if known"></textarea>
+  </div>
+ </div>
+</section>
+
+<!-- SYMPTOMS -->
+<section class="card">
+ <h2>🩺 Select Current Symptoms</h2>
+ <p class="card-sub">You can select one or more symptoms.</p>
+
+ <div class="symptoms">
+  <label class="symptom-item"><input type="checkbox" value="Headache"> 🤕 Headache</label>
+  <label class="symptom-item"><input type="checkbox" value="Fever"> 🤒 Fever</label>
+  <label class="symptom-item"><input type="checkbox" value="Nausea or Vomiting"> 🤢 Nausea / Vomiting</label>
+  <label class="symptom-item"><input type="checkbox" value="Cough"> 😷 Cough</label>
+  <label class="symptom-item"><input type="checkbox" value="Cold or Runny Nose"> 🤧 Cold / Runny Nose</label>
+  <label class="symptom-item"><input type="checkbox" value="Difficulty Breathing"> 😮‍💨 Difficulty Breathing</label>
+  <label class="symptom-item"><input type="checkbox" value="Stomach Pain"> 💢 Stomach Pain</label>
+  <label class="symptom-item"><input type="checkbox" value="Diarrhea"> 💩 Diarrhea</label>
+  <label class="symptom-item"><input type="checkbox" value="Constipation"> 🚽 Constipation</label>
+  <label class="symptom-item"><input type="checkbox" value="Dizziness"> 😵 Dizziness</label>
+  <label class="symptom-item"><input type="checkbox" value="Fatigue or Weakness"> 😴 Fatigue / Weakness</label>
+  <label class="symptom-item"><input type="checkbox" value="Chest Discomfort"> 💓 Chest Discomfort</label>
+  <label class="symptom-item"><input type="checkbox" value="Body Pain"> 🦵 Body Pain</label>
+  <label class="symptom-item"><input type="checkbox" value="Sore Throat"> 🔥 Sore Throat</label>
+  <label class="symptom-item"><input type="checkbox" value="Unusual Bleeding"> 🩸 Unusual Bleeding</label>
+  <label class="symptom-item"><input type="checkbox" value="Skin Rash or Itching"> 🟡 Skin Rash / Itching</label>
+  <label class="symptom-item"><input type="checkbox" value="Swelling"> 🦶 Swelling</label>
+  <label class="symptom-item"><input type="checkbox" value="Anxiety or Restlessness"> 😰 Anxiety / Restlessness</label>
+  <label class="symptom-item"><input type="checkbox" value="Loss of Appetite"> 🥵 Loss of Appetite</label>
+  <label class="symptom-item"><input type="checkbox" value="Dehydration or Excessive Thirst"> 💧 Excessive Thirst / Dehydration</label>
+ </div>
+</section>
+
+<!-- GENERAL DETAILS -->
+<section class="card">
+ <h2>⏱️ Symptom Details</h2>
+
+ <div class="grid">
+  <div>
+   <label>How long have the symptoms been present?</label>
+   <select id="duration">
+    <option value="">Select duration</option>
+    <option>Less than 24 hours</option>
+    <option>1–3 days</option>
+    <option>4–7 days</option>
+    <option>More than 1 week</option>
+   </select>
+  </div>
+
+  <div>
+   <label>Overall severity</label>
+   <select id="severity">
+    <option value="">Select severity</option>
+    <option value="Mild">🟢 Mild</option>
+    <option value="Moderate">🟡 Moderate</option>
+    <option value="Severe">🔴 Severe</option>
+   </select>
+  </div>
+
+  <div class="full">
+   <label>Describe what is happening or any possible trigger</label>
+   <textarea id="description" placeholder="Example: pain started after eating, symptoms occur at night, etc."></textarea>
+  </div>
+ </div>
+
+ <!-- Dynamic questions appear here -->
+ <div id="followUpArea"></div>
+</section>
+
+<button type="submit">🔍 Get Smart Health Guidance</button>
+
+</form>
+
+<!-- RESULTS -->
+<section id="resultSection" class="card result">
+
+ <h2>📊 Your Health Summary</h2>
+
+ <div id="alertArea"></div>
+
+ <div class="summary-box" id="summary"></div>
+
+ <div class="guidance">
+  <h3>💡 General Health Guidance</h3>
+  <div id="guidanceText"></div>
+ </div>
+
+ <p class="disclaimer">
+ ⚠️ <strong>Important:</strong> This Smart Health System provides general educational guidance only. It cannot diagnose a disease or replace a doctor, nurse, pharmacist, or emergency service. If symptoms are severe, worsening, or you are concerned, seek professional medical care.
+ </p>
+
+</section>
+
+</main>
+
+<script>
+const age = document.getElementById("age");
+const gender = document.getElementById("gender");
+const pregnancyBox = document.getElementById("pregnancyBox");
+const pregnancy = document.getElementById("pregnancy");
+const symptomChecks = document.querySelectorAll('.symptom-item input[type="checkbox"]');
+const followUpArea = document.getElementById("followUpArea");
+
+/* Pregnancy visibility according to requested project rule */
+function updatePregnancy() {
+  const patientAge = Number(age.value);
+  if (gender.value === "Female" && patientAge >= 21) {
+    pregnancyBox.classList.remove("hidden");
+  } else {
+    pregnancyBox.classList.add("hidden");
+    pregnancy.value = "";
+  }
+}
+
+age.addEventListener("input", updatePregnancy);
+gender.addEventListener("change", updatePregnancy);
+
+/* Follow-up questions for selected symptoms */
+const followUps = {
+ "Headache": "Did the headache start suddenly or gradually? Any vision changes or fainting?",
+ "Fever": "Do you know the temperature? Are there chills, rash, or worsening symptoms?",
+ "Nausea or Vomiting": "How often is vomiting happening? Are you able to keep fluids down?",
+ "Cough": "Is the cough dry or with mucus? Is there breathing difficulty?",
+ "Cold or Runny Nose": "Are there other symptoms such as fever, sore throat, or facial pain?",
+ "Difficulty Breathing": "Is breathing difficulty present at rest or getting worse? This may need urgent assessment.",
+ "Stomach Pain": "Where is the pain located? Is it constant or intermittent? Is there vomiting, fever, or change in bowel habits?",
+ "Diarrhea": "How frequent are the stools? Are you able to drink fluids and are there signs of dehydration?",
+ "Constipation": "How long has constipation been present? Is there severe pain, vomiting, or abdominal swelling?",
+ "Dizziness": "Did you faint or nearly faint? Does dizziness happen when standing up?",
+ "Fatigue or Weakness": "Is the weakness sudden or gradually developing? Is it affecting normal activities?",
+ "Chest Discomfort": "When did it start? Is there shortness of breath, sweating, fainting, or pain spreading elsewhere?",
+ "Body Pain": "Which body areas are affected? Is there fever, injury, or recent unusual physical activity?",
+ "Sore Throat": "How long has it been present? Is swallowing or breathing difficult?",
+ "Unusual Bleeding": "Where is the bleeding from and how much bleeding is occurring? Sudden or heavy bleeding needs urgent assessment.",
+ "Skin Rash or Itching": "When did the rash start? Is there swelling of the face/lips or difficulty breathing?",
+ "Swelling": "Where is the swelling? Did it appear suddenly and is there breathing difficulty or severe pain?",
+ "Anxiety or Restlessness": "Is the feeling sudden or persistent? Is it affecting daily activities or safety?",
+ "Loss of Appetite": "How long has appetite been reduced? Is there weight loss, vomiting, or other symptoms?",
+ "Dehydration or Excessive Thirst": "Are you drinking enough fluids? Is there reduced urination, dizziness, or extreme weakness?"
+};
+
+function updateFollowUps() {
+  const selected = [...symptomChecks].filter(c => c.checked).map(c => c.value);
+
+  if (!selected.length) {
+    followUpArea.innerHTML = "";
+    return;
+  }
+
+  let html = `<div class="question-box">
+    <h3>🤖 Smart Follow-up Questions</h3>
+    <p style="font-size:13px;color:#657686;margin-bottom:12px">
+      Please consider these questions and add relevant details in the description above.
+    </p>`;
+
+  selected.forEach(symptom => {
+    html += `<div style="margin:12px 0;padding:12px;background:#fff;border-radius:8px;border-left:3px solid #1f6fae">
+      <strong>${symptom}</strong><br>
+      <span style="font-size:13px;color:#657686">${followUps[symptom]}</span>
+    </div>`;
+  });
+
+  html += `</div>`;
+  followUpArea.innerHTML = html;
+}
+
+symptomChecks.forEach(check => check.addEventListener("change", updateFollowUps));
+
+/* Form submission and safety screening */
+document.getElementById("healthForm").addEventListener("submit", function(e) {
+ e.preventDefault();
+
+ const selected = [...symptomChecks].filter(c => c.checked).map(c => c.value);
+
+ if (!selected.length) {
+   alert("Please select at least one symptom.");
+   return;
+ }
+
+ const name = document.getElementById("name").value;
+ const patientAge = age.value;
+ const patientGender = gender.value;
+ const severity = document.getElementById("severity").value;
+ const duration = document.getElementById("duration").value;
+ const allergy = document.getElementById("allergy").value;
+ const condition = document.getElementById("condition").value;
+ const pregnant = pregnancy.value;
+
+ let urgent = false;
+ let alerts = [];
+
+ /* Red flag screening */
+ const emergencySymptoms = [
+   "Difficulty Breathing",
+   "Chest Discomfort",
+   "Unusual Bleeding"
+ ];
+
+ if (selected.some(s => emergencySymptoms.includes(s))) {
+   urgent = true;
+   alerts.push("Some selected symptoms can sometimes be associated with serious conditions and should be assessed promptly, especially if severe or worsening.");
+ }
+
+ if (severity === "Severe") {
+   urgent = true;
+   alerts.push("Severe symptoms should not be ignored. Consider urgent professional medical assessment.");
+ }
+
+ if (pregnant === "Yes" || pregnant === "Not sure") {
+   alerts.push("Pregnancy status may affect health decisions. Avoid self-prescribing medicines and consult a qualified healthcare professional for personalised advice.");
+ }
+
+ if (allergy === "Yes" || condition === "Yes") {
+   alerts.push("Existing medical conditions or medicine allergies should be considered before taking any new medicine.");
+ }
+
+ const summary = document.getElementById("summary");
+ summary.innerHTML = `
+   <p><strong>Patient:</strong> ${escapeHTML(name)}</p>
+   <p><strong>Age / Gender:</strong> ${escapeHTML(patientAge)} years / ${escapeHTML(patientGender)}</p>
+   <p><strong>Selected Symptoms:</strong> ${selected.map(escapeHTML).join(", ")}</p>
+   <p><strong>Duration:</strong> ${escapeHTML(duration || "Not specified")}</p>
+   <p><strong>Severity:</strong> ${escapeHTML(severity || "Not specified")}</p>
+ `;
+
+ const alertArea = document.getElementById("alertArea");
+ alertArea.innerHTML = "";
+
+ if (urgent) {
+   alertArea.innerHTML += `<div class="alert danger">🚨 <strong>Urgent Attention Recommended:</strong> Based on the information selected, please seek prompt assessment from a qualified healthcare professional or local emergency service, especially if symptoms are severe, sudden, or worsening.</div>`;
+ }
+
+ if (alerts.length && !urgent) {
+   alertArea.innerHTML += `<div class="alert warning">⚠️ ${alerts.join("<br><br>")}</div>`;
+ } else if (alerts.length && urgent) {
+   alertArea.innerHTML += `<div class="alert warning">⚠️ ${alerts.filter(a => !a.includes("serious") && !a.includes("Severe symptoms")).join("<br><br>")}</div>`;
+ }
+
+ const guidanceText = document.getElementById("guidanceText");
+
+ let guidance = `
+   <p>• Monitor your symptoms and note any changes or worsening.</p>
+   <p>• Rest and maintain appropriate fluid intake unless a healthcare professional has advised otherwise.</p>
+   <p>• Avoid assuming that one symptom has only one cause; proper assessment may be needed to identify the reason.</p>
+ `;
+
+ if (duration === "More than 1 week") {
+   guidance += `<p>• Because symptoms have been present for more than one week, consider discussing them with a qualified healthcare professional.</p>`;
+ }
+
+ if (pregnant === "Yes" || pregnant === "Not sure") {
+   guidance += `<p>• Because pregnancy may be relevant, do not rely on this system for medicine selection. Consult a qualified healthcare professional or pharmacist before taking medicines.</p>`;
+ }
+
+ if (condition === "Yes" || allergy === "Yes") {
+   guidance += `<p>• Tell your healthcare professional about existing conditions, allergies and regular medicines before starting any new treatment.</p>`;
+ }
+
+ if (!urgent) {
+   guidance += `<p>• If symptoms become severe, sudden, or concerning, seek medical care promptly.</p>`;
+ }
+
+ guidanceText.innerHTML = guidance;
+
+ document.getElementById("resultSection").style.display = "block";
+ document.getElementById("resultSection").scrollIntoView({behavior:"smooth"});
+});
+
+function escapeHTML(value) {
+ return String(value)
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
+}
+</script>
+
+</body>
+</html>
