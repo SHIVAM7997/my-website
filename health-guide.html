@@ -3,101 +3,277 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Health Education | ZevaCare</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background:#f4f8fb;color:#20394f}
-header{background:#fff;padding:15px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e1e8ee}
-.brand{font-size:22px;font-weight:bold}.brand span{color:#1f6fae}
-.back{background:#1f6fae;color:#fff;text-decoration:none;padding:10px 15px;border-radius:8px;font-size:13px}
-main{max-width:1050px;margin:auto;padding:30px 5% 50px}
-.hero{text-align:center;margin-bottom:28px}.hero h1{font-size:30px;margin-bottom:9px}.hero p{color:#71808d;line-height:1.6}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
-.card{background:#fff;border:1px solid #e1e8ee;border-radius:18px;padding:22px;transition:.25s}
-.card:hover{transform:translateY(-4px);box-shadow:0 10px 25px rgba(0,0,0,.07)}
-.icon{font-size:42px;margin-bottom:12px}
-.card h2{font-size:19px;margin-bottom:8px}.card p{font-size:14px;color:#71808d;line-height:1.6}
-.tip{margin-top:30px;background:#eaf3f8;border-radius:18px;padding:23px}
-.tip h2{margin-bottom:9px}.tip p{color:#526775;line-height:1.7}
-footer{text-align:center;padding:25px;color:#71808d;font-size:13px}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+  background:#f4f8fb;
+  color:#20394f;
+}
+
+header{
+  background:#ffffff;
+  padding:15px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #e1e8ee;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.brand{
+  font-size:23px;
+  font-weight:bold;
+}
+
+.brand span{
+  color:#1f6fae;
+}
+
+.back{
+  background:#1f6fae;
+  color:white;
+  text-decoration:none;
+  padding:10px 16px;
+  border-radius:9px;
+  font-size:13px;
+}
+
+/* HERO */
+main{
+  max-width:1150px;
+  margin:auto;
+  padding:30px 5% 50px;
+}
+
+.hero{
+  background:linear-gradient(135deg,#eaf3f8,#ffffff);
+  border:1px solid #dce8ee;
+  border-radius:22px;
+  padding:35px 25px;
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.hero-icon{
+  font-size:55px;
+  margin-bottom:10px;
+}
+
+.hero h1{
+  font-size:32px;
+  margin-bottom:10px;
+}
+
+.hero p{
+  max-width:650px;
+  margin:auto;
+  color:#71808d;
+  line-height:1.7;
+}
+
+/* SECTION */
+.section-heading{
+  margin:30px 0 18px;
+}
+
+.section-heading h2{
+  font-size:24px;
+  margin-bottom:6px;
+}
+
+.section-heading p{
+  color:#71808d;
+  font-size:14px;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:white;
+  border:1px solid #e1e8ee;
+  border-radius:18px;
+  padding:22px;
+  transition:.25s;
+  display:flex;
+  flex-direction:column;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 12px 28px rgba(20,60,90,.10);
+}
+
+.icon{
+  width:58px;
+  height:58px;
+  background:#edf5f9;
+  border-radius:16px;
+  display:grid;
+  place-items:center;
+  font-size:30px;
+  margin-bottom:15px;
+}
+
+.card h3{
+  font-size:18px;
+  margin-bottom:8px;
+}
+
+.card p{
+  font-size:13px;
+  color:#71808d;
+  line-height:1.6;
+  flex-grow:1;
+}
+
+/* EXPLORE BUTTON */
+.explore-btn{
+  margin-top:16px;
+  border:none;
+  background:#1f6fae;
+  color:white;
+  padding:10px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.explore-btn:hover{
+  opacity:.9;
+}
+
+/* INFORMATION PANEL */
+.info-panel{
+  display:none;
+  background:white;
+  border:1px solid #dce8ee;
+  border-radius:20px;
+  padding:25px;
+  margin-top:25px;
+  line-height:1.7;
+  animation:show .35s ease;
+}
+
+.info-panel.show{
+  display:block;
+}
+
+.info-panel h2{
+  margin-bottom:10px;
+}
+
+.info-panel p{
+  color:#526775;
+  margin-bottom:10px;
+}
+
+.warning{
+  background:#fff5e8;
+  border-left:4px solid #e39b38;
+  padding:14px;
+  border-radius:8px;
+  font-size:13px;
+  margin-top:15px;
+  color:#6d5737;
+}
+
+.tip-box{
+  margin-top:30px;
+  background:#eaf3f8;
+  border-radius:20px;
+  padding:25px;
+}
+
+.tip-box h2{
+  margin-bottom:10px;
+}
+
+.tip-box p{
+  color:#526775;
+  line-height:1.7;
+}
+
+footer{
+  text-align:center;
+  padding:25px;
+  color:#71808d;
+  font-size:13px;
+}
+
+@keyframes show{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media(max-width:600px){
+  main{
+    padding:25px 5% 40px;
+  }
+
+  .hero h1{
+    font-size:26px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
 
 <body>
 
 <header>
- <div class="brand">Zeva<span>Care</span></div>
- <a href="dashboard.html" class="back">← Dashboard</a>
+  <div class="brand">Zeva<span>Care</span></div>
+  <a href="dashboard.html" class="back">← Dashboard</a>
 </header>
 
 <main>
 
+<!-- HERO -->
 <section class="hero">
- <h1>📚 Health Education & Awareness</h1>
- <p>Explore simple health education topics and learn about healthy habits for everyday life.</p>
+  <div class="hero-icon">🏥</div>
+  <h1>Health Education & Awareness</h1>
+  <p>
+    Learn about important health topics, healthy habits and disease awareness.
+    Knowledge helps you make informed decisions about your health.
+  </p>
+</section>
+
+<!-- DAILY HEALTH -->
+<section class="section-heading">
+  <h2>🌿 Everyday Healthy Living</h2>
+  <p>Simple topics to help support a healthy lifestyle.</p>
 </section>
 
 <section class="grid">
 
- <article class="card">
-  <div class="icon">🧼</div>
-  <h2>Hand Hygiene</h2>
-  <p>Cleaning hands properly at important times can help reduce the spread of infections.</p>
- </article>
+  <article class="card">
+    <div class="icon">🧼</div>
+    <h3>Hand Hygiene</h3>
+    <p>Learn why proper hand hygiene is important for preventing the spread of infections.</p>
+    <button class="explore-btn" onclick="showInfo('hand')">Explore →</button>
+  </article>
 
- <article class="card">
-  <div class="icon">🥗</div>
-  <h2>Healthy Nutrition</h2>
-  <p>A balanced diet with a variety of nutritious foods supports overall health and wellbeing.</p>
- </article>
-
- <article class="card">
-  <div class="icon">💧</div>
-  <h2>Hydration</h2>
-  <p>Appropriate fluid intake is an important part of healthy daily habits. Individual needs can vary.</p>
- </article>
-
- <article class="card">
-  <div class="icon">🏃</div>
-  <h2>Physical Activity</h2>
-  <p>Regular movement and physical activity can support physical and mental wellbeing.</p>
- </article>
-
- <article class="card">
-  <div class="icon">😴</div>
-  <h2>Healthy Sleep</h2>
-  <p>A regular sleep routine and adequate rest can help support daily functioning and wellbeing.</p>
- </article>
-
- <article class="card">
-  <div class="icon">🧠</div>
-  <h2>Mental Wellbeing</h2>
-  <p>Talking to trusted people and seeking professional support when needed are important parts of wellbeing.</p>
- </article>
-
- <article class="card">
-  <div class="icon">❤️</div>
-  <h2>Heart Health</h2>
-  <p>Healthy lifestyle choices and regular health check-ups can support long-term cardiovascular health.</p>
- </article>
-
- <article class="card">
-  <div class="icon">🩺</div>
-  <h2>When to Seek Help</h2>
-  <p>Severe, sudden, worsening or concerning symptoms should be assessed by an appropriate healthcare professional.</p>
- </article>
-
-</section>
-
-<section class="tip">
- <h2>💡 Remember</h2>
- <p>Health information can help you make informed choices, but online guidance cannot replace an individual medical assessment. If you have a serious health concern, consult a qualified healthcare professional.</p>
-</section>
-
-</main>
-
-<footer>© 2026 ZevaCare | Health Education & Awareness</footer>
-
-</body>
-</html>
+  <article class="card">
+    <div class="icon">🥗</div>
+    <h3>Healthy Nutrition</h3>
+    <p>Understand the importance of a balanced and nutritious diet for overall wellbeing.</p>
+    <button class="explore-btn" onclick="showInfo('nutrition')">Explore →</button>
