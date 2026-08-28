@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Awareness Hub | ZevaCare</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f4f7fb;
+      color: #263b4d;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8ef;
+      padding: 16px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: #1f6fae;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .brand-name {
+      font-size: 23px;
+      font-weight: 700;
+      color: #21384d;
+    }
+
+    .brand-name span {
+      color: #1f6fae;
+    }
+
+    .back {
+      text-decoration: none;
+      color: #1f6fae;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    /* Hero */
+    .hero {
+      max-width: 1150px;
+      margin: auto;
+      padding: 55px 7% 30px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #eaf3fa;
+      color: #1f6fae;
+      padding: 7px 14px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      color: #1e3549;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: #647484;
+      font-size: 17px;
+    }
+
+    /* Topic Navigation */
+    .topic-nav-wrap {
+      background: white;
+      border-top: 1px solid #e5ebf0;
+      border-bottom: 1px solid #e5ebf0;
+      overflow-x: auto;
+    }
+
+    .topic-nav {
+      max-width: 1150px;
+      margin: auto;
+      padding: 15px 7%;
+      display: flex;
+      gap: 12px;
+      min-width: max-content;
+    }
+
+    .topic-nav a {
+      text-decoration: none;
+      color: #425466;
+      background: #f3f6f9;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: 0.2s;
+    }
+
+    .topic-nav a:hover {
+      background: #e7f1f8;
+      color: #1f6fae;
+    }
+
+    /* Main */
+    main {
+      max-width: 1150px;
+      margin: auto;
+      padding: 45px 7% 60px;
+    }
+
+    .section-heading h2 {
+      font-size: 30px;
+      color: #1e3549;
+      margin-bottom: 6px;
+    }
+
+    .section-heading p {
+      color: #71808d;
+      margin-bottom: 30px;
+    }
+
+    /* Cards */
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 20px;
+    }
+
+    .topic-card {
+      background: #ffffff;
+      border: 1px solid #e1e8ee;
+      border-radius: 18px;
+      padding: 25px;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .topic-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(34, 61, 82, 0.09);
+    }
+
+    .topic-icon {
+      width: 58px;
+      height: 58px;
+      background: #edf4fa;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .topic-card h3 {
+      font-size: 20px;
+      color: #243b4f;
+      margin-bottom: 9px;
+    }
+
+    .topic-card p {
+      color: #687887;
+      font-size: 14px;
+      min-height: 65px;
+    }
+
+    .explore-btn {
+      border: none;
+      background: none;
+      color: #1f6fae;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    /* Information Panel */
+    .info-panel {
+      display: none;
+      margin-top: 40px;
+      background: #ffffff;
+      border: 1px solid #dfe7ed;
+      border-radius: 18px;
+      padding: 30px;
+      scroll-margin-top: 90px;
+    }
+
+    .info-panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .info-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .info-title h2 {
+      color: #1e3549;
+    }
+
+    .info-content p {
+      color: #526574;
+      margin-bottom: 15px;
+    }
+
+    .info-content h3 {
+      margin: 20px 0 8px;
+      color: #28465f;
+    }
+
+    .info-content ul {
+      padding-left: 22px;
+      color: #526574;
+    }
+
+    .info-content li {
+      margin-bottom: 7px;
+    }
+
+    .close-btn {
+      margin-top: 20px;
+      padding: 10px 18px;
+      background: #eef4f8;
+      color: #1f6fae;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Disclaimer */
+    .disclaimer {
+      margin-top: 35px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #eef4f8;
+      color: #627382;
+      font-size: 13px;
+    }
+
+    footer {
+      background: #203f5c;
+      color: #dbe7f0;
+      text-align: center;
+      padding: 25px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 650px) {
+      header {
+        padding: 14px 6%;
+      }
+
+      .hero {
+        padding: 40px 6% 25px;
+      }
+
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      main {
+        padding: 35px 6% 50px;
+      }
+
+      .info-panel {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="logo">+</div>
+      <div class="brand-name">Zeva<span>Care</span></div>
+    </div>
+    <a href="dashboard.html" class="back">← Dashboard</a>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="badge">HEALTH EDUCATION</div>
+    <h1>Health Awareness Hub</h1>
+    <p>
+      Explore essential health topics and general awareness information
+      designed to support informed and healthy lifestyle choices.
+    </p>
+  </section>
+
+  <!-- Navigation -->
+  <div class="topic-nav-wrap">
+    <nav class="topic-nav">
+      <a href="#topics">🩺 NCD</a>
+      <a href="#topics">🎗️ Cancer</a>
+      <a href="#topics">👁️ Eye Care</a>
+      <a href="#topics">🧠 Stroke</a>
+      <a href="#topics">❤️ Heart</a>
+      <a href="#topics">🩸 Blood Pressure</a>
+      <a href="#topics">🩹 First Aid</a>
+    </nav>
+  </div>
+
+  <main id="topics">
+
+    <div class="section-heading">
+      <h2>Explore Health Topics</h2>
+      <p>Choose a topic to view basic health awareness information.</p>
+    </div>
+
+    <section class="topics-grid">
+
+      <!-- NCD -->
+      <article class="topic-card">
+        <div class="topic-icon">🩺</div>
+        <h3>NCD & Lifestyle Health</h3>
+        <p>Learn about common non-communicable diseases and healthy lifestyle awareness.</p>
+        <button class="explore-btn" onclick="showTopic('ncd')">Explore →</button>
+      </article>
+
+      <!-- Cancer -->
+      <article class="topic-card">
+        <div class="topic-icon">🎗️</div>
+        <h3>Cancer Awareness</h3>
+        <p>Understand awareness, possible warning signs and the importance of appropriate screening.</p>
+        <button class="explore-btn" onclick="showTopic('cancer')">Explore →</button>
+      </article>
+
+      <!-- Eye -->
+      <article class="topic-card">
+        <div class="topic-icon">👁️</div>
+        <h3>Eye & Vision Care</h3>
+        <p>Basic awareness about eye health, vision care and common eye conditions.</p>
+        <button class="explore-btn" onclick="showTopic('eye')">Explore →</button>
+      </article>
+
+      <!-- Stroke -->
+      <article class="topic-card">
+        <div class="topic-icon">🧠</div>
+        <h3>Stroke Awareness</h3>
+        <p>Learn about common stroke warning signs and why urgent medical care is important.</p>
+        <button class="explore-btn" onclick="showTopic('stroke')">Explore →</button>
+      </article>
+
+      <!-- Heart -->
+      <article class="topic-card">
+        <div class="topic-icon">❤️</div>
+        <h3>Heart Health</h3>
+        <p>Explore general information about maintaining heart health and reducing risk factors.</p>
+        <button class="explore-btn" onclick="showTopic('heart')">Explore →</button>
+      </article>
+
+      <!-- BP -->
+      <article class="topic-card">
+        <div class="topic-icon">🩸</div>
+        <h3>Blood Pressure</h3>
+        <p>Learn about blood pressure awareness, healthy habits and the importance of regular monitoring.</p>
+        <button class="explore-btn" onclick="showTopic('bp')">Explore →</button>
+      </article>
+
+      <!-- First Aid -->
+      <article class="topic-card">
+        <div class="topic-icon">🩹</div>
+        <h3>First Aid & Basic Care</h3>
+        <p>Learn general first-aid awareness and understand when professional medical help is needed.</p>
+        <button class="explore-btn" onclick="showTopic('firstaid')">Explore →</button>
+      </article>
+
+    </section>
+
+    <!-- Information Panels -->
+    <section id="infoPanel" class="info-panel">
+      <div class="info-title">
+        <span id="infoIcon" style="font-size:32px;"></span>
+        <h2 id="infoHeading"></h2>
+      </div>
+      <div id="infoContent" class="info-content"></div>
+      <button class="close-btn" onclick="closeTopic()">Close Information</button>
+    </section>
+
+    <div class="disclaimer">
+      <strong>Important:</strong> ZevaCare provides general educational health information only.
+      It does not provide a medical diagnosis or replace professional medical advice,
+      examination, diagnosis, or treatment.
+    </div>
+
+  </main>
+
+  <footer>
+    © 2026 ZevaCare | Health Awareness & Educational Platform
+  </footer>
+
+  <script>
+    const topics = {
+      ncd: {
+        icon: "🩺",
+        title: "NCD & Lifestyle Health",
+        content: `
+          <p>Non-communicable diseases (NCDs) are long-term health conditions that are not spread directly from person to person. Common examples include cardiovascular diseases, diabetes and some chronic respiratory conditions.</p>
+          <h3>Healthy Lifestyle Awareness</h3>
+          <ul>
+            <li>Choose a balanced and nutritious diet.</li>
+            <li>Stay physically active according to your ability.</li>
+            <li>Avoid tobacco and limit harmful substances.</li>
+            <li>Attend appropriate health check-ups.</li>
+          </ul>`
+      },
+      cancer: {
+        icon: "🎗️",
+        title: "Cancer Awareness",
+        content: `
+          <p>Cancer awareness focuses on understanding risk factors, recognizing unusual changes and seeking appropriate medical evaluation when needed.</p>
+          <h3>Important Awareness Points</h3>
+          <ul>
+            <li>Some cancers may have no symptoms in early stages.</li>
+            <li>Persistent or unusual changes should be discussed with a qualified healthcare professional.</li>
+            <li>Appropriate screening may help detect some cancers early.</li>
+          </ul>`
+      },
+      eye: {
+        icon: "👁️",
+        title: "Eye & Vision Care",
+        content: `
+          <p>Good eye care includes protecting the eyes, having vision checked when needed and seeking professional care for sudden or significant changes in vision.</p>
+          <h3>Common Topics</h3>
+          <ul>
+            <li>Cataract awareness</li>
+            <li>Glaucoma awareness</li>
+            <li>Vision changes and regular eye examinations</li>
+            <li>Eye protection and healthy habits</li>
+          </ul>`
+      },
+      stroke: {
+        icon: "🧠",
+        title: "Stroke Awareness",
+        content: `
+          <p>A stroke is a medical emergency. Sudden weakness, facial drooping, speech difficulty or sudden confusion can be warning signs that require urgent medical attention.</p>
+          <h3>Remember FAST</h3>
+          <ul>
+            <li><strong>F</strong> – Face drooping</li>
+            <li><strong>A</strong> – Arm weakness</li>
+            <li><strong>S</strong> – Speech difficulty</li>
+            <li><strong>T</strong> – Time to seek emergency medical help</li>
+          </ul>`
+      },
+      heart: {
+        icon: "❤️",
+        title: "Heart Health",
+        content: `
+          <p>Heart health can be supported through healthy lifestyle habits and appropriate medical care for individual risk factors.</p>
+          <h3>Healthy Habits</h3>
+          <ul>
+            <li>Maintain regular physical activity.</li>
+            <li>Choose a balanced diet and manage salt intake as appropriate.</li>
+            <li>Avoid tobacco use.</li>
+            <li>Discuss personal risk factors with a healthcare professional.</li>
+          </ul>`
+      },
+      bp: {
+        icon: "🩸",
+        title: "Blood Pressure Awareness",
+        content: `
+          <p>Blood pressure is the force of blood against artery walls. High blood pressure often has no obvious symptoms, so appropriate monitoring can be important.</p>
+          <h3>General Awareness</h3>
+          <ul>
+            <li>Have blood pressure checked as advised by a healthcare professional.</li>
+            <li>Follow healthy lifestyle recommendations.</li>
+            <li>Do not change prescribed medicines without professional advice.</li>
+          </ul>`
+      },
+      firstaid: {
+        icon: "🩹",
+        title: "First Aid & Basic Care",
+        content: `
+          <p>First aid provides immediate basic assistance while professional medical care is arranged when necessary.</p>
+          <h3>Safety First</h3>
+          <ul>
+            <li>Check that the environment is safe before helping.</li>
+            <li>Seek emergency help for serious injuries or life-threatening symptoms.</li>
+            <li>Do not delay professional care in an emergency.</li>
+          </ul>`
+      }
+    };
+
+    function showTopic(topic) {
+      const data = topics[topic];
+      document.getElementById("infoIcon").textContent = data.icon;
+      document.getElementById("infoHeading").textContent = data.title;
+      document.getElementById("infoContent").innerHTML = data.content;
+
+      const panel = document.getElementById("infoPanel");
+      panel.classList.add("active");
+
+      setTimeout(() => {
+        panel.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+
+    function closeTopic() {
+      document.getElementById("infoPanel").classList.remove("active");
+    }
+  </script>
+
+</body>
+</html>
