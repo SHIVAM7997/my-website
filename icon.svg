@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="100" fill="#1f6fae"/>
+  
+  <circle cx="256" cy="256" r="170" fill="#ffffff" opacity="0.12"/>
+  
+  <!-- Medical Cross -->
+  <rect x="216" y="120" width="80" height="272" rx="18" fill="white"/>
+  <rect x="120" y="216" width="272" height="80" rx="18" fill="white"/>
+  
+  <!-- Heart -->
+  <path d="M256 355
+           C210 320,175 285,175 235
+           C175 205,198 185,225 185
+           C242 185,254 194,256 205
+           C258 194,270 185,287 185
+           C314 185,337 205,337 235
+           C337 285,302 320,256 355Z"
+        fill="#e84d5b"/>
+</svg>
