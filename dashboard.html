@@ -1,195 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Dashboard | ZevaCare</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZevaCare | Dashboard</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; }
 
-        body {
-            margin: 0;
-            background: #f4f7fb;
-            color: #333;
-        }
+body { background:#f5f8fb; color:#243447; }
 
-        /* Header */
-        header {
-            background: #1677c8;
-            color: white;
-            padding: 18px 6%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+header {
+  background:#fff;
+  padding:16px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #e5ebf0;
+}
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
+.brand { display:flex; align-items:center; gap:10px; }
+.logo {
+  width:42px; height:42px; border-radius:10px;
+  background:#1769aa; color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-size:25px; font-weight:bold;
+}
+.brand h2 { color:#163a59; font-size:24px; }
+.brand h2 span { color:#1769aa; }
 
-        .logout {
-            background: white;
-            color: #1677c8;
-            padding: 9px 18px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-        }
+.logout {
+  text-decoration:none; background:#eef4f8; color:#1769aa;
+  padding:10px 18px; border-radius:7px; font-weight:bold;
+}
 
-        /* Main Content */
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 35px auto;
-        }
+main { max-width:1150px; margin:auto; padding:45px 7%; }
 
-        .welcome {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-            margin-bottom: 25px;
-        }
+.welcome h1 { color:#163a59; font-size:32px; margin-bottom:8px; }
+.welcome p { color:#687786; }
 
-        .welcome h1 {
-            margin: 0 0 8px;
-            color: #1677c8;
-        }
+.grid {
+  margin-top:30px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  gap:20px;
+}
 
-        .welcome p {
-            margin: 0;
-            color: #666;
-        }
+.card {
+  background:#fff;
+  padding:25px;
+  border-radius:14px;
+  border:1px solid #e7edf2;
+  text-decoration:none;
+  color:inherit;
+  transition:0.2s;
+}
 
-        /* Cards */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 20px;
-        }
+.card:hover {
+  transform:translateY(-4px);
+  box-shadow:0 12px 25px rgba(20,50,70,0.08);
+}
 
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-            text-align: center;
-            transition: 0.3s;
-        }
+.icon { font-size:32px; margin-bottom:15px; }
+.card h3 { color:#163a59; margin-bottom:9px; }
+.card p { color:#6b7b88; font-size:14px; line-height:1.6; }
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
+.emergency {
+  margin-top:35px;
+  background:#fff4f4;
+  border:1px solid #f0d0d0;
+  padding:22px;
+  border-radius:12px;
+}
 
-        .icon {
-            font-size: 38px;
-            margin-bottom: 10px;
-        }
+.emergency h3 { color:#a33b3b; margin-bottom:8px; }
+.emergency p { color:#6b5555; line-height:1.6; font-size:14px; }
 
-        .card h3 {
-            margin: 8px 0;
-            color: #222;
-        }
+footer {
+  text-align:center;
+  padding:25px;
+  color:#71808d;
+  font-size:13px;
+}
 
-        .card p {
-            color: #777;
-            font-size: 14px;
-        }
-
-        .card button {
-            background: #1677c8;
-            color: white;
-            border: none;
-            padding: 9px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #777;
-            margin-top: 30px;
-        }
-    </style>
+@media(max-width:600px) {
+  header { padding:14px 6%; }
+  main { padding:35px 6%; }
+  .welcome h1 { font-size:27px; }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-    <div class="logo">✚ ZevaCare</div>
-    <a href="index.html" class="logout">Logout</a>
+  <div class="brand">
+    <div class="logo">+</div>
+    <h2>Zeva<span>Care</span></h2>
+  </div>
+  <a href="index.html" class="logout">Logout</a>
 </header>
 
-<div class="container">
+<main>
+  <section class="welcome">
+    <h1>Welcome to ZevaCare 👋</h1>
+    <p>Choose a service to access healthcare information and support.</p>
+  </section>
 
-    <div class="welcome">
-        <h1>Welcome, Admin! 👋</h1>
-        <p>Manage your health information and medical services from your dashboard.</p>
-    </div>
+  <section class="grid">
 
-    <div class="dashboard-grid">
+    <a href="profile.html" class="card">
+      <div class="icon">👤</div>
+      <h3>My Profile</h3>
+      <p>Add and manage your basic health profile information.</p>
+    </a>
 
-        <div class="card">
-            <div class="icon">👤</div>
-            <h3>My Profile</h3>
-            <p>View your personal information.</p>
-            <button onclick="window.location.href='profile.html'">View Profile</button>
-        </div>
+    <a href="health-guide.html" class="card">
+      <div class="icon">🩺</div>
+      <h3>Symptom Guide</h3>
+      <p>Explore common symptoms and general health information.</p>
+    </a>
 
-        <div class="card">
-            <div class="icon">📅</div>
-            <h3>Appointments</h3>
-            <p>Check your upcoming appointments.</p>
-            <button onclick="window.location.href='appointment.html'">Book Appointment</button>
-        </div>
+    <a href="education.html" class="card">
+      <div class="icon">📚</div>
+      <h3>Health Education</h3>
+      <p>Learn about common health conditions and healthy living.</p>
+    </a>
 
-        <div class="card">
-            <div class="icon">📋</div>
-            <h3>Medical Records</h3>
-            <p>Access your health records securely.</p>
-            <button onclick="window.location.href='records.html'">View Records</button>
-        </div>
+    <a href="appointment.html" class="card">
+      <div class="icon">📅</div>
+      <h3>Appointment Request</h3>
+      <p>Submit a demo appointment request through the platform.</p>
+    </a>
 
-        <div class="card">
-            <div class="icon">💊</div>
-            <h3>Prescriptions</h3>
-            <p>View your prescribed medicines.</p>
-            <button onclick="window.location.href='prescriptions.html'">View Prescriptions</button>
-        </div>
+  </section>
 
-        <div class="card">
-            <div class="icon">❤️</div>
-            <h3>Health Information</h3>
-            <p>Learn useful health information.</p>
-            <button onclick="window.location.href='health-guide.html'">Explore Health Guide</button>
-        </div>
-
-        <div class="card">
-            <div class="icon">☎️</div>
-            <h3>Contact Support</h3>
-            <p>Get help and support when needed.</p>
-            <button onclick="window.location.href='support.html'">Contact</button>
-        </div>
-
-    </div>
-
-</div>
+  <section class="emergency">
+    <h3>🚨 Emergency Warning</h3>
+    <p>
+      If you have severe chest pain, serious difficulty breathing,
+      unconsciousness, severe bleeding, or another life-threatening emergency,
+      seek immediate emergency medical care or contact your local emergency services.
+    </p>
+  </section>
+</main>
 
 <footer>
-    © 2026 MediCare+ | Demo Healthcare Website
+  © 2026 ZevaCare | Educational Healthcare Platform
 </footer>
-
-<script>
-    function showMessage(message) {
-        alert(message);
-    }
-</script>
 
 </body>
 </html>
