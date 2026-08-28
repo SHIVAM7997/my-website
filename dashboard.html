@@ -4,7 +4,139 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ZevaCare | Dashboard</title>
+/* Live Health Monitor */
+.health-monitor {
+  background: white;
+  border: 1px solid #e1e8ee;
+  border-radius: 16px;
+  padding: 18px;
+  margin: 18px 0;
+  overflow: hidden;
+}
 
+.monitor-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #526475;
+  letter-spacing: 0.5px;
+}
+
+.pulse-dot {
+  width: 9px;
+  height: 9px;
+  background: #e74c3c;
+  border-radius: 50%;
+  animation: pulse 1.2s infinite;
+}
+
+.heart-icon {
+  margin-left: auto;
+  font-size: 20px;
+  color: #e74c3c;
+  animation: heartbeat 1.2s infinite;
+}
+
+.ecg-container {
+  height: 65px;
+  margin: 8px 0;
+}
+
+.ecg-container svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ecg-line {
+  fill: none;
+  stroke: #1f6fae;
+  stroke-width: 3;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawEcg 3s linear infinite;
+}
+
+.health-message {
+  margin: 0;
+  text-align: center;
+  color: #657686;
+  font-size: 13px;
+}
+
+@keyframes drawEcg {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Moving Health Awareness Banner */
+.awareness-banner {
+  display: flex;
+  align-items: center;
+  background: #edf4f9;
+  border: 1px solid #dce7ef;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 18px 0;
+  min-height: 48px;
+}
+
+.awareness-label {
+  padding: 14px;
+  font-weight: bold;
+  font-size: 12px;
+  white-space: nowrap;
+  color: #1f6fae;
+  border-right: 1px solid #dce7ef;
+}
+
+.tip-window {
+  overflow: hidden;
+  flex: 1;
+}
+
+.tip-track {
+  display: flex;
+  width: max-content;
+  animation: moveTips 22s linear infinite;
+}
+
+.tip-track span {
+  white-space: nowrap;
+  padding: 0 45px;
+  font-size: 13px;
+  color: #526475;
+}
+
+@keyframes moveTips {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-75%); }
+}
+
+@media (max-width: 600px) {
+  .awareness-banner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .awareness-label {
+    border-right: none;
+    border-bottom: 1px solid #dce7ef;
+    padding: 8px 14px;
+  }
+}
 <style>
 * {
   margin: 0;
@@ -246,7 +378,36 @@ if (savedProfile) {
     <h1 id="welcomeMessage">Welcome to ZevaCare 👋</h1>
     <p>Your healthcare information and support platform.</p>
   </section>
+<!-- Live Health Monitor -->
+<section class="health-monitor">
+  <div class="monitor-header">
+    <span class="pulse-dot"></span>
+    <span>LIVE HEALTH AWARENESS</span>
+    <span class="heart-icon">♥</span>
+  </div>
 
+  <div class="ecg-container">
+    <svg viewBox="0 0 800 100" preserveAspectRatio="none">
+      <path class="ecg-line"
+        d="M0,50 L80,50 L100,50 L115,20 L130,80 L145,50 L220,50 L235,50 L250,15 L265,85 L280,50 L360,50 L375,50 L390,20 L405,80 L420,50 L500,50 L515,15 L530,85 L545,50 L800,50" />
+    </svg>
+  </div>
+
+  <p class="health-message">❤️ Your Health Matters — Stay aware, stay healthy.</p>
+</section>
+
+<!-- Health Awareness Moving Banner -->
+<section class="awareness-banner">
+  <div class="awareness-label">🧼 HEALTH TIP</div>
+  <div class="tip-window">
+    <div class="tip-track">
+      <span>🧼 Clean Hands Save Lives — Wash your hands regularly to prevent infections.</span>
+      <span>💧 Stay Hydrated — Drink enough water throughout the day.</span>
+      <span>💊 Take medicines only as prescribed by a healthcare professional.</span>
+      <span>🥗 Eat a balanced diet and include fresh fruits and vegetables.</span>
+    </div>
+  </div>
+</section>
   <!-- SMART HEALTH SYSTEM -->
   <section class="smart-health">
     <div>
