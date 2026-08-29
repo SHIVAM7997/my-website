@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1f6fae">
+  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#1f6fae">
 
   <title>ZevaCare | Health Information & Guidance</title>
 
@@ -17,7 +15,15 @@
       box-sizing: border-box;
       font-family: Arial, Helvetica, sans-serif;
     }
-
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("service-worker.js")
+      .then(() => console.log("ZevaCare App mode ready"))
+      .catch(error => console.log("Service Worker error:", error));
+  });
+}
+</script>
     body {
       background: #f7fafc;
       color: #1e293b;
@@ -79,24 +85,247 @@
       font-weight: 600;
     }
 
-    /* ===============================
-       HEALTH AWARENESS AUTO SLIDER
-    =============================== */
-
-    .banner-slider {
-      width: 100%;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .slide {
-      display: none;
+    /* Hero */
+    .hero {
       min-height: 560px;
       padding: 70px 10%;
+      display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 60px;
-      animation: fadeSlide 0.6s ease;
+      background:
+        radial-gradient(circle at 90% 15%, #dceefa 0%, transparent 28%),
+        #f7fafc;
     }
 
-    .
+    .hero-text {
+      flex: 1;
+      max-width: 620px;
+    }
+
+    .small-title {
+      color: #1769aa;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: 52px;
+      line-height: 1.12;
+      color: #163a59;
+      margin-bottom: 22px;
+    }
+
+    h1 span {
+      color: #1769aa;
+    }
+
+    .hero-text p {
+      font-size: 18px;
+      line-height: 1.7;
+      color: #617080;
+      max-width: 560px;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 15px 27px;
+      background: #1769aa;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .disclaimer {
+      margin-top: 18px;
+      font-size: 13px !important;
+      color: #7b8794 !important;
+    }
+
+    /* Health Card */
+    .hero-visual {
+      flex: 0.8;
+      min-width: 330px;
+    }
+
+    .health-card {
+      background: white;
+      border-radius: 22px;
+      padding: 38px;
+      box-shadow: 0 20px 50px rgba(22, 58, 89, 0.1);
+      text-align: center;
+      border: 1px solid #edf2f6;
+    }
+
+    .doctor-icon {
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 22px;
+      border-radius: 50%;
+      background: #eaf4fb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 55px;
+    }
+
+    .health-card h2 {
+      color: #163a59;
+      margin-bottom: 12px;
+      font-size: 25px;
+    }
+
+    .health-card p {
+      color: #687786;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    /* About */
+    .about {
+      background: white;
+      padding: 70px 10%;
+      text-align: center;
+      border-top: 1px solid #eef2f5;
+    }
+
+    .about h2 {
+      font-size: 32px;
+      color: #163a59;
+      margin-bottom: 18px;
+    }
+
+    .about p {
+      max-width: 780px;
+      margin: auto;
+      color: #657382;
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    /* Footer */
+    footer {
+      background: #163a59;
+      color: #dce6ee;
+      text-align: center;
+      padding: 25px;
+      font-size: 14px;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      header {
+        padding: 14px 6%;
+      }
+
+      .brand-name {
+        font-size: 21px;
+      }
+
+      .tagline {
+        display: none;
+      }
+
+      .login-btn {
+        padding: 10px 16px;
+      }
+
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 65px 7%;
+        gap: 40px;
+      }
+
+      h1 {
+        font-size: 39px;
+      }
+
+      .hero-text p {
+        font-size: 16px;
+      }
+
+      .hero-visual {
+        min-width: 100%;
+        width: 100%;
+      }
+
+      .about {
+        padding: 55px 7%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="logo-mark">+</div>
+      <div>
+        <div class="brand-name">Zeva<span>Care</span></div>
+        <div class="tagline">Health Information & Guidance</div>
+      </div>
+    </div>
+
+    <a href="login.html" class="login-btn">Login</a>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+
+    <div class="hero-text">
+      <div class="small-title">Smart Healthcare Support</div>
+
+      <h1>Understand Your Health,<br><span>One Step at a Time.</span></h1>
+
+      <p>
+        ZevaCare is a digital healthcare information platform designed to
+        help users explore common health concerns and access useful health
+        guidance in one convenient place.
+      </p>
+
+      <a href="login.html" class="hero-btn">Login to Continue →</a>
+
+      <p class="disclaimer">
+        For health information and awareness. Not a substitute for professional medical advice.
+      </p>
+    </div>
+
+    <div class="hero-visual">
+      <div class="health-card">
+        <div class="doctor-icon">🧑‍⚕️</div>
+        <h2>Health Support Made Simple</h2>
+        <p>
+          Access healthcare information and digital services through
+          a simple and easy-to-use platform.
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- About -->
+  <section class="about">
+    <h2>About ZevaCare</h2>
+    <p>
+      ZevaCare is an educational healthcare platform that demonstrates how
+      digital technology can support health awareness and access to general
+      health information. The platform does not provide a medical diagnosis
+      or replace consultation with a qualified healthcare professional.
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © 2026 ZevaCare | Educational Healthcare Platform
+  </footer>
+
+</body>
+</html>
