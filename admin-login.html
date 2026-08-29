@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZevaCare - Personal Login</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f4f8fb;
+      padding: 20px;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 400px;
+      background: white;
+      padding: 30px 25px;
+      border-radius: 18px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 30px;
+      font-weight: bold;
+      color: #1f6fae;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 7px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 25px;
+      border: none;
+      border-radius: 10px;
+      background: #1f6fae;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #1f6fae;
+      text-decoration: none;
+    }
+
+    .demo-note {
+      margin-top: 20px;
+      padding: 12px;
+      background: #eef6fc;
+      border-radius: 10px;
+      font-size: 13px;
+      color: #555;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-box">
+    <div class="logo">🏥 ZevaCare</div>
+    <p class="subtitle">Personal / Admin Login</p>
+
+    <form id="adminLoginForm">
+      <label>Email</label>
+      <input type="email" id="email" placeholder="Enter admin email" required>
+
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Enter password" required>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <div class="demo-note">
+      <strong>Demo Login:</strong><br>
+      Email: admin@zevacare.com<br>
+      Password: admin123
+    </div>
+
+    <a href="login.html" class="back">← Back to Patient Login</a>
+  </div>
+
+  <script>
+    document.getElementById("adminLoginForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      if (email === "admin@zevacare.com" && password === "admin123") {
+        window.location.href = "admin-dashboard.html";
+      } else {
+        alert("Invalid demo login details. Please try again.");
+      }
+    });
+  </script>
+
+</body>
+</html>
