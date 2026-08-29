@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#1f6fae">
-  <head>
+
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ZevaCare | Health Information & Guidance</title>
+  <meta name="theme-color" content="#1769aa">
+  <link rel="manifest" href="manifest.json">
+
+  <title>ZevaCare | Smart Health System</title>
 
   <style>
     * {
@@ -15,43 +17,43 @@
       box-sizing: border-box;
       font-family: Arial, Helvetica, sans-serif;
     }
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function () {
-    navigator.serviceWorker.register("service-worker.js")
-      .then(() => console.log("ZevaCare App mode ready"))
-      .catch(error => console.log("Service Worker error:", error));
-  });
-}
-</script>
+
     body {
-      background: #f7fafc;
+      background: #f5f8fc;
       color: #1e293b;
+      padding-bottom: 85px;
     }
 
-    /* Header */
+    a {
+      text-decoration: none;
+    }
+
+    /* ================= HEADER ================= */
+
     header {
       background: #ffffff;
-      padding: 15px 8%;
+      padding: 14px 7%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #e8eef3;
+      border-bottom: 1px solid #e5edf5;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
-    /* Logo */
     .brand {
       display: flex;
       align-items: center;
-      gap: 11px;
+      gap: 10px;
     }
 
     .logo-mark {
-      width: 43px;
-      height: 43px;
-      border-radius: 11px;
+      width: 42px;
+      height: 42px;
       background: #1769aa;
       color: white;
+      border-radius: 11px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -60,7 +62,7 @@ if ("serviceWorker" in navigator) {
     }
 
     .brand-name {
-      font-size: 24px;
+      font-size: 23px;
       font-weight: 700;
       color: #163a59;
     }
@@ -70,193 +72,417 @@ if ("serviceWorker" in navigator) {
     }
 
     .tagline {
-      font-size: 11px;
-      color: #7a8794;
+      font-size: 10px;
+      color: #7b8794;
       margin-top: 2px;
     }
 
     .login-btn {
       background: #1769aa;
       color: white;
-      text-decoration: none;
-      padding: 11px 22px;
-      border-radius: 7px;
-      font-size: 15px;
-      font-weight: 600;
-    }
-
-    /* Hero */
-    .hero {
-      min-height: 560px;
-      padding: 70px 10%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 60px;
-      background:
-        radial-gradient(circle at 90% 15%, #dceefa 0%, transparent 28%),
-        #f7fafc;
-    }
-
-    .hero-text {
-      flex: 1;
-      max-width: 620px;
-    }
-
-    .small-title {
-      color: #1769aa;
+      padding: 10px 19px;
+      border-radius: 8px;
       font-size: 14px;
       font-weight: bold;
+    }
+
+    /* ================= WELCOME ================= */
+
+    .welcome {
+      padding: 25px 7% 10px;
+    }
+
+    .welcome h1 {
+      font-size: 26px;
+      color: #163a59;
+      margin-bottom: 7px;
+    }
+
+    .welcome p {
+      color: #6b7b8c;
+      font-size: 14px;
+    }
+
+    /* ================= AUTO BANNER ================= */
+
+    .banner-slider {
+      width: 86%;
+      max-width: 1200px;
+      margin: 15px auto 28px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 12px 35px rgba(22, 58, 89, 0.12);
+      position: relative;
+    }
+
+    .slide {
+      display: none;
+      min-height: 310px;
+      padding: 45px 8%;
+      position: relative;
+      overflow: hidden;
+      align-items: center;
+      animation: fadeSlide 0.6s ease;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    .heart {
+      background: linear-gradient(120deg, #dbeeff, #8fc5ef);
+    }
+
+    .mental {
+      background: linear-gradient(120deg, #eee8ff, #c8b8f0);
+    }
+
+    .hygiene {
+      background: linear-gradient(120deg, #dff8f1, #9edfcf);
+    }
+
+    .cancer {
+      background: linear-gradient(120deg, #fff0f4, #f4becb);
+    }
+
+    .slide-content {
+      width: 65%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .slide-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: bold;
       letter-spacing: 1px;
-      text-transform: uppercase;
+      color: #1769aa;
+      margin-bottom: 12px;
+    }
+
+    .slide h2 {
+      font-size: 42px;
+      line-height: 1.15;
+      color: #163a59;
       margin-bottom: 15px;
     }
 
-    h1 {
-      font-size: 52px;
-      line-height: 1.12;
-      color: #163a59;
-      margin-bottom: 22px;
-    }
-
-    h1 span {
+    .slide h2 span {
       color: #1769aa;
     }
 
-    .hero-text p {
-      font-size: 18px;
-      line-height: 1.7;
-      color: #617080;
-      max-width: 560px;
-    }
-
-    .hero-btn {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 15px 27px;
-      background: #1769aa;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-    }
-
-    .disclaimer {
-      margin-top: 18px;
-      font-size: 13px !important;
-      color: #7b8794 !important;
-    }
-
-    /* Health Card */
-    .hero-visual {
-      flex: 0.8;
-      min-width: 330px;
-    }
-
-    .health-card {
-      background: white;
-      border-radius: 22px;
-      padding: 38px;
-      box-shadow: 0 20px 50px rgba(22, 58, 89, 0.1);
-      text-align: center;
-      border: 1px solid #edf2f6;
-    }
-
-    .doctor-icon {
-      width: 110px;
-      height: 110px;
-      margin: 0 auto 22px;
-      border-radius: 50%;
-      background: #eaf4fb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 55px;
-    }
-
-    .health-card h2 {
-      color: #163a59;
-      margin-bottom: 12px;
-      font-size: 25px;
-    }
-
-    .health-card p {
-      color: #687786;
+    .slide p {
+      color: #526879;
       line-height: 1.6;
+      max-width: 520px;
       font-size: 15px;
     }
 
-    /* About */
+    .banner-btn {
+      display: inline-block;
+      margin-top: 22px;
+      padding: 12px 20px;
+      background: #1769aa;
+      color: white;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .slide-art {
+      position: absolute;
+      right: 8%;
+      font-size: 130px;
+      filter: drop-shadow(0 12px 10px rgba(0,0,0,.12));
+    }
+
+    .slider-dots {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 5;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.7);
+      transition: 0.3s;
+    }
+
+    .dot.active {
+      width: 25px;
+      border-radius: 10px;
+      background: #1769aa;
+    }
+
+    @keyframes fadeSlide {
+      from {
+        opacity: 0;
+        transform: translateX(25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* ================= SECTION TITLE ================= */
+
+    .section-title {
+      width: 86%;
+      max-width: 1200px;
+      margin: 25px auto 15px;
+    }
+
+    .section-title h2 {
+      color: #163a59;
+      font-size: 24px;
+    }
+
+    .section-title p {
+      margin-top: 5px;
+      color: #748394;
+      font-size: 14px;
+    }
+
+    /* ================= FEATURES ================= */
+
+    .features {
+      width: 86%;
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 22px 15px;
+      border-radius: 18px;
+      text-align: center;
+      color: #163a59;
+      box-shadow: 0 5px 20px rgba(22, 58, 89, 0.07);
+      border: 1px solid #edf2f6;
+      transition: 0.25s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(22, 58, 89, 0.13);
+    }
+
+    .feature-icon {
+      width: 55px;
+      height: 55px;
+      margin: auto auto 12px;
+      border-radius: 16px;
+      background: #eaf4fb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 27px;
+    }
+
+    .feature-card h3 {
+      font-size: 15px;
+      margin-bottom: 7px;
+    }
+
+    .feature-card p {
+      color: #718091;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    /* ================= SMART SYSTEM ================= */
+
+    .smart-box {
+      width: 86%;
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 30px;
+      border-radius: 22px;
+      background: linear-gradient(120deg, #163a59, #1769aa);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .smart-box h2 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .smart-box p {
+      color: #dbeafe;
+      line-height: 1.6;
+      font-size: 14px;
+      max-width: 650px;
+    }
+
+    .smart-btn {
+      white-space: nowrap;
+      background: white;
+      color: #1769aa;
+      padding: 13px 20px;
+      border-radius: 9px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    /* ================= ABOUT ================= */
+
     .about {
       background: white;
-      padding: 70px 10%;
+      margin-top: 35px;
+      padding: 50px 10%;
       text-align: center;
-      border-top: 1px solid #eef2f5;
+      border-top: 1px solid #e9eff5;
     }
 
     .about h2 {
-      font-size: 32px;
       color: #163a59;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
+      font-size: 27px;
     }
 
     .about p {
-      max-width: 780px;
+      max-width: 800px;
       margin: auto;
       color: #657382;
       line-height: 1.8;
-      font-size: 16px;
+      font-size: 14px;
     }
 
-    /* Footer */
     footer {
       background: #163a59;
       color: #dce6ee;
       text-align: center;
-      padding: 25px;
-      font-size: 14px;
+      padding: 22px;
+      font-size: 13px;
     }
 
-    /* Mobile */
-    @media (max-width: 768px) {
+    /* ================= BOTTOM NAVIGATION ================= */
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      border-top: 1px solid #e5eaf0;
+      display: flex;
+      justify-content: space-around;
+      padding: 9px 4px 12px;
+      z-index: 1000;
+      box-shadow: 0 -4px 18px rgba(0,0,0,.06);
+    }
+
+    .nav-item {
+      text-align: center;
+      color: #6b7785;
+      font-size: 11px;
+      min-width: 58px;
+    }
+
+    .nav-icon {
+      font-size: 23px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .nav-item.active {
+      color: #1769aa;
+      font-weight: bold;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 700px) {
+
       header {
-        padding: 14px 6%;
+        padding: 12px 5%;
       }
 
       .brand-name {
-        font-size: 21px;
+        font-size: 20px;
       }
 
       .tagline {
         display: none;
       }
 
-      .login-btn {
-        padding: 10px 16px;
+      .welcome {
+        padding: 20px 7% 8px;
       }
 
-      .hero {
+      .welcome h1 {
+        font-size: 22px;
+      }
+
+      .banner-slider {
+        width: 90%;
+      }
+
+      .slide {
+        min-height: 260px;
+        padding: 30px 7%;
+      }
+
+      .slide-content {
+        width: 72%;
+      }
+
+      .slide h2 {
+        font-size: 27px;
+      }
+
+      .slide p {
+        font-size: 12px;
+      }
+
+      .slide-art {
+        font-size: 75px;
+        right: 4%;
+      }
+
+      .section-title,
+      .features,
+      .smart-box {
+        width: 90%;
+      }
+
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .feature-card {
+        padding: 18px 10px;
+      }
+
+      .smart-box {
+        padding: 24px;
         flex-direction: column;
-        text-align: center;
-        padding: 65px 7%;
-        gap: 40px;
+        align-items: flex-start;
       }
 
-      h1 {
-        font-size: 39px;
+      .smart-box h2 {
+        font-size: 22px;
       }
 
-      .hero-text p {
-        font-size: 16px;
-      }
-
-      .hero-visual {
-        min-width: 100%;
+      .smart-btn {
         width: 100%;
-      }
-
-      .about {
-        padding: 55px 7%;
+        text-align: center;
       }
     }
   </style>
@@ -264,7 +490,7 @@ if ("serviceWorker" in navigator) {
 
 <body>
 
-  <!-- Header -->
+  <!-- HEADER -->
   <header>
     <div class="brand">
       <div class="logo-mark">+</div>
@@ -277,55 +503,241 @@ if ("serviceWorker" in navigator) {
     <a href="login.html" class="login-btn">Login</a>
   </header>
 
-  <!-- Hero -->
-  <section class="hero">
+  <!-- WELCOME -->
+  <section class="welcome">
+    <h1>Your Health, One Smart Platform ❤️</h1>
+    <p>Explore health information, tools and digital healthcare services.</p>
+  </section>
 
-    <div class="hero-text">
-      <div class="small-title">Smart Healthcare Support</div>
+  <!-- AUTO CHANGING HEALTH AWARENESS BANNER -->
+  <section class="banner-slider">
 
-      <h1>Understand Your Health,<br><span>One Step at a Time.</span></h1>
-
-      <p>
-        ZevaCare is a digital healthcare information platform designed to
-        help users explore common health concerns and access useful health
-        guidance in one convenient place.
-      </p>
-
-      <a href="login.html" class="hero-btn">Login to Continue →</a>
-
-      <p class="disclaimer">
-        For health information and awareness. Not a substitute for professional medical advice.
-      </p>
+    <div class="slide heart active">
+      <div class="slide-content">
+        <div class="slide-tag">❤️ HEALTH AWARENESS</div>
+        <h2>Take Care of Your <span>Heart</span></h2>
+        <p>Small healthy habits today can help support a healthier lifestyle tomorrow.</p>
+        <a href="health-topics.html" class="banner-btn">Explore Health →</a>
+      </div>
+      <div class="slide-art">❤️</div>
     </div>
 
-    <div class="hero-visual">
-      <div class="health-card">
-        <div class="doctor-icon">🧑‍⚕️</div>
-        <h2>Health Support Made Simple</h2>
-        <p>
-          Access healthcare information and digital services through
-          a simple and easy-to-use platform.
-        </p>
+    <div class="slide mental">
+      <div class="slide-content">
+        <div class="slide-tag">🧠 MENTAL WELLNESS</div>
+        <h2>Your Mind Needs <span>Care Too</span></h2>
+        <p>Learn about mental wellness, healthy habits and the importance of seeking support when needed.</p>
+        <a href="health-topics.html" class="banner-btn">Learn More →</a>
       </div>
+      <div class="slide-art">🧠</div>
+    </div>
+
+    <div class="slide hygiene">
+      <div class="slide-content">
+        <div class="slide-tag">🧼 HAND HYGIENE</div>
+        <h2>Clean Hands, <span>Healthy Life</span></h2>
+        <p>Good hand hygiene is an important part of preventing the spread of many infections.</p>
+        <a href="health-guide.html" class="banner-btn">Health Guide →</a>
+      </div>
+      <div class="slide-art">🧼</div>
+    </div>
+
+    <div class="slide cancer">
+      <div class="slide-content">
+        <div class="slide-tag">🎗️ HEALTH EDUCATION</div>
+        <h2>Awareness Can Save <span>Lives</span></h2>
+        <p>Learn about prevention, awareness and the importance of timely professional healthcare.</p>
+        <a href="health-topics.html" class="banner-btn">Know More →</a>
+      </div>
+      <div class="slide-art">🎗️</div>
+    </div>
+
+    <div class="slider-dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
     </div>
 
   </section>
 
-  <!-- About -->
+  <!-- ALL YOUR WEBSITE FEATURES -->
+  <section class="section-title">
+    <h2>Explore ZevaCare Services</h2>
+    <p>All your health tools and services in one place.</p>
+  </section>
+
+  <section class="features">
+
+    <a href="smart-health.html" class="feature-card">
+      <div class="feature-icon">🏥</div>
+      <h3>Smart Health System</h3>
+      <p>Explore smart healthcare support.</p>
+    </a>
+
+    <a href="profile.html" class="feature-card">
+      <div class="feature-icon">👤</div>
+      <h3>My Profile</h3>
+      <p>View your personal profile.</p>
+    </a>
+
+    <a href="bmi.html" class="feature-card">
+      <div class="feature-icon">⚖️</div>
+      <h3>BMI Calculator</h3>
+      <p>Calculate your Body Mass Index.</p>
+    </a>
+
+    <a href="tracker.html" class="feature-card">
+      <div class="feature-icon">📈</div>
+      <h3>Health Tracker</h3>
+      <p>Track your health information.</p>
+    </a>
+
+    <a href="meditrack.html" class="feature-card">
+      <div class="feature-icon">💊</div>
+      <h3>MediTrack</h3>
+      <p>Manage medicine-related information.</p>
+    </a>
+
+    <a href="health-report.html" class="feature-card">
+      <div class="feature-icon">📋</div>
+      <h3>Health Report</h3>
+      <p>View your health reports.</p>
+    </a>
+
+    <a href="health-guide.html" class="feature-card">
+      <div class="feature-icon">📚</div>
+      <h3>Health Education</h3>
+      <p>Learn about important health topics.</p>
+    </a>
+
+    <a href="health-topics.html" class="feature-card">
+      <div class="feature-icon">🩺</div>
+      <h3>Health Topics</h3>
+      <p>Explore health awareness information.</p>
+    </a>
+
+    <a href="appointment.html" class="feature-card">
+      <div class="feature-icon">📅</div>
+      <h3>Appointment Request</h3>
+      <p>Request an appointment.</p>
+    </a>
+
+    <a href="prescriptions.html" class="feature-card">
+      <div class="feature-icon">📝</div>
+      <h3>Prescriptions</h3>
+      <p>Manage prescription information.</p>
+    </a>
+
+    <a href="records.html" class="feature-card">
+      <div class="feature-icon">📂</div>
+      <h3>Health Records</h3>
+      <p>Access health records.</p>
+    </a>
+
+    <a href="emergency.html" class="feature-card">
+      <div class="feature-icon">🚨</div>
+      <h3>Emergency Assist</h3>
+      <p>Quick access to emergency support.</p>
+    </a>
+
+    <a href="support.html" class="feature-card">
+      <div class="feature-icon">💬</div>
+      <h3>Health Support</h3>
+      <p>Get useful guidance and support.</p>
+    </a>
+
+  </section>
+
+  <!-- SMART HEALTH SYSTEM -->
+  <section class="smart-box">
+    <div>
+      <h2>🏥 Smart Health System</h2>
+      <p>
+        ZevaCare brings health awareness, digital tools and healthcare
+        information together in one easy-to-use platform.
+      </p>
+    </div>
+
+    <a href="smart-health.html" class="smart-btn">Open Smart System →</a>
+  </section>
+
+  <!-- ABOUT -->
   <section class="about">
     <h2>About ZevaCare</h2>
     <p>
-      ZevaCare is an educational healthcare platform that demonstrates how
-      digital technology can support health awareness and access to general
-      health information. The platform does not provide a medical diagnosis
-      or replace consultation with a qualified healthcare professional.
+      ZevaCare is an educational healthcare platform designed to demonstrate
+      how digital technology can support health awareness and access to general
+      health information. This platform does not replace professional medical
+      diagnosis or consultation with a qualified healthcare professional.
     </p>
   </section>
 
-  <!-- Footer -->
+  <!-- FOOTER -->
   <footer>
-    © 2026 ZevaCare | Educational Healthcare Platform
+    © 2026 ZevaCare | Smart Healthcare & Educational Platform
   </footer>
+
+  <!-- APP STYLE BOTTOM NAVIGATION -->
+  <nav class="bottom-nav">
+
+    <a href="index.html" class="nav-item active">
+      <span class="nav-icon">⌂</span>
+      Home
+    </a>
+
+    <a href="smart-health.html" class="nav-item">
+      <span class="nav-icon">🏥</span>
+      Smart Health
+    </a>
+
+    <a href="health-guide.html" class="nav-item">
+      <span class="nav-icon">📚</span>
+      Health Guide
+    </a>
+
+    <a href="emergency.html" class="nav-item">
+      <span class="nav-icon">🚨</span>
+      Emergency
+    </a>
+
+    <a href="login.html" class="nav-item">
+      <span class="nav-icon">👤</span>
+      Account
+    </a>
+
+  </nav>
+
+  <!-- AUTO SLIDER SCRIPT -->
+  <script>
+    let currentSlide = 0;
+
+    const slides = document.querySelectorAll(".slide");
+    const dots = document.querySelectorAll(".dot");
+
+    function showSlide(index) {
+      slides.forEach(slide => slide.classList.remove("active"));
+      dots.forEach(dot => dot.classList.remove("active"));
+
+      slides[index].classList.add("active");
+      dots[index].classList.add("active");
+    }
+
+    setInterval(() => {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }, 5000);
+
+
+    /* PWA SERVICE WORKER */
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("service-worker.js")
+          .then(() => console.log("ZevaCare App mode ready"))
+          .catch(error => console.log("Service Worker error:", error));
+      });
+    }
+  </script>
 
 </body>
 </html>
