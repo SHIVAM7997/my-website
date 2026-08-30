@@ -185,68 +185,114 @@ if ("serviceWorker" in navigator) {
       line-height: 1.6;
       font-size: 15px;
     }
-<!-- FUTURE SMART HEALTH SECTION -->
-<section class="future-health">
 
-  <div class="future-heading">
-    <div class="small-title">Future Technology</div>
-    <h2>ZevaCare <span>Future Smart Health</span></h2>
-    <p>
-      Discover how emerging digital technology can make healthcare more
-      connected, simple and accessible in the future.
-    </p>
-  </div>
 
-  <div class="future-grid">
+    
+  /* FUTURE SMART HEALTH */
+.future-health {
+  padding: 80px 10%;
+  background: #f1f7fb;
+  text-align: center;
+}
 
-    <div class="future-card">
-      <div class="future-icon">🧬</div>
-      <h3>Digital Health Profile</h3>
-      <p>
-        Keep health information, records and wellness progress organized
-        in one smart digital profile.
-      </p>
-      <span class="future-tag">Future Feature</span>
-    </div>
+.future-heading {
+  max-width: 750px;
+  margin: 0 auto 45px;
+}
 
-    <div class="future-card">
-      <div class="future-icon">🎙️</div>
-      <h3>Voice Health Assistant</h3>
-      <p>
-        Explore health information and navigate ZevaCare using simple
-        voice commands in your preferred language.
-      </p>
-      <span class="future-tag">Future Feature</span>
-    </div>
+.future-heading h2 {
+  font-size: 34px;
+  color: #163a59;
+  margin-bottom: 15px;
+}
 
-    <div class="future-card">
-      <div class="future-icon">📊</div>
-      <h3>Smart Health Timeline</h3>
-      <p>
-        View your health journey and wellness records in a simple
-        timeline to understand changes over time.
-      </p>
-      <span class="future-tag">Future Feature</span>
-    </div>
+.future-heading h2 span {
+  color: #1769aa;
+}
 
-    <div class="future-card">
-      <div class="future-icon">🏠</div>
-      <h3>Hospital at Home</h3>
-      <p>
-        A future concept for connecting home-based care and healthcare
-        support through digital technology.
-      </p>
-      <span class="future-tag">Future Feature</span>
-    </div>
+.future-heading p {
+  color: #657382;
+  line-height: 1.7;
+  font-size: 16px;
+}
 
-  </div>
+.future-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
 
-  <p class="future-note">
-    ⚠️ These are future technology concepts for educational demonstration.
-    They are not currently providing medical diagnosis or emergency care.
-  </p>
+.future-card {
+  background: white;
+  padding: 30px 22px;
+  border-radius: 18px;
+  text-align: left;
+  border: 1px solid #e3edf4;
+  box-shadow: 0 8px 25px rgba(22, 58, 89, 0.06);
+  transition: transform 0.3s ease;
+}
 
-</section>
+.future-card:hover {
+  transform: translateY(-7px);
+}
+
+.future-icon {
+  font-size: 42px;
+  margin-bottom: 18px;
+}
+
+.future-card h3 {
+  color: #163a59;
+  font-size: 19px;
+  margin-bottom: 12px;
+}
+
+.future-card p {
+  color: #687786;
+  line-height: 1.6;
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+
+.future-tag {
+  display: inline-block;
+  background: #eaf4fb;
+  color: #1769aa;
+  padding: 6px 11px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.future-note {
+  max-width: 800px;
+  margin: 35px auto 0;
+  font-size: 13px;
+  color: #718096;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .future-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .future-health {
+    padding: 55px 7%;
+  }
+
+  .future-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .future-heading h2 {
+    font-size: 28px;
+  }
+}
     /* About */
     .about {
       background: white;
