@@ -13,7 +13,19 @@
     transform: translateX(30%);
   }
 }
+/* ECG Heartbeat Animation Fix */
+@keyframes ecgMove {
+  0% {
+    transform: translateX(-30%);
+  }
+  100% {
+    transform: translateX(30%);
+  }
+}
 
+.ecg-line {
+  animation: ecgMove 3s linear infinite;
+}
 }<style>
 *{
   margin:0;
