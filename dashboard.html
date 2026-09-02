@@ -1,720 +1,917 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#0878f9">
-
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Dashboard | ZevaCare</title>
-
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
+body{background:#f5f8fc;color:#142d4c}.app{display:flex;min-height:100vh}.sidebar{width:238px;background:#fff;border-right:1px solid #e3eaf2;position:fixed;left:0;top:0;bottom:0;padding:20px 14px;overflow:auto;z-index:20}.brand{display:flex;gap:10px;align-items:center;padding:4px 8px 18px;border-bottom:1px solid #e7edf3}.mark{width:39px;height:39px;border-radius:10px;background:#1267d6;color:#fff;display:grid;place-items:center;font-size:25px;font-weight:700}.brand b{font-size:21px}.brand b span{color:#1267d6}.brand small{display:block;color:#738196;font-size:9px;margin-top:2px}.nav{padding-top:14px}.nav a{display:flex;gap:11px;align-items:center;color:#1d334d;padding:11px 10px;border-radius:8px;margin:3px 0;font-size:12px;font-weight:700}.nav a span:first-child{font-size:18px;width:22px;text-align:center}.nav a small{display:block;font-weight:400;color:#78879a;margin-top:2px}.nav a.active{background:#1267d6;color:#fff}.nav a.active small{color:#e4f0ff}.nav hr{border:0;border-top:1px solid #e4eaf1;margin:14px 8px}.premium{margin:22px 5px 0;padding:16px;border-radius:12px;background:#edf5ff;border:1px solid #dceaff}.premium b{font-size:13px;color:#1267d6}.premium p{font-size:11px;color:#65768b;line-height:1.5;margin:8px 0}.premium button{border:0;background:#dbeaff;color:#0757b7;padding:8px 12px;border-radius:7px;font-size:11px;font-weight:700}
+main{margin-left:238px;width:calc(100% - 238px);padding:25px 26px 35px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.top h1{font-size:25px}.top p{color:#718096;font-size:12px;margin-top:5px}.profile{display:flex;align-items:center;gap:12px}.avatar{width:40px;height:40px;border-radius:50%;background:#e7f1ff;display:grid;place-items:center}.date{font-size:10px;color:#6e7d90;text-align:right}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}.stat,.box,.quick{background:#fff;border:1px solid #e1e9f1;border-radius:14px;box-shadow:0 5px 18px #163d6710}.stat{padding:16px;position:relative;min-height:115px}.stat .icon{width:42px;height:42px;border-radius:11px;background:#eef5ff;display:grid;place-items:center;font-size:23px;float:left;margin-right:12px}.stat h4{font-size:11px;margin:3px 0 6px}.stat strong{font-size:20px}.stat small{display:block;color:#159447;margin-top:7px;font-size:10px}.mini-line{clear:both;margin-top:13px;height:2px;background:linear-gradient(90deg,#1267d6 20%,#dbe9f7 20%);border-radius:5px}
+.monitorRow{display:grid;grid-template-columns:1fr 1.8fr;gap:14px;margin-bottom:14px}.monitor{background:#06182c;border-radius:15px;color:#fff;padding:17px;min-height:165px;overflow:hidden}.monitorHead{display:flex;justify-content:space-between;font-size:12px}.live{color:#35d16e}.heart{font-size:54px;animation:beat 1.1s infinite;margin:10px 0}.ecg{color:#ff3858;font-size:21px;white-space:nowrap;animation:move 3s linear infinite}.monitorFoot{display:flex;justify-content:space-between;font-size:11px;margin-top:12px}.awareness{background:linear-gradient(120deg,#e9f4ff,#d8ebff);border-radius:15px;padding:18px;min-height:165px;display:flex;align-items:center;position:relative;overflow:hidden}.awareness .copy{max-width:68%}.label{font-size:11px;color:#1267d6;font-weight:800}.awareness h2{font-size:19px;margin:8px 0}.awareness p{font-size:12px;line-height:1.6;color:#53677d}.learn{display:inline-block;background:#1267d6;color:#fff;padding:8px 13px;border-radius:7px;font-size:10px;margin-top:9px}.awareness .art{position:absolute;right:4%;font-size:70px}
+.title{font-size:16px;margin:12px 0 9px}.quickgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.quick{padding:13px;text-decoration:none;color:#152f4b;min-height:112px}.qicon{font-size:24px;margin-bottom:9px}.quick h3{font-size:11px;margin-bottom:5px}.quick p{font-size:9px;line-height:1.4;color:#6e7d90}.quickLink{font-size:9px;color:#1267d6;font-weight:700;display:block;margin-top:7px}
+.grid4{display:grid;grid-template-columns:1.1fr 1.1fr 1.2fr 1fr;gap:10px;margin-top:12px}.box{padding:14px;min-height:150px}.boxHead{display:flex;justify-content:space-between;font-size:11px;font-weight:700;margin-bottom:13px}.boxHead a{color:#1267d6;font-size:9px}.adherence{display:flex;gap:15px;align-items:center}.ring{width:72px;height:72px;border-radius:50%;background:conic-gradient(#1267d6 var(--pct),#e7edf4 0);display:grid;place-items:center;flex-shrink:0}.ring:after{content:attr(data-text);width:57px;height:57px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:13px;font-weight:800}.legend{font-size:10px;line-height:2}.green{color:#159447}.orange{color:#e89313}.red{color:#e83c5a}.rows{font-size:10px}.row{display:flex;justify-content:space-between;gap:6px;padding:8px 0;border-bottom:1px solid #edf1f5}.pill{padding:3px 6px;border-radius:10px;background:#fff3db;color:#c87800}.pill.done{background:#e8f8ef;color:#159447}
+.trackerCards{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.metric{background:#f5f8fc;border-radius:9px;padding:10px;text-align:center}.metric span{font-size:9px;color:#718096}.metric strong{display:block;font-size:15px;margin:5px 0}.metric small{font-size:8px;color:#718096}.smart p{font-size:10px;line-height:1.8}.smart strong{color:#1267d6}.lower{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:10px;margin-top:12px}.trend{min-height:180px}.chart{height:105px;display:flex;align-items:flex-end;gap:8px;padding:8px 5px;border-bottom:1px solid #dfe7ef}.bar{width:100%;background:#dbeaff;border-radius:4px 4px 0 0}.trendStats{display:flex;justify-content:space-around;font-size:9px;margin-top:10px}.future{margin-top:14px;border-radius:16px;padding:20px;background:linear-gradient(100deg,#f1eaff,#f7f0ff);display:flex;align-items:center;justify-content:space-between;gap:20px;overflow:hidden}.future h2{font-size:18px;color:#302071;margin-bottom:6px}.future p{font-size:10px;color:#6d6285;line-height:1.5;max-width:680px}.future button{border:0;background:#e6d8ff;color:#5c32b7;padding:9px 14px;border-radius:8px;font-size:10px;font-weight:700}.future .brain{font-size:58px}
+footer{margin-top:16px;background:#0a2d55;color:#dce8f4;text-align:center;padding:17px;font-size:11px;border-radius:10px}
+.voice{position:fixed;right:22px;bottom:22px;z-index:30;background:#1267d6;color:#fff;border:0;border-radius:50px;padding:12px 16px;font-weight:700;box-shadow:0 10px 25px #1267d63d;cursor:pointer}.voice select{background:transparent;color:#fff;border:0;margin-left:7px;font-weight:700}.voice select option{color:#142d4c}
+.mobileMenu{display:none;position:fixed;top:14px;left:14px;z-index:60;width:42px;height:42px;border:1px solid #dce6f0;border-radius:12px;background:#fff;color:#1267d6;font-size:23px;box-shadow:0 5px 18px #163d6714;cursor:pointer}.drawerShade{display:none}.drawerClose{display:none}.supportModal{display:none;position:fixed;inset:0;background:rgba(12,35,58,.45);z-index:100;align-items:center;justify-content:center;padding:18px}.supportModal.show{display:flex}.supportCard{position:relative;width:min(430px,100%);background:#fff;border-radius:20px;padding:25px;box-shadow:0 20px 60px rgba(10,45,85,.22);text-align:center}.supportClose{position:absolute;right:12px;top:10px;border:0;background:#eef5ff;color:#1267d6;width:34px;height:34px;border-radius:50%;font-size:22px;cursor:pointer}.supportIcon{width:52px;height:52px;margin:0 auto 12px;border-radius:15px;background:#eaf3ff;color:#1267d6;display:grid;place-items:center;font-size:28px;font-weight:800}.supportCard h2{font-size:21px;margin-bottom:7px}.supportCard>p{font-size:12px;color:#718096;line-height:1.5;margin-bottom:16px}.supportOptions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.supportOptions button{border:1px solid #dce7f2;background:#f7faff;color:#17324e;border-radius:10px;padding:11px 8px;font-size:11px;font-weight:700;cursor:pointer}.demoNote{margin-top:14px;font-size:10px;color:#8795a5}
+@media(max-width:760px){.mobileMenu{display:block}.drawerShade{position:fixed;inset:0;background:rgba(12,35,58,.38);z-index:40}.drawerShade.show{display:block}.sidebar{position:fixed;left:0;top:0;bottom:0;width:min(290px,86vw);height:100vh;padding:18px 14px;transform:translateX(-105%);transition:transform .25s ease;z-index:50;box-shadow:12px 0 35px rgba(10,45,85,.18);overflow:auto}.sidebar.open{transform:translateX(0)}body.drawer-open{overflow:hidden}.drawerClose{display:block;position:absolute;right:10px;top:10px;width:32px;height:32px;border:0;border-radius:50%;background:#eef5ff;color:#1267d6;font-size:22px;line-height:1;cursor:pointer}.brand{padding-top:10px}.nav{display:block}.premium{display:block}main{margin:0;width:100%;padding:68px 12px 35px}.top{padding-left:2px}.top h1{font-size:21px}.stats{grid-template-columns:1fr 1fr}.monitorRow{grid-template-columns:1fr}.awareness .art{font-size:50px;right:1%}.quickgrid{grid-template-columns:1fr 1fr}.grid4,.lower{grid-template-columns:1fr}.trackerCards{grid-template-columns:repeat(2,1fr)}.future{flex-direction:column;align-items:flex-start}.voice{right:12px;bottom:12px}}
+@media(max-width:430px){.stats{grid-template-columns:1fr}.quickgrid{grid-template-columns:1fr}.supportOptions{grid-template-columns:1fr}.monitor{min-height:150px}.awareness{min-height:180px}.awareness .copy{max-width:82%}}
+@keyframes beat{0%,100%{transform:scale(1)}20%{transform:scale(1.13)}35%{transform:scale(1)}50%{transform:scale(1.08)}}@keyframes move{from{transform:translateX(-4%)}to{transform:translateX(-35%)}}
+@media(max-width:1150px){.sidebar{width:210px}main{margin-left:210px;width:calc(100% - 210px)}.stats{grid-template-columns:repeat(2,1fr)}.quickgrid{grid-template-columns:repeat(3,1fr)}.grid4{grid-template-columns:1fr 1fr}.lower{grid-template-columns:1fr 1fr}.lower .trend{grid-column:1/-1}}
+@media(max-width:760px){html,body{width:100%;max-width:100%;overflow-x:hidden}.app{width:100%;min-width:0}.sidebar{width:min(290px,86vw);margin-left:0}main{margin-left:0!important;width:100%!important;max-width:100%;padding-left:12px;padding-right:12px}.top{width:100%}.stats,.monitorRow,.quickgrid,.grid4,.lower{width:100%}}
+.alarm-status{position:fixed;right:18px;bottom:18px;z-index:40;background:#fff;border:1px solid #dbe7f3;border-radius:12px;padding:9px 13px;font-size:12px;box-shadow:0 6px 20px rgba(20,70,110,.12)}.alarm-status.ringing{border-color:#ef4444;animation:alarmPulse .8s infinite}@keyframes alarmPulse{50%{transform:scale(1.03)}}@media(max-width:760px){.alarm-status{right:12px;bottom:12px;max-width:calc(100% - 24px)}}
+.editBtn{border:1px solid #cfe0f2;background:#fff;color:#1267d6;border-radius:9px;padding:8px 11px;font-size:10px;font-weight:700;cursor:pointer;margin-right:8px}.profileName{display:flex;flex-direction:column;align-items:flex-end;font-size:11px;color:#142d4c}.profileName small{font-size:9px;color:#718096;margin-top:2px}.avatar img{width:40px;height:40px;border-radius:50%;object-fit:cover;display:block}.editModal{display:none;position:fixed;inset:0;background:rgba(12,35,58,.48);z-index:110;align-items:center;justify-content:center;padding:15px}.editModal.show{display:flex}.editCard{width:min(760px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:20px;padding:22px;box-shadow:0 25px 70px rgba(10,45,85,.28)}.editHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.editHead h2{font-size:21px;color:#102b4e}.editClose{border:0;background:#eef5ff;color:#1267d6;width:34px;height:34px;border-radius:50%;font-size:22px;cursor:pointer}.editGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.editField{display:flex;flex-direction:column;gap:5px}.editField.full{grid-column:1/-1}.editField label{font-size:10px;font-weight:800;color:#53677d}.editField input,.editField select,.editField textarea{width:100%;padding:10px;border:1px solid #dce6ef;border-radius:9px;font-size:12px;background:#fff;color:#142d4c}.editField textarea{min-height:70px;resize:vertical}.editSection{font-size:12px;font-weight:800;color:#1267d6;border-top:1px solid #e8eef5;padding-top:13px;margin-top:13px;margin-bottom:9px}.remEdit{display:grid;grid-template-columns:1.6fr .8fr .8fr;gap:7px;margin-bottom:7px}.editActions{display:flex;gap:8px;justify-content:flex-end;margin-top:17px}.editActions button{border:0;border-radius:9px;padding:10px 14px;font-size:11px;font-weight:800;cursor:pointer}.saveDash{background:#1267d6;color:#fff}.resetDash{background:#eef5ff;color:#1267d6}.editHint{font-size:10px;color:#7a8898;line-height:1.5;margin-top:8px}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+<button class="mobileMenu" id="mobileMenu" aria-label="Open navigation">☰</button>
+<div class="drawerShade" id="drawerShade"></div>
+
+<aside class="sidebar" id="sidebar">
+<button class="drawerClose" id="drawerClose" aria-label="Close navigation">×</button>
+
+<div class="brand">
+<div class="mark">Z</div>
+<div><b><span>Zeva</span>Care</b><small>SMART HEALTHCARE</small></div>
+</div>
+
+<nav class="nav">
+<a href="dashboard.html" class="active"><span>🏠</span><div>Dashboard<small>Health overview</small></div></a>
+<a href="tracker.html"><span>📊</span><div>Health Tracker<small>Track your health</small></div></a>
+<a href="smart-health.html"><span>🧠</span><div>Smart Health<small>AI health checks</small></div></a>
+<a href="bmi.html"><span>⚖️</span><div>BMI Calculator<small>Check your BMI</small></div></a>
+<a href="health-report.html"><span>📋</span><div>Health Reports<small>Your reports</small></div></a>
+<a href="appointment.html"><span>🩺</span><div>Appointments<small>Book appointment</small></div></a>
+<a href="health-guide.html"><span>📚</span><div>Health Guide<small>Learn & stay healthy</small></div></a>
+<a href="emergency.html"><span>🚨</span><div>Emergency<small>Get urgent help</small></div></a>
+<hr>
+<a href="profile.html"><span>👤</span><div>My Profile<small>Personal settings</small></div></a>
+<a href="#" id="helpSupport"><span>💬</span><div>Help & Support<small>Get assistance</small></div></a>
+</nav>
+
+<div class="premium">
+<b>⭐ ZevaCare Premium</b>
+<p>Unlock advanced health insights and future smart healthcare services.</p>
+<button id="premiumBtn">Explore Premium</button>
+</div>
+</aside>
+
+<main>
+
+<header class="top">
+<div>
+<h1>Good Morning, <span id="name">Shivam Kumar</span> 👋</h1>
+<p>Here is your health overview for today.</p>
+</div>
+
+<div class="profile">
+<div class="profileName">
+<strong id="profileDisplayName">Shivam Kumar</strong>
+<small>Patient</small>
+</div>
+<button class="editBtn" id="editDashboard">✏️ Edit</button>
+<div class="avatar"><img src="https://i.pravatar.cc/100?img=12" alt="Profile"></div>
+</div>
+</header>
+
+<section class="stats">
+
+<div class="stat">
+<div class="icon">❤️</div>
+<h4>Heart Rate</h4>
+<strong id="pulse">72 bpm</strong>
+<small>● Normal</small>
+<div class="mini-line"></div>
+</div>
+
+<div class="stat">
+<div class="icon">🩸</div>
+<h4>Blood Pressure</h4>
+<strong id="bp">120/80</strong>
+<small>● Healthy</small>
+<div class="mini-line"></div>
+</div>
+
+<div class="stat">
+<div class="icon">⭐</div>
+<h4>Health Score</h4>
+<strong id="score">85/100</strong>
+<small>● Very Good</small>
+<div class="mini-line"></div>
+</div>
+
+<div class="stat">
+<div class="icon">😴</div>
+<h4>Sleep</h4>
+<strong id="sleep">7 h 30 m</strong>
+<small>● Good sleep</small>
+<div class="mini-line"></div>
+</div>
+
+</section>
+
+<section class="monitorRow">
+
+<div class="monitor">
+<div class="monitorHead"><b>LIVE HEART MONITOR</b><span class="live">● LIVE</span></div>
+<div class="heart">❤️</div>
+<div class="ecg">⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁⌁</div>
+<div class="monitorFoot"><span>Current Heart Rate</span><b id="livePulse">72 BPM</b></div>
+</div>
+
+<div class="awareness">
+<div class="copy">
+<div class="label">💡 HEALTH AWARENESS</div>
+<h2 id="awareTitle">Stay Hydrated, Stay Healthy!</h2>
+<p id="awareText">Drink enough water every day to keep your body active and your mind fresh.</p>
+<a class="learn" href="health-guide.html">Learn More →</a>
+</div>
+<div class="art">💧</div>
+</div>
+
+</section>
+
+<h2 class="title">Quick Access</h2>
+
+<section class="quickgrid">
+
+<a class="quick" href="tracker.html">
+<div class="qicon">📊</div>
+<h3>My Health Tracker</h3>
+<p>Track weight, BP, pulse and sleep.</p>
+<span class="quickLink">Open Tracker →</span>
+</a>
+
+<a class="quick" href="smart-health.html">
+<div class="qicon">🧠</div>
+<h3>Smart Health System</h3>
+<p>Check symptoms and get health guidance.</p>
+<span class="quickLink">Start Check →</span>
+</a>
+
+<a class="quick" href="bmi.html">
+<div class="qicon">⚖️</div>
+<h3>BMI Calculator</h3>
+<p>Calculate your body mass index.</p>
+<span class="quickLink">Calculate →</span>
+</a>
+
+<a class="quick" href="health-report.html">
+<div class="qicon">📋</div>
+<h3>Health Reports</h3>
+<p>View your health information.</p>
+<span class="quickLink">View Reports →</span>
+</a>
+
+<a class="quick" href="appointment.html">
+<div class="qicon">🩺</div>
+<h3>Appointments</h3>
+<p>Request a healthcare appointment.</p>
+<span class="quickLink">Book Now →</span>
+</a>
+
+<a class="quick" href="emergency.html">
+<div class="qicon">🚨</div>
+<h3>Emergency Assist</h3>
+<p>Get urgent emergency information.</p>
+<span class="quickLink">Open →</span>
+</a>
+
+</section>
+
+<section class="grid4">
+
+<div class="box">
+<div class="boxHead"><span>💊 Medicines Summary</span><a href="meditrack.html">View All</a></div>
+<div class="adherence">
+<div class="ring" id="adherenceRing" style="--pct:85%" data-text="85%"></div>
+<div class="legend">
+<div class="green">● Taken: <b id="taken">14</b></div>
+<div class="orange">● Pending: <b id="pending">2</b></div>
+<div class="red">● Missed: <b id="missed">1</b></div>
+</div>
+</div>
+</div>
+
+<div class="box">
+<div class="boxHead"><span>⏰ Today's Reminders</span><a href="tracker.html">Manage</a></div>
+<div class="rows" id="reminders"></div>
+</div>
+
+<div class="box">
+<div class="boxHead"><span>📈 Health Tracker Summary</span><a href="tracker.html">Open</a></div>
+<div class="trackerCards">
+<div class="metric"><span>Weight</span><strong id="weight">68.5 kg</strong><small>Current</small></div>
+<div class="metric"><span>BP</span><strong id="bpSmall">120/80</strong><small>Normal</small></div>
+<div class="metric"><span>Pulse</span><strong id="pulseSmall">72</strong><small>BPM</small></div>
+<div class="metric"><span>Records</span><strong id="recordCount">18</strong><small>Total</small></div>
+</div>
+</div>
+
+<div class="box smart">
+<div class="boxHead"><span>🧠 Smart Health</span><a href="smart-health.html">Check</a></div>
+<p>Symptoms checked: <strong id="symptoms">5</strong></p>
+<p>Severity: <strong id="severity">Mild</strong></p>
+<p>Last check: <strong id="lastCheck">23 May 2025</strong></p>
+</div>
+
+</section>
+
+<section class="lower">
+
+<div class="box trend">
+<div class="boxHead"><span>📈 Health Trends</span><a href="tracker.html">View Trends</a></div>
+<div class="chart" id="chart">
+<div class="bar" style="height:45%"></div>
+<div class="bar" style="height:62%"></div>
+<div class="bar" style="height:50%"></div>
+<div class="bar" style="height:76%"></div>
+<div class="bar" style="height:68%"></div>
+<div class="bar" style="height:84%"></div>
+<div class="bar" style="height:72%"></div>
+</div>
+<div class="trendStats">
+<span>Avg HR <b id="trendCount">72</b></span>
+<span>Pulse <b id="trendPulse">72</b></span>
+<span>BP <b id="trendBP">120/80</b></span>
+</div>
+</div>
+
+<div class="box">
+<div class="boxHead"><span>📝 Recent Health Records</span><a href="health-report.html">View All</a></div>
+<div class="rows" id="recent"></div>
+</div>
+
+<div class="box">
+<div class="boxHead"><span>🔔 Smart Health Alerts</span><a href="smart-health.html">Check</a></div>
+<div class="rows" id="alerts"></div>
+</div>
+
+</section>
+
+<section class="future">
+<div>
+<div class="label">🚀 FUTURE HEALTH TECHNOLOGY</div>
+<h2>Smarter Healthcare for Your Future</h2>
+<p>ZevaCare is designed to grow with future healthcare technology, helping patients track health, understand wellness patterns and access smarter digital healthcare services.</p>
+<button onclick="alert('Future ZevaCare technology features are planned for a future release.')">Explore Future Tech</button>
+</div>
+<div class="brain">🧠</div>
+</section>
+
+<footer>
+© 2025 ZevaCare • Smart Healthcare Platform • Designed for better health awareness
+</footer>
+
+</main>
+</div>
+
+<button class="voice" onclick="speakDashboard()">🎙️ Voice
+<select id="voiceLang" onclick="event.stopPropagation()">
+<option value="en-IN">English</option>
+<option value="hi-IN">हिन्दी</option>
+<option value="gu-IN">ગુજરાતી</option>
+</select>
+</button>
+
+<div class="alarm-status" id="alarmStatus">🔔 Alarm system ready</div>
+
+<div class="supportModal" id="supportModal" aria-hidden="true">
+<div class="supportCard">
+<button class="supportClose" id="supportClose">×</button>
+<div class="supportIcon">?</div>
+<h2>Help & Support</h2>
+<p>Choose an option below. These support services are currently demo features.</p>
+<div class="supportOptions">
+<button onclick="demoSupport('Live Chat')">💬 Live Chat</button>
+<button onclick="demoSupport('Call Support')">📞 Call Support</button>
+<button onclick="demoSupport('Email Support')">✉️ Email Support</button>
+<button onclick="demoSupport('FAQs')">📚 FAQs</button>
+</div>
+<div class="demoNote">ZevaCare support will be connected to real services in a future version.</div>
+</div>
+</div>
+
+<div class="editModal" id="editModal" aria-hidden="true">
+<div class="editCard">
+<div class="editHead">
+<h2>✏️ Edit Dashboard</h2>
+<button class="editClose" id="editClose">×</button>
+</div>
+
+<div class="editGrid">
+
+<div class="editField">
+<label>Name</label>
+<input id="fName">
+</div>
+
+<div class="editField">
+<label>Heart Rate</label>
+<input id="fPulse">
+</div>
+
+<div class="editField">
+<label>Blood Pressure</label>
+<input id="fBP">
+</div>
+
+<div class="editField">
+<label>Health Score</label>
+<input id="fScore">
+</div>
+
+<div class="editField">
+<label>Sleep</label>
+<input id="fSleep">
+</div>
+
+<div class="editField">
+<label>Weight</label>
+<input id="fWeight">
+</div>
+
+<div class="editField">
+<label>Total Records</label>
+<input id="fRecords">
+</div>
+
+<div class="editField">
+<label>Adherence %</label>
+<input id="fAdherence">
+</div>
+
+<div class="editField">
+<label>Date</label>
+<input id="fDate">
+</div>
+
+<div class="editField">
+<label>Time</label>
+<input id="fTime">
+</div>
+
+<div class="editField">
+<label>Symptoms Checked</label>
+<input id="fSymptoms">
+</div>
+
+<div class="editField">
+<label>Severity</label>
+<select id="fSeverity">
+<option>Mild</option>
+<option>Moderate</option>
+<option>Severe</option>
+</select>
+</div>
+
+<div class="editField full">
+<label>Last Smart Health Check</label>
+<input id="fLastCheck">
+</div>
+
+<div class="editSection full">Medicine Summary</div>
+
+<div class="editField">
+<label>Taken</label>
+<input id="fTaken">
+</div>
+
+<div class="editField">
+<label>Pending</label>
+<input id="fPending">
+</div>
+
+<div class="editField">
+<label>Missed</label>
+<input id="fMissed">
+</div>
+
+<div class="editField full">
+<label>Reminder 1 / 2 / 3 / 4</label>
+<textarea id="remEdit"></textarea>
+</div>
+
+<div class="editSection full">Health Awareness</div>
+
+<div class="editField full">
+<label>Awareness Title</label>
+<input id="fAwareTitle">
+</div>
+
+<div class="editField full">
+<label>Awareness Text</label>
+<textarea id="fAwareText"></textarea>
+</div>
+
+<div class="editSection full">Health Trends</div>
+
+<div class="editField">
+<label>Average Heart Rate</label>
+<input id="fAvgHR">
+</div>
+
+<div class="editField">
+<label>Average Steps</label>
+<input id="fAvgSteps">
+</div>
+
+<div class="editField">
+<label>Average Sleep</label>
+<input id="fAvgSleep">
+</div>
+
+<div class="editField full">
+<label>Recent Records</label>
+<textarea id="fRecent"></textarea>
+</div>
+
+<div class="editField full">
+<label>Smart Alerts</label>
+<textarea id="fAlerts"></textarea>
+</div>
+
+</div>
+
+<p class="editHint">Changes are saved only on this device using localStorage. They can be reset anytime.</p>
+
+<div class="editActions">
+<button class="resetDash" id="resetDash">Reset Defaults</button>
+<button class="saveDash" id="saveDash">Save Dashboard</button>
+</div>
+
+</div>
+</div>
+
+<script>
+const dashboardDefaults={
+name:"Shivam Kumar",
+pulse:72,
+bp:"120/80",
+score:85,
+sleep:"7 h 30 m",
+weight:"68.5 kg",
+records:18,
+symptoms:5,
+severity:"Mild",
+lastCheck:"23 May 2025, 09:45 AM",
+taken:14,
+pending:2,
+missed:1,
+adherence:85,
+date:"Friday, 23 May 2025",
+time:"10:30 AM",
+reminders:[
+{name:"Paracetamol 500mg",time:"11:00 AM",status:"Pending"},
+{name:"Drink Water",time:"12:00 PM",status:"Pending"},
+{name:"Evening Walk",time:"06:30 PM",status:"Done"},
+{name:"Vitamin D3",time:"09:00 PM",status:"Pending"}
+],
+awareTitle:"Stay Hydrated, Stay Healthy!",
+awareText:"Drink enough water every day to keep your body active and your mind fresh.",
+avgHR:"72 bpm",
+avgSteps:"8,432",
+avgSleep:"7h 15m",
+recent:[
+"Weight Record — 68.5 kg — Today, 08:30 AM",
+"Blood Pressure — 120/80 mmHg — Today, 08:30 AM",
+"Pulse Rate — 72 bpm — Today, 08:30 AM",
+"Medicine Taken — Paracetamol 500mg — Today, 11:00 AM"
+],
+alerts:[
+"You have 2 pending medicine reminders today. — Please take them on time. — 10:00 AM",
+"You haven't logged your water intake today. — Stay hydrated! — 09:30 AM",
+"Great! You completed your daily step goal. — Keep it up! — 08:30 AM"
+]
+};
+
+function cloneDefaults(){
+return JSON.parse(JSON.stringify(dashboardDefaults));
+}
+
+function getDashboardData(){
+try{
+const saved=localStorage.getItem("zevaCareDashboard");
+return saved?Object.assign(cloneDefaults(),JSON.parse(saved)):cloneDefaults();
+}catch(e){
+return cloneDefaults();
+}
+}
+
+function saveDashboardData(data){
+localStorage.setItem("zevaCareDashboard",JSON.stringify(data));
+}
+
+function renderDashboard(){
+
+const d=getDashboardData();
+
+document.getElementById("name").textContent=d.name;
+document.getElementById("profileDisplayName").textContent=d.name;
+
+document.getElementById("pulse").textContent=d.pulse+" bpm";
+document.getElementById("livePulse").textContent=d.pulse+" BPM";
+document.getElementById("bp").textContent=d.bp;
+document.getElementById("score").textContent=d.score+"/100";
+document.getElementById("sleep").textContent=d.sleep;
+
+document.getElementById("weight").textContent=d.weight;
+document.getElementById("bpSmall").textContent=d.bp;
+document.getElementById("pulseSmall").textContent=d.pulse;
+document.getElementById("recordCount").textContent=d.records;
+
+document.getElementById("symptoms").textContent=d.symptoms;
+document.getElementById("severity").textContent=d.severity;
+document.getElementById("lastCheck").textContent=d.lastCheck;
+
+document.getElementById("taken").textContent=d.taken;
+document.getElementById("pending").textContent=d.pending;
+document.getElementById("missed").textContent=d.missed;
+
+const ring=document.getElementById("adherenceRing");
+ring.style.setProperty("--pct",Math.max(0,Math.min(100,d.adherence))+"%");
+ring.setAttribute("data-text",d.adherence+"%");
+
+document.getElementById("awareTitle").textContent=d.awareTitle;
+document.getElementById("awareText").textContent=d.awareText;
+
+document.getElementById("trendCount").textContent=d.avgHR;
+document.getElementById("trendPulse").textContent=d.pulse;
+document.getElementById("trendBP").textContent=d.bp;
+
+const reminderBox=document.getElementById("reminders");
+reminderBox.innerHTML="";
+
+d.reminders.forEach((r,index)=>{
+const row=document.createElement("div");
+row.className="row";
+
+const name=document.createElement("span");
+name.textContent=r.name+" • "+r.time;
+
+const pill=document.createElement("span");
+pill.className="pill"+(r.status==="Done"?" done":"");
+pill.textContent=r.status;
+
+row.appendChild(name);
+row.appendChild(pill);
+reminderBox.appendChild(row);
+});
+
+const recentBox=document.getElementById("recent");
+recentBox.innerHTML="";
+
+d.recent.forEach(item=>{
+const row=document.createElement("div");
+row.className="row";
+row.textContent=item;
+recentBox.appendChild(row);
+});
+
+const alertsBox=document.getElementById("alerts");
+alertsBox.innerHTML="";
+
+d.alerts.forEach(item=>{
+const row=document.createElement("div");
+row.className="row";
+row.textContent=item;
+alertsBox.appendChild(row);
+});
+
+}
+
+renderDashboard();
+
+const sidebar=document.getElementById("sidebar");
+const mobileMenu=document.getElementById("mobileMenu");
+const drawerShade=document.getElementById("drawerShade");
+const drawerClose=document.getElementById("drawerClose");
+
+function openDrawer(){
+sidebar.classList.add("open");
+drawerShade.classList.add("show");
+document.body.classList.add("drawer-open");
+}
+
+function closeDrawer(){
+sidebar.classList.remove("open");
+drawerShade.classList.remove("show");
+document.body.classList.remove("drawer-open");
+}
+
+mobileMenu.addEventListener("click",openDrawer);
+drawerClose.addEventListener("click",closeDrawer);
+drawerShade.addEventListener("click",closeDrawer);
+
+document.querySelectorAll(".nav a").forEach(a=>{
+a.addEventListener("click",closeDrawer);
+});
+
+const editModal=document.getElementById("editModal");
+
+function openEdit(){
+
+const d=getDashboardData();
+
+document.getElementById("fName").value=d.name;
+document.getElementById("fPulse").value=d.pulse;
+document.getElementById("fBP").value=d.bp;
+document.getElementById("fScore").value=d.score;
+document.getElementById("fSleep").value=d.sleep;
+document.getElementById("fWeight").value=d.weight;
+document.getElementById("fRecords").value=d.records;
+document.getElementById("fAdherence").value=d.adherence;
+document.getElementById("fDate").value=d.date;
+document.getElementById("fTime").value=d.time;
+document.getElementById("fSymptoms").value=d.symptoms;
+document.getElementById("fSeverity").value=d.severity;
+document.getElementById("fLastCheck").value=d.lastCheck;
+
+document.getElementById("fTaken").value=d.taken;
+document.getElementById("fPending").value=d.pending;
+document.getElementById("fMissed").value=d.missed;
+
+document.getElementById("remEdit").value=d.reminders.map(r=>r.name+" | "+r.time+" | "+r.status).join("\n");
+
+document.getElementById("fAwareTitle").value=d.awareTitle;
+document.getElementById("fAwareText").value=d.awareText;
+
+document.getElementById("fAvgHR").value=d.avgHR;
+document.getElementById("fAvgSteps").value=d.avgSteps;
+document.getElementById("fAvgSleep").value=d.avgSleep;
+
+document.getElementById("fRecent").value=d.recent.join("\n");
+document.getElementById("fAlerts").value=d.alerts.join("\n");
+
+editModal.classList.add("show");
+editModal.setAttribute("aria-hidden","false");
+}
+
+function closeEdit(){
+editModal.classList.remove("show");
+editModal.setAttribute("aria-hidden","true");
+}
+
+document.getElementById("editDashboard").addEventListener("click",openEdit);
+document.getElementById("editClose").addEventListener("click",closeEdit);
+
+editModal.addEventListener("click",e=>{
+if(e.target===editModal)closeEdit();
+});
+
+document.getElementById("saveDash").addEventListener("click",()=>{
+
+const d=getDashboardData();
+
+d.name=document.getElementById("fName").value.trim()||"Shivam Kumar";
+d.pulse=Number(document.getElementById("fPulse").value)||72;
+d.bp=document.getElementById("fBP").value.trim()||"120/80";
+d.score=Number(document.getElementById("fScore").value)||85;
+d.sleep=document.getElementById("fSleep").value.trim()||"7 h 30 m";
+d.weight=document.getElementById("fWeight").value.trim()||"68.5 kg";
+d.records=Number(document.getElementById("fRecords").value)||18;
+d.adherence=Number(document.getElementById("fAdherence").value)||85;
+d.date=document.getElementById("fDate").value.trim();
+d.time=document.getElementById("fTime").value.trim();
+d.symptoms=Number(document.getElementById("fSymptoms").value)||5;
+d.severity=document.getElementById("fSeverity").value;
+d.lastCheck=document.getElementById("fLastCheck").value.trim();
+
+d.taken=Number(document.getElementById("fTaken").value)||0;
+d.pending=Number(document.getElementById("fPending").value)||0;
+d.missed=Number(document.getElementById("fMissed").value)||0;
+
+const remLines=document.getElementById("remEdit").value.split("\n").filter(x=>x.trim());
+
+d.reminders=remLines.map(line=>{
+const p=line.split("|").map(x=>x.trim());
+return{
+name:p[0]||"Reminder",
+time:p[1]||"",
+status:p[2]||"Pending"
+};
+});
+
+d.awareTitle=document.getElementById("fAwareTitle").value.trim();
+d.awareText=document.getElementById("fAwareText").value.trim();
+
+d.avgHR=document.getElementById("fAvgHR").value.trim();
+d.avgSteps=document.getElementById("fAvgSteps").value.trim();
+d.avgSleep=document.getElementById("fAvgSleep").value.trim();
+
+d.recent=document.getElementById("fRecent").value.split("\n").filter(x=>x.trim());
+d.alerts=document.getElementById("fAlerts").value.split("\n").filter(x=>x.trim());
+
+saveDashboardData(d);
+renderDashboard();
+closeEdit();
+
+alert("Dashboard updated successfully.");
+
+});
+
+document.getElementById("resetDash").addEventListener("click",()=>{
+
+if(!confirm("Reset dashboard to default data?"))return;
+
+localStorage.removeItem("zevaCareDashboard");
+renderDashboard();
+openEdit();
+
+});
+
+const premiumBtn=document.getElementById("premiumBtn");
+
+premiumBtn.addEventListener("click",()=>{
+alert("ZevaCare Premium is a demo feature. Secure premium services can be connected to a real backend later.");
+});
+
+const supportModal=document.getElementById("supportModal");
+
+function openSupport(){
+supportModal.classList.add("show");
+supportModal.setAttribute("aria-hidden","false");
+}
+
+function closeSupport(){
+supportModal.classList.remove("show");
+supportModal.setAttribute("aria-hidden","true");
+}
+
+document.getElementById("helpSupport").addEventListener("click",e=>{
+e.preventDefault();
+closeDrawer();
+openSupport();
+});
+
+document.getElementById("supportClose").addEventListener("click",closeSupport);
+
+supportModal.addEventListener("click",e=>{
+if(e.target===supportModal)closeSupport();
+});
+
+document.addEventListener("keydown",e=>{
+if(e.key==="Escape"){
+closeDrawer();
+closeSupport();
+closeEdit();
 }
+});
 
-body{
-    background:#f4f8fd;
-    color:#183b5d;
-    overflow-x:hidden;
+function demoSupport(option){
+alert(option+" is a demo feature in ZevaCare. It is not connected to a real support service yet.");
 }
 
-a{text-decoration:none;color:inherit}
-button{font-family:inherit}
-
-/* ================= SIDEBAR ================= */
-
-.sidebar{
-    position:fixed;
-    left:0;
-    top:0;
-    bottom:0;
-    width:220px;
-    background:white;
-    border-right:1px solid #e2ebf4;
-    padding:25px 15px;
-    z-index:1000;
-    overflow-y:auto;
-    transition:transform .25s ease;
-}
-
-.logo{
-    color:#0878f9;
-    font-size:25px;
-    font-weight:800;
-    padding:0 12px;
-    margin-bottom:30px;
-}
-
-.logo span{color:#075bc4}
-
-.nav-title{
-    color:#9aaabd;
-    font-size:11px;
-    font-weight:700;
-    text-transform:uppercase;
-    padding:0 12px;
-    margin:20px 0 8px;
-}
-
-.nav-link{
-    display:flex;
-    align-items:center;
-    gap:11px;
-    width:100%;
-    padding:11px 12px;
-    margin:3px 0;
-    border-radius:10px;
-    color:#60758a;
-    font-size:13px;
-    font-weight:600;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.nav-link:hover,
-.nav-link.active{
-    background:#eaf4ff;
-    color:#0878f9;
-}
-
-.nav-icon{
-    width:23px;
-    text-align:center;
-    font-size:17px;
-}
-
-.logout{margin-top:20px;color:#e25555}
-.logout:hover{background:#fff2f2;color:#d53c3c}
-
-/* ================= MOBILE ================= */
-
-.mobile-menu{
-    display:none;
-    position:fixed;
-    top:14px;
-    left:14px;
-    width:42px;
-    height:42px;
-    border:0;
-    border-radius:11px;
-    background:#0878f9;
-    color:white;
-    font-size:21px;
-    z-index:1200;
-    cursor:pointer;
-    box-shadow:0 7px 20px rgba(8,120,249,.25);
-}
-
-.drawer-shade{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(10,35,60,.35);
-    z-index:900;
-}
-
-.drawer-close{
-    display:none;
-}
-
-/* ================= MAIN ================= */
-
-main{
-    margin-left:220px;
-    width:calc(100% - 220px);
-    padding:28px 30px 45px;
-}
-
-/* ================= TOP ================= */
-
-.topbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:20px;
-    margin-bottom:25px;
-}
-
-.greeting h1{
-    font-size:27px;
-    color:#143c61;
-    margin-bottom:5px;
-}
-
-.greeting p{
-    color:#8293a6;
-    font-size:13px;
-}
-
-.profile{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.profile-info{
-    text-align:right;
-}
-
-.profile-info strong{
-    display:block;
-    color:#214766;
-    font-size:13px;
-}
-
-.profile-info span{
-    color:#91a0b0;
-    font-size:11px;
-}
-
-.avatar{
-    width:43px;
-    height:43px;
-    border-radius:50%;
-    background:#e6f2ff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#0878f9;
-    font-weight:800;
-    overflow:hidden;
-}
-
-.avatar img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-/* EDIT BUTTON */
-
-.edit-btn{
-    border:1px solid #cfe0f2;
-    background:white;
-    color:#1267d6;
-    border-radius:9px;
-    padding:8px 11px;
-    font-size:10px;
-    font-weight:700;
-    cursor:pointer;
-}
-
-.edit-btn:hover{
-    background:#eef7ff;
-}
-
-/* ================= STATS ================= */
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:16px;
-    margin-bottom:18px;
-}
-
-.stat-card{
-    background:white;
-    border:1px solid #e4edf6;
-    border-radius:16px;
-    padding:18px;
-    min-height:125px;
-}
-
-.stat-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:16px;
-}
-
-.stat-label{
-    color:#8292a4;
-    font-size:12px;
-    font-weight:600;
-}
-
-.stat-icon{
-    width:36px;
-    height:36px;
-    border-radius:10px;
-    background:#eaf4ff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:18px;
-}
-
-.stat-value{
-    color:#163c5e;
-    font-size:25px;
-    font-weight:800;
-}
-
-.stat-unit{
-    color:#8a99aa;
-    font-size:11px;
-}
-
-.stat-note{
-    color:#8b9bad;
-    font-size:11px;
-    margin-top:5px;
-}
-
-/* ================= GRID ================= */
+function speakDashboard(){
 
-.dashboard-grid{
-    display:grid;
-    grid-template-columns:1.45fr .8fr;
-    gap:18px;
+if(!("speechSynthesis" in window)){
+alert("Voice support is not available in this browser.");
+return;
 }
 
-.card{
-    background:white;
-    border:1px solid #e2ebf4;
-    border-radius:17px;
-    padding:20px;
-    box-shadow:0 5px 20px rgba(34,76,112,.03);
-}
-
-.card-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
-}
-
-.card-header h2{
-    font-size:17px;
-    color:#173d5f;
-}
-
-.card-header span{
-    color:#8c9bab;
-    font-size:11px;
-}
-
-.live{
-    display:flex;
-    align-items:center;
-    gap:7px;
-    color:#26a269;
-    font-size:11px;
-    font-weight:700;
-}
-
-.live-dot{
-    width:8px;
-    height:8px;
-    background:#26a269;
-    border-radius:50%;
-    animation:blink 1s infinite;
-}
-
-@keyframes blink{
-    50%{opacity:.3}
-}
-
-/* ================= ECG ================= */
-
-.monitor{
-    min-height:270px;
-}
-
-.monitor-value{
-    display:flex;
-    align-items:end;
-    gap:8px;
-    margin-bottom:14px;
-}
+const lang=document.getElementById("voiceLang").value;
 
-.heart-number{
-    font-size:43px;
-    font-weight:800;
-    color:#153f63;
-}
+const text=
+lang==="hi-IN"
+?"ZevaCare डैशबोर्ड में आपका स्वागत है। अपने स्वास्थ्य रिकॉर्ड, दवाइयों, अपॉइंटमेंट और स्मार्ट हेल्थ टूल्स देखें."
+:
+lang==="gu-IN"
+?"ZevaCare ડેશબોર્ડમાં આપનું સ્વાગત છે. તમારા આરોગ્ય રેકોર્ડ, દવાઓ, એપોઇન્ટમેન્ટ અને સ્માર્ટ હેલ્થ ટૂલ્સ જુઓ."
+:
+"Welcome to your ZevaCare dashboard. You can check your health records, medicines, appointments and smart health tools.";
 
-.bpm{
-    color:#8b9bab;
-    font-size:12px;
-    margin-bottom:8px;
-}
+speechSynthesis.cancel();
 
-.ecg-box{
-    height:135px;
-    overflow:hidden;
-    border-radius:12px;
-    background:#f7fbff;
-    border:1px solid #e6eff8;
-    position:relative;
-}
+const u=new SpeechSynthesisUtterance(text);
+u.lang=lang;
 
-.ecg-line{
-    position:absolute;
-    left:0;
-    top:50%;
-    width:200%;
-    height:100%;
-    transform:translateY(-50%);
-    animation:ecgMove 4s linear infinite;
+speechSynthesis.speak(u);
 }
+</script>
 
-@keyframes ecgMove{
-    from{transform:translate(-25%,-50%)}
-    to{transform:translate(0%,-50%)}
-}
+<script>
+(function(){
 
-.ecg-line svg{
-    width:50%;
-    height:100%;
-}
+const box=document.getElementById("alarmStatus");
 
-.monitor-bottom{
-    display:flex;
-    justify-content:space-between;
-    margin-top:13px;
-    color:#8998a8;
-    font-size:11px;
-}
+let ctx=null;
+let timer=null;
+let last="";
 
-.heart-animation{
-    animation:heartbeat 1s infinite;
-}
+function status(t,ring){
 
-@keyframes heartbeat{
-    0%,100%{transform:scale(1)}
-    15%{transform:scale(1.12)}
-    30%{transform:scale(1)}
-}
+if(!box)return;
 
-/* ================= AWARENESS ================= */
+box.textContent=t;
+box.classList.toggle("ringing",!!ring);
 
-.awareness{
-    background:linear-gradient(135deg,#0878f9,#4ba1ff);
-    color:white;
-    min-height:270px;
 }
 
-.awareness .card-header h2{color:white}
-.awareness .card-header span{color:rgba(255,255,255,.75)}
+function beep(){
 
-.awareness-content{padding-top:10px}
+try{
 
-.awareness-icon{
-    font-size:35px;
-    margin-bottom:14px;
-}
+ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();
 
-.awareness-content h3{
-    font-size:20px;
-    margin-bottom:10px;
-}
+if(ctx.state==="suspended")ctx.resume();
 
-.awareness-content p{
-    color:rgba(255,255,255,.9);
-    font-size:13px;
-    line-height:1.7;
-}
+const o=ctx.createOscillator();
+const g=ctx.createGain();
 
-.awareness-dots{
-    display:flex;
-    gap:5px;
-    margin-top:25px;
-}
+o.frequency.value=880;
+g.gain.value=.08;
 
-.awareness-dot{
-    width:20px;
-    height:4px;
-    border-radius:5px;
-    background:rgba(255,255,255,.35);
-}
+o.connect(g);
+g.connect(ctx.destination);
 
-.awareness-dot.active{background:white}
+o.start();
+o.stop(ctx.currentTime+.35);
 
-/* ================= QUICK ================= */
+}catch(e){}
 
-.section-title{
-    margin:25px 0 13px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
 }
 
-.section-title h2{
-    color:#173d5f;
-    font-size:18px;
-}
+function notify(title,body){
 
-.section-title span{
-    color:#8b9aaa;
-    font-size:11px;
-}
+if("Notification" in window && Notification.permission==="granted"){
 
-.quick-grid{
-    display:grid;
-    grid-template-columns:repeat(6,1fr);
-    gap:12px;
-}
+try{
 
-.quick-card{
-    background:white;
-    border:1px solid #e3ecf5;
-    border-radius:14px;
-    padding:17px 10px;
-    text-align:center;
-    cursor:pointer;
-    transition:.2s;
-}
+new Notification(title,{body});
 
-.quick-card:hover{
-    transform:translateY(-3px);
-    border-color:#b9d9fa;
-    box-shadow:0 10px 25px rgba(30,91,140,.08);
-}
+}catch(e){}
 
-.quick-icon{
-    width:40px;
-    height:40px;
-    margin:0 auto 9px;
-    border-radius:11px;
-    background:#eaf4ff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:19px;
 }
 
-.quick-card strong{
-    display:block;
-    color:#31526e;
-    font-size:11px;
 }
 
-/* ================= LOWER ================= */
+window.zevaCareEnableAlarm=async function(){
 
-.lower-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-    margin-top:18px;
-}
+try{
 
-.list{
-    display:grid;
-    gap:11px;
-}
+ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();
 
-.list-item{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    padding:11px;
-    border-radius:11px;
-    background:#f8fbfe;
-}
+await ctx.resume();
 
-.item-left{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
+beep();
 
-.item-icon{
-    width:35px;
-    height:35px;
-    border-radius:9px;
-    background:#eaf4ff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
+localStorage.setItem("zevaCareAlarmEnabled","1");
 
-.item-name{
-    color:#355570;
-    font-size:12px;
-    font-weight:700;
+if("Notification" in window && Notification.permission==="default"){
+await Notification.requestPermission();
 }
 
-.item-sub{
-    color:#93a1b0;
-    font-size:10px;
-    margin-top:3px;
-}
+status("🔔 Alarm enabled",false);
 
-.status{
-    font-size:10px;
-    padding:5px 8px;
-    border-radius:20px;
-    background:#eaf8f1;
-    color:#25945e;
-}
+}catch(e){
 
-.status.pending{
-    background:#fff7df;
-    color:#a67a00;
-}
+status("🔔 Tap again to enable alarm",false);
 
-.status.missed{
-    background:#fff0f0;
-    color:#d95353;
 }
 
-/* ================= TREND ================= */
-
-.trend{
-    height:175px;
-    display:flex;
-    align-items:end;
-    justify-content:space-around;
-    gap:8px;
-    padding:20px 8px 25px;
-    position:relative;
-}
+};
 
-.trend-empty{
-    position:absolute;
-    inset:30px 20px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    color:#8a9aaa;
-    font-size:12px;
-    line-height:1.5;
-}
+window.zevaCareStopAlarm=function(){
 
-.bar{
-    width:9%;
-    max-width:28px;
-    min-height:3px;
-    border-radius:7px 7px 2px 2px;
-    background:#b8d9fa;
-}
+clearInterval(timer);
+timer=null;
 
-.day{
-    color:#96a4b2;
-    font-size:9px;
-}
+status("🔔 Alarm system ready",false);
 
-/* ================= FUTURE ================= */
-
-.future{
-    margin-top:18px;
-    background:linear-gradient(135deg,#102f4d,#1b547e);
-    color:white;
-    border-radius:18px;
-    padding:25px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-}
+};
 
-.future h2{
-    font-size:20px;
-    margin-bottom:8px;
-}
+window.zevaCareRing=function(title,body,key){
 
-.future p{
-    color:#c5d7e6;
-    font-size:12px;
-    line-height:1.6;
-    max-width:650px;
-}
+if(last===key)return;
 
-.future-btn{
-    border:0;
-    background:white;
-    color:#1263ae;
-    padding:11px 17px;
-    border-radius:10px;
-    font-size:12px;
-    font-weight:700;
-    cursor:pointer;
-}
+last=key;
 
-/* ================= MODALS ================= */
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(10,35,60,.48);
-    z-index:2000;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-}
+clearInterval(timer);
 
-.modal.show{display:flex}
-
-.modal-box{
-    width:100%;
-    max-width:480px;
-    max-height:90vh;
-    overflow:auto;
-    background:white;
-    border-radius:20px;
-    padding:25px;
-    box-shadow:0 25px 70px rgba(0,0,0,.2);
-}
+beep();
 
-.modal-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
+timer=setInterval(beep,1200);
 
-.modal-head h2{
-    color:#173d5f;
-    font-size:20px;
-}
+status("🚨 "+title+" — Stop/Complete it",true);
 
-.close{
-    border:0;
-    background:#f0f5fa;
-    width:34px;
-    height:34px;
-    border-radius:9px;
-    cursor:pointer;
-    font-size:18px;
-}
+notify(title,body);
 
-.support-list{
-    display:grid;
-    gap:10px;
-}
+};
 
-.support-btn{
-    width:100%;
-    border:1px solid #e2ebf4;
-    background:#f8fbfe;
-    padding:13px;
-    border-radius:11px;
-    text-align:left;
-    cursor:pointer;
-    color:#31536f;
-    font-weight:700;
-}
+document.addEventListener("visibilitychange",()=>{
 
-.support-btn:hover{
-    border-color:#bcdcff;
-    background:#eef7ff;
+if(!document.hidden && localStorage.getItem("zevaCareAlarmEnabled")==="1"){
+status("🔔 Alarm system ready",false);
 }
 
-/* ================= EDIT MODAL ================= */
+});
 
-.edit-modal .modal-box{
-    max-width:760px;
-}
+})();
+</script>
 
-.edit-grid{
-display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-}
+</body>
+</html>
