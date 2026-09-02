@@ -2,1083 +2,2414 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#0878f9">
 
 <title>Dashboard | ZevaCare</title>
 
 <style>
-
-/* ===============================
-   ZEVACARE ANIMATIONS
-   =============================== */
-
-@keyframes ecgMove {
-  0% {
-    transform: translateX(-30%);
-  }
-
-  100% {
-    transform: translateX(30%);
-  }
-}
-
-@keyframes heartbeat {
-  0%, 100% {
-    transform: scale(1);
-  }
-
-  10% {
-    transform: scale(1.08);
-  }
-
-  20% {
-    transform: scale(1);
-  }
-
-  30% {
-    transform: scale(1.12);
-  }
-
-  45% {
-    transform: scale(1);
-  }
-}
-
-@keyframes blink {
-  0%, 100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: .35;
-  }
-}
-
-
-/* ===============================
-   GENERAL
-   =============================== */
-
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial,Helvetica,sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-  background:#f4f8fb;
-  color:#20394f;
+    background:#f4f8fd;
+    color:#183b5d;
+    overflow-x:hidden;
 }
 
-
-/* ===============================
-   HEADER
-   =============================== */
-
-header{
-  background:#ffffff;
-  padding:15px 6%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid #e1e8ee;
-  position:sticky;
-  top:0;
-  z-index:100;
+a{
+    text-decoration:none;
+    color:inherit;
 }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
+button{
+    font-family:inherit;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:220px;
+    background:white;
+    border-right:1px solid #e2ebf4;
+    padding:25px 15px;
+    z-index:1000;
+    overflow-y:auto;
+    transition:transform .25s ease;
 }
 
 .logo{
-  width:45px;
-  height:45px;
-  border-radius:13px;
-  background:#1f6fae;
-  color:white;
-  display:grid;
-  place-items:center;
-  font-size:27px;
-  font-weight:bold;
+    color:#0878f9;
+    font-size:25px;
+    font-weight:800;
+    padding:0 12px;
+    margin-bottom:30px;
 }
 
-.brand-name{
-  font-size:23px;
-  font-weight:bold;
+.logo span{
+    color:#075bc4;
 }
 
-.brand-name span{
-  color:#1f6fae;
+.nav-title{
+    color:#9aaabd;
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    padding:0 12px;
+    margin:20px 0 8px;
+}
+
+.nav-link{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    width:100%;
+    padding:11px 12px;
+    margin:3px 0;
+    border-radius:10px;
+    color:#60758a;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.nav-link:hover{
+    background:#eef6ff;
+    color:#0878f9;
+}
+
+.nav-link.active{
+    background:#eaf4ff;
+    color:#0878f9;
+}
+
+.nav-icon{
+    width:23px;
+    text-align:center;
+    font-size:17px;
 }
 
 .logout{
-  background:#1f6fae;
-  color:white;
-  text-decoration:none;
-  padding:10px 16px;
-  border-radius:9px;
-  font-size:13px;
+    margin-top:20px;
+    color:#e25555;
 }
 
+.logout:hover{
+    background:#fff2f2;
+    color:#d53c3c;
+}
 
-/* ===============================
-   MAIN
-   =============================== */
+/* ================= MOBILE MENU ================= */
+
+.mobile-menu{
+    display:none;
+    position:fixed;
+    top:14px;
+    left:14px;
+    width:42px;
+    height:42px;
+    border:0;
+    border-radius:11px;
+    background:#0878f9;
+    color:white;
+    font-size:21px;
+    z-index:1200;
+    cursor:pointer;
+    box-shadow:0 7px 20px rgba(8,120,249,.25);
+}
+
+.drawer-shade{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(10,35,60,.35);
+    z-index:900;
+}
+
+.drawer-close{
+    display:none;
+}
+
+/* ================= MAIN ================= */
 
 main{
-  max-width:1150px;
-  margin:auto;
-  padding:30px 5% 55px;
+    margin-left:220px;
+    width:calc(100% - 220px);
+    padding:28px 30px 45px;
 }
 
+/* ================= TOP BAR ================= */
 
-/* ===============================
-   WELCOME
-   =============================== */
-
-.welcome{
-  margin-bottom:22px;
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    margin-bottom:25px;
 }
 
-.welcome h1{
-  font-size:30px;
-  margin-bottom:8px;
+.greeting h1{
+    font-size:27px;
+    color:#143c61;
+    margin-bottom:5px;
 }
 
-.welcome p{
-  color:#71808d;
-  line-height:1.6;
+.greeting p{
+    color:#8293a6;
+    font-size:13px;
 }
 
-
-/* ===============================
-   LIVE HEALTH MONITOR
-   =============================== */
-
-.monitor{
-  background:#193548;
-  border-radius:20px;
-  padding:20px;
-  margin-bottom:22px;
-  color:white;
+.profile{
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
-.monitor-title{
-  font-size:12px;
-  letter-spacing:1px;
-  margin-bottom:15px;
+.profile-info{
+    text-align:right;
 }
 
-.live-dot{
-  display:inline-block;
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  background:#ff4d4d;
-  margin-right:6px;
-  animation:blink 1s ease-in-out infinite;
+.profile-info strong{
+    display:block;
+    color:#214766;
+    font-size:13px;
 }
 
-.monitor-content{
-  background:white;
-  color:#20394f;
-  border-radius:15px;
-  padding:20px;
-  display:flex;
-  align-items:center;
-  gap:22px;
+.profile-info span{
+    color:#91a0b0;
+    font-size:11px;
 }
 
-.heart{
-  font-size:75px;
-  animation:heartbeat 1.1s ease-in-out infinite;
-  transform-origin:center;
-  flex-shrink:0;
+.avatar{
+    width:43px;
+    height:43px;
+    border-radius:50%;
+    background:#e6f2ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#0878f9;
+    font-weight:800;
 }
 
-.monitor-text h2{
-  margin-bottom:7px;
+/* ================= STATS ================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:18px;
 }
 
-.monitor-text p{
-  color:#71808d;
-  line-height:1.6;
-  font-size:14px;
+.stat-card{
+    background:white;
+    border:1px solid #e4edf6;
+    border-radius:16px;
+    padding:18px;
+    min-height:125px;
 }
 
-
-/* ===============================
-   ECG MOVING LINE
-   =============================== */
-
-.ecg{
-  margin-top:15px;
-  height:35px;
-  overflow:hidden;
-  white-space:nowrap;
-  color:#1f6fae;
-  font-size:25px;
-  font-weight:bold;
+.stat-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:16px;
 }
 
-.ecg-line{
-  display:inline-block;
-  min-width:max-content;
-  animation:ecgMove 3s linear infinite;
+.stat-label{
+    color:#8292a4;
+    font-size:12px;
+    font-weight:600;
 }
 
-
-/* ===============================
-   HEALTH AWARENESS
-   =============================== */
-
-.awareness{
-  background:white;
-  border:1px solid #e1e8ee;
-  border-radius:20px;
-  overflow:hidden;
-  margin-bottom:25px;
+.stat-icon{
+    width:36px;
+    height:36px;
+    border-radius:10px;
+    background:#eaf4ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
 }
 
-.awareness-head{
-  padding:14px 18px;
-  background:#eaf3f8;
-  color:#1f6fae;
-  font-size:13px;
-  font-weight:bold;
-  display:flex;
-  justify-content:space-between;
+.stat-value{
+    color:#163c5e;
+    font-size:25px;
+    font-weight:800;
 }
 
-.auto-playing{
-  animation:blink 1.2s ease-in-out infinite;
+.stat-unit{
+    color:#8a99aa;
+    font-size:11px;
 }
 
-.slides{
-  height:230px;
-  position:relative;
-  overflow:hidden;
+.stat-note{
+    color:#8b9bad;
+    font-size:11px;
+    margin-top:5px;
 }
 
-.slide{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:25px;
-  padding:25px;
-  opacity:0;
-  transform:translateX(50px);
-  transition:.7s ease;
-}
+/* ================= GRID ================= */
 
-.slide.active{
-  opacity:1;
-  transform:translateX(0);
-}
-
-.slide-icon{
-  width:105px;
-  height:105px;
-  background:#edf5f9;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  font-size:58px;
-  flex-shrink:0;
-}
-
-.slide-content{
-  max-width:500px;
-}
-
-.tag{
-  display:inline-block;
-  background:#1f6fae;
-  color:white;
-  padding:6px 12px;
-  border-radius:20px;
-  font-size:11px;
-  font-weight:bold;
-  margin-bottom:9px;
-}
-
-.slide-content h2{
-  font-size:23px;
-  margin-bottom:7px;
-}
-
-.slide-content p{
-  color:#71808d;
-  line-height:1.6;
-  font-size:14px;
-}
-
-.dots{
-  display:flex;
-  justify-content:center;
-  gap:7px;
-  padding:13px;
-}
-
-.dot{
-  width:8px;
-  height:8px;
-  border-radius:10px;
-  background:#cbd7df;
-  transition:.3s;
-}
-
-.dot.active{
-  width:25px;
-  background:#1f6fae;
-}
-
-
-/* ===============================
-   EXTRA INFORMATION
-   =============================== */
-
-.info-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-  margin-bottom:30px;
-}
-
-.info{
-  background:white;
-  border:1px solid #e1e8ee;
-  border-radius:15px;
-  padding:17px;
-}
-
-.info h3{
-  font-size:15px;
-  margin:8px 0;
-}
-
-.info p{
-  color:#71808d;
-  font-size:12px;
-  line-height:1.5;
-}
-
-
-/* ===============================
-   SERVICES
-   =============================== */
-
-.section-title{
-  font-size:25px;
-  margin-bottom:7px;
-}
-
-.subtitle{
-  color:#71808d;
-  font-size:14px;
-  margin-bottom:20px;
-}
-
-.services{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:17px;
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:1.45fr .8fr;
+    gap:18px;
 }
 
 .card{
-  background:white;
-  border:1px solid #e1e8ee;
-  border-radius:17px;
-  padding:20px;
-  text-decoration:none;
-  color:#20394f;
-  transition:.25s;
-}
-
-.card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 10px 25px rgba(20,60,90,.10);
-}
-
-.card-icon{
-  width:48px;
-  height:48px;
-  background:#edf5f9;
-  border-radius:13px;
-  display:grid;
-  place-items:center;
-  font-size:25px;
-  margin-bottom:13px;
-}
-
-.card h3{
-  font-size:17px;
-  margin-bottom:7px;
-}
-
-.card p{
-  font-size:13px;
-  color:#71808d;
-  line-height:1.5;
-}
-
-.emergency{
-  border:2px solid #f1b5b5;
-}
-
-.smart{
-  background:#eaf3f8;
-}
-
-
-/* ===============================
-   FUTURE HEALTHCARE
-   =============================== */
-
-.future-health{
-  margin-top:35px;
-  background:#ffffff;
-  border:1px solid #e1e8ee;
-  border-radius:20px;
-  padding:25px;
-}
-
-.future-health h2{
-  font-size:25px;
-  margin-bottom:8px;
-}
-
-.section-text{
-  color:#71808d;
-  font-size:14px;
-  line-height:1.6;
-  margin-bottom:20px;
-}
-
-.future-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:17px;
-}
-
-.future-card{
-  background:#f4f8fb;
-  border:1px solid #e1e8ee;
-  border-radius:17px;
-  padding:20px;
-  transition:.25s;
-}
-
-.future-card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 10px 25px rgba(20,60,90,.10);
-}
-
-.future-icon{
-  width:52px;
-  height:52px;
-  background:#eaf3f8;
-  border-radius:14px;
-  display:grid;
-  place-items:center;
-  font-size:28px;
-  margin-bottom:13px;
-}
-
-.future-card h3{
-  font-size:17px;
-  margin-bottom:8px;
-}
-
-.future-card p{
-  color:#71808d;
-  font-size:13px;
-  line-height:1.5;
-  margin-bottom:12px;
-}
-
-.future-tag{
-  display:inline-block;
-  background:#1f6fae;
-  color:white;
-  padding:5px 10px;
-  border-radius:15px;
-  font-size:10px;
-  font-weight:bold;
-}
-
-
-/* ===============================
-   FOOTER
-   =============================== */
-
-footer{
-  background:#193548;
-  color:white;
-  text-align:center;
-  padding:20px;
-  font-size:13px;
-}
-
-
-/* ===============================
-   MOBILE RESPONSIVE
-   =============================== */
-
-@media(max-width:700px){
-
-  .monitor-content{
-    flex-direction:column;
-    text-align:center;
-  }
-
-  .heart{
-    font-size:60px;
-  }
-
-  .slide{
-    gap:15px;
-    padding:18px;
-  }
-
-  .slide-icon{
-    width:80px;
-    height:80px;
-    font-size:42px;
-  }
-
-  .slide-content h2{
-    font-size:19px;
-  }
-
-  .slide-content p{
-    font-size:12px;
-  }
-
-  .info-grid{
-    grid-template-columns:1fr;
-  }
-
-  .future-health{
+    background:white;
+    border:1px solid #e2ebf4;
+    border-radius:17px;
     padding:20px;
-  }
-
-  .future-health h2{
-    font-size:21px;
-  }
-
+    box-shadow:0 5px 20px rgba(34,76,112,.03);
 }
 
+.card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.card-header h2{
+    font-size:17px;
+    color:#173d5f;
+}
+
+.card-header span{
+    color:#8c9bab;
+    font-size:11px;
+}
+
+.live{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    color:#26a269;
+    font-size:11px;
+    font-weight:700;
+}
+
+.live-dot{
+    width:8px;
+    height:8px;
+    background:#26a269;
+    border-radius:50%;
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+    50%{opacity:.3}
+}
+
+/* ================= ECG ================= */
+
+.monitor{
+    min-height:270px;
+}
+
+.monitor-value{
+    display:flex;
+    align-items:end;
+    gap:8px;
+    margin-bottom:14px;
+}
+
+.heart-number{
+    font-size:43px;
+    font-weight:800;
+    color:#153f63;
+}
+
+.bpm{
+    color:#8b9bab;
+    font-size:12px;
+    margin-bottom:8px;
+}
+
+.ecg-box{
+    height:135px;
+    overflow:hidden;
+    border-radius:12px;
+    background:#f7fbff;
+    border:1px solid #e6eff8;
+    position:relative;
+}
+
+.ecg-line{
+    position:absolute;
+    left:0;
+    top:50%;
+    width:200%;
+    height:100%;
+    transform:translateY(-50%);
+    animation:ecgMove 4s linear infinite;
+}
+
+@keyframes ecgMove{
+    from{transform:translate(-25%, -50%)}
+    to{transform:translate(0%, -50%)}
+}
+
+.ecg-line svg{
+    width:50%;
+    height:100%;
+}
+
+.monitor-bottom{
+    display:flex;
+    justify-content:space-between;
+    margin-top:13px;
+    color:#8998a8;
+    font-size:11px;
+}
+
+.heart-animation{
+    animation:heartbeat 1s infinite;
+}
+
+@keyframes heartbeat{
+    0%,100%{transform:scale(1)}
+    15%{transform:scale(1.12)}
+    30%{transform:scale(1)}
+}
+
+/* ================= AWARENESS ================= */
+
+.awareness{
+    background:linear-gradient(135deg,#0878f9,#4ba1ff);
+    color:white;
+    min-height:270px;
+}
+
+.awareness .card-header h2{
+    color:white;
+}
+
+.awareness .card-header span{
+    color:rgba(255,255,255,.75);
+}
+
+.awareness-content{
+    padding-top:10px;
+}
+
+.awareness-icon{
+    font-size:35px;
+    margin-bottom:14px;
+}
+
+.awareness-content h3{
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.awareness-content p{
+    color:rgba(255,255,255,.9);
+    font-size:13px;
+    line-height:1.7;
+}
+
+.awareness-dots{
+    display:flex;
+    gap:5px;
+    margin-top:25px;
+}
+
+.awareness-dot{
+    width:20px;
+    height:4px;
+    border-radius:5px;
+    background:rgba(255,255,255,.35);
+}
+
+.awareness-dot.active{
+    background:white;
+}
+
+/* ================= QUICK ACCESS ================= */
+
+.section-title{
+    margin:25px 0 13px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.section-title h2{
+    color:#173d5f;
+    font-size:18px;
+}
+
+.section-title span{
+    color:#8b9aaa;
+    font-size:11px;
+}
+
+.quick-grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:12px;
+}
+
+.quick-card{
+    background:white;
+    border:1px solid #e3ecf5;
+    border-radius:14px;
+    padding:17px 10px;
+    text-align:center;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.quick-card:hover{
+    transform:translateY(-3px);
+    border-color:#b9d9fa;
+    box-shadow:0 10px 25px rgba(30,91,140,.08);
+}
+
+.quick-icon{
+    width:40px;
+    height:40px;
+    margin:0 auto 9px;
+    border-radius:11px;
+    background:#eaf4ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:19px;
+}
+
+.quick-card strong{
+    display:block;
+    color:#31526e;
+    font-size:11px;
+}
+
+/* ================= LOWER CARDS ================= */
+
+.lower-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:18px;
+}
+
+.list{
+    display:grid;
+    gap:11px;
+}
+
+.list-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:11px;
+    border-radius:11px;
+    background:#f8fbfe;
+}
+
+.item-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.item-icon{
+    width:35px;
+    height:35px;
+    border-radius:9px;
+    background:#eaf4ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.item-name{
+    color:#355570;
+    font-size:12px;
+    font-weight:700;
+}
+
+.item-sub{
+    color:#93a1b0;
+    font-size:10px;
+    margin-top:3px;
+}
+
+.status{
+    font-size:10px;
+    padding:5px 8px;
+    border-radius:20px;
+    background:#eaf8f1;
+    color:#25945e;
+}
+
+.status.pending{
+    background:#fff7df;
+    color:#a67a00;
+}
+
+.status.missed{
+    background:#fff0f0;
+    color:#d95353;
+}
+
+/* ================= TREND ================= */
+
+.trend{
+    height:175px;
+    display:flex;
+    align-items:end;
+    justify-content:space-around;
+    gap:8px;
+    padding:20px 8px 25px;
+    position:relative;
+}
+
+.trend-empty{
+    position:absolute;
+    inset:30px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:#8a9aaa;
+    font-size:12px;
+    line-height:1.5;
+}
+
+.bar{
+    width:9%;
+    max-width:28px;
+    min-height:3px;
+    border-radius:7px 7px 2px 2px;
+    background:#b8d9fa;
+}
+
+.day{
+    color:#96a4b2;
+    font-size:9px;
+}
+
+/* ================= FUTURE ================= */
+
+.future{
+    margin-top:18px;
+    background:linear-gradient(135deg,#102f4d,#1b547e);
+    color:white;
+    border-radius:18px;
+    padding:25px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.future h2{
+    font-size:20px;
+    margin-bottom:8px;
+}
+
+.future p{
+    color:#c5d7e6;
+    font-size:12px;
+    line-height:1.6;
+    max-width:650px;
+}
+
+.future-btn{
+    border:0;
+    background:white;
+    color:#1263ae;
+    padding:11px 17px;
+    border-radius:10px;
+    font-size:12px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(10,35,60,.48);
+    z-index:2000;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:480px;
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 25px 70px rgba(0,0,0,.2);
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.modal-head h2{
+    color:#173d5f;
+    font-size:20px;
+}
+
+.close{
+    border:0;
+    background:#f0f5fa;
+    width:34px;
+    height:34px;
+    border-radius:9px;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.support-list{
+    display:grid;
+    gap:10px;
+}
+
+.support-btn{
+    width:100%;
+    border:1px solid #e2ebf4;
+    background:#f8fbfe;
+    padding:13px;
+    border-radius:11px;
+    text-align:left;
+    cursor:pointer;
+    color:#31536f;
+    font-weight:700;
+}
+
+.support-btn:hover{
+    border-color:#bcdcff;
+    background:#eef7ff;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1150px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .quick-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
+
+    .lower-grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:760px){
+
+    html,body{
+        width:100%;
+        max-width:100%;
+        overflow-x:hidden;
+    }
+
+    .mobile-menu{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .sidebar{
+        width:min(290px,86vw);
+        margin-left:0;
+        transform:translateX(-105%);
+        box-shadow:12px 0 35px rgba(20,65,100,.16);
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .drawer-shade.show{
+        display:block;
+    }
+
+    .drawer-close{
+        display:block;
+        position:absolute;
+        right:15px;
+        top:15px;
+        width:32px;
+        height:32px;
+        border:0;
+        border-radius:8px;
+        background:#eef6ff;
+        color:#0878f9;
+        cursor:pointer;
+    }
+
+    main{
+        margin-left:0!important;
+        width:100%!important;
+        max-width:100%;
+        padding:72px 12px 35px;
+    }
+
+    .topbar{
+        align-items:flex-start;
+    }
+
+    .profile-info{
+        display:none;
+    }
+
+    .greeting h1{
+        font-size:23px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+        width:100%;
+    }
+
+    .stat-card{
+        min-height:115px;
+        padding:14px;
+    }
+
+    .stat-value{
+        font-size:21px;
+    }
+
+    .dashboard-grid,
+    .lower-grid{
+        grid-template-columns:1fr;
+        width:100%;
+    }
+
+    .quick-grid{
+        grid-template-columns:repeat(2,1fr);
+        width:100%;
+    }
+
+    .future{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+}
+
+@media(max-width:430px){
+
+    main{
+        padding-left:10px;
+        padding-right:10px;
+    }
+
+    .stats{
+        gap:9px;
+    }
+
+    .stat-card{
+        padding:12px;
+    }
+
+    .stat-icon{
+        width:30px;
+        height:30px;
+        font-size:15px;
+    }
+
+    .quick-card{
+        padding:14px 7px;
+    }
+
+    .card{
+        padding:16px;
+    }
+
+    .heart-number{
+        font-size:36px;
+    }
+}
+
+@media(max-width:350px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+}
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="brand">
-    <div class="logo">+</div>
-    <div class="brand-name">Zeva<span>Care</span></div>
-  </div>
+<!-- ================= MOBILE DRAWER ================= -->
 
-  <a href="index.html" class="logout">Logout</a>
-</header>
+<button class="mobile-menu" id="mobileMenu" aria-label="Open menu">
+    ☰
+</button>
 
+<div class="drawer-shade" id="drawerShade"></div>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <button class="drawer-close" id="drawerClose">×</button>
+
+    <div class="logo">
+        ✚ ZevaCare<span>+</span>
+    </div>
+
+    <div class="nav-title">Main</div>
+
+    <a class="nav-link active" href="dashboard.html">
+        <span class="nav-icon">⌂</span>
+        Dashboard
+    </a>
+
+    <a class="nav-link" href="meditrack.html">
+        <span class="nav-icon">💊</span>
+        MediTrack
+    </a>
+
+    <a class="nav-link" href="tracker.html">
+        <span class="nav-icon">📈</span>
+        Health Tracker
+    </a>
+
+    <a class="nav-link" href="smart-health.html">
+        <span class="nav-icon">🧠</span>
+        Smart Health
+    </a>
+
+    <div class="nav-title">Healthcare</div>
+
+    <a class="nav-link" href="health-guide.html">
+        <span class="nav-icon">📚</span>
+        Health Education
+    </a>
+
+    <a class="nav-link" href="bmi.html">
+        <span class="nav-icon">⚖️</span>
+        BMI Calculator
+    </a>
+
+    <a class="nav-link" href="appointment.html">
+        <span class="nav-icon">📅</span>
+        Appointment
+    </a>
+
+    <a class="nav-link" href="health-report.html">
+        <span class="nav-icon">📄</span>
+        Health Reports
+    </a>
+
+    <a class="nav-link" href="emergency.html">
+        <span class="nav-icon">🚨</span>
+        Emergency Assist
+    </a>
+
+    <div class="nav-title">More</div>
+
+    <a class="nav-link" href="#voice" onclick="openVoice(event)">
+        <span class="nav-icon">🎙️</span>
+        Voice Assistant
+    </a>
+
+    <a class="nav-link" href="#future">
+        <span class="nav-icon">🚀</span>
+        Future Technology
+    </a>
+
+    <a class="nav-link" href="profile.html">
+        <span class="nav-icon">👤</span>
+        Profile Settings
+    </a>
+
+    <a class="nav-link" href="#support" onclick="openSupport(event)">
+        <span class="nav-icon">❓</span>
+        Help & Support
+    </a>
+
+    <a class="nav-link logout" href="index.html" onclick="logout()">
+        <span class="nav-icon">↪</span>
+        Logout
+    </a>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
 
 <main>
 
-<!-- WELCOME -->
-<section class="welcome">
-  <h1>Welcome Back! 👋</h1>
-  <p>Your personal healthcare dashboard. Manage your health, access useful tools and learn healthy habits.</p>
-</section>
+    <!-- TOP -->
 
+    <div class="topbar">
 
-<!-- 📢 HEALTH ADVERTISEMENT -->
-<section style="
-  background:linear-gradient(135deg,#1f6fae,#2d91b8);
-  border-radius:20px;
-  padding:25px;
-  margin-bottom:22px;
-  color:white;
-  position:relative;
-  overflow:hidden;
-  min-height:150px;
-  display:flex;
-  align-items:center;
-">
+        <div class="greeting">
+            <h1>Welcome Back 👋</h1>
+            <p id="currentDate">Your health dashboard</p>
+        </div>
 
-  <div style="position:relative;z-index:2;max-width:650px;">
+        <div class="profile">
 
-    <span style="
-      display:inline-block;
-      background:rgba(255,255,255,.18);
-      padding:6px 12px;
-      border-radius:20px;
-      font-size:11px;
-      font-weight:bold;
-      margin-bottom:10px;
-    ">HEALTH AWARENESS</span>
+            <div class="profile-info">
+                <strong>Patient</strong>
+                <span>ZevaCare Member</span>
+            </div>
 
-    <h2 style="font-size:26px;margin-bottom:8px;">
-      Your Health, Your Priority ❤️
-    </h2>
+            <div class="avatar">
+                P
+            </div>
 
-    <p style="font-size:14px;line-height:1.6;">
-      Take small steps every day towards a healthier life.
-      Stay active, eat balanced meals and never ignore important health symptoms.
-    </p>
-
-  </div>
-
-  <div style="
-    position:absolute;
-    right:7%;
-    font-size:70px;
-  ">🏥❤️</div>
-
-</section>
-
-
-<!-- ❤️ LIVE HEALTH MONITOR -->
-<section class="monitor">
-
-  <div class="monitor-title">
-    <span class="live-dot"></span>LIVE HEALTH MONITOR
-  </div>
-
-  <div class="monitor-content">
-
-    <div class="heart">❤️</div>
-
-    <div class="monitor-text">
-
-      <h2>Your Health Matters</h2>
-
-      <p>
-        Stay aware, stay informed and take care of your health every day.
-      </p>
-
-      <div class="ecg">
-        <span class="ecg-line">
-          ────╱╲────╱╲────╱╲────╱╲────╱╲────╱╲────
-        </span>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- 🧼 AUTO HEALTH AWARENESS -->
-<section class="awareness">
-
-  <div class="awareness-head">
-    <span>🎬 HEALTH AWARENESS</span>
-    <span class="auto-playing">● AUTO PLAYING</span>
-  </div>
-
-  <div class="slides">
-
-    <!-- HAND HYGIENE -->
-    <div class="slide active">
-
-      <div class="slide-icon">🧼</div>
-
-      <div class="slide-content">
-
-        <span class="tag">HAND HYGIENE</span>
-
-        <h2>Clean Hands Save Lives</h2>
-
-        <p>
-          Wash your hands regularly with soap and water to help reduce the spread of infections.
-        </p>
-
-      </div>
+        </div>
 
     </div>
 
 
-    <!-- HEART -->
-    <div class="slide">
+    <!-- ================= STATS ================= -->
 
-      <div class="slide-icon">❤️</div>
+    <section class="stats">
 
-      <div class="slide-content">
+        <div class="stat-card">
 
-        <span class="tag">HEART HEALTH</span>
+            <div class="stat-top">
+                <span class="stat-label">Heart Rate</span>
+                <div class="stat-icon heart-animation">❤️</div>
+            </div>
 
-        <h2>Take Care of Your Heart</h2>
+            <div>
+                <span class="stat-value" id="pulseValue">--</span>
+                <span class="stat-unit"> BPM</span>
+            </div>
 
-        <p>
-          Healthy habits, regular activity and check-ups can support overall heart health.
-        </p>
+            <div class="stat-note" id="pulseNote">
+                No pulse record
+            </div>
 
-      </div>
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+                <span class="stat-label">Blood Pressure</span>
+                <div class="stat-icon">🩸</div>
+            </div>
+
+            <div>
+                <span class="stat-value" id="bpValue">--</span>
+            </div>
+
+            <div class="stat-note">
+                mmHg · No record
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+                <span class="stat-label">Health Score</span>
+                <div class="stat-icon">💙</div>
+            </div>
+
+            <div>
+                <span class="stat-value" id="healthScore">--</span>
+                <span class="stat-unit"> / 100</span>
+            </div>
+
+            <div class="stat-note" id="scoreNote">
+                Based on available records
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+                <span class="stat-label">Sleep</span>
+                <div class="stat-icon">🌙</div>
+            </div>
+
+            <div>
+                <span class="stat-value" style="font-size:20px" id="sleepValue">
+                    Not recorded
+                </span>
+            </div>
+
+            <div class="stat-note">
+                Add sleep data when available
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= MONITOR + AWARENESS ================= -->
+
+    <section class="dashboard-grid">
+
+        <div class="card monitor">
+
+            <div class="card-header">
+
+                <h2>Live Health Monitor</h2>
+
+                <div class="live">
+                    <span class="live-dot"></span>
+                    LIVE
+                </div>
+
+            </div>
+
+            <div class="monitor-value">
+                <span class="heart-number" id="monitorPulse">--</span>
+                <span class="bpm">BPM</span>
+            </div>
+
+            <div class="ecg-box">
+
+                <div class="ecg-line">
+
+                    <svg viewBox="0 0 1000 140" preserveAspectRatio="none">
+
+                        <polyline
+                            points="
+                            0,70
+                            80,70
+                            100,70
+                            120,65
+                            135,72
+                            150,70
+                            170,70
+                            190,70
+                            210,70
+                            230,70
+                            245,68
+                            255,70
+                            265,70
+                            280,70
+                            300,70
+                            315,68
+                            325,70
+                            340,70
+                            355,70
+                            370,70
+                            390,70
+                            405,20
+                            415,118
+                            425,70
+                            445,70
+                            465,70
+                            485,70
+                            505,70
+                            520,70
+                            540,70
+                            555,68
+                            565,70
+                            580,70
+                            600,70
+                            620,70
+                            640,70
+                            655,70
+                            670,70
+                            685,70
+                            700,70
+                            715,70
+                            730,70
+                            745,70
+                            760,70
+                            780,70
+                            800,70
+                            815,68
+                            825,70
+                            845,70
+                            865,70
+                            885,70
+                            900,70
+                            915,20
+                            925,118
+                            935,70
+                            955,70
+                            1000,70"
+                            fill="none"
+                            stroke="#0878f9"
+                            stroke-width="3"
+                        />
+
+                    </svg>
+
+                </div>
+
+            </div>
+
+            <div class="monitor-bottom">
+                <span>Heart rhythm visualization</span>
+                <span id="monitorStatus">Waiting for record</span>
+            </div>
+
+        </div>
+
+
+        <div class="card awareness">
+
+            <div class="card-header">
+
+                <h2>Health Awareness</h2>
+
+                <span id="awarenessCount">1 / 5</span>
+
+            </div>
+
+            <div class="awareness-content">
+
+                <div class="awareness-icon" id="awarenessIcon">
+                    💧
+                </div>
+
+                <h3 id="awarenessTitle">
+                    Stay Hydrated
+                </h3>
+
+                <p id="awarenessText">
+                    Drinking enough water throughout the day
+                    supports normal body functions and wellbeing.
+                </p>
+
+                <div class="awareness-dots" id="awarenessDots">
+
+                    <span class="awareness-dot active"></span>
+                    <span class="awareness-dot"></span>
+                    <span class="awareness-dot"></span>
+                    <span class="awareness-dot"></span>
+                    <span class="awareness-dot"></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= QUICK ACCESS ================= -->
+
+    <div class="section-title">
+        <h2>Quick Access</h2>
+        <span>Healthcare tools</span>
+    </div>
+
+    <section class="quick-grid">
+
+        <a class="quick-card" href="meditrack.html">
+            <div class="quick-icon">💊</div>
+            <strong>MediTrack</strong>
+        </a>
+
+        <a class="quick-card" href="tracker.html">
+            <div class="quick-icon">📈</div>
+            <strong>Health Tracker</strong>
+        </a>
+
+        <a class="quick-card" href="smart-health.html">
+            <div class="quick-icon">🧠</div>
+            <strong>Smart Check</strong>
+        </a>
+
+        <a class="quick-card" href="bmi.html">
+            <div class="quick-icon">⚖️</div>
+            <strong>BMI</strong>
+        </a>
+
+        <a class="quick-card" href="health-report.html">
+            <div class="quick-icon">📄</div>
+            <strong>Reports</strong>
+        </a>
+
+        <a class="quick-card" href="appointment.html">
+            <div class="quick-icon">📅</div>
+            <strong>Appointments</strong>
+        </a>
+
+    </section>
+
+
+    <!-- ================= LOWER CARDS ================= -->
+
+    <section class="lower-grid">
+
+        <!-- MEDICINES -->
+
+        <div class="card">
+
+            <div class="card-header">
+                <h2>Medicine Summary</h2>
+                <span id="medicineCount">0 medicines</span>
+            </div>
+
+            <div class="list" id="medicineList">
+
+                <div class="list-item">
+
+                    <div class="item-left">
+
+                        <div class="item-icon">💊</div>
+
+                        <div>
+                            <div class="item-name">
+                                No medicines recorded
+                            </div>
+
+                            <div class="item-sub">
+                                Add medicines in MediTrack
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- REMINDERS -->
+
+        <div class="card">
+
+            <div class="card-header">
+                <h2>Reminders</h2>
+                <span id="reminderCount">0 reminders</span>
+            </div>
+
+            <div class="list" id="reminderList">
+
+                <div class="list-item">
+
+                    <div class="item-left">
+
+                        <div class="item-icon">⏰</div>
+
+                        <div>
+                            <div class="item-name">
+                                No reminders recorded
+                            </div>
+
+                            <div class="item-sub">
+                                Add reminders in Tracker
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RECORDS -->
+
+        <div class="card">
+
+            <div class="card-header">
+                <h2>Health Records</h2>
+                <span>Latest</span>
+            </div>
+
+            <div class="list">
+
+                <div class="list-item">
+
+                    <div class="item-left">
+                        <div class="item-icon">⚖️</div>
+
+                        <div>
+                            <div class="item-name">Weight</div>
+                            <div class="item-sub" id="weightRecord">
+                                No record
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="list-item">
+
+                    <div class="item-left">
+                        <div class="item-icon">🩺</div>
+
+                        <div>
+                            <div class="item-name">Blood Pressure</div>
+                            <div class="item-sub" id="bpRecord">
+                                No record
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="list-item">
+
+                    <div class="item-left">
+                        <div class="item-icon">❤️</div>
+
+                        <div>
+                            <div class="item-name">Pulse</div>
+                            <div class="item-sub" id="pulseRecord">
+                                No record
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= WEEKLY TREND ================= -->
+
+    <div class="section-title">
+        <h2>Pulse Trend</h2>
+        <span>Recorded data only</span>
+    </div>
+
+    <div class="card">
+
+        <div class="trend" id="trendChart">
+
+            <div class="trend-empty" id="trendEmpty">
+                No pulse trend data recorded yet.<br>
+                Add pulse records in Health Tracker.
+            </div>
+
+        </div>
 
     </div>
 
 
-    <!-- NUTRITION -->
-    <div class="slide">
+    <!-- ================= FUTURE TECHNOLOGY ================= -->
 
-      <div class="slide-icon">🥗</div>
+    <section class="future" id="future">
 
-      <div class="slide-content">
+        <div>
 
-        <span class="tag">HEALTHY NUTRITION</span>
+            <h2>🚀 Future Healthcare Technology</h2>
 
-        <h2>Eat Healthy, Live Healthy</h2>
+            <p>
+                ZevaCare is designed to grow with future healthcare
+                technology such as smarter monitoring, connected
+                healthcare devices and advanced digital assistance.
+                This section represents future concepts and is not
+                a currently connected medical device service.
+            </p>
 
-        <p>
-          A balanced diet provides important nutrients to support your body and wellbeing.
-        </p>
+        </div>
 
-      </div>
+        <button class="future-btn" onclick="futureDemo()">
+            Explore Concept
+        </button>
 
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <div style="
+        text-align:center;
+        color:#8c9baa;
+        font-size:11px;
+        padding-top:30px;
+    ">
+        © 2026 ZevaCare+ · Patient Health Dashboard
     </div>
-
-
-    <!-- HYDRATION -->
-    <div class="slide">
-
-      <div class="slide-icon">💧</div>
-
-      <div class="slide-content">
-
-        <span class="tag">STAY HYDRATED</span>
-
-        <h2>Keep Yourself Hydrated</h2>
-
-        <p>
-          Make healthy hydration part of your daily routine according to your individual needs.
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="dots">
-
-    <span class="dot active"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-
-  </div>
-
-</section>
-
-
-<!-- EXTRA FEATURES -->
-<section class="info-grid">
-
-  <div class="info">
-
-    💡
-
-    <h3>Today's Health Tip</h3>
-
-    <p>
-      Small healthy habits practiced regularly can make a positive difference over time.
-    </p>
-
-  </div>
-
-
-  <div class="info">
-
-    🔔
-
-    <h3>Health Reminder</h3>
-
-    <p>
-      Remember to follow the advice and medicine schedule given by your healthcare professional.
-    </p>
-
-  </div>
-
-
-  <div class="info">
-
-    🆘
-
-    <h3>Emergency Support</h3>
-
-    <p>
-      For serious or life-threatening emergencies, seek immediate emergency medical help.
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- HEALTHCARE SERVICES -->
-<h2 class="section-title">
-  Healthcare Services
-</h2>
-
-<p class="subtitle">
-  Choose a service to manage and explore your healthcare information.
-</p>
-
-
-<section class="services">
-
-
-  <a href="profile.html" class="card">
-
-    <div class="card-icon">👤</div>
-
-    <h3>My Profile</h3>
-
-    <p>
-      View and manage your personal information.
-    </p>
-
-  </a>
-
-
-  <a href="bmi.html" class="card">
-
-    <div class="card-icon">⚖️</div>
-
-    <h3>BMI Calculator</h3>
-
-    <p>
-      Calculate and understand your Body Mass Index.
-    </p>
-
-  </a>
-
-
-  <a href="tracker.html" class="card">
-
-    <div class="card-icon">📊</div>
-
-    <h3>My Health Tracker</h3>
-
-    <p>
-      Track and organize your health information.
-    </p>
-
-  </a>
-
-
-  <a href="meditrack.html" class="card">
-
-    <div class="card-icon">💊</div>
-
-    <h3>MediTrack</h3>
-
-    <p>
-      Manage medicine schedules and reminders.
-    </p>
-
-  </a>
-
-
-  <!-- MY HEALTH REPORT -->
-  <a href="health-report.html" class="card">
-
-    <div class="card-icon">📋</div>
-
-    <h3>My Health Report</h3>
-
-    <p>
-      View and organize your personal health information.
-    </p>
-
-  </a>
-
-
-  <!-- EMERGENCY -->
-  <a href="emergency.html" class="card emergency">
-
-    <div class="card-icon">🚨</div>
-
-    <h3>Emergency Assist</h3>
-
-    <p>
-      Access important emergency support information quickly.
-    </p>
-
-  </a>
-
-
-  <!-- HEALTH EDUCATION -->
-  <a href="health-guide.html" class="card">
-
-    <div class="card-icon">📚</div>
-
-    <h3>Health Education</h3>
-
-    <p>
-      Learn about healthy habits and health awareness.
-    </p>
-
-  </a>
-
-
-  <!-- APPOINTMENT -->
-  <a href="appointment.html" class="card">
-
-    <div class="card-icon">📅</div>
-
-    <h3>Appointment Request</h3>
-
-    <p>
-      Request and manage healthcare appointments.
-    </p>
-
-  </a>
-
-
-  <!-- SMART HEALTH -->
-  <a href="smart-health.html" class="card smart">
-
-    <div class="card-icon">🤖</div>
-
-    <h3>Smart Health System</h3>
-
-    <p>
-      Get symptom-based general guidance and important safety alerts.
-    </p>
-
-  </a>
-
-
-</section>
-
-
-<!-- ===============================
-     FUTURE HEALTHCARE TECHNOLOGY
-     =============================== -->
-
-<section class="future-health">
-
-  <h2>🚀 Future Healthcare Technology</h2>
-
-  <p class="section-text">
-    Exploring innovative healthcare technology concepts for a smarter future.
-  </p>
-
-
-  <div class="future-grid">
-
-
-    <div class="future-card">
-
-      <div class="future-icon">🤖</div>
-
-      <h3>AI Health Assistant</h3>
-
-      <p>
-        A future technology concept that can help users understand general
-        health information and healthcare guidance.
-      </p>
-
-      <span class="future-tag">Future Concept</span>
-
-    </div>
-
-
-    <div class="future-card">
-
-      <div class="future-icon">⌚</div>
-
-      <h3>Remote Health Monitoring</h3>
-
-      <p>
-        Smart devices could help monitor health information remotely and
-        support better healthcare awareness.
-      </p>
-
-      <span class="future-tag">Future Concept</span>
-
-    </div>
-
-
-    <div class="future-card">
-
-      <div class="future-icon">🧬</div>
-
-      <h3>Personalized Healthcare</h3>
-
-      <p>
-        Future digital systems may help organize health information for more
-        personalized healthcare support.
-      </p>
-
-      <span class="future-tag">Future Concept</span>
-
-    </div>
-
-
-    <div class="future-card">
-
-      <div class="future-icon">🏠</div>
-
-      <h3>Hospital at Home</h3>
-
-      <p>
-        A future concept for connecting home-based care and healthcare support
-        through digital technology.
-      </p>
-
-      <span class="future-tag">Future Concept</span>
-
-    </div>
-
-
-  </div>
-
-</section>
-
 
 </main>
 
 
-<footer>
-  © 2026 ZevaCare | Your Healthcare Support Platform
-</footer>
+<!-- ================= SUPPORT MODAL ================= -->
+
+<div class="modal" id="supportModal">
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <h2>Help & Support</h2>
+
+            <button class="close" onclick="closeSupport()">
+                ×
+            </button>
+
+        </div>
+
+        <div class="support-list">
+
+            <button class="support-btn" onclick="supportDemo('Chat Support')">
+                💬 Chat Support
+            </button>
+
+            <button class="support-btn" onclick="supportDemo('Call Support')">
+                📞 Call Support
+            </button>
+
+            <button class="support-btn" onclick="supportDemo('Email Support')">
+                ✉️ Email Support
+            </button>
+
+            <button class="support-btn" onclick="supportDemo('FAQ')">
+                ❓ Frequently Asked Questions
+            </button>
+
+            <button class="support-btn" onclick="supportDemo('Raise Support Ticket')">
+                🎫 Raise Support Ticket
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 
 <script>
 
-/* 🎬 AUTOMATIC HEALTH AWARENESS SLIDES */
+/* ================= DATE ================= */
 
-const slides = document.querySelectorAll(".slide");
-const dots = document.querySelectorAll(".dot");
+const dateElement = document.getElementById("currentDate");
 
-let current = 0;
+const now = new Date();
 
-setInterval(() => {
+dateElement.textContent =
+    now.toLocaleDateString("en-IN",{
+        weekday:"long",
+        day:"numeric",
+        month:"long",
+        year:"numeric"
+    });
 
-  slides[current].classList.remove("active");
-  dots[current].classList.remove("active");
 
-  current = (current + 1) % slides.length;
+/* ================= MOBILE DRAWER ================= */
 
-  slides[current].classList.add("active");
-  dots[current].classList.add("active");
+const sidebar = document.getElementById("sidebar");
+const mobileMenu = document.getElementById("mobileMenu");
+const drawerShade = document.getElementById("drawerShade");
+const drawerClose = document.getElementById("drawerClose");
 
-}, 5000);
+function openDrawer(){
+    sidebar.classList.add("open");
+    drawerShade.classList.add("show");
+    document.body.style.overflow = "hidden";
+}
+
+function closeDrawer(){
+    sidebar.classList.remove("open");
+    drawerShade.classList.remove("show");
+    document.body.style.overflow = "";
+}
+
+mobileMenu.addEventListener("click",openDrawer);
+drawerClose.addEventListener("click",closeDrawer);
+drawerShade.addEventListener("click",closeDrawer);
+
+document.addEventListener("keydown",function(e){
+    if(e.key === "Escape"){
+        closeDrawer();
+        closeSupport();
+    }
+});
+
+
+/* Close mobile drawer after navigation */
+
+document.querySelectorAll(".sidebar a").forEach(function(link){
+
+    link.addEventListener("click",function(){
+        if(window.innerWidth <= 760){
+            closeDrawer();
+        }
+    });
+
+});
+
+
+/* ================= HEALTH RECORDS ================= */
+
+function getRecords(){
+
+    try{
+        const data =
+            JSON.parse(localStorage.getItem("zevaCareRecords"));
+
+        return Array.isArray(data) ? data : [];
+
+    }catch(e){
+        return [];
+    }
+
+}
+
+function getLatestRecord(type){
+
+    const records = getRecords()
+        .filter(r => String(r.type || "").toLowerCase() === type.toLowerCase());
+
+    if(!records.length) return null;
+
+    return records[records.length - 1];
+}
+
+
+/* ================= DASHBOARD HEALTH DATA ================= */
+
+function updateHealthData(){
+
+    const pulse =
+        getLatestRecord("Pulse");
+
+    const bp =
+        getLatestRecord("Blood Pressure");
+
+    const weight =
+        getLatestRecord("Weight");
+
+
+    /* Pulse */
+
+    if(pulse){
+
+        const value =
+            pulse.value ??
+            pulse.pulse ??
+            pulse.result ??
+            "--";
+
+        document.getElementById("pulseValue").textContent = value;
+        document.getElementById("monitorPulse").textContent = value;
+
+        document.getElementById("pulseNote").textContent =
+            "Latest recorded pulse";
+
+        document.getElementById("pulseRecord").textContent =
+            value + " BPM";
+
+        document.getElementById("monitorStatus").textContent =
+            "Record available";
+
+    }
+
+
+    /* Blood pressure */
+
+    if(bp){
+
+        const value =
+            bp.value ??
+            bp.bp ??
+            bp.result ??
+            "--";
+
+        document.getElementById("bpValue").textContent = value;
+
+        document.getElementById("bpRecord").textContent =
+            value + " mmHg";
+
+        const bpNote =
+            document.querySelector(".stat-card:nth-child(2) .stat-note");
+
+        if(bpNote){
+            bpNote.textContent = "Latest recorded BP";
+        }
+
+    }
+
+
+    /* Weight */
+
+    if(weight){
+
+        const value =
+            weight.value ??
+            weight.weight ??
+            weight.result ??
+            "--";
+
+        document.getElementById("weightRecord").textContent =
+            value + " kg";
+
+    }
+
+
+    calculateHealthScore();
+    buildPulseTrend();
+}
+
+
+/* ================= HEALTH SCORE ================= */
+
+function calculateHealthScore(){
+
+    const records = getRecords();
+
+    let score = 0;
+    let available = 0;
+
+
+    const pulse = getLatestRecord("Pulse");
+
+    if(pulse){
+
+        const value =
+            Number(
+                pulse.value ??
+                pulse.pulse ??
+                pulse.result
+            );
+
+        if(Number.isFinite(value)){
+
+            available++;
+
+            if(value >= 60 && value <= 100){
+                score += 25;
+            }else{
+                score += 15;
+            }
+
+        }
+
+    }
+
+
+    const bp = getLatestRecord("Blood Pressure");
+
+    if(bp){
+
+        const raw =
+            String(
+                bp.value ??
+                bp.bp ??
+                bp.result ??
+                ""
+            );
+
+        const numbers =
+            raw.match(/\d+/g);
+
+        if(numbers && numbers.length >= 2){
+
+            available++;
+
+            const systolic = Number(numbers[0]);
+            const diastolic = Number(numbers[1]);
+
+            if(
+                systolic >= 90 &&
+                systolic <= 120 &&
+                diastolic >= 60 &&
+                diastolic <= 80
+            ){
+                score += 25;
+            }else{
+                score += 15;
+            }
+
+        }
+
+    }
+
+
+    const weight = getLatestRecord("Weight");
+
+    if(weight){
+
+        const value =
+            Number(
+                weight.value ??
+                weight.weight ??
+                weight.result
+            );
+
+        if(Number.isFinite(value)){
+            available++;
+            score += 25;
+        }
+
+    }
+
+
+    if(records.length > 0){
+        available++;
+        score += 25;
+    }
+
+
+    if(available === 0){
+
+        document.getElementById("healthScore").textContent = "--";
+
+        document.getElementById("scoreNote").textContent =
+            "Add health records to calculate";
+
+        return;
+
+    }
+
+
+    const finalScore =
+        Math.round(score / (available * 25) * 100);
+
+    document.getElementById("healthScore").textContent =
+        Math.min(finalScore,100);
+
+    document.getElementById("scoreNote").textContent =
+        "Calculated from recorded data";
+
+}
+
+
+/* ================= PULSE TREND ================= */
+
+function buildPulseTrend(){
+
+    const chart =
+        document.getElementById("trendChart");
+
+    const empty =
+        document.getElementById("trendEmpty");
+
+    const records =
+        getRecords()
+        .filter(r =>
+            String(r.type || "").toLowerCase() === "pulse"
+        );
+
+
+    if(!records.length){
+
+        empty.style.display = "flex";
+        return;
+
+    }
+
+
+    empty.style.display = "none";
+
+
+    chart.querySelectorAll(".trend-bar-wrap")
+        .forEach(el => el.remove());
+
+
+    const recent =
+        records.slice(-7);
+
+
+    const values =
+        recent.map(r =>
+            Number(
+                r.value ??
+                r.pulse ??
+                r.result
+            )
+        ).filter(Number.isFinite);
+
+
+    if(!values.length){
+
+        empty.style.display = "flex";
+        empty.innerHTML =
+            "No numeric pulse trend data recorded yet.";
+        return;
+
+    }
+
+
+    const min =
+        Math.min(...values);
+
+    const max =
+        Math.max(...values);
+
+
+    values.forEach((value,index)=>{
+
+        const wrap =
+            document.createElement("div");
+
+        wrap.className =
+            "trend-bar-wrap";
+
+        wrap.style.cssText =
+            "display:flex;flex-direction:column;align-items:center;gap:5px;flex:1;height:100%;justify-content:flex-end;";
+
+        const bar =
+            document.createElement("div");
+
+        bar.className = "bar";
+
+        let height = 15;
+
+        if(max !== min){
+            height =
+                25 +
+                ((value-min)/(max-min))*105;
+        }
+
+        bar.style.height =
+            height + "px";
+
+        bar.title =
+            value + " BPM";
+
+        const day =
+            document.createElement("span");
+
+        day.className = "day";
+
+        day.textContent =
+            "R" + (index+1);
+
+        wrap.appendChild(bar);
+        wrap.appendChild(day);
+
+        chart.appendChild(wrap);
+
+    });
+
+}
+
+
+/* ================= MEDICINES ================= */
+
+function getMedicines(){
+
+    try{
+
+        const data =
+            JSON.parse(
+                localStorage.getItem("zevaCareMedicines")
+            );
+
+        return Array.isArray(data) ? data : [];
+
+    }catch(e){
+        return [];
+    }
+
+}
+
+
+function updateMedicines(){
+
+    const list =
+        document.getElementById("medicineList");
+
+    const medicines =
+        getMedicines();
+
+    document.getElementById("medicineCount").textContent =
+        medicines.length + " medicine" +
+        (medicines.length === 1 ? "" : "s");
+
+
+    if(!medicines.length){
+
+        list.innerHTML = `
+            <div class="list-item">
+                <div class="item-left">
+                    <div class="item-icon">💊</div>
+                    <div>
+                        <div class="item-name">
+                            No medicines recorded
+                        </div>
+                        <div class="item-sub">
+                            Add medicines in MediTrack
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        return;
+    }
+
+
+    list.innerHTML = "";
+
+    medicines.slice(-3).forEach(medicine=>{
+
+        const name =
+            medicine.name ||
+            medicine.medicine ||
+            "Medicine";
+
+        const time =
+            medicine.time ||
+            medicine.scheduledTime ||
+            "Scheduled";
+
+
+        const status =
+            medicine.status ||
+            "Pending";
+
+
+        const item =
+            document.createElement("div");
+
+        item.className = "list-item";
+
+        let statusClass = "";
+
+        if(String(status).toLowerCase() === "missed"){
+            statusClass = "missed";
+        }else if(String(status).toLowerCase() !== "taken"){
+            statusClass = "pending";
+        }
+
+
+        item.innerHTML = `
+            <div class="item-left">
+                <div class="item-icon">💊</div>
+                <div>
+                    <div class="item-name">
+                        ${escapeHTML(name)}
+                    </div>
+                    <div class="item-sub">
+                        ${escapeHTML(time)}
+                    </div>
+                </div>
+            </div>
+
+            <span class="status ${statusClass}">
+                ${escapeHTML(status)}
+            </span>
+        `;
+
+        list.appendChild(item);
+
+    });
+
+}
+
+
+/* ================= REMINDERS ================= */
+
+function getReminders(){
+
+    try{
+
+        const data =
+            JSON.parse(
+                localStorage.getItem("zevaCareReminders")
+            );
+
+        return Array.isArray(data) ? data : [];
+
+    }catch(e){
+        return [];
+    }
+
+}
+
+
+function updateReminders(){
+
+    const list =
+        document.getElementById("reminderList");
+
+    const reminders =
+        getReminders();
+
+    document.getElementById("reminderCount").textContent =
+        reminders.length + " reminder" +
+        (reminders.length === 1 ? "" : "s");
+
+
+    if(!reminders.length){
+
+        list.innerHTML = `
+            <div class="list-item">
+                <div class="item-left">
+                    <div class="item-icon">⏰</div>
+                    <div>
+                        <div class="item-name">
+                            No reminders recorded
+                        </div>
+                        <div class="item-sub">
+                            Add reminders in Tracker
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        return;
+    }
+
+
+    list.innerHTML = "";
+
+    reminders.slice(-3).forEach(reminder=>{
+
+        const name =
+            reminder.name ||
+            reminder.title ||
+            reminder.type ||
+            "Reminder";
+
+        const time =
+            reminder.time ||
+            reminder.scheduledTime ||
+            "Scheduled";
+
+        const status =
+            reminder.status ||
+            "Pending";
+
+
+        let statusClass = "";
+
+        if(String(status).toLowerCase() === "skipped"){
+            statusClass = "missed";
+        }else if(String(status).toLowerCase() !== "done"){
+            statusClass = "pending";
+        }
+
+
+        const item =
+            document.createElement("div");
+
+        item.className = "list-item";
+
+        item.innerHTML = `
+            <div class="item-left">
+                <div class="item-icon">⏰</div>
+                <div>
+                    <div class="item-name">
+                        ${escapeHTML(name)}
+                    </div>
+                    <div class="item-sub">
+                        ${escapeHTML(time)}
+                    </div>
+                </div>
+            </div>
+
+            <span class="status ${statusClass}">
+                ${escapeHTML(status)}
+            </span>
+        `;
+
+        list.appendChild(item);
+
+    });
+
+}
+
+
+/* ================= SAFE HTML ================= */
+
+function escapeHTML(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* ================= AWARENESS ================= */
+
+const awarenessData = [
+
+    {
+        icon:"💧",
+        title:"Stay Hydrated",
+        text:"Drinking enough water throughout the day supports normal body functions and wellbeing."
+    },
+
+    {
+        icon:"🥗",
+        title:"Choose Balanced Meals",
+        text:"A varied diet with vegetables, fruits, whole grains and protein can support overall health."
+    },
+
+    {
+        icon:"🚶",
+        title:"Keep Moving",
+        text:"Regular physical activity can support cardiovascular health, mobility and daily wellbeing."
+    },
+
+    {
+        icon:"😴",
+        title:"Prioritize Sleep",
+        text:"Consistent, adequate sleep is an important part of maintaining overall health."
+    },
+
+    {
+        icon:"🩺",
+        title:"Know Your Numbers",
+        text:"Keeping track of recorded health measurements can help you discuss changes with a healthcare professional."
+    }
+
+];
+
+
+let awarenessIndex = 0;
+
+
+function showAwareness(index){
+
+    const item =
+        awarenessData[index];
+
+    document.getElementById("awarenessIcon").textContent =
+        item.icon;
+
+    document.getElementById("awarenessTitle").textContent =
+        item.title;
+
+    document.getElementById("awarenessText").textContent =
+        item.text;
+
+    document.getElementById("awarenessCount").textContent =
+        (index+1) + " / " + awarenessData.length;
+
+
+    document
+        .querySelectorAll(".awareness-dot")
+        .forEach((dot,i)=>{
+            dot.classList.toggle(
+                "active",
+                i === index
+            );
+        });
+
+}
+
+
+setInterval(function(){
+
+    awarenessIndex =
+        (awarenessIndex + 1) %
+        awarenessData.length;
+
+    showAwareness(awarenessIndex);
+
+},5000);
+
+
+/* ================= SUPPORT ================= */
+
+function openSupport(event){
+
+    if(event){
+        event.preventDefault();
+    }
+
+    document
+        .getElementById("supportModal")
+        .classList.add("show");
+
+    closeDrawer();
+
+}
+
+
+function closeSupport(){
+
+    document
+        .getElementById("supportModal")
+        .classList.remove("show");
+
+}
+
+
+function supportDemo(type){
+
+    alert(
+        type +
+        " is currently a demo feature. " +
+        "A real support backend can be connected later."
+    );
+
+}
+
+
+document
+    .getElementById("supportModal")
+    .addEventListener("click",function(e){
+
+        if(e.target === this){
+            closeSupport();
+        }
+
+    });
+
+
+/* ================= VOICE ASSISTANT ================= */
+
+function openVoice(event){
+
+    if(event){
+        event.preventDefault();
+    }
+
+    closeDrawer();
+
+    if(!("speechSynthesis" in window)){
+
+        alert(
+            "Voice Assistant is not supported by this browser."
+        );
+
+        return;
+
+    }
+
+
+    const language =
+        prompt(
+            "Choose language:\n1 = English\n2 = Hindi\n3 = Gujarati",
+            "1"
+        );
+
+
+    if(language === null) return;
+
+
+    let text =
+        "Welcome to ZevaCare. Your health dashboard is ready.";
+
+    let lang = "en-IN";
+
+
+    if(language === "2"){
+
+        text =
+            "ZevaCare mein aapka swagat hai. Aapka health dashboard ready hai.";
+
+        lang = "hi-IN";
+
+    }else if(language === "3"){
+
+        text =
+            "ZevaCare ma tamaru swagat chhe. Tamaru health dashboard taiyar chhe.";
+
+        lang = "gu-IN";
+
+    }
+
+
+    const speech =
+        new SpeechSynthesisUtterance(text);
+
+    speech.lang = lang;
+    speech.rate = .95;
+
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(speech);
+
+}
+
+
+/* ================= FUTURE DEMO ================= */
+
+function futureDemo(){
+
+    alert(
+        "Future Healthcare Technology is a concept/demo section. " +
+        "Real connected medical-device functionality can be added later."
+    );
+
+}
+
+
+/* ================= LOGOUT ================= */
+
+function logout(){
+
+    localStorage.removeItem("zevaCareLoggedIn");
+
+}
+
+
+/* ================= INITIAL LOAD ================= */
+
+updateHealthData();
+updateMedicines();
+updateReminders();
+showAwareness(0);
+
+
+/* Refresh dashboard when returning to page */
+
+window.addEventListener("pageshow",function(){
+
+    updateHealthData();
+    updateMedicines();
+    updateReminders();
+
+});
+
+
+/* Listen for localStorage updates from other tabs */
+
+window.addEventListener("storage",function(){
+
+    updateHealthData();
+    updateMedicines();
+    updateReminders();
+
+});
 
 </script>
-
 
 </body>
 </html>
