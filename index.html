@@ -1,583 +1,800 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#1f6fae">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0878f9">
 
-  <title>ZevaCare | Health Information & Guidance</title>
+<title>ZevaCare | Your Health, Simplified</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
 }
-</script>
-    body {
-      background: #f7fafc;
-      color: #1e293b;
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f6faff;
+    color:#18324d;
+    overflow-x:hidden;
+}
+
+/* ================= HEADER ================= */
+
+header{
+    width:100%;
+    height:76px;
+    background:white;
+    border-bottom:1px solid #e7eef7;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    font-size:27px;
+    font-weight:800;
+    color:#0878f9;
+    text-decoration:none;
+}
+
+.logo span{
+    color:#075dc4;
+}
+
+.login-btn{
+    text-decoration:none;
+    background:#0878f9;
+    color:white;
+    padding:11px 23px;
+    border-radius:10px;
+    font-weight:700;
+    font-size:14px;
+    transition:.2s;
+}
+
+.login-btn:hover{
+    background:#075fcf;
+    transform:translateY(-1px);
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:calc(100vh - 76px);
+    padding:70px 7%;
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    align-items:center;
+    gap:55px;
+    background:
+        radial-gradient(circle at 10% 10%,rgba(8,120,249,.09),transparent 30%),
+        linear-gradient(180deg,#f8fbff,#f1f7ff);
+}
+
+.hero-content{
+    max-width:650px;
+}
+
+.badge{
+    display:inline-block;
+    background:#e8f3ff;
+    color:#0878f9;
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:56px;
+    line-height:1.08;
+    color:#12395f;
+    margin-bottom:22px;
+}
+
+.hero h1 span{
+    color:#0878f9;
+}
+
+.hero p{
+    max-width:570px;
+    color:#60758c;
+    font-size:18px;
+    line-height:1.75;
+    margin-bottom:30px;
+}
+
+.hero-actions{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+}
+
+.primary-btn,
+.secondary-btn{
+    display:inline-block;
+    text-decoration:none;
+    padding:14px 24px;
+    border-radius:12px;
+    font-size:15px;
+    font-weight:700;
+    transition:.2s;
+}
+
+.primary-btn{
+    background:#0878f9;
+    color:white;
+    box-shadow:0 10px 25px rgba(8,120,249,.2);
+}
+
+.primary-btn:hover{
+    background:#075fcf;
+    transform:translateY(-2px);
+}
+
+.secondary-btn{
+    background:white;
+    color:#0878f9;
+    border:1px solid #d9e7f7;
+}
+
+.secondary-btn:hover{
+    border-color:#0878f9;
+}
+
+/* ================= DOCTOR CARD ================= */
+
+.hero-visual{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.doctor-card{
+    width:min(430px,100%);
+    min-height:420px;
+    background:white;
+    border:1px solid #e0ebf7;
+    border-radius:30px;
+    box-shadow:0 25px 60px rgba(30,88,140,.14);
+    padding:25px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.doctor-bg{
+    width:100%;
+    height:365px;
+    border-radius:23px;
+    background:linear-gradient(145deg,#eaf5ff,#f7fbff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:150px;
+}
+
+/* Floating information cards */
+
+.float-card{
+    position:absolute;
+    background:white;
+    border:1px solid #e3edf7;
+    border-radius:14px;
+    padding:13px 16px;
+    box-shadow:0 12px 30px rgba(35,86,130,.13);
+    font-size:12px;
+    color:#60758c;
+}
+
+.float-card strong{
+    display:block;
+    color:#183d63;
+    font-size:14px;
+    margin-bottom:3px;
+}
+
+.float-one{
+    top:35px;
+    left:-28px;
+}
+
+.float-two{
+    bottom:35px;
+    right:-28px;
+}
+
+/* ================= HIGHLIGHTS ================= */
+
+.highlights{
+    padding:75px 7%;
+    background:white;
+}
+
+.section-heading{
+    text-align:center;
+    max-width:650px;
+    margin:0 auto 45px;
+}
+
+.section-heading h2{
+    color:#12395f;
+    font-size:34px;
+    margin-bottom:12px;
+}
+
+.section-heading p{
+    color:#718399;
+    line-height:1.7;
+}
+
+.highlight-grid{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.highlight-card{
+    padding:28px 24px;
+    border:1px solid #e3edf7;
+    border-radius:18px;
+    background:#fbfdff;
+    transition:.25s;
+}
+
+.highlight-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(28,83,130,.1);
+}
+
+.highlight-icon{
+    width:50px;
+    height:50px;
+    border-radius:14px;
+    background:#eaf4ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    margin-bottom:18px;
+}
+
+.highlight-card h3{
+    color:#193e62;
+    margin-bottom:9px;
+    font-size:19px;
+}
+
+.highlight-card p{
+    color:#708399;
+    line-height:1.65;
+    font-size:14px;
+}
+
+/* ================= ABOUT ================= */
+
+.about{
+    padding:80px 7%;
+    background:#f4f9ff;
+}
+
+.about-box{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:55px;
+    align-items:center;
+}
+
+.about h2{
+    color:#12395f;
+    font-size:35px;
+    margin-bottom:18px;
+}
+
+.about p{
+    color:#667b91;
+    line-height:1.8;
+    margin-bottom:15px;
+}
+
+.about-points{
+    display:grid;
+    gap:12px;
+    margin-top:22px;
+}
+
+.about-point{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#35536f;
+    font-size:14px;
+    font-weight:600;
+}
+
+.check{
+    width:27px;
+    height:27px;
+    border-radius:50%;
+    background:#e4f2ff;
+    color:#0878f9;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.about-card{
+    background:white;
+    border:1px solid #e1ebf5;
+    border-radius:22px;
+    padding:32px;
+    box-shadow:0 15px 40px rgba(40,90,130,.08);
+}
+
+.about-card h3{
+    color:#183e62;
+    margin-bottom:12px;
+}
+
+.about-card p{
+    font-size:14px;
+}
+
+/* ================= CTA ================= */
+
+.cta{
+    padding:70px 7%;
+    background:white;
+    text-align:center;
+}
+
+.cta-box{
+    max-width:900px;
+    margin:auto;
+    background:linear-gradient(135deg,#0878f9,#075acb);
+    color:white;
+    padding:50px 25px;
+    border-radius:25px;
+    box-shadow:0 20px 45px rgba(8,100,220,.18);
+}
+
+.cta-box h2{
+    font-size:32px;
+    margin-bottom:12px;
+}
+
+.cta-box p{
+    opacity:.9;
+    margin-bottom:25px;
+    line-height:1.6;
+}
+
+.cta-login{
+    display:inline-block;
+    background:white;
+    color:#0878f9;
+    text-decoration:none;
+    padding:13px 25px;
+    border-radius:11px;
+    font-weight:700;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#102f4d;
+    color:#b9c9d8;
+    padding:30px 7%;
+    text-align:center;
+    font-size:13px;
+}
+
+footer strong{
+    color:white;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+        padding-top:55px;
     }
 
-    
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function () {
-    navigator.serviceWorker.register("service-worker.js")
-      .then(() => console.log("ZevaCare App mode ready"))
-      .catch(error => console.log("Service Worker error:", error));
-  });
-}
-</script> Header */
-    header {
-      background: #ffffff;
-      padding: 15px 8%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #e8eef3;
+    .hero-content{
+        margin:auto;
     }
 
-    /* Logo */
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 11px;
+    .hero p{
+        margin-left:auto;
+        margin-right:auto;
     }
 
-    .logo-mark {
-      width: 43px;
-      height: 43px;
-      border-radius: 11px;
-      background: #1769aa;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 27px;
-      font-weight: bold;
+    .hero-actions{
+        justify-content:center;
     }
 
-    .brand-name {
-      font-size: 24px;
-      font-weight: 700;
-      color: #163a59;
+    .hero-visual{
+        margin-top:10px;
     }
 
-    .brand-name span {
-      color: #1769aa;
+    .highlight-grid{
+        grid-template-columns:1fr;
+        max-width:600px;
     }
 
-    .tagline {
-      font-size: 11px;
-      color: #7a8794;
-      margin-top: 2px;
+    .about-box{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    header{
+        height:68px;
+        padding:0 20px;
     }
 
-    .login-btn {
-      background: #1769aa;
-      color: white;
-      text-decoration: none;
-      padding: 11px 22px;
-      border-radius: 7px;
-      font-size: 15px;
-      font-weight: 600;
+    .logo{
+        font-size:23px;
     }
 
-    /* Hero */
-    .hero {
-      min-height: 560px;
-      padding: 70px 10%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 60px;
-      background:
-        radial-gradient(circle at 90% 15%, #dceefa 0%, transparent 28%),
-        #f7fafc;
+    .login-btn{
+        padding:9px 16px;
+        font-size:13px;
     }
 
-    .hero-text {
-      flex: 1;
-      max-width: 620px;
+    .hero{
+        min-height:auto;
+        padding:48px 20px 55px;
+        gap:35px;
     }
 
-    .small-title {
-      color: #1769aa;
-      font-size: 14px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 15px;
+    .hero h1{
+        font-size:38px;
     }
 
-    h1 {
-      font-size: 52px;
-      line-height: 1.12;
-      color: #163a59;
-      margin-bottom: 22px;
+    .hero p{
+        font-size:16px;
     }
 
-    h1 span {
-      color: #1769aa;
+    .doctor-card{
+        min-height:340px;
+        padding:18px;
+        border-radius:23px;
     }
 
-    .hero-text p {
-      font-size: 18px;
-      line-height: 1.7;
-      color: #617080;
-      max-width: 560px;
+    .doctor-bg{
+        height:300px;
+        font-size:110px;
     }
 
-    .hero-btn {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 15px 27px;
-      background: #1769aa;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
+    .float-one{
+        left:5px;
+        top:20px;
     }
 
-    .disclaimer {
-      margin-top: 18px;
-      font-size: 13px !important;
-      color: #7b8794 !important;
+    .float-two{
+        right:5px;
+        bottom:20px;
     }
 
-    /* Health Card */
-    .hero-visual {
-      flex: 0.8;
-      min-width: 330px;
+    .highlights,
+    .about,
+    .cta{
+        padding:55px 20px;
     }
 
-    .health-card {
-      background: white;
-      border-radius: 22px;
-      padding: 38px;
-      box-shadow: 0 20px 50px rgba(22, 58, 89, 0.1);
-      text-align: center;
-      border: 1px solid #edf2f6;
+    .section-heading h2,
+    .about h2{
+        font-size:28px;
     }
 
-    .doctor-icon {
-      width: 110px;
-      height: 110px;
-      margin: 0 auto 22px;
-      border-radius: 50%;
-      background: #eaf4fb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 55px;
+    .cta-box h2{
+        font-size:26px;
+    }
+}
+
+@media(max-width:380px){
+
+    .hero h1{
+        font-size:33px;
     }
 
-    .health-card h2 {
-      color: #163a59;
-      margin-bottom: 12px;
-      font-size: 25px;
+    .hero-actions{
+        flex-direction:column;
     }
 
-    .health-card p {
-      color: #687786;
-      line-height: 1.6;
-      font-size: 15px;
+    .primary-btn,
+    .secondary-btn{
+        width:100%;
     }
 
-
-    
-  /* FUTURE SMART HEALTH */
-.future-health {
-  padding: 80px 10%;
-  background: #f1f7fb;
-  text-align: center;
-}
-
-.future-heading {
-  max-width: 750px;
-  margin: 0 auto 45px;
-}
-
-.future-heading h2 {
-  font-size: 34px;
-  color: #163a59;
-  margin-bottom: 15px;
-}
-
-.future-heading h2 span {
-  color: #1769aa;
-}
-
-.future-heading p {
-  color: #657382;
-  line-height: 1.7;
-  font-size: 16px;
-}
-
-.future-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.future-card {
-  background: white;
-  padding: 30px 22px;
-  border-radius: 18px;
-  text-align: left;
-  border: 1px solid #e3edf4;
-  box-shadow: 0 8px 25px rgba(22, 58, 89, 0.06);
-  transition: transform 0.3s ease;
-}
-
-.future-card:hover {
-  transform: translateY(-7px);
-}
-
-.future-icon {
-  font-size: 42px;
-  margin-bottom: 18px;
-}
-
-.future-card h3 {
-  color: #163a59;
-  font-size: 19px;
-  margin-bottom: 12px;
-}
-
-.future-card p {
-  color: #687786;
-  line-height: 1.6;
-  font-size: 14px;
-  margin-bottom: 18px;
-}
-
-.future-tag {
-  display: inline-block;
-  background: #eaf4fb;
-  color: #1769aa;
-  padding: 6px 11px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: bold;
-}
-
-.future-note {
-  max-width: 800px;
-  margin: 35px auto 0;
-  font-size: 13px;
-  color: #718096;
-  line-height: 1.6;
-}
-
-@media (max-width: 900px) {
-  .future-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .future-health {
-    padding: 55px 7%;
-  }
-
-  .future-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .future-heading h2 {
-    font-size: 28px;
-  }
-}
-    /* About */
-    .about {
-      background: white;
-      padding: 70px 10%;
-      text-align: center;
-      border-top: 1px solid #eef2f5;
+    .doctor-card{
+        min-height:300px;
     }
 
-    .about h2 {
-      font-size: 32px;
-      color: #163a59;
-      margin-bottom: 18px;
+    .doctor-bg{
+        height:260px;
+        font-size:90px;
     }
-
-    .about p {
-      max-width: 780px;
-      margin: auto;
-      color: #657382;
-      line-height: 1.8;
-      font-size: 16px;
-    }
-
-    /* Footer */
-    footer {
-      background: #163a59;
-      color: #dce6ee;
-      text-align: center;
-      padding: 25px;
-      font-size: 14px;
-    }
-
-    /* Mobile */
-    @media (max-width: 768px) {
-      header {
-        padding: 14px 6%;
-      }
-
-      .brand-name {
-        font-size: 21px;
-      }
-
-      .tagline {
-        display: none;
-      }
-
-      .login-btn {
-        padding: 10px 16px;
-      }
-
-      .hero {
-        flex-direction: column;
-        text-align: center;
-        padding: 65px 7%;
-        gap: 40px;
-      }
-
-      h1 {
-        font-size: 39px;
-      }
-
-      .hero-text p {
-        font-size: 16px;
-      }
-
-      .hero-visual {
-        min-width: 100%;
-        width: 100%;
-      }
-
-      .about {
-        padding: 55px 7%;
-      }
-    }/* FUTURE SMART HEALTH */
-.future-health {
-  padding: 80px 10%;
-  background: #f1f7fb;
-  text-align: center;
 }
-
-.future-heading {
-  max-width: 750px;
-  margin: 0 auto 45px;
-}
-
-.future-heading h2 {
-  font-size: 34px;
-  color: #163a59;
-  margin-bottom: 15px;
-}
-
-.future-heading h2 span {
-  color: #1769aa;
-}
-
-.future-heading p {
-  color: #657382;
-  line-height: 1.7;
-  font-size: 16px;
-}
-
-.future-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.future-card {
-  background: white;
-  padding: 30px 22px;
-  border-radius: 18px;
-  text-align: left;
-  border: 1px solid #e3edf4;
-  box-shadow: 0 8px 25px rgba(22, 58, 89, 0.06);
-  transition: transform 0.3s ease;
-}
-
-.future-card:hover {
-  transform: translateY(-7px);
-}
-
-.future-icon {
-  font-size: 42px;
-  margin-bottom: 18px;
-}
-
-.future-card h3 {
-  color: #163a59;
-  font-size: 19px;
-  margin-bottom: 12px;
-}
-
-.future-card p {
-  color: #687786;
-  line-height: 1.6;
-  font-size: 14px;
-  margin-bottom: 18px;
-}
-
-.future-tag {
-  display: inline-block;
-  background: #eaf4fb;
-  color: #1769aa;
-  padding: 6px 11px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: bold;
-}
-
-.future-note {
-  max-width: 800px;
-  margin: 35px auto 0;
-  font-size: 13px;
-  color: #718096;
-  line-height: 1.6;
-}
-
-@media (max-width: 900px) {
-  .future-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .future-health {
-    padding: 55px 7%;
-  }
-
-  .future-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .future-heading h2 {
-    font-size: 28px;
-  }
-}
-  </style>
+</style>
 </head>
 
 <body>
 
-  <!-- Header -->
-  <header>
-    <div class="brand">
-      <div class="logo-mark">+</div>
-      <div>
-        <div class="brand-name">Zeva<span>Care</span></div>
-        <div class="tagline">Health Information & Guidance</div>
-      </div>
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <a href="index.html" class="logo">
+        ✚ ZevaCare<span>+</span>
+    </a>
+
+    <a href="login.html" class="login-btn">
+        Login
+    </a>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            🩺 Your Digital Healthcare Companion
+        </div>
+
+        <h1>
+            Understand Your Health,
+            <span>One Step at a Time.</span>
+        </h1>
+
+        <p>
+            ZevaCare helps you stay informed about your health with
+            simple, reliable and easy-to-understand healthcare tools
+            designed for everyday use.
+        </p>
+
+        <div class="hero-actions">
+
+            <a href="login.html" class="primary-btn">
+                Get Started →
+            </a>
+
+            <a href="#about" class="secondary-btn">
+                Learn More
+            </a>
+
+        </div>
+
     </div>
 
-    <a href="login.html" class="login-btn">Login</a>
-  </header>
 
-  <!-- Hero -->
-  <section class="hero">
-
-    <div class="hero-text">
-      <div class="small-title">Smart Healthcare Support</div>
-
-      <h1>Understand Your Health,<br><span>One Step at a Time.</span></h1>
-
-      <p>
-        ZevaCare is a digital healthcare information platform designed to
-        help users explore common health concerns and access useful health
-        guidance in one convenient place.
-      </p>
-
-      <a href="login.html" class="hero-btn">Login to Continue →</a>
-
-      <p class="disclaimer">
-        For health information and awareness. Not a substitute for professional medical advice.
-      </p>
-    </div>
+    <!-- ORIGINAL DOCTOR VISUAL PRESERVED -->
 
     <div class="hero-visual">
-      <div class="health-card">
-        <div class="doctor-icon">🧑‍⚕️</div>
-        <h2>Health Support Made Simple</h2>
-        <p>
-          Access healthcare information and digital services through
-          a simple and easy-to-use platform.
-        </p>
-      </div>
+
+        <div class="doctor-card">
+
+            <div class="doctor-bg">
+                🧑‍⚕️
+            </div>
+
+            <div class="float-card float-one">
+                <strong>Healthcare</strong>
+                Made Simple
+            </div>
+
+            <div class="float-card float-two">
+                <strong>ZevaCare+</strong>
+                Your Health Matters
+            </div>
+
+        </div>
+
     </div>
-
-  </section>
-<!-- FUTURE SMART HEALTH SECTION -->
-<section class="future-health">
-
-  <div class="future-heading">
-    <div class="small-title">Future Technology</div>
-    <h2>ZevaCare <span>Future Smart Health</span></h2>
-    <p>Discover how emerging digital technology can make healthcare more connected and accessible.</p>
-  </div>
-
-  <div class="future-grid">
-
-    <div class="future-card">
-      <div class="future-icon">🧬</div>
-      <h3>Digital Health Profile</h3>
-      <p>Keep health information and wellness progress organized in one smart digital profile.</p>
-      <span class="future-tag">Future Feature</span>
-    </div>
-
-    <div class="future-card">
-      <div class="future-icon">🎙️</div>
-      <h3>Voice Health Assistant</h3>
-      <p>Explore health information and navigate ZevaCare using simple voice commands.</p>
-      <span class="future-tag">Future Feature</span>
-    </div>
-
-    <div class="future-card">
-      <div class="future-icon">📊</div>
-      <h3>Smart Health Timeline</h3>
-      <p>View your health journey and wellness records in a simple timeline.</p>
-      <span class="future-tag">Future Feature</span>
-    </div>
-
-    <div class="future-card">
-      <div class="future-icon">🏠</div>
-      <h3>Hospital at Home</h3>
-      <p>A future concept connecting home-based care with digital healthcare support.</p>
-      <span class="future-tag">Future Feature</span>
-    </div>
-
-  </div>
 
 </section>
-  <!-- About -->
-  <section class="about">
-    <h2>About ZevaCare</h2>
-    <p>
-      ZevaCare is an educational healthcare platform that demonstrates how
-      digital technology can support health awareness and access to general
-      health information. The platform does not provide a medical diagnosis
-      or replace consultation with a qualified healthcare professional.
-    </p>
-  </section>
 
-  <!-- Footer -->
-  <footer>
-    © 2026 ZevaCare | Educational Healthcare Platform
-  </footer>
+
+<!-- ================= HIGHLIGHTS ================= -->
+
+<section class="highlights">
+
+    <div class="section-heading">
+
+        <h2>Healthcare Made Simpler</h2>
+
+        <p>
+            A simple starting point for understanding and managing
+            your healthcare journey.
+        </p>
+
+    </div>
+
+
+    <div class="highlight-grid">
+
+        <div class="highlight-card">
+
+            <div class="highlight-icon">
+                📚
+            </div>
+
+            <h3>Reliable Information</h3>
+
+            <p>
+                Access clear and easy-to-understand healthcare
+                information designed to support better awareness.
+            </p>
+
+        </div>
+
+
+        <div class="highlight-card">
+
+            <div class="highlight-icon">
+                ❤️
+            </div>
+
+            <h3>Health Awareness</h3>
+
+            <p>
+                Learn more about common health topics and build
+                better awareness of your everyday wellbeing.
+            </p>
+
+        </div>
+
+
+        <div class="highlight-card">
+
+            <div class="highlight-icon">
+                🔐
+            </div>
+
+            <h3>Simple & Secure</h3>
+
+            <p>
+                Sign in to access your personal ZevaCare healthcare
+                dashboard in one convenient place.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about" id="about">
+
+    <div class="about-box">
+
+        <div>
+
+            <h2>About ZevaCare</h2>
+
+            <p>
+                ZevaCare is designed as a modern digital healthcare
+                companion that brings useful health tools together
+                in a simple and user-friendly experience.
+            </p>
+
+            <p>
+                Our goal is to make healthcare information easier
+                to understand while helping users stay connected
+                with their personal health journey.
+            </p>
+
+
+            <div class="about-points">
+
+                <div class="about-point">
+                    <span class="check">✓</span>
+                    Easy-to-use healthcare experience
+                </div>
+
+                <div class="about-point">
+                    <span class="check">✓</span>
+                    Clear health information
+                </div>
+
+                <div class="about-point">
+                    <span class="check">✓</span>
+                    Designed with patients in mind
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="about-card">
+
+            <h3>Why ZevaCare?</h3>
+
+            <p>
+                Healthcare can sometimes feel complicated.
+                ZevaCare focuses on making the digital experience
+                simple, organized and approachable.
+            </p>
+
+            <p>
+                After login, patients can access the available
+                ZevaCare tools and their personal dashboard.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+    <div class="cta-box">
+
+        <h2>Ready to Begin?</h2>
+
+        <p>
+            Sign in to your ZevaCare account and continue your
+            healthcare journey.
+        </p>
+
+        <a href="login.html" class="cta-login">
+            Patient Login
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <strong>✚ ZevaCare+</strong>
+
+    <br><br>
+
+    Your health. Your awareness. Your journey.
+
+    <br><br>
+
+    © 2026 ZevaCare. All rights reserved.
+
+</footer>
 
 </body>
 </html>
