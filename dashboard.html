@@ -5,28 +5,60 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Dashboard | ZevaCare</title>
+
+<style>
+
+/* ===============================
+   ZEVACARE ANIMATIONS
+   =============================== */
+
 @keyframes ecgMove {
   0% {
     transform: translateX(-30%);
   }
-  100% {
-    transform: translateX(30%);
-  }
-}
-/* ECG Heartbeat Animation Fix */
-@keyframes ecgMove {
-  0% {
-    transform: translateX(-30%);
-  }
+
   100% {
     transform: translateX(30%);
   }
 }
 
-.ecg-line {
-  animation: ecgMove 3s linear infinite;
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  10% {
+    transform: scale(1.08);
+  }
+
+  20% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(1.12);
+  }
+
+  45% {
+    transform: scale(1);
+  }
 }
-}<style>
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .35;
+  }
+}
+
+
+/* ===============================
+   GENERAL
+   =============================== */
+
 *{
   margin:0;
   padding:0;
@@ -39,7 +71,11 @@ body{
   color:#20394f;
 }
 
-/* HEADER */
+
+/* ===============================
+   HEADER
+   =============================== */
+
 header{
   background:#ffffff;
   padding:15px 6%;
@@ -88,14 +124,22 @@ header{
   font-size:13px;
 }
 
-/* MAIN */
+
+/* ===============================
+   MAIN
+   =============================== */
+
 main{
   max-width:1150px;
   margin:auto;
   padding:30px 5% 55px;
 }
 
-/* WELCOME */
+
+/* ===============================
+   WELCOME
+   =============================== */
+
 .welcome{
   margin-bottom:22px;
 }
@@ -110,7 +154,11 @@ main{
   line-height:1.6;
 }
 
-/* ❤️ LIVE HEALTH MONITOR */
+
+/* ===============================
+   LIVE HEALTH MONITOR
+   =============================== */
+
 .monitor{
   background:#193548;
   border-radius:20px;
@@ -132,7 +180,7 @@ main{
   border-radius:50%;
   background:#ff4d4d;
   margin-right:6px;
-  animation:blink 1s infinite;
+  animation:blink 1s ease-in-out infinite;
 }
 
 .monitor-content{
@@ -147,7 +195,8 @@ main{
 
 .heart{
   font-size:75px;
-  animation:heartbeat 1.1s infinite;
+  animation:heartbeat 1.1s ease-in-out infinite;
+  transform-origin:center;
   flex-shrink:0;
 }
 
@@ -161,7 +210,11 @@ main{
   font-size:14px;
 }
 
-/* ECG MOVING LINE */
+
+/* ===============================
+   ECG MOVING LINE
+   =============================== */
+
 .ecg{
   margin-top:15px;
   height:35px;
@@ -174,10 +227,15 @@ main{
 
 .ecg-line{
   display:inline-block;
+  min-width:max-content;
   animation:ecgMove 3s linear infinite;
 }
 
-/* 🎬 HEALTH AWARENESS */
+
+/* ===============================
+   HEALTH AWARENESS
+   =============================== */
+
 .awareness{
   background:white;
   border:1px solid #e1e8ee;
@@ -197,7 +255,7 @@ main{
 }
 
 .auto-playing{
-  animation:blink 1.2s infinite;
+  animation:blink 1.2s ease-in-out infinite;
 }
 
 .slides{
@@ -281,7 +339,11 @@ main{
   background:#1f6fae;
 }
 
-/* EXTRA INFORMATION */
+
+/* ===============================
+   EXTRA INFORMATION
+   =============================== */
+
 .info-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -307,7 +369,11 @@ main{
   line-height:1.5;
 }
 
-/* SERVICES */
+
+/* ===============================
+   SERVICES
+   =============================== */
+
 .section-title{
   font-size:25px;
   margin-bottom:7px;
@@ -369,68 +435,146 @@ main{
 .smart{
   background:#eaf3f8;
 }
-<!-- Future Healthcare Technology -->
-<section class="future-health">
 
-  <h2>🚀 Future Healthcare Technology</h2>
 
-  <p class="section-text">
-    Exploring innovative healthcare technology concepts for a smarter future.
-  </p>
+/* ===============================
+   FUTURE HEALTHCARE
+   =============================== */
 
-  <div class="future-grid">
+.future-health{
+  margin-top:35px;
+  background:#ffffff;
+  border:1px solid #e1e8ee;
+  border-radius:20px;
+  padding:25px;
+}
 
-    <div class="future-card">
-      <div class="future-icon">🤖</div>
-      <h3>AI Health Assistant</h3>
-      <p>
-        A future technology concept that can help users understand general
-        health information and healthcare guidance.
-      </p>
-      <span class="future-tag">Future Concept</span>
-    </div>
+.future-health h2{
+  font-size:25px;
+  margin-bottom:8px;
+}
 
-    <div class="future-card">
-      <div class="future-icon">⌚</div>
-      <h3>Remote Health Monitoring</h3>
-      <p>
-        Smart devices could help monitor health information remotely and
-        support better healthcare awareness.
-      </p>
-      <span class="future-tag">Future Concept</span>
-    </div>
+.section-text{
+  color:#71808d;
+  font-size:14px;
+  line-height:1.6;
+  margin-bottom:20px;
+}
 
-    <div class="future-card">
-      <div class="future-icon">🧬</div>
-      <h3>Personalized Healthcare</h3>
-      <p>
-        Future digital systems may help organize health information for more
-        personalized healthcare support.
-      </p>
-      <span class="future-tag">Future Concept</span>
-    </div>
+.future-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:17px;
+}
 
-    <div class="future-card">
-      <div class="future-icon">🏠</div>
-      <h3>Hospital at Home</h3>
-      <p>
-        A future concept for connecting home-based care and healthcare support
-        through digital technology.
-      </p>
-      <span class="future-tag">Future Concept</span>
-    </div>
+.future-card{
+  background:#f4f8fb;
+  border:1px solid #e1e8ee;
+  border-radius:17px;
+  padding:20px;
+  transition:.25s;
+}
 
-  </div>
+.future-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 10px 25px rgba(20,60,90,.10);
+}
 
-</section>
+.future-icon{
+  width:52px;
+  height:52px;
+  background:#eaf3f8;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  font-size:28px;
+  margin-bottom:13px;
+}
 
-    font-size:45px;
+.future-card h3{
+  font-size:17px;
+  margin-bottom:8px;
+}
+
+.future-card p{
+  color:#71808d;
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:12px;
+}
+
+.future-tag{
+  display:inline-block;
+  background:#1f6fae;
+  color:white;
+  padding:5px 10px;
+  border-radius:15px;
+  font-size:10px;
+  font-weight:bold;
+}
+
+
+/* ===============================
+   FOOTER
+   =============================== */
+
+footer{
+  background:#193548;
+  color:white;
+  text-align:center;
+  padding:20px;
+  font-size:13px;
+}
+
+
+/* ===============================
+   MOBILE RESPONSIVE
+   =============================== */
+
+@media(max-width:700px){
+
+  .monitor-content{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .heart{
+    font-size:60px;
+  }
+
+  .slide{
+    gap:15px;
+    padding:18px;
+  }
+
+  .slide-icon{
+    width:80px;
+    height:80px;
+    font-size:42px;
+  }
+
+  .slide-content h2{
+    font-size:19px;
+  }
+
+  .slide-content p{
+    font-size:12px;
   }
 
   .info-grid{
     grid-template-columns:1fr;
   }
+
+  .future-health{
+    padding:20px;
+  }
+
+  .future-health h2{
+    font-size:21px;
+  }
+
 }
+
 </style>
 </head>
 
@@ -441,8 +585,10 @@ main{
     <div class="logo">+</div>
     <div class="brand-name">Zeva<span>Care</span></div>
   </div>
+
   <a href="index.html" class="logout">Logout</a>
 </header>
+
 
 <main>
 
@@ -451,6 +597,8 @@ main{
   <h1>Welcome Back! 👋</h1>
   <p>Your personal healthcare dashboard. Manage your health, access useful tools and learn healthy habits.</p>
 </section>
+
+
 <!-- 📢 HEALTH ADVERTISEMENT -->
 <section style="
   background:linear-gradient(135deg,#1f6fae,#2d91b8);
@@ -464,7 +612,9 @@ main{
   display:flex;
   align-items:center;
 ">
+
   <div style="position:relative;z-index:2;max-width:650px;">
+
     <span style="
       display:inline-block;
       background:rgba(255,255,255,.18);
@@ -483,6 +633,7 @@ main{
       Take small steps every day towards a healthier life.
       Stay active, eat balanced meals and never ignore important health symptoms.
     </p>
+
   </div>
 
   <div style="
@@ -490,28 +641,41 @@ main{
     right:7%;
     font-size:70px;
   ">🏥❤️</div>
+
 </section>
+
+
 <!-- ❤️ LIVE HEALTH MONITOR -->
 <section class="monitor">
+
   <div class="monitor-title">
     <span class="live-dot"></span>LIVE HEALTH MONITOR
   </div>
 
   <div class="monitor-content">
+
     <div class="heart">❤️</div>
 
     <div class="monitor-text">
+
       <h2>Your Health Matters</h2>
-      <p>Stay aware, stay informed and take care of your health every day.</p>
+
+      <p>
+        Stay aware, stay informed and take care of your health every day.
+      </p>
 
       <div class="ecg">
         <span class="ecg-line">
           ────╱╲────╱╲────╱╲────╱╲────╱╲────╱╲────
         </span>
       </div>
+
     </div>
+
   </div>
+
 </section>
+
 
 <!-- 🧼 AUTO HEALTH AWARENESS -->
 <section class="awareness">
@@ -525,158 +689,384 @@ main{
 
     <!-- HAND HYGIENE -->
     <div class="slide active">
+
       <div class="slide-icon">🧼</div>
+
       <div class="slide-content">
+
         <span class="tag">HAND HYGIENE</span>
+
         <h2>Clean Hands Save Lives</h2>
-        <p>Wash your hands regularly with soap and water to help reduce the spread of infections.</p>
+
+        <p>
+          Wash your hands regularly with soap and water to help reduce the spread of infections.
+        </p>
+
       </div>
+
     </div>
+
 
     <!-- HEART -->
     <div class="slide">
+
       <div class="slide-icon">❤️</div>
+
       <div class="slide-content">
+
         <span class="tag">HEART HEALTH</span>
+
         <h2>Take Care of Your Heart</h2>
-        <p>Healthy habits, regular activity and check-ups can support overall heart health.</p>
+
+        <p>
+          Healthy habits, regular activity and check-ups can support overall heart health.
+        </p>
+
       </div>
+
     </div>
+
 
     <!-- NUTRITION -->
     <div class="slide">
+
       <div class="slide-icon">🥗</div>
+
       <div class="slide-content">
+
         <span class="tag">HEALTHY NUTRITION</span>
+
         <h2>Eat Healthy, Live Healthy</h2>
-        <p>A balanced diet provides important nutrients to support your body and wellbeing.</p>
+
+        <p>
+          A balanced diet provides important nutrients to support your body and wellbeing.
+        </p>
+
       </div>
+
     </div>
+
 
     <!-- HYDRATION -->
     <div class="slide">
+
       <div class="slide-icon">💧</div>
+
       <div class="slide-content">
+
         <span class="tag">STAY HYDRATED</span>
+
         <h2>Keep Yourself Hydrated</h2>
-        <p>Make healthy hydration part of your daily routine according to your individual needs.</p>
+
+        <p>
+          Make healthy hydration part of your daily routine according to your individual needs.
+        </p>
+
       </div>
+
     </div>
 
   </div>
 
+
   <div class="dots">
+
     <span class="dot active"></span>
     <span class="dot"></span>
     <span class="dot"></span>
     <span class="dot"></span>
+
   </div>
 
 </section>
+
 
 <!-- EXTRA FEATURES -->
 <section class="info-grid">
 
   <div class="info">
+
     💡
+
     <h3>Today's Health Tip</h3>
-    <p>Small healthy habits practiced regularly can make a positive difference over time.</p>
+
+    <p>
+      Small healthy habits practiced regularly can make a positive difference over time.
+    </p>
+
   </div>
 
+
   <div class="info">
+
     🔔
+
     <h3>Health Reminder</h3>
-    <p>Remember to follow the advice and medicine schedule given by your healthcare professional.</p>
+
+    <p>
+      Remember to follow the advice and medicine schedule given by your healthcare professional.
+    </p>
+
   </div>
 
+
   <div class="info">
+
     🆘
+
     <h3>Emergency Support</h3>
-    <p>For serious or life-threatening emergencies, seek immediate emergency medical help.</p>
+
+    <p>
+      For serious or life-threatening emergencies, seek immediate emergency medical help.
+    </p>
+
   </div>
 
 </section>
 
+
 <!-- HEALTHCARE SERVICES -->
-<h2 class="section-title">Healthcare Services</h2>
-<p class="subtitle">Choose a service to manage and explore your healthcare information.</p>
+<h2 class="section-title">
+  Healthcare Services
+</h2>
+
+<p class="subtitle">
+  Choose a service to manage and explore your healthcare information.
+</p>
+
 
 <section class="services">
 
+
   <a href="profile.html" class="card">
+
     <div class="card-icon">👤</div>
+
     <h3>My Profile</h3>
-    <p>View and manage your personal information.</p>
+
+    <p>
+      View and manage your personal information.
+    </p>
+
   </a>
+
 
   <a href="bmi.html" class="card">
+
     <div class="card-icon">⚖️</div>
+
     <h3>BMI Calculator</h3>
-    <p>Calculate and understand your Body Mass Index.</p>
+
+    <p>
+      Calculate and understand your Body Mass Index.
+    </p>
+
   </a>
+
 
   <a href="tracker.html" class="card">
+
     <div class="card-icon">📊</div>
+
     <h3>My Health Tracker</h3>
-    <p>Track and organize your health information.</p>
+
+    <p>
+      Track and organize your health information.
+    </p>
+
   </a>
 
+
   <a href="meditrack.html" class="card">
+
     <div class="card-icon">💊</div>
+
     <h3>MediTrack</h3>
-    <p>Manage medicine schedules and reminders.</p>
+
+    <p>
+      Manage medicine schedules and reminders.
+    </p>
+
   </a>
+
 
   <!-- MY HEALTH REPORT -->
   <a href="health-report.html" class="card">
+
     <div class="card-icon">📋</div>
+
     <h3>My Health Report</h3>
-    <p>View and organize your personal health information.</p>
+
+    <p>
+      View and organize your personal health information.
+    </p>
+
   </a>
+
 
   <!-- EMERGENCY -->
   <a href="emergency.html" class="card emergency">
+
     <div class="card-icon">🚨</div>
+
     <h3>Emergency Assist</h3>
-    <p>Access important emergency support information quickly.</p>
+
+    <p>
+      Access important emergency support information quickly.
+    </p>
+
   </a>
+
 
   <!-- HEALTH EDUCATION -->
   <a href="health-guide.html" class="card">
+
     <div class="card-icon">📚</div>
+
     <h3>Health Education</h3>
-    <p>Learn about healthy habits and health awareness.</p>
+
+    <p>
+      Learn about healthy habits and health awareness.
+    </p>
+
   </a>
+
 
   <!-- APPOINTMENT -->
   <a href="appointment.html" class="card">
+
     <div class="card-icon">📅</div>
+
     <h3>Appointment Request</h3>
-    <p>Request and manage healthcare appointments.</p>
+
+    <p>
+      Request and manage healthcare appointments.
+    </p>
+
   </a>
+
 
   <!-- SMART HEALTH -->
   <a href="smart-health.html" class="card smart">
+
     <div class="card-icon">🤖</div>
+
     <h3>Smart Health System</h3>
-    <p>Get symptom-based general guidance and important safety alerts.</p>
+
+    <p>
+      Get symptom-based general guidance and important safety alerts.
+    </p>
+
   </a>
+
 
 </section>
 
+
+<!-- ===============================
+     FUTURE HEALTHCARE TECHNOLOGY
+     =============================== -->
+
+<section class="future-health">
+
+  <h2>🚀 Future Healthcare Technology</h2>
+
+  <p class="section-text">
+    Exploring innovative healthcare technology concepts for a smarter future.
+  </p>
+
+
+  <div class="future-grid">
+
+
+    <div class="future-card">
+
+      <div class="future-icon">🤖</div>
+
+      <h3>AI Health Assistant</h3>
+
+      <p>
+        A future technology concept that can help users understand general
+        health information and healthcare guidance.
+      </p>
+
+      <span class="future-tag">Future Concept</span>
+
+    </div>
+
+
+    <div class="future-card">
+
+      <div class="future-icon">⌚</div>
+
+      <h3>Remote Health Monitoring</h3>
+
+      <p>
+        Smart devices could help monitor health information remotely and
+        support better healthcare awareness.
+      </p>
+
+      <span class="future-tag">Future Concept</span>
+
+    </div>
+
+
+    <div class="future-card">
+
+      <div class="future-icon">🧬</div>
+
+      <h3>Personalized Healthcare</h3>
+
+      <p>
+        Future digital systems may help organize health information for more
+        personalized healthcare support.
+      </p>
+
+      <span class="future-tag">Future Concept</span>
+
+    </div>
+
+
+    <div class="future-card">
+
+      <div class="future-icon">🏠</div>
+
+      <h3>Hospital at Home</h3>
+
+      <p>
+        A future concept for connecting home-based care and healthcare support
+        through digital technology.
+      </p>
+
+      <span class="future-tag">Future Concept</span>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
 </main>
+
 
 <footer>
   © 2026 ZevaCare | Your Healthcare Support Platform
 </footer>
 
+
 <script>
+
 /* 🎬 AUTOMATIC HEALTH AWARENESS SLIDES */
+
 const slides = document.querySelectorAll(".slide");
 const dots = document.querySelectorAll(".dot");
+
 let current = 0;
 
 setInterval(() => {
+
   slides[current].classList.remove("active");
   dots[current].classList.remove("active");
 
@@ -684,8 +1074,11 @@ setInterval(() => {
 
   slides[current].classList.add("active");
   dots[current].classList.add("active");
+
 }, 5000);
+
 </script>
+
 
 </body>
 </html>
