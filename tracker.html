@@ -8,12 +8,11 @@
 <style>
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
+  margin: 0;
   background: #f4f7fb;
   color: #263b4d;
 }
@@ -41,7 +40,7 @@ header {
   color: white;
   display: grid;
   place-items: center;
-  font-size: 24px;
+  font-size: 23px;
   font-weight: bold;
 }
 
@@ -62,25 +61,29 @@ header {
 }
 
 main {
-  max-width: 1100px;
+  max-width: 1000px;
   margin: auto;
   padding: 45px 7%;
 }
 
+.hero {
+  margin-bottom: 30px;
+}
+
 .hero h1 {
-  font-size: 32px;
+  margin: 0 0 8px;
   color: #20394f;
-  margin-bottom: 8px;
+  font-size: 32px;
 }
 
 .hero p {
   color: #6d7d8b;
-  margin-bottom: 30px;
+  line-height: 1.6;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
 }
 
@@ -92,30 +95,31 @@ main {
 }
 
 .box h2 {
+  margin-top: 0;
   color: #20394f;
-  margin-bottom: 8px;
 }
 
 .box-description {
-  color: #71808d;
-  font-size: 14px;
-  margin-bottom: 20px;
+  color: #6d7d8b;
   line-height: 1.5;
+  font-size: 14px;
 }
 
 label {
   display: block;
-  margin: 14px 0 6px;
+  margin: 15px 0 6px;
   font-weight: bold;
   font-size: 14px;
 }
 
-input, select {
+input,
+select {
   width: 100%;
   padding: 12px;
   border: 1px solid #d9e2e9;
   border-radius: 8px;
   font-size: 15px;
+  background: white;
 }
 
 .btn {
@@ -131,12 +135,8 @@ input, select {
   cursor: pointer;
 }
 
-.btn:hover {
-  opacity: 0.9;
-}
-
 .records-section {
-  margin-top: 30px;
+  margin-top: 28px;
   background: white;
   border: 1px solid #e1e8ee;
   border-radius: 16px;
@@ -144,21 +144,15 @@ input, select {
 }
 
 .records-section h2 {
-  margin-bottom: 18px;
-  color: #20394f;
-}
-
-.empty {
-  color: #7a8995;
-  text-align: center;
-  padding: 25px;
+  margin-top: 0;
 }
 
 .record {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px;
+  gap: 15px;
+  padding: 17px 0;
   border-bottom: 1px solid #edf1f4;
 }
 
@@ -166,23 +160,67 @@ input, select {
   border-bottom: none;
 }
 
+.record-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .record-info strong {
-  color: #263b4d;
+  font-size: 15px;
 }
 
 .record-info span {
-  display: block;
+  color: #6d7d8b;
   font-size: 13px;
-  color: #748390;
-  margin-top: 4px;
 }
 
 .delete {
-  background: none;
   border: none;
-  color: #b04a4a;
-  font-weight: bold;
+  padding: 9px 14px;
+  border-radius: 7px;
   cursor: pointer;
+  font-weight: bold;
+  background: #f0f3f6;
+  color: #647484;
+}
+
+.done {
+  border: none;
+  padding: 9px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: bold;
+  background: #e7f5ed;
+  color: #247a4b;
+}
+
+.skip {
+  border: none;
+  padding: 9px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: bold;
+  background: #fff0f0;
+  color: #b34444;
+}
+
+.reminder-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.reminder-status {
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.empty {
+  text-align: center;
+  padding: 25px;
+  color: #7a8995;
 }
 
 .note {
@@ -195,14 +233,100 @@ input, select {
   line-height: 1.6;
 }
 
-footer {
-  text-align: center;
-  padding: 25px;
-  color: #71808d;
-  font-size: 13px;
+/* =========================
+   🔔 REMINDER POPUP
+========================= */
+
+.reminder-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 40, 55, 0.58);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
+.reminder-popup {
+  width: 100%;
+  max-width: 430px;
+  background: white;
+  border-radius: 20px;
+  padding: 28px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  animation: popupIn .3s ease;
+}
+
+.reminder-icon {
+  font-size: 58px;
+  animation: alarmPulse 1s infinite;
+}
+
+.reminder-popup h2 {
+  margin: 8px 0;
+  color: #20394f;
+}
+
+.reminder-popup p {
+  color: #6d7d8b;
+  line-height: 1.6;
+}
+
+.alarm-time {
+  margin: 12px 0;
+  font-weight: bold;
+  color: #1f6fae;
+}
+
+.stop-alarm,
+.reminder-done {
+  width: 100%;
+  border: none;
+  padding: 13px;
+  border-radius: 9px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.stop-alarm {
+  background: #b34444;
+  color: white;
+}
+
+.reminder-done {
+  background: #247a4b;
+  color: white;
+}
+
+@keyframes popupIn {
+  from {
+    transform: scale(.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes alarmPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+/* =========================
+   📱 MOBILE
+========================= */
+
 @media(max-width:650px) {
+
   header {
     padding: 14px 6%;
   }
@@ -219,6 +343,10 @@ footer {
     align-items: flex-start;
     gap: 12px;
   }
+
+  .reminder-actions {
+    flex-direction: column;
+  }
 }
 </style>
 </head>
@@ -226,189 +354,956 @@ footer {
 <body>
 
 <header>
+
   <div class="brand">
+
     <div class="logo">+</div>
-    <div class="brand-name">Zeva<span>Care</span></div>
+
+    <div class="brand-name">
+      Zeva<span>Care</span>
+    </div>
+
   </div>
-  <a href="dashboard.html" class="back">← Dashboard</a>
+
+  <a href="dashboard.html" class="back">
+    ← Dashboard
+  </a>
+
 </header>
 
 <main>
 
   <section class="hero">
+
     <h1>My Health Tracker 📊</h1>
-    <p>Keep a personal record of selected health measurements and manage your reminders.</p>
+
+    <p>
+      Keep a personal record of selected health measurements
+      and manage your reminders.
+    </p>
+
   </section>
+
 
   <section class="grid">
 
-    <!-- Health Record -->
+    <!-- =========================
+         HEALTH RECORD
+    ========================== -->
+
     <div class="box">
+
       <h2>📊 Add Health Record</h2>
-      <p class="box-description">Save a personal measurement for your own tracking and awareness.</p>
+
+      <p class="box-description">
+        Save a personal measurement for your own tracking
+        and awareness.
+      </p>
 
       <label>Record Type</label>
+
       <select id="recordType">
-        <option value="Weight">⚖️ Weight</option>
-        <option value="Blood Pressure">🩸 Blood Pressure</option>
-        <option value="Pulse">❤️ Pulse</option>
+
+        <option value="Weight">
+          ⚖️ Weight
+        </option>
+
+        <option value="Blood Pressure">
+          🩸 Blood Pressure
+        </option>
+
+        <option value="Pulse">
+          ❤️ Pulse
+        </option>
+
       </select>
+
 
       <label>Value</label>
-      <input type="text" id="recordValue" placeholder="Example: 65 kg or 120/80">
 
-      <button class="btn" onclick="addRecord()">Save Record</button>
+      <input
+        type="text"
+        id="recordValue"
+        placeholder="Example: 65 kg or 120/80"
+      >
+
+
+      <button
+        class="btn"
+        onclick="addRecord()"
+      >
+        Save Record
+      </button>
+
     </div>
 
-    <!-- Reminder -->
+
+    <!-- =========================
+         REMINDER
+    ========================== -->
+
     <div class="box">
+
       <h2>🔔 Add Reminder</h2>
-      <p class="box-description">Create a personal reminder for your daily routine.</p>
+
+      <p class="box-description">
+        Create a personal reminder for your daily routine.
+      </p>
+
 
       <label>Reminder</label>
+
       <select id="reminderType">
-        <option value="Drink Water 💧">Drink Water 💧</option>
-        <option value="Exercise 🚶">Exercise 🚶</option>
-        <option value="Medicine Reminder 💊">Medicine Reminder 💊</option>
-        <option value="Appointment 📅">Appointment 📅</option>
+
+        <option value="Drink Water 💧">
+          Drink Water 💧
+        </option>
+
+        <option value="Exercise 🚶">
+          Exercise 🚶
+        </option>
+
+        <option value="Medicine Reminder 💊">
+          Medicine Reminder 💊
+        </option>
+
+        <option value="Appointment 📅">
+          Appointment 📅
+        </option>
+
       </select>
 
-      <label>Reminder Time</label>
-      <input type="time" id="reminderTime">
 
-      <button class="btn" onclick="addReminder()">Add Reminder</button>
+      <label>Reminder Time</label>
+
+      <input
+        type="time"
+        id="reminderTime"
+      >
+
+
+      <button
+        class="btn"
+        onclick="addReminder()"
+      >
+        Add Reminder
+      </button>
+
     </div>
 
   </section>
 
-  <!-- Records -->
+
+  <!-- =========================
+       RECORDS
+  ========================== -->
+
   <section class="records-section">
+
     <h2>📋 My Health Records</h2>
+
     <div id="recordsList"></div>
+
   </section>
 
-  <!-- Reminders -->
+
+  <!-- =========================
+       REMINDERS
+  ========================== -->
+
   <section class="records-section">
+
     <h2>🔔 My Reminders</h2>
+
     <div id="remindersList"></div>
+
   </section>
+
 
   <div class="note">
-    <strong>Important:</strong> This tracker is for personal record keeping and general awareness only.
+
+    <strong>Important:</strong>
+    This tracker is for personal record keeping and general awareness only.
     It does not diagnose a health condition or replace professional medical advice.
     For urgent or concerning symptoms, seek appropriate medical care.
-    Reminders in this demo work only while you are using the website and are not guaranteed
-    to function as background alarms.
+    Reminders in this demo work only while you are using the website and are not
+    guaranteed to function as background alarms.
+
   </div>
 
 </main>
 
+
+<!-- =========================
+     🔔 ALARM POPUP
+========================= -->
+
+<div
+  class="reminder-overlay"
+  id="reminderOverlay"
+>
+
+  <div class="reminder-popup">
+
+    <div class="reminder-icon">
+      🔔
+    </div>
+
+    <h2>
+      Health Reminder
+    </h2>
+
+    <p id="reminderMessage">
+      It's time for your reminder.
+    </p>
+
+    <div
+      class="alarm-time"
+      id="reminderAlarmTime"
+    ></div>
+
+
+    <button
+      class="stop-alarm"
+      onclick="stopAlarm()"
+    >
+      🔕 Stop Alarm
+    </button>
+
+
+    <button
+      class="reminder-done"
+      onclick="completeReminderFromPopup()"
+    >
+      ✅ Done
+    </button>
+
+  </div>
+
+</div>
+
+
 <footer>
+
   © 2026 ZevaCare | Educational Healthcare Platform
+
 </footer>
 
+
 <script>
-let records = JSON.parse(localStorage.getItem("zevaCareRecords")) || [];
-let reminders = JSON.parse(localStorage.getItem("zevaCareReminders")) || [];
+
+/* =====================================================
+   EXISTING DATA
+===================================================== */
+
+let records =
+  JSON.parse(
+    localStorage.getItem("zevaCareRecords")
+  ) || [];
+
+
+let reminders =
+  JSON.parse(
+    localStorage.getItem("zevaCareReminders")
+  ) || [];
+
+
+/* =====================================================
+   ALARM VARIABLES
+===================================================== */
+
+let audioContext = null;
+let alarmInterval = null;
+let activeReminderId = null;
+let lastReminderKey = null;
+
+
+/* =====================================================
+   SAVE DATA
+===================================================== */
 
 function saveData() {
-  localStorage.setItem("zevaCareRecords", JSON.stringify(records));
-  localStorage.setItem("zevaCareReminders", JSON.stringify(reminders));
+
+  localStorage.setItem(
+    "zevaCareRecords",
+    JSON.stringify(records)
+  );
+
+  localStorage.setItem(
+    "zevaCareReminders",
+    JSON.stringify(reminders)
+  );
+
 }
+
+
+/* =====================================================
+   ADD HEALTH RECORD
+===================================================== */
 
 function addRecord() {
-  const type = document.getElementById("recordType").value;
-  const value = document.getElementById("recordValue").value.trim();
+
+  const type =
+    document.getElementById(
+      "recordType"
+    ).value;
+
+  const value =
+    document.getElementById(
+      "recordValue"
+    ).value.trim();
+
 
   if (!value) {
+
     alert("Please enter a value.");
+
     return;
   }
+
 
   records.unshift({
+
     id: Date.now(),
+
     type: type,
+
     value: value,
+
     date: new Date().toLocaleString()
+
   });
 
-  document.getElementById("recordValue").value = "";
+
+  document.getElementById(
+    "recordValue"
+  ).value = "";
+
+
   saveData();
+
   renderRecords();
+
 }
+
+
+/* =====================================================
+   DELETE RECORD
+===================================================== */
 
 function deleteRecord(id) {
-  records = records.filter(record => record.id !== id);
+
+  records =
+    records.filter(
+      record => record.id !== id
+    );
+
+
   saveData();
+
   renderRecords();
+
 }
+
+
+/* =====================================================
+   RENDER RECORDS
+===================================================== */
 
 function renderRecords() {
-  const list = document.getElementById("recordsList");
+
+  const list =
+    document.getElementById(
+      "recordsList"
+    );
+
 
   if (records.length === 0) {
-    list.innerHTML = '<div class="empty">No health records added yet.</div>';
+
+    list.innerHTML =
+      '<div class="empty">No health records added yet.</div>';
+
     return;
   }
 
-  list.innerHTML = records.map(record => `
-    <div class="record">
-      <div class="record-info">
-        <strong>${record.type}: ${record.value}</strong>
-        <span>${record.date}</span>
+
+  list.innerHTML =
+    records.map(record => `
+
+      <div class="record">
+
+        <div class="record-info">
+
+          <strong>
+            ${escapeHTML(record.type)}:
+            ${escapeHTML(record.value)}
+          </strong>
+
+          <span>
+            ${escapeHTML(record.date)}
+          </span>
+
+        </div>
+
+        <button
+          class="delete"
+          onclick="deleteRecord(${record.id})"
+        >
+          Delete
+        </button>
+
       </div>
-      <button class="delete" onclick="deleteRecord(${record.id})">Delete</button>
-    </div>
-  `).join("");
+
+    `).join("");
+
 }
+
+
+/* =====================================================
+   ADD REMINDER
+===================================================== */
 
 function addReminder() {
-  const type = document.getElementById("reminderType").value;
-  const time = document.getElementById("reminderTime").value;
+
+  const type =
+    document.getElementById(
+      "reminderType"
+    ).value;
+
+  const time =
+    document.getElementById(
+      "reminderTime"
+    ).value;
+
 
   if (!time) {
-    alert("Please select a reminder time.");
+
+    alert(
+      "Please select a reminder time."
+    );
+
     return;
   }
+
 
   reminders.unshift({
+
     id: Date.now(),
+
     type: type,
-    time: time
+
+    time: time,
+
+    status: "Pending"
+
   });
 
-  document.getElementById("reminderTime").value = "";
+
+  document.getElementById(
+    "reminderTime"
+  ).value = "";
+
+
   saveData();
+
   renderReminders();
+
+
+  alert(
+    "Reminder added successfully. 🔔"
+  );
+
 }
+
+
+/* =====================================================
+   DELETE REMINDER
+===================================================== */
 
 function deleteReminder(id) {
-  reminders = reminders.filter(reminder => reminder.id !== id);
-  saveData();
-  renderReminders();
-}
 
-function renderReminders() {
-  const list = document.getElementById("remindersList");
+  if (
+    !confirm(
+      "Delete this reminder?"
+    )
+  ) {
 
-  if (reminders.length === 0) {
-    list.innerHTML = '<div class="empty">No reminders added yet.</div>';
     return;
   }
 
-  list.innerHTML = reminders.map(reminder => `
-    <div class="record">
-      <div class="record-info">
-        <strong>${reminder.type}</strong>
-        <span>⏰ ${reminder.time}</span>
-      </div>
-      <button class="delete" onclick="deleteReminder(${reminder.id})">Delete</button>
-    </div>
-  `).join("");
+
+  reminders =
+    reminders.filter(
+      reminder => reminder.id !== id
+    );
+
+
+  saveData();
+
+  renderReminders();
+
 }
 
+
+/* =====================================================
+   COMPLETE REMINDER
+===================================================== */
+
+function completeReminder(id) {
+
+  reminders =
+    reminders.map(reminder => {
+
+      if (reminder.id === id) {
+
+        reminder.status = "Done";
+
+      }
+
+      return reminder;
+
+    });
+
+
+  saveData();
+
+  renderReminders();
+
+}
+
+
+/* =====================================================
+   SKIP REMINDER
+===================================================== */
+
+function skipReminder(id) {
+
+  reminders =
+    reminders.map(reminder => {
+
+      if (reminder.id === id) {
+
+        reminder.status = "Skipped";
+
+      }
+
+      return reminder;
+
+    });
+
+
+  saveData();
+
+  renderReminders();
+
+}
+
+
+/* =====================================================
+   RENDER REMINDERS
+===================================================== */
+
+function renderReminders() {
+
+  const list =
+    document.getElementById(
+      "remindersList"
+    );
+
+
+  if (reminders.length === 0) {
+
+    list.innerHTML =
+      '<div class="empty">No reminders added yet.</div>';
+
+    return;
+  }
+
+
+  list.innerHTML =
+    reminders.map(reminder => {
+
+      let statusText = "⏳ Pending";
+
+
+      if (reminder.status === "Done") {
+        statusText = "✅ Done";
+      }
+
+
+      if (reminder.status === "Skipped") {
+        statusText = "⏭️ Skipped";
+      }
+
+
+      return `
+
+        <div class="record">
+
+          <div class="record-info">
+
+            <strong>
+              ${escapeHTML(reminder.type)}
+            </strong>
+
+            <span>
+              ⏰ ${escapeHTML(reminder.time)}
+            </span>
+
+            <div class="reminder-status">
+              ${statusText}
+            </div>
+
+          </div>
+
+
+          <div class="reminder-actions">
+
+            <button
+              class="done"
+              onclick="completeReminder(${reminder.id})"
+            >
+              ✓ Done
+            </button>
+
+
+            <button
+              class="skip"
+              onclick="skipReminder(${reminder.id})"
+            >
+              Skip
+            </button>
+
+
+            <button
+              class="delete"
+              onclick="deleteReminder(${reminder.id})"
+            >
+              Delete
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =====================================================
+   🔊 CREATE ALARM SOUND
+===================================================== */
+
+function playAlarmSound() {
+
+  try {
+
+    if (!audioContext) {
+
+      audioContext =
+        new (
+          window.AudioContext ||
+          window.webkitAudioContext
+        )();
+
+    }
+
+
+    if (
+      audioContext.state === "suspended"
+    ) {
+
+      audioContext.resume();
+
+    }
+
+
+    const oscillator =
+      audioContext.createOscillator();
+
+
+    const gain =
+      audioContext.createGain();
+
+
+    oscillator.type = "sine";
+
+
+    oscillator.frequency.setValueAtTime(
+      880,
+      audioContext.currentTime
+    );
+
+
+    gain.gain.setValueAtTime(
+      0.001,
+      audioContext.currentTime
+    );
+
+
+    gain.gain.exponentialRampToValueAtTime(
+      0.3,
+      audioContext.currentTime + 0.05
+    );
+
+
+    gain.gain.exponentialRampToValueAtTime(
+      0.001,
+      audioContext.currentTime + 0.5
+    );
+
+
+    oscillator.connect(gain);
+
+    gain.connect(
+      audioContext.destination
+    );
+
+
+    oscillator.start();
+
+
+    oscillator.stop(
+      audioContext.currentTime + 0.5
+    );
+
+  }
+
+  catch(error) {
+
+    console.log(
+      "Alarm sound error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   🔔 CHECK REMINDERS EVERY SECOND
+===================================================== */
+
+function checkReminders() {
+
+  const now = new Date();
+
+
+  const hour =
+    String(
+      now.getHours()
+    ).padStart(2, "0");
+
+
+  const minute =
+    String(
+      now.getMinutes()
+    ).padStart(2, "0");
+
+
+  const currentTime =
+    `${hour}:${minute}`;
+
+
+  const today =
+    `${now.getFullYear()}-${String(
+      now.getMonth() + 1
+    ).padStart(2, "0")}-${String(
+      now.getDate()
+    ).padStart(2, "0")}`;
+
+
+  reminders.forEach(reminder => {
+
+    const reminderKey =
+      `${today}-${reminder.id}-${reminder.time}`;
+
+
+    if (
+
+      reminder.time === currentTime &&
+
+      reminder.status !== "Done" &&
+
+      reminder.status !== "Skipped" &&
+
+      lastReminderKey !== reminderKey
+
+    ) {
+
+      lastReminderKey =
+        reminderKey;
+
+
+      showReminder(reminder);
+
+    }
+
+  });
+
+}
+
+
+/* =====================================================
+   SHOW REMINDER POPUP
+===================================================== */
+
+function showReminder(reminder) {
+
+  activeReminderId =
+    reminder.id;
+
+
+  document.getElementById(
+    "reminderMessage"
+  ).innerHTML =
+    `It's time for <strong>${escapeHTML(
+      reminder.type
+    )}</strong>.`;
+
+
+  document.getElementById(
+    "reminderAlarmTime"
+  ).textContent =
+    `⏰ Scheduled time: ${reminder.time}`;
+
+
+  document.getElementById(
+    "reminderOverlay"
+  ).style.display =
+    "flex";
+
+
+  playAlarmSound();
+
+
+  if (alarmInterval) {
+
+    clearInterval(
+      alarmInterval
+    );
+
+  }
+
+
+  alarmInterval =
+    setInterval(
+      playAlarmSound,
+      1500
+    );
+
+}
+
+
+/* =====================================================
+   STOP ALARM
+===================================================== */
+
+function stopAlarm() {
+
+  if (alarmInterval) {
+
+    clearInterval(
+      alarmInterval
+    );
+
+    alarmInterval = null;
+
+  }
+
+}
+
+
+/* =====================================================
+   DONE FROM POPUP
+===================================================== */
+
+function completeReminderFromPopup() {
+
+  if (
+    activeReminderId !== null
+  ) {
+
+    completeReminder(
+      activeReminderId
+    );
+
+  }
+
+
+  stopAlarm();
+
+
+  document.getElementById(
+    "reminderOverlay"
+  ).style.display =
+    "none";
+
+
+  activeReminderId =
+    null;
+
+}
+
+
+/* =====================================================
+   SAFE TEXT
+===================================================== */
+
+function escapeHTML(text) {
+
+  return String(text)
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* =====================================================
+   START REMINDER SYSTEM
+===================================================== */
+
+setInterval(
+  checkReminders,
+  1000
+);
+
+
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
+
 renderRecords();
+
 renderReminders();
+
 </script>
 
 </body>
