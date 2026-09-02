@@ -88,12 +88,17 @@ label {
   font-size: 14px;
 }
 
-input {
+input, textarea {
   width: 100%;
   padding: 12px;
   border: 1px solid #d9e2e9;
   border-radius: 8px;
   font-size: 15px;
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
 }
 
 .btn {
@@ -142,7 +147,22 @@ input {
   font-weight: bold;
 }
 
-.actions { margin-top: 12px; display: flex; gap: 10px; }
+.missed-reason {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: #fff5f5;
+  border-radius: 8px;
+  color: #9c4545;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
 
 .taken, .missed, .delete {
   border: none;
@@ -172,6 +192,144 @@ input {
   line-height: 1.6;
 }
 
+/* 🔔 REMINDER POPUP */
+.reminder-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 40, 55, .55);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.reminder-popup {
+  width: 100%;
+  max-width: 430px;
+  background: white;
+  border-radius: 20px;
+  padding: 28px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,.2);
+  animation: popupIn .3s ease;
+}
+
+.reminder-icon {
+  font-size: 55px;
+  margin-bottom: 10px;
+  animation: pulse 1s infinite;
+}
+
+.reminder-popup h2 {
+  margin: 5px 0 8px;
+  color: #20394f;
+}
+
+.reminder-popup p {
+  color: #6d7d8b;
+  line-height: 1.5;
+}
+
+.stop-alarm {
+  width: 100%;
+  border: none;
+  padding: 13px;
+  border-radius: 9px;
+  background: #b34444;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.reminder-taken {
+  width: 100%;
+  border: none;
+  padding: 13px;
+  border-radius: 9px;
+  background: #247a4b;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+@keyframes popupIn {
+  from { transform: scale(.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* ❓ MISSED REASON MODAL */
+.reason-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 40, 55, .55);
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.reason-box {
+  width: 100%;
+  max-width: 480px;
+  background: white;
+  border-radius: 18px;
+  padding: 25px;
+}
+
+.reason-box h2 {
+  margin-top: 0;
+  color: #20394f;
+}
+
+.reason-option {
+  display: block;
+  padding: 11px;
+  margin: 7px 0;
+  background: #f5f8fa;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.reason-option input {
+  width: auto;
+  margin-right: 8px;
+}
+
+.reason-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.reason-buttons button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.save-reason {
+  background: #1f6fae;
+  color: white;
+}
+
+.cancel-reason {
+  background: #edf1f4;
+  color: #526474;
+}
+
 footer {
   text-align: center;
   padding: 25px;
@@ -183,6 +341,10 @@ footer {
   header { padding: 14px 6%; }
   main { padding: 35px 6%; }
   .hero h1 { font-size: 27px; }
+
+  .medicine-top {
+    flex-direction: column;
+  }
 }
 </style>
 </head>
@@ -201,29 +363,43 @@ footer {
 
   <section class="hero">
     <h1>💊 MediTrack</h1>
-    <p>Manage medicine schedules and record whether a dose has been confirmed as taken or missed.</p>
+    <p>
+      Manage medicine schedules and record whether a dose has been confirmed
+      as taken or missed.
+    </p>
   </section>
 
   <section class="grid">
+
     <div class="box">
       <h2>Add Medicine</h2>
 
       <label>Medicine Name</label>
-      <input type="text" id="medicineName" placeholder="Example: Medicine name">
+      <input
+        type="text"
+        id="medicineName"
+        placeholder="Example: Medicine name"
+      >
 
       <label>Scheduled Time</label>
       <input type="time" id="medicineTime">
 
-      <button class="btn" onclick="addMedicine()">Add to Schedule</button>
+      <button class="btn" onclick="addMedicine()">
+        Add to Schedule
+      </button>
     </div>
 
     <div class="box">
       <h2>Today's Adherence</h2>
+
       <p style="color:#6d7d8b; line-height:1.6;">
-        Mark each scheduled dose after it has been confirmed. This helps maintain a personal adherence record.
+        Mark each scheduled dose after it has been confirmed.
+        This helps maintain a personal adherence record.
       </p>
+
       <div id="summary" style="margin-top:20px; font-weight:bold;"></div>
     </div>
+
   </section>
 
   <section class="medicine-list">
@@ -232,26 +408,160 @@ footer {
   </section>
 
   <div class="note">
-    <strong>Important:</strong> MediTrack is a personal reminder and record-keeping tool.
-    Marking a dose as “Taken” records a user's confirmation and does not independently verify
-    that the medicine was consumed. Do not change or stop prescribed medicines based on this tool.
-    For missed doses or medication questions, follow the instructions provided by your healthcare professional.
+    <strong>Important:</strong> MediTrack is a personal reminder and
+    record-keeping tool. Marking a dose as “Taken” records a user's
+    confirmation and does not independently verify that the medicine was
+    consumed. Do not change or stop prescribed medicines based on this tool.
+    For missed doses or medication questions, follow the instructions
+    provided by your healthcare professional.
   </div>
 
 </main>
 
-<footer>© 2026 ZevaCare | Educational Healthcare Platform</footer>
+<!-- 🔔 REMINDER POPUP -->
+<div class="reminder-overlay" id="reminderOverlay">
+
+  <div class="reminder-popup">
+
+    <div class="reminder-icon">💊</div>
+
+    <h2>Medicine Reminder</h2>
+
+    <p id="reminderText">
+      It's time to take your medicine.
+    </p>
+
+    <button class="stop-alarm" onclick="stopAlarm()">
+      🔕 Stop Alarm
+    </button>
+
+    <button class="reminder-taken" onclick="takeFromReminder()">
+      ✅ Mark as Taken
+    </button>
+
+  </div>
+
+</div>
+
+<!-- ❓ MISSED REASON -->
+<div class="reason-overlay" id="reasonOverlay">
+
+  <div class="reason-box">
+
+    <h2>❓ Why was the medicine missed?</h2>
+
+    <p style="color:#6d7d8b; font-size:14px;">
+      Select the reason that best describes what happened.
+    </p>
+
+    <label class="reason-option">
+      <input type="radio" name="missReason" value="Forgot to take the medicine">
+      😕 Forgot to take the medicine
+    </label>
+
+    <label class="reason-option">
+      <input type="radio" name="missReason" value="Reminder was not noticed">
+      🔔 Reminder was not noticed
+    </label>
+
+    <label class="reason-option">
+      <input type="radio" name="missReason" value="Was sleeping or busy">
+      😴 Was sleeping or busy
+    </label>
+
+    <label class="reason-option">
+      <input type="radio" name="missReason" value="Feeling unwell or nausea">
+      🤢 Feeling unwell or nausea
+    </label>
+
+    <label class="reason-option">
+      <input type="radio" name="missReason" value="Medicine was not available">
+      💊 Medicine was not available
+    </label>
+
+    <label class="reason-option">
+      <input type="radio" name="missReason" value="Timing was confusing">
+      📅 Timing was confusing
+    </label>
+
+    <label class="reason-option">
+      <input type="radio" name="missReason" value="Difficulty taking the medicine">
+      🚫 Difficulty taking the medicine
+    </label>
+
+    <label class="reason-option">
+      <input type="radio" name="missReason" value="Waiting for healthcare professional advice">
+      🧑‍⚕️ Waiting for healthcare professional advice
+    </label>
+
+    <label class="reason-option">
+      <input type="radio" name="missReason" value="Other">
+      ✏️ Other reason
+    </label>
+
+    <div id="otherReasonBox" style="display:none;">
+      <textarea
+        id="otherReason"
+        placeholder="Write your reason..."
+      ></textarea>
+    </div>
+
+    <div class="reason-buttons">
+      <button class="cancel-reason" onclick="closeReasonModal()">
+        Cancel
+      </button>
+
+      <button class="save-reason" onclick="saveMissedReason()">
+        Save Reason
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ZevaCare | Educational Healthcare Platform
+</footer>
 
 <script>
-let medicines = JSON.parse(localStorage.getItem("zevaCareMedicines")) || [];
+
+/* =========================================================
+   MEDICINE DATA
+========================================================= */
+
+let medicines =
+  JSON.parse(localStorage.getItem("zevaCareMedicines")) || [];
+
+let selectedMissedMedicineId = null;
+let reminderMedicineId = null;
+let alarmInterval = null;
+let lastReminderKey = null;
+
+
+/* =========================================================
+   SAVE DATA
+========================================================= */
 
 function saveMedicines() {
-  localStorage.setItem("zevaCareMedicines", JSON.stringify(medicines));
+  localStorage.setItem(
+    "zevaCareMedicines",
+    JSON.stringify(medicines)
+  );
 }
 
+
+/* =========================================================
+   ADD MEDICINE
+========================================================= */
+
 function addMedicine() {
-  const name = document.getElementById("medicineName").value.trim();
-  const time = document.getElementById("medicineTime").value;
+
+  const name =
+    document.getElementById("medicineName").value.trim();
+
+  const time =
+    document.getElementById("medicineTime").value;
 
   if (!name || !time) {
     alert("Please enter medicine name and scheduled time.");
@@ -262,7 +572,8 @@ function addMedicine() {
     id: Date.now(),
     name: name,
     time: time,
-    status: "Pending"
+    status: "Pending",
+    missedReason: ""
   });
 
   document.getElementById("medicineName").value = "";
@@ -270,13 +581,28 @@ function addMedicine() {
 
   saveMedicines();
   renderMedicines();
+
+  alert("Medicine reminder added successfully. 🔔");
 }
 
+
+/* =========================================================
+   TAKEN
+========================================================= */
+
 function updateStatus(id, status) {
+
   medicines = medicines.map(medicine => {
+
     if (medicine.id === id) {
+
       medicine.status = status;
+
+      if (status === "Taken") {
+        medicine.missedReason = "";
+      }
     }
+
     return medicine;
   });
 
@@ -284,48 +610,464 @@ function updateStatus(id, status) {
   renderMedicines();
 }
 
+
+/* =========================================================
+   MISSED BUTTON
+========================================================= */
+
+function openMissedReason(id) {
+
+  selectedMissedMedicineId = id;
+
+  document.querySelectorAll(
+    'input[name="missReason"]'
+  ).forEach(input => {
+    input.checked = false;
+  });
+
+  document.getElementById("otherReason").value = "";
+
+  document.getElementById("otherReasonBox").style.display = "none";
+
+  document.getElementById("reasonOverlay").style.display = "flex";
+}
+
+
+/* =========================================================
+   SHOW OTHER TEXTBOX
+========================================================= */
+
+document.addEventListener("change", function(event) {
+
+  if (
+    event.target.name === "missReason" &&
+    event.target.value === "Other"
+  ) {
+
+    document.getElementById(
+      "otherReasonBox"
+    ).style.display = "block";
+
+  } else if (
+    event.target.name === "missReason"
+  ) {
+
+    document.getElementById(
+      "otherReasonBox"
+    ).style.display = "none";
+  }
+
+});
+
+
+/* =========================================================
+   SAVE MISSED REASON
+========================================================= */
+
+function saveMissedReason() {
+
+  const selected =
+    document.querySelector(
+      'input[name="missReason"]:checked'
+    );
+
+  if (!selected) {
+    alert("Please select a reason.");
+    return;
+  }
+
+  let reason = selected.value;
+
+  if (reason === "Other") {
+
+    reason =
+      document.getElementById(
+        "otherReason"
+      ).value.trim();
+
+    if (!reason) {
+      alert("Please write your reason.");
+      return;
+    }
+  }
+
+  medicines = medicines.map(medicine => {
+
+    if (medicine.id === selectedMissedMedicineId) {
+
+      medicine.status = "Missed";
+      medicine.missedReason = reason;
+    }
+
+    return medicine;
+  });
+
+  saveMedicines();
+
+  closeReasonModal();
+
+  renderMedicines();
+}
+
+
+/* =========================================================
+   CLOSE REASON MODAL
+========================================================= */
+
+function closeReasonModal() {
+
+  document.getElementById(
+    "reasonOverlay"
+  ).style.display = "none";
+
+  selectedMissedMedicineId = null;
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
 function deleteMedicine(id) {
-  medicines = medicines.filter(medicine => medicine.id !== id);
+
+  if (!confirm("Delete this medicine from your schedule?")) {
+    return;
+  }
+
+  medicines =
+    medicines.filter(
+      medicine => medicine.id !== id
+    );
+
   saveMedicines();
   renderMedicines();
 }
 
+
+/* =========================================================
+   RENDER
+========================================================= */
+
 function renderMedicines() {
-  const list = document.getElementById("medicineList");
+
+  const list =
+    document.getElementById("medicineList");
 
   if (medicines.length === 0) {
-    list.innerHTML = '<div class="empty">No medicines added yet.</div>';
+
+    list.innerHTML =
+      '<div class="empty">No medicines added yet.</div>';
+
   } else {
-    list.innerHTML = medicines.map(medicine => `
-      <div class="medicine">
-        <div class="medicine-top">
-          <div class="medicine-name">💊 ${medicine.name}</div>
-          <div class="time">⏰ ${medicine.time}</div>
+
+    list.innerHTML =
+      medicines.map(medicine => `
+
+        <div class="medicine">
+
+          <div class="medicine-top">
+
+            <div class="medicine-name">
+              💊 ${escapeHTML(medicine.name)}
+            </div>
+
+            <div class="time">
+              ⏰ ${medicine.time}
+            </div>
+
+          </div>
+
+          <div class="status">
+
+            Status:
+            ${
+              medicine.status === "Taken"
+              ? "✅ Taken"
+              : medicine.status === "Missed"
+              ? "❌ Missed"
+              : "⏳ Pending"
+            }
+
+          </div>
+
+          ${
+            medicine.status === "Missed" &&
+            medicine.missedReason
+            ? `
+              <div class="missed-reason">
+                <strong>Why missed:</strong>
+                ${escapeHTML(medicine.missedReason)}
+              </div>
+            `
+            : ""
+          }
+
+          <div class="actions">
+
+            <button
+              class="taken"
+              onclick="updateStatus(${medicine.id}, 'Taken')">
+              ✓ Taken
+            </button>
+
+            <button
+              class="missed"
+              onclick="openMissedReason(${medicine.id})">
+              ✕ Missed
+            </button>
+
+            <button
+              class="delete"
+              onclick="deleteMedicine(${medicine.id})">
+              Delete
+            </button>
+
+          </div>
+
         </div>
 
-        <div class="status">
-          Status: ${medicine.status === "Taken" ? "✅ Taken" :
-                    medicine.status === "Missed" ? "❌ Missed" : "⏳ Pending"}
-        </div>
-
-        <div class="actions">
-          <button class="taken" onclick="updateStatus(${medicine.id}, 'Taken')">✓ Taken</button>
-          <button class="missed" onclick="updateStatus(${medicine.id}, 'Missed')">✕ Missed</button>
-          <button class="delete" onclick="deleteMedicine(${medicine.id})">Delete</button>
-        </div>
-      </div>
-    `).join("");
+      `).join("");
   }
 
-  const taken = medicines.filter(m => m.status === "Taken").length;
-  const missed = medicines.filter(m => m.status === "Missed").length;
-  const pending = medicines.filter(m => m.status === "Pending").length;
+  const taken =
+    medicines.filter(
+      m => m.status === "Taken"
+    ).length;
+
+  const missed =
+    medicines.filter(
+      m => m.status === "Missed"
+    ).length;
+
+  const pending =
+    medicines.filter(
+      m => m.status === "Pending"
+    ).length;
 
   document.getElementById("summary").innerHTML =
-    `✅ Taken: ${taken}<br>❌ Missed: ${missed}<br>⏳ Pending: ${pending}`;
+    `✅ Taken: ${taken}<br>
+     ❌ Missed: ${missed}<br>
+     ⏳ Pending: ${pending}`;
 }
 
+
+/* =========================================================
+   SAFE TEXT
+========================================================= */
+
+function escapeHTML(text) {
+
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+
+/* =========================================================
+   🔊 ALARM SOUND
+========================================================= */
+
+let audioContext = null;
+
+function playAlarmSound() {
+
+  try {
+
+    if (!audioContext) {
+
+      audioContext =
+        new (
+          window.AudioContext ||
+          window.webkitAudioContext
+        )();
+
+    }
+
+    if (audioContext.state === "suspended") {
+      audioContext.resume();
+    }
+
+    const oscillator =
+      audioContext.createOscillator();
+
+    const gain =
+      audioContext.createGain();
+
+    oscillator.type = "sine";
+
+    oscillator.frequency.setValueAtTime(
+      880,
+      audioContext.currentTime
+    );
+
+    gain.gain.setValueAtTime(
+      0.001,
+      audioContext.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      0.3,
+      audioContext.currentTime + 0.05
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      0.001,
+      audioContext.currentTime + 0.5
+    );
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    oscillator.start();
+
+    oscillator.stop(
+      audioContext.currentTime + 0.5
+    );
+
+  } catch (error) {
+
+    console.log(
+      "Alarm sound could not start:",
+      error
+    );
+  }
+}
+
+
+/* =========================================================
+   🔔 CHECK REMINDERS
+========================================================= */
+
+function checkReminders() {
+
+  const now = new Date();
+
+  const currentHour =
+    String(now.getHours()).padStart(2, "0");
+
+  const currentMinute =
+    String(now.getMinutes()).padStart(2, "0");
+
+  const currentTime =
+    `${currentHour}:${currentMinute}`;
+
+  const todayKey =
+    now.toISOString().slice(0, 10);
+
+  medicines.forEach(medicine => {
+
+    const reminderKey =
+      `${todayKey}-${medicine.id}-${medicine.time}`;
+
+    if (
+      medicine.time === currentTime &&
+      medicine.status !== "Taken" &&
+      lastReminderKey !== reminderKey
+    ) {
+
+      lastReminderKey = reminderKey;
+
+      showReminder(medicine);
+
+    }
+
+  });
+}
+
+
+/* =========================================================
+   SHOW REMINDER
+========================================================= */
+
+function showReminder(medicine) {
+
+  reminderMedicineId = medicine.id;
+
+  document.getElementById(
+    "reminderText"
+  ).innerHTML =
+    `It's time for <strong>${escapeHTML(
+      medicine.name
+    )}</strong>.<br>
+    Scheduled time: ${medicine.time}`;
+
+  document.getElementById(
+    "reminderOverlay"
+  ).style.display = "flex";
+
+  playAlarmSound();
+
+  if (alarmInterval) {
+    clearInterval(alarmInterval);
+  }
+
+  alarmInterval =
+    setInterval(
+      playAlarmSound,
+      1500
+    );
+
+}
+
+
+/* =========================================================
+   STOP ALARM
+========================================================= */
+
+function stopAlarm() {
+
+  if (alarmInterval) {
+
+    clearInterval(alarmInterval);
+
+    alarmInterval = null;
+  }
+}
+
+
+/* =========================================================
+   MARK REMINDER AS TAKEN
+========================================================= */
+
+function takeFromReminder() {
+
+  if (reminderMedicineId !== null) {
+
+    updateStatus(
+      reminderMedicineId,
+      "Taken"
+    );
+  }
+
+  stopAlarm();
+
+  document.getElementById(
+    "reminderOverlay"
+  ).style.display = "none";
+
+  reminderMedicineId = null;
+}
+
+
+/* =========================================================
+   START REMINDER CHECK
+========================================================= */
+
+setInterval(
+  checkReminders,
+  1000
+);
+
+
+/* =========================================================
+   FIRST RENDER
+========================================================= */
+
 renderMedicines();
+
 </script>
 
 </body>
