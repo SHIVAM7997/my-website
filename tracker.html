@@ -59,7 +59,973 @@ header {
   color: #1f6fae;
   font-weight: bold;
 }
+<!-- ================= MEDICINE TRACKER / MEDITRACK ================= -->
+<section class="medicine-tracker" id="medicineTracker">
 
+  <div class="medicine-head">
+    <div>
+      <span class="medicine-label">💊 MEDICINE TRACKER</span>
+      <h2>My Medicines</h2>
+      <p>Manage your medicines, timings and daily adherence.</p>
+    </div>
+
+    <button class="medicine-add" id="openMedicineForm">
+      + Add Medicine
+    </button>
+  </div>
+
+  <!-- Medicine Form -->
+  <div class="medicine-form" id="medicineForm" style="display:none;">
+
+    <div class="medicine-input">
+      <label>Medicine Name</label>
+      <input
+        type="text"
+        id="medicineName"
+        placeholder="e.g. Paracetamol 500mg"
+      >
+    </div>
+
+    <div class="medicine-input">
+      <label>Scheduled Time</label>
+      <input type="time" id="medicineTime">
+    </div>
+
+    <div class="medicine-form-buttons">
+      <button id="saveMedicine">Save Medicine</button>
+      <button id="cancelMedicine">Cancel</button>
+    </div>
+
+  </div>
+
+  <!-- Adherence Summary -->
+  <div class="medicine-summary">
+
+    <div class="medicine-summary-card">
+      <span>💊 Total</span>
+      <strong id="medicineTotal">0</strong>
+    </div>
+
+    <div class="medicine-summary-card taken-card">
+      <span>✅ Taken</span>
+      <strong id="medicineTaken">0</strong>
+    </div>
+
+    <div class="medicine-summary-card pending-card">
+      <span>⏳ Pending</span>
+      <strong id="medicinePending">0</strong>
+    </div>
+
+    <div class="medicine-summary-card missed-card">
+      <span>❌ Missed</span>
+      <strong id="medicineMissed">0</strong>
+    </div>
+
+    <div class="medicine-summary-card adherence-card">
+      <span>📊 Adherence</span>
+      <strong id="medicineAdherence">0%</strong>
+    </div>
+
+  </div>
+
+  <!-- Medicine List -->
+  <div class="medicine-list" id="medicineList">
+
+    <div class="medicine-empty" id="medicineEmpty">
+      <div>💊</div>
+      <strong>No medicines added yet</strong>
+      <p>Add your first medicine to start tracking.</p>
+    </div>
+
+  </div>
+
+  <!-- Alarm Controls -->
+  <div class="medicine-alarm">
+
+    <div>
+      <strong>🔔 Medicine Reminder Alarm</strong>
+      <p id="medicineAlarmText">
+        Enable alarm sound to receive medicine reminders.
+      </p>
+    </div>
+
+    <div class="medicine-alarm-buttons">
+      <button id="enableMedicineAlarm">
+        🔔 Enable Alarm
+      </button>
+
+      <button id="stopMedicineAlarm">
+        🔕 Stop Alarm
+      </button>
+    </div>
+
+  </div>
+
+</section>
+
+<style>
+/* ================= MEDICINE TRACKER ================= */
+
+.medicine-tracker{
+  margin-top:20px;
+  background:#fff;
+  border:1px solid #e1e9f1;
+  border-radius:16px;
+  padding:20px;
+  box-shadow:0 5px 18px rgba(22,61,103,.06);
+}
+
+.medicine-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:18px;
+}
+
+.medicine-label{
+  color:#1267d6;
+  font-size:10px;
+  font-weight:800;
+}
+
+.medicine-head h2{
+  font-size:20px;
+  margin:5px 0;
+  color:#142d4c;
+}
+
+.medicine-head p{
+  font-size:11px;
+  color:#718096;
+}
+
+.medicine-add{
+  border:0;
+  background:#1267d6;
+  color:#fff;
+  padding:10px 15px;
+  border-radius:9px;
+  cursor:pointer;
+  font-size:11px;
+  font-weight:700;
+}
+
+.medicine-form{
+  background:#f5f9ff;
+  border:1px solid #dce9f7;
+  border-radius:12px;
+  padding:15px;
+  margin-bottom:15px;
+}
+
+.medicine-input{
+  margin-bottom:11px;
+}
+
+.medicine-input label{
+  display:block;
+  font-size:10px;
+  font-weight:700;
+  color:#53677d;
+  margin-bottom:5px;
+}
+
+.medicine-input input{
+  width:100%;
+  padding:10px;
+  border:1px solid #dce6ef;
+  border-radius:8px;
+  background:#fff;
+  font-size:12px;
+  color:#142d4c;
+}
+
+.medicine-form-buttons{
+  display:flex;
+  gap:8px;
+}
+
+.medicine-form-buttons button{
+  border:0;
+  padding:9px 14px;
+  border-radius:8px;
+  font-size:10px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+#saveMedicine{
+  background:#1267d6;
+  color:#fff;
+}
+
+#cancelMedicine{
+  background:#e8f1fb;
+  color:#1267d6;
+}
+
+.medicine-summary{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:9px;
+  margin-bottom:15px;
+}
+
+.medicine-summary-card{
+  background:#f7faff;
+  border:1px solid #e4edf6;
+  border-radius:10px;
+  padding:12px;
+  text-align:center;
+}
+
+.medicine-summary-card span{
+  display:block;
+  color:#6e7d90;
+  font-size:9px;
+}
+
+.medicine-summary-card strong{
+  display:block;
+  font-size:18px;
+  margin-top:5px;
+  color:#142d4c;
+}
+
+.taken-card strong{
+  color:#159447;
+}
+
+.pending-card strong{
+  color:#d78300;
+}
+
+.missed-card strong{
+  color:#e83c5a;
+}
+
+.adherence-card strong{
+  color:#1267d6;
+}
+
+.medicine-list{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.medicine-empty{
+  text-align:center;
+  padding:25px 10px;
+  border:1px dashed #cfdce9;
+  border-radius:11px;
+  color:#718096;
+}
+
+.medicine-empty div{
+  font-size:30px;
+  margin-bottom:7px;
+}
+
+.medicine-empty strong{
+  display:block;
+  color:#344b63;
+  font-size:12px;
+}
+
+.medicine-empty p{
+  font-size:10px;
+  margin-top:4px;
+}
+
+.medicine-item{
+  border:1px solid #e1e9f1;
+  border-radius:11px;
+  padding:13px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  background:#fff;
+}
+
+.medicine-info{
+  min-width:0;
+}
+
+.medicine-name{
+  font-size:12px;
+  font-weight:800;
+  color:#183451;
+}
+
+.medicine-time{
+  font-size:10px;
+  color:#718096;
+  margin-top:4px;
+}
+
+.medicine-status{
+  display:inline-block;
+  margin-top:6px;
+  padding:4px 7px;
+  border-radius:20px;
+  font-size:8px;
+  font-weight:800;
+}
+
+.status-taken{
+  background:#e7f8ee;
+  color:#159447;
+}
+
+.status-pending{
+  background:#fff3dc;
+  color:#c87800;
+}
+
+.status-missed{
+  background:#ffe8ed;
+  color:#e83c5a;
+}
+
+.medicine-actions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:5px;
+}
+
+.medicine-actions button{
+  border:1px solid #dce6ef;
+  background:#f8fbff;
+  color:#31516f;
+  border-radius:7px;
+  padding:7px 8px;
+  font-size:9px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.medicine-actions .take-btn{
+  background:#e7f8ee;
+  border-color:#c9edd8;
+  color:#159447;
+}
+
+.medicine-actions .miss-btn{
+  background:#fff0f3;
+  border-color:#ffd4dc;
+  color:#e83c5a;
+}
+
+.medicine-actions .delete-btn{
+  background:#f7f7f7;
+  color:#69798a;
+}
+
+.medicine-alarm{
+  margin-top:15px;
+  padding:13px;
+  border-radius:11px;
+  background:#edf5ff;
+  border:1px solid #d9eaff;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.medicine-alarm strong{
+  font-size:11px;
+  color:#1267d6;
+}
+
+.medicine-alarm p{
+  font-size:9px;
+  color:#718096;
+  margin-top:4px;
+}
+
+.medicine-alarm-buttons{
+  display:flex;
+  gap:6px;
+}
+
+.medicine-alarm-buttons button{
+  border:0;
+  border-radius:8px;
+  padding:8px 10px;
+  font-size:9px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+#enableMedicineAlarm{
+  background:#1267d6;
+  color:#fff;
+}
+
+#stopMedicineAlarm{
+  background:#dfeafa;
+  color:#1267d6;
+}
+
+@media(max-width:760px){
+
+  .medicine-tracker{
+    padding:14px;
+  }
+
+  .medicine-head{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .medicine-add{
+    width:100%;
+  }
+
+  .medicine-summary{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .medicine-item{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .medicine-actions{
+    width:100%;
+    justify-content:flex-start;
+  }
+
+  .medicine-alarm{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .medicine-alarm-buttons{
+    width:100%;
+  }
+
+  .medicine-alarm-buttons button{
+    flex:1;
+  }
+
+}
+
+@media(max-width:430px){
+
+  .medicine-summary{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .medicine-summary-card:last-child{
+    grid-column:1/-1;
+  }
+
+}
+</style>
+
+<script>
+/* ================= MEDICINE TRACKER LOGIC ================= */
+
+(function(){
+
+const STORAGE_KEY="zevaCareMedicines";
+
+const list=document.getElementById("medicineList");
+const empty=document.getElementById("medicineEmpty");
+
+const form=document.getElementById("medicineForm");
+const openForm=document.getElementById("openMedicineForm");
+const saveBtn=document.getElementById("saveMedicine");
+const cancelBtn=document.getElementById("cancelMedicine");
+
+const nameInput=document.getElementById("medicineName");
+const timeInput=document.getElementById("medicineTime");
+
+const totalEl=document.getElementById("medicineTotal");
+const takenEl=document.getElementById("medicineTaken");
+const pendingEl=document.getElementById("medicinePending");
+const missedEl=document.getElementById("medicineMissed");
+const adherenceEl=document.getElementById("medicineAdherence");
+
+const enableAlarm=document.getElementById("enableMedicineAlarm");
+const stopAlarm=document.getElementById("stopMedicineAlarm");
+const alarmText=document.getElementById("medicineAlarmText");
+
+let medicines=[];
+let audioContext=null;
+let alarmTimer=null;
+
+function loadMedicines(){
+
+try{
+
+const saved=localStorage.getItem(STORAGE_KEY);
+
+medicines=saved?JSON.parse(saved):[];
+
+if(!Array.isArray(medicines)){
+medicines=[];
+}
+
+}catch(e){
+
+medicines=[];
+
+}
+
+render();
+
+}
+
+function saveMedicines(){
+
+localStorage.setItem(
+STORAGE_KEY,
+JSON.stringify(medicines)
+);
+
+}
+
+function createId(){
+
+return Date.now().toString(36)+Math.random().toString(36).slice(2);
+
+}
+
+function render(){
+
+list.innerHTML="";
+
+if(medicines.length===0){
+
+list.appendChild(empty);
+updateSummary();
+return;
+
+}
+
+medicines.forEach(medicine=>{
+
+const item=document.createElement("div");
+item.className="medicine-item";
+
+const info=document.createElement("div");
+info.className="medicine-info";
+
+const name=document.createElement("div");
+name.className="medicine-name";
+name.textContent=medicine.name;
+
+const time=document.createElement("div");
+time.className="medicine-time";
+time.textContent="⏰ "+formatTime(medicine.time);
+
+const status=document.createElement("span");
+status.className="medicine-status "+statusClass(medicine.status);
+status.textContent=medicine.status;
+
+info.appendChild(name);
+info.appendChild(time);
+info.appendChild(status);
+
+const actions=document.createElement("div");
+actions.className="medicine-actions";
+
+const take=document.createElement("button");
+take.className="take-btn";
+take.textContent="✓ Taken";
+take.onclick=function(){
+setStatus(medicine.id,"Taken");
+};
+
+const pending=document.createElement("button");
+pending.textContent="⏳ Pending";
+pending.onclick=function(){
+setStatus(medicine.id,"Pending");
+};
+
+const missed=document.createElement("button");
+missed.className="miss-btn";
+missed.textContent="✕ Missed";
+missed.onclick=function(){
+markMissed(medicine.id);
+};
+
+const del=document.createElement("button");
+del.className="delete-btn";
+del.textContent="🗑 Delete";
+del.onclick=function(){
+deleteMedicine(medicine.id);
+};
+
+actions.appendChild(take);
+actions.appendChild(pending);
+actions.appendChild(missed);
+actions.appendChild(del);
+
+item.appendChild(info);
+item.appendChild(actions);
+
+list.appendChild(item);
+
+});
+
+updateSummary();
+
+}
+
+function statusClass(status){
+
+if(status==="Taken")return"status-taken";
+if(status==="Missed")return"status-missed";
+
+return"status-pending";
+
+}
+
+function formatTime(time){
+
+if(!time)return"Time not set";
+
+const parts=time.split(":");
+
+let hour=parseInt(parts[0],10);
+const minute=parts[1];
+
+const suffix=hour>=12?"PM":"AM";
+
+hour=hour%12||12;
+
+return hour+":"+minute+" "+suffix;
+
+}
+
+function updateSummary(){
+
+const total=medicines.length;
+
+const taken=medicines.filter(m=>m.status==="Taken").length;
+
+const missed=medicines.filter(m=>m.status==="Missed").length;
+
+const pending=medicines.filter(m=>m.status==="Pending").length;
+
+const completed=taken+missed;
+
+const adherence=completed===0?0:Math.round((taken/completed)*100);
+
+totalEl.textContent=total;
+takenEl.textContent=taken;
+pendingEl.textContent=pending;
+missedEl.textContent=missed;
+adherenceEl.textContent=adherence+"%";
+
+}
+
+function setStatus(id,status){
+
+const medicine=medicines.find(m=>m.id===id);
+
+if(!medicine)return;
+
+medicine.status=status;
+
+medicine.updatedAt=new Date().toISOString();
+
+saveMedicines();
+render();
+
+if(status==="Taken"){
+
+stopAlarmSound();
+
+}
+
+}
+
+function markMissed(id){
+
+const medicine=medicines.find(m=>m.id===id);
+
+if(!medicine)return;
+
+const reason=prompt(
+"Why was this medicine missed?\n\nExample: Forgot, Not available, Feeling better, Other"
+);
+
+if(reason===null)return;
+
+medicine.status="Missed";
+medicine.missedReason=reason.trim()||"No reason provided";
+medicine.updatedAt=new Date().toISOString();
+
+saveMedicines();
+render();
+
+}
+
+function deleteMedicine(id){
+
+const medicine=medicines.find(m=>m.id===id);
+
+if(!medicine)return;
+
+if(!confirm("Delete "+medicine.name+" from Medicine Tracker?"))return;
+
+medicines=medicines.filter(m=>m.id!==id);
+
+saveMedicines();
+render();
+
+}
+
+openForm.addEventListener("click",function(){
+
+form.style.display=form.style.display==="none"?"block":"none";
+
+if(form.style.display==="block"){
+
+nameInput.focus();
+
+}
+
+});
+
+cancelBtn.addEventListener("click",function(){
+
+form.style.display="none";
+nameInput.value="";
+timeInput.value="";
+
+});
+
+saveBtn.addEventListener("click",function(){
+
+const name=nameInput.value.trim();
+const time=timeInput.value;
+
+if(!name){
+
+alert("Please enter medicine name.");
+nameInput.focus();
+return;
+
+}
+
+if(!time){
+
+alert("Please select medicine time.");
+timeInput.focus();
+return;
+
+}
+
+medicines.push({
+
+id:createId(),
+name:name,
+time:time,
+status:"Pending",
+missedReason:"",
+createdAt:new Date().toISOString()
+
+});
+
+saveMedicines();
+
+nameInput.value="";
+timeInput.value="";
+form.style.display="none";
+
+render();
+
+});
+
+function beep(){
+
+try{
+
+audioContext=
+audioContext||
+new(window.AudioContext||window.webkitAudioContext)();
+
+if(audioContext.state==="suspended"){
+audioContext.resume();
+}
+
+const oscillator=audioContext.createOscillator();
+const gain=audioContext.createGain();
+
+oscillator.frequency.value=880;
+gain.gain.value=.08;
+
+oscillator.connect(gain);
+gain.connect(audioContext.destination);
+
+oscillator.start();
+
+oscillator.stop(audioContext.currentTime+.35);
+
+}catch(e){}
+
+}
+
+async function enableAlarmSound(){
+
+try{
+
+audioContext=
+audioContext||
+new(window.AudioContext||window.webkitAudioContext)();
+
+await audioContext.resume();
+
+beep();
+
+localStorage.setItem(
+"zevaCareMedicineAlarmEnabled",
+"1"
+);
+
+if("Notification"in window){
+
+if(Notification.permission==="default"){
+
+try{
+
+await Notification.requestPermission();
+
+}catch(e){}
+
+}
+
+}
+
+alarmText.textContent=
+"🔔 Medicine alarm is enabled.";
+
+}catch(e){
+
+alarmText.textContent=
+"Tap Enable Alarm again to activate sound.";
+
+}
+
+}
+
+function stopAlarmSound(){
+
+clearInterval(alarmTimer);
+alarmTimer=null;
+
+alarmText.textContent=
+"Medicine alarm ready.";
+
+}
+
+enableAlarm.addEventListener(
+"click",
+enableAlarmSound
+);
+
+stopAlarm.addEventListener(
+"click",
+stopAlarmSound
+);
+
+function showNotification(medicine){
+
+if(
+"Notification"in window &&
+Notification.permission==="granted"
+){
+
+try{
+
+new Notification(
+"💊 Medicine Reminder",
+{
+body:medicine.name+
+" is scheduled now."
+}
+);
+
+}catch(e){}
+
+}
+
+}
+
+function checkMedicineAlarms(){
+
+if(localStorage.getItem(
+"zevaCareMedicineAlarmEnabled"
+)!=="1")return;
+
+const now=new Date();
+
+const currentHour=
+String(now.getHours()).padStart(2,"0");
+
+const currentMinute=
+String(now.getMinutes()).padStart(2,"0");
+
+const currentTime=
+currentHour+":"+currentMinute;
+
+medicines.forEach(medicine=>{
+
+if(
+medicine.time===currentTime &&
+medicine.status==="Pending"
+){
+
+const today=
+now.getFullYear()+"-"+
+String(now.getMonth()+1).padStart(2,"0")+"-"+
+String(now.getDate()).padStart(2,"0");
+
+const alarmKey=
+today+"_"+medicine.id+"_"+currentTime;
+
+if(medicine.lastAlarm!==alarmKey){
+
+medicine.lastAlarm=alarmKey;
+
+saveMedicines();
+
+beep();
+
+clearInterval(alarmTimer);
+
+alarmTimer=setInterval(beep,1200);
+
+alarmText.textContent=
+"🚨 Take "+medicine.name+
+" — Alarm is ringing.";
+
+showNotification(medicine);
+
+}
+
+}
+
+});
+
+}
+
+setInterval(checkMedicineAlarms,15000);
+
+loadMedicines();
+
+})();
+</script>
 main {
   max-width: 1000px;
   margin: auto;
