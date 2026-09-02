@@ -2,2275 +2,2596 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>My Health Tracker | ZevaCare</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
 }
 
-body {
-  margin: 0;
-  background: #f4f7fb;
-  color: #263b4d;
+body{
+  background:#f4f8fc;
+  color:#17324f;
+  min-height:100vh;
 }
 
-header {
-  background: white;
-  padding: 16px 7%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #e1e8ee;
+a{
+  text-decoration:none;
+  color:inherit;
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+button,input,select,textarea{
+  font-family:inherit;
 }
 
-.logo {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  background: #1f6fae;
-  color: white;
-  display: grid;
-  place-items: center;
-  font-size: 23px;
-  font-weight: bold;
+button{
+  cursor:pointer;
 }
 
-.brand-name {
-  font-size: 22px;
-  font-weight: bold;
-  color: #20394f;
+.page{
+  width:min(1180px,94%);
+  margin:auto;
+  padding:22px 0 45px;
 }
 
-.brand-name span {
-  color: #1f6fae;
-}
+/* HEADER */
 
-.back {
-  text-decoration: none;
-  color: #1f6fae;
-  font-weight: bold;
-}
-<!-- ================= MEDICINE TRACKER / MEDITRACK ================= -->
-<section class="medicine-tracker" id="medicineTracker">
-
-  <div class="medicine-head">
-    <div>
-      <span class="medicine-label">💊 MEDICINE TRACKER</span>
-      <h2>My Medicines</h2>
-      <p>Manage your medicines, timings and daily adherence.</p>
-    </div>
-
-    <button class="medicine-add" id="openMedicineForm">
-      + Add Medicine
-    </button>
-  </div>
-
-  <!-- Medicine Form -->
-  <div class="medicine-form" id="medicineForm" style="display:none;">
-
-    <div class="medicine-input">
-      <label>Medicine Name</label>
-      <input
-        type="text"
-        id="medicineName"
-        placeholder="e.g. Paracetamol 500mg"
-      >
-    </div>
-
-    <div class="medicine-input">
-      <label>Scheduled Time</label>
-      <input type="time" id="medicineTime">
-    </div>
-
-    <div class="medicine-form-buttons">
-      <button id="saveMedicine">Save Medicine</button>
-      <button id="cancelMedicine">Cancel</button>
-    </div>
-
-  </div>
-
-  <!-- Adherence Summary -->
-  <div class="medicine-summary">
-
-    <div class="medicine-summary-card">
-      <span>💊 Total</span>
-      <strong id="medicineTotal">0</strong>
-    </div>
-
-    <div class="medicine-summary-card taken-card">
-      <span>✅ Taken</span>
-      <strong id="medicineTaken">0</strong>
-    </div>
-
-    <div class="medicine-summary-card pending-card">
-      <span>⏳ Pending</span>
-      <strong id="medicinePending">0</strong>
-    </div>
-
-    <div class="medicine-summary-card missed-card">
-      <span>❌ Missed</span>
-      <strong id="medicineMissed">0</strong>
-    </div>
-
-    <div class="medicine-summary-card adherence-card">
-      <span>📊 Adherence</span>
-      <strong id="medicineAdherence">0%</strong>
-    </div>
-
-  </div>
-
-  <!-- Medicine List -->
-  <div class="medicine-list" id="medicineList">
-
-    <div class="medicine-empty" id="medicineEmpty">
-      <div>💊</div>
-      <strong>No medicines added yet</strong>
-      <p>Add your first medicine to start tracking.</p>
-    </div>
-
-  </div>
-
-  <!-- Alarm Controls -->
-  <div class="medicine-alarm">
-
-    <div>
-      <strong>🔔 Medicine Reminder Alarm</strong>
-      <p id="medicineAlarmText">
-        Enable alarm sound to receive medicine reminders.
-      </p>
-    </div>
-
-    <div class="medicine-alarm-buttons">
-      <button id="enableMedicineAlarm">
-        🔔 Enable Alarm
-      </button>
-
-      <button id="stopMedicineAlarm">
-        🔕 Stop Alarm
-      </button>
-    </div>
-
-  </div>
-
-</section>
-
-<style>
-/* ================= MEDICINE TRACKER ================= */
-
-.medicine-tracker{
-  margin-top:20px;
+.header{
   background:#fff;
-  border:1px solid #e1e9f1;
+  border:1px solid #dfe8f1;
   border-radius:16px;
-  padding:20px;
-  box-shadow:0 5px 18px rgba(22,61,103,.06);
-}
-
-.medicine-head{
+  padding:15px 18px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:15px;
+  box-shadow:0 6px 20px rgba(20,70,110,.06);
   margin-bottom:18px;
 }
 
-.medicine-label{
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo{
+  width:42px;
+  height:42px;
+  background:#1267d6;
+  color:#fff;
+  border-radius:11px;
+  display:grid;
+  place-items:center;
+  font-size:23px;
+  font-weight:800;
+}
+
+.brand h2{
+  font-size:18px;
+}
+
+.brand span{
+  color:#1267d6;
+}
+
+.brand small{
+  display:block;
+  font-size:9px;
+  color:#7b8998;
+  margin-top:2px;
+}
+
+.header-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.header-btn{
+  border:1px solid #d8e5f1;
+  background:#f7fbff;
+  color:#1267d6;
+  padding:9px 12px;
+  border-radius:8px;
+  font-size:10px;
+  font-weight:800;
+}
+
+.header-btn.primary{
+  background:#1267d6;
+  color:#fff;
+  border-color:#1267d6;
+}
+
+/* HERO */
+
+.hero{
+  background:linear-gradient(120deg,#e9f4ff,#f7fbff);
+  border:1px solid #dceaff;
+  border-radius:17px;
+  padding:22px;
+  margin-bottom:16px;
+}
+
+.hero-label{
   color:#1267d6;
   font-size:10px;
   font-weight:800;
 }
 
-.medicine-head h2{
-  font-size:20px;
-  margin:5px 0;
-  color:#142d4c;
+.hero h1{
+  font-size:28px;
+  margin:7px 0;
 }
 
-.medicine-head p{
-  font-size:11px;
-  color:#718096;
+.hero p{
+  color:#66798d;
+  font-size:12px;
+  line-height:1.6;
+  max-width:700px;
 }
 
-.medicine-add{
-  border:0;
-  background:#1267d6;
-  color:#fff;
-  padding:10px 15px;
-  border-radius:9px;
-  cursor:pointer;
-  font-size:11px;
+.hero-date{
+  margin-top:10px;
+  color:#1267d6;
+  font-size:10px;
   font-weight:700;
 }
 
-.medicine-form{
-  background:#f5f9ff;
-  border:1px solid #dce9f7;
-  border-radius:12px;
-  padding:15px;
+/* STATS */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  margin-bottom:16px;
+}
+
+.stat{
+  background:#fff;
+  border:1px solid #e0e9f1;
+  border-radius:13px;
+  padding:14px;
+  box-shadow:0 5px 16px rgba(20,70,110,.05);
+}
+
+.stat-icon{
+  font-size:22px;
+  margin-bottom:8px;
+}
+
+.stat span{
+  display:block;
+  font-size:9px;
+  color:#77879a;
+}
+
+.stat strong{
+  display:block;
+  font-size:19px;
+  margin-top:4px;
+}
+
+.stat small{
+  display:block;
+  font-size:8px;
+  color:#159447;
+  margin-top:5px;
+}
+
+/* SECTION */
+
+.section{
+  background:#fff;
+  border:1px solid #e0e9f1;
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:16px;
+  box-shadow:0 5px 18px rgba(20,70,110,.05);
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
   margin-bottom:15px;
 }
 
-.medicine-input{
-  margin-bottom:11px;
+.section-head h2{
+  font-size:17px;
 }
 
-.medicine-input label{
-  display:block;
+.section-head p{
+  color:#758598;
   font-size:10px;
-  font-weight:700;
-  color:#53677d;
-  margin-bottom:5px;
+  margin-top:4px;
+  line-height:1.5;
 }
 
-.medicine-input input{
-  width:100%;
-  padding:10px;
-  border:1px solid #dce6ef;
-  border-radius:8px;
-  background:#fff;
-  font-size:12px;
-  color:#142d4c;
+.badge{
+  background:#eaf3ff;
+  color:#1267d6;
+  padding:6px 9px;
+  border-radius:20px;
+  font-size:9px;
+  font-weight:800;
 }
 
-.medicine-form-buttons{
+/* FORMS */
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:11px;
+}
+
+.field{
   display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.field.full{
+  grid-column:1/-1;
+}
+
+.field label{
+  font-size:9px;
+  color:#52677e;
+  font-weight:800;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  border:1px solid #dbe6ef;
+  border-radius:9px;
+  padding:10px;
+  outline:none;
+  font-size:11px;
+  color:#17324f;
+  background:#fff;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:#1267d6;
+  box-shadow:0 0 0 3px #1267d612;
+}
+
+.field textarea{
+  min-height:75px;
+  resize:vertical;
+}
+
+.form-actions{
+  display:flex;
+  justify-content:flex-end;
   gap:8px;
+  margin-top:13px;
 }
 
-.medicine-form-buttons button{
+.btn{
   border:0;
-  padding:9px 14px;
   border-radius:8px;
+  padding:9px 13px;
   font-size:10px;
-  font-weight:700;
-  cursor:pointer;
+  font-weight:800;
 }
 
-#saveMedicine{
+.btn-blue{
   background:#1267d6;
   color:#fff;
 }
 
-#cancelMedicine{
-  background:#e8f1fb;
+.btn-light{
+  background:#eaf3ff;
   color:#1267d6;
 }
+
+.btn-green{
+  background:#e8f8ef;
+  color:#159447;
+}
+
+.btn-orange{
+  background:#fff2d9;
+  color:#c77800;
+}
+
+.btn-red{
+  background:#ffe9ee;
+  color:#e83c5a;
+}
+
+/* RECORDS */
+
+.record-tools{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+}
+
+.search{
+  flex:1;
+  min-width:180px;
+  border:1px solid #dbe6ef;
+  padding:9px 11px;
+  border-radius:8px;
+  font-size:10px;
+  outline:none;
+}
+
+.filter{
+  border:1px solid #dbe6ef;
+  padding:9px 10px;
+  border-radius:8px;
+  background:#fff;
+  font-size:10px;
+}
+
+.record-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.record{
+  border:1px solid #e1e9f1;
+  border-radius:10px;
+  padding:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+.record-main{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  min-width:0;
+}
+
+.record-icon{
+  width:38px;
+  height:38px;
+  border-radius:9px;
+  background:#edf5ff;
+  display:grid;
+  place-items:center;
+  font-size:19px;
+  flex-shrink:0;
+}
+
+.record-info strong{
+  display:block;
+  font-size:11px;
+}
+
+.record-info span{
+  display:block;
+  color:#728398;
+  font-size:9px;
+  margin-top:4px;
+}
+
+.record-note{
+  color:#64778c;
+  font-size:9px;
+  margin-top:3px;
+}
+
+.record-actions{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+/* REMINDERS */
+
+.reminder-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.reminder-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.reminder{
+  border:1px solid #e0e8f0;
+  border-radius:10px;
+  padding:12px;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+}
+
+.reminder-main strong{
+  display:block;
+  font-size:11px;
+}
+
+.reminder-main span{
+  display:block;
+  font-size:9px;
+  color:#718196;
+  margin-top:4px;
+}
+
+.reminder-status{
+  margin-top:5px;
+  display:inline-block;
+  padding:4px 7px;
+  border-radius:15px;
+  font-size:8px;
+  font-weight:800;
+}
+
+.status-pending{
+  background:#fff2d8;
+  color:#c77800;
+}
+
+.status-done{
+  background:#e8f8ef;
+  color:#159447;
+}
+
+.status-skipped{
+  background:#edf0f4;
+  color:#6d7b8a;
+}
+
+.reminder-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  justify-content:flex-end;
+}
+
+/* MEDICINE */
 
 .medicine-summary{
   display:grid;
   grid-template-columns:repeat(5,1fr);
-  gap:9px;
-  margin-bottom:15px;
+  gap:8px;
+  margin-bottom:13px;
 }
 
-.medicine-summary-card{
+.med-stat{
   background:#f7faff;
-  border:1px solid #e4edf6;
-  border-radius:10px;
-  padding:12px;
+  border:1px solid #e1eaf3;
+  border-radius:9px;
+  padding:11px;
   text-align:center;
 }
 
-.medicine-summary-card span{
+.med-stat span{
   display:block;
-  color:#6e7d90;
-  font-size:9px;
+  font-size:8px;
+  color:#718196;
 }
 
-.medicine-summary-card strong{
+.med-stat strong{
   display:block;
-  font-size:18px;
-  margin-top:5px;
-  color:#142d4c;
+  font-size:17px;
+  margin-top:4px;
 }
 
-.taken-card strong{
+.med-taken strong{
   color:#159447;
 }
 
-.pending-card strong{
-  color:#d78300;
+.med-pending strong{
+  color:#c77800;
 }
 
-.missed-card strong{
+.med-missed strong{
   color:#e83c5a;
 }
 
-.adherence-card strong{
+.med-adherence strong{
   color:#1267d6;
 }
 
 .medicine-list{
   display:flex;
   flex-direction:column;
-  gap:9px;
+  gap:8px;
 }
 
-.medicine-empty{
-  text-align:center;
-  padding:25px 10px;
-  border:1px dashed #cfdce9;
+.medicine{
+  border:1px solid #e0e8f0;
   border-radius:11px;
-  color:#718096;
-}
-
-.medicine-empty div{
-  font-size:30px;
-  margin-bottom:7px;
-}
-
-.medicine-empty strong{
-  display:block;
-  color:#344b63;
-  font-size:12px;
-}
-
-.medicine-empty p{
-  font-size:10px;
-  margin-top:4px;
-}
-
-.medicine-item{
-  border:1px solid #e1e9f1;
-  border-radius:11px;
-  padding:13px;
+  padding:12px;
   display:flex;
   justify-content:space-between;
-  align-items:center;
   gap:10px;
-  background:#fff;
+  align-items:center;
 }
 
-.medicine-info{
-  min-width:0;
-}
-
-.medicine-name{
+.medicine-info strong{
+  display:block;
   font-size:12px;
-  font-weight:800;
-  color:#183451;
 }
 
-.medicine-time{
-  font-size:10px;
-  color:#718096;
+.medicine-info span{
+  display:block;
+  color:#718196;
+  font-size:9px;
   margin-top:4px;
 }
 
-.medicine-status{
+.medicine-note{
+  font-size:9px;
+  color:#65788d;
+  margin-top:5px;
+}
+
+.med-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  justify-content:flex-end;
+}
+
+.med-status{
   display:inline-block;
   margin-top:6px;
   padding:4px 7px;
-  border-radius:20px;
+  border-radius:15px;
   font-size:8px;
   font-weight:800;
 }
 
-.status-taken{
-  background:#e7f8ee;
-  color:#159447;
+.empty{
+  text-align:center;
+  padding:22px;
+  color:#718196;
+  border:1px dashed #cfdae5;
+  border-radius:10px;
 }
 
-.status-pending{
-  background:#fff3dc;
-  color:#c87800;
+.empty-icon{
+  font-size:29px;
+  margin-bottom:6px;
 }
 
-.status-missed{
-  background:#ffe8ed;
-  color:#e83c5a;
-}
-
-.medicine-actions{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:flex-end;
-  gap:5px;
-}
-
-.medicine-actions button{
-  border:1px solid #dce6ef;
-  background:#f8fbff;
-  color:#31516f;
-  border-radius:7px;
-  padding:7px 8px;
-  font-size:9px;
-  font-weight:700;
-  cursor:pointer;
-}
-
-.medicine-actions .take-btn{
-  background:#e7f8ee;
-  border-color:#c9edd8;
-  color:#159447;
-}
-
-.medicine-actions .miss-btn{
-  background:#fff0f3;
-  border-color:#ffd4dc;
-  color:#e83c5a;
-}
-
-.medicine-actions .delete-btn{
-  background:#f7f7f7;
-  color:#69798a;
-}
-
-.medicine-alarm{
-  margin-top:15px;
-  padding:13px;
-  border-radius:11px;
-  background:#edf5ff;
-  border:1px solid #d9eaff;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-}
-
-.medicine-alarm strong{
+.empty strong{
+  display:block;
   font-size:11px;
-  color:#1267d6;
+  color:#425970;
 }
 
-.medicine-alarm p{
+.empty p{
   font-size:9px;
-  color:#718096;
   margin-top:4px;
 }
 
-.medicine-alarm-buttons{
+/* ALARM */
+
+.alarm-box{
+  background:#edf5ff;
+  border:1px solid #d9eaff;
+  border-radius:12px;
+  padding:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+.alarm-info strong{
+  display:block;
+  color:#1267d6;
+  font-size:11px;
+}
+
+.alarm-info p{
+  color:#718196;
+  font-size:9px;
+  margin-top:5px;
+  line-height:1.5;
+}
+
+.alarm-buttons{
   display:flex;
   gap:6px;
+  flex-wrap:wrap;
 }
 
-.medicine-alarm-buttons button{
-  border:0;
-  border-radius:8px;
-  padding:8px 10px;
+.alarm-status{
+  margin-top:10px;
   font-size:9px;
-  font-weight:700;
-  cursor:pointer;
-}
-
-#enableMedicineAlarm{
-  background:#1267d6;
-  color:#fff;
-}
-
-#stopMedicineAlarm{
-  background:#dfeafa;
   color:#1267d6;
+  font-weight:700;
 }
 
-@media(max-width:760px){
+/* TRENDS */
 
-  .medicine-tracker{
-    padding:14px;
+.trend-grid{
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  gap:15px;
+}
+
+.chart{
+  height:170px;
+  display:flex;
+  align-items:flex-end;
+  gap:8px;
+  padding:12px;
+  border-bottom:1px solid #dfe7ef;
+}
+
+.bar-wrap{
+  flex:1;
+  height:100%;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.bar{
+  width:75%;
+  max-width:38px;
+  background:#bcdcff;
+  border-radius:5px 5px 0 0;
+  min-height:8px;
+}
+
+.bar-label{
+  font-size:7px;
+  color:#718196;
+  margin-top:5px;
+  text-align:center;
+}
+
+.trend-info{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.trend-card{
+  background:#f7faff;
+  border-radius:10px;
+  padding:13px;
+}
+
+.trend-card span{
+  display:block;
+  font-size:8px;
+  color:#718196;
+}
+
+.trend-card strong{
+  display:block;
+  font-size:16px;
+  margin-top:5px;
+}
+
+/* MODAL */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(10,35,60,.48);
+  z-index:100;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-card{
+  width:min(620px,100%);
+  max-height:92vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 25px 70px rgba(0,0,0,.2);
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+}
+
+.modal-head h2{
+  font-size:19px;
+}
+
+.close{
+  width:32px;
+  height:32px;
+  border:0;
+  border-radius:50%;
+  background:#edf5ff;
+  color:#1267d6;
+  font-size:21px;
+}
+
+/* FOOTER */
+
+footer{
+  text-align:center;
+  color:#77879a;
+  font-size:9px;
+  padding:12px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+
+  .stats{
+    grid-template-columns:repeat(3,1fr);
   }
 
-  .medicine-head{
-    align-items:flex-start;
-    flex-direction:column;
-  }
-
-  .medicine-add{
-    width:100%;
+  .form-grid{
+    grid-template-columns:1fr 1fr;
   }
 
   .medicine-summary{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(3,1fr);
   }
 
-  .medicine-item{
-    align-items:flex-start;
-    flex-direction:column;
-  }
-
-  .medicine-actions{
-    width:100%;
-    justify-content:flex-start;
-  }
-
-  .medicine-alarm{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .medicine-alarm-buttons{
-    width:100%;
-  }
-
-  .medicine-alarm-buttons button{
-    flex:1;
+  .reminder-grid,
+  .trend-grid{
+    grid-template-columns:1fr;
   }
 
 }
 
-@media(max-width:430px){
+@media(max-width:650px){
+
+  .page{
+    width:94%;
+    padding-top:12px;
+  }
+
+  .header{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .header-actions{
+    width:100%;
+  }
+
+  .header-btn{
+    flex:1;
+  }
+
+  .hero h1{
+    font-size:22px;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .field.full{
+    grid-column:auto;
+  }
 
   .medicine-summary{
     grid-template-columns:1fr 1fr;
   }
 
-  .medicine-summary-card:last-child{
-    grid-column:1/-1;
+  .medicine,
+  .record,
+  .reminder,
+  .alarm-box{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .record-actions,
+  .med-actions,
+  .reminder-actions,
+  .alarm-buttons{
+    width:100%;
+    justify-content:flex-start;
+  }
+
+  .record-actions button,
+  .med-actions button,
+  .reminder-actions button{
+    flex:1;
   }
 
 }
-</style>
 
-<script>
-/* ================= MEDICINE TRACKER LOGIC ================= */
+@media(max-width:400px){
 
-(function(){
-
-const STORAGE_KEY="zevaCareMedicines";
-
-const list=document.getElementById("medicineList");
-const empty=document.getElementById("medicineEmpty");
-
-const form=document.getElementById("medicineForm");
-const openForm=document.getElementById("openMedicineForm");
-const saveBtn=document.getElementById("saveMedicine");
-const cancelBtn=document.getElementById("cancelMedicine");
-
-const nameInput=document.getElementById("medicineName");
-const timeInput=document.getElementById("medicineTime");
-
-const totalEl=document.getElementById("medicineTotal");
-const takenEl=document.getElementById("medicineTaken");
-const pendingEl=document.getElementById("medicinePending");
-const missedEl=document.getElementById("medicineMissed");
-const adherenceEl=document.getElementById("medicineAdherence");
-
-const enableAlarm=document.getElementById("enableMedicineAlarm");
-const stopAlarm=document.getElementById("stopMedicineAlarm");
-const alarmText=document.getElementById("medicineAlarmText");
-
-let medicines=[];
-let audioContext=null;
-let alarmTimer=null;
-
-function loadMedicines(){
-
-try{
-
-const saved=localStorage.getItem(STORAGE_KEY);
-
-medicines=saved?JSON.parse(saved):[];
-
-if(!Array.isArray(medicines)){
-medicines=[];
-}
-
-}catch(e){
-
-medicines=[];
-
-}
-
-render();
-
-}
-
-function saveMedicines(){
-
-localStorage.setItem(
-STORAGE_KEY,
-JSON.stringify(medicines)
-);
-
-}
-
-function createId(){
-
-return Date.now().toString(36)+Math.random().toString(36).slice(2);
-
-}
-
-function render(){
-
-list.innerHTML="";
-
-if(medicines.length===0){
-
-list.appendChild(empty);
-updateSummary();
-return;
-
-}
-
-medicines.forEach(medicine=>{
-
-const item=document.createElement("div");
-item.className="medicine-item";
-
-const info=document.createElement("div");
-info.className="medicine-info";
-
-const name=document.createElement("div");
-name.className="medicine-name";
-name.textContent=medicine.name;
-
-const time=document.createElement("div");
-time.className="medicine-time";
-time.textContent="⏰ "+formatTime(medicine.time);
-
-const status=document.createElement("span");
-status.className="medicine-status "+statusClass(medicine.status);
-status.textContent=medicine.status;
-
-info.appendChild(name);
-info.appendChild(time);
-info.appendChild(status);
-
-const actions=document.createElement("div");
-actions.className="medicine-actions";
-
-const take=document.createElement("button");
-take.className="take-btn";
-take.textContent="✓ Taken";
-take.onclick=function(){
-setStatus(medicine.id,"Taken");
-};
-
-const pending=document.createElement("button");
-pending.textContent="⏳ Pending";
-pending.onclick=function(){
-setStatus(medicine.id,"Pending");
-};
-
-const missed=document.createElement("button");
-missed.className="miss-btn";
-missed.textContent="✕ Missed";
-missed.onclick=function(){
-markMissed(medicine.id);
-};
-
-const del=document.createElement("button");
-del.className="delete-btn";
-del.textContent="🗑 Delete";
-del.onclick=function(){
-deleteMedicine(medicine.id);
-};
-
-actions.appendChild(take);
-actions.appendChild(pending);
-actions.appendChild(missed);
-actions.appendChild(del);
-
-item.appendChild(info);
-item.appendChild(actions);
-
-list.appendChild(item);
-
-});
-
-updateSummary();
-
-}
-
-function statusClass(status){
-
-if(status==="Taken")return"status-taken";
-if(status==="Missed")return"status-missed";
-
-return"status-pending";
-
-}
-
-function formatTime(time){
-
-if(!time)return"Time not set";
-
-const parts=time.split(":");
-
-let hour=parseInt(parts[0],10);
-const minute=parts[1];
-
-const suffix=hour>=12?"PM":"AM";
-
-hour=hour%12||12;
-
-return hour+":"+minute+" "+suffix;
-
-}
-
-function updateSummary(){
-
-const total=medicines.length;
-
-const taken=medicines.filter(m=>m.status==="Taken").length;
-
-const missed=medicines.filter(m=>m.status==="Missed").length;
-
-const pending=medicines.filter(m=>m.status==="Pending").length;
-
-const completed=taken+missed;
-
-const adherence=completed===0?0:Math.round((taken/completed)*100);
-
-totalEl.textContent=total;
-takenEl.textContent=taken;
-pendingEl.textContent=pending;
-missedEl.textContent=missed;
-adherenceEl.textContent=adherence+"%";
-
-}
-
-function setStatus(id,status){
-
-const medicine=medicines.find(m=>m.id===id);
-
-if(!medicine)return;
-
-medicine.status=status;
-
-medicine.updatedAt=new Date().toISOString();
-
-saveMedicines();
-render();
-
-if(status==="Taken"){
-
-stopAlarmSound();
-
-}
-
-}
-
-function markMissed(id){
-
-const medicine=medicines.find(m=>m.id===id);
-
-if(!medicine)return;
-
-const reason=prompt(
-"Why was this medicine missed?\n\nExample: Forgot, Not available, Feeling better, Other"
-);
-
-if(reason===null)return;
-
-medicine.status="Missed";
-medicine.missedReason=reason.trim()||"No reason provided";
-medicine.updatedAt=new Date().toISOString();
-
-saveMedicines();
-render();
-
-}
-
-function deleteMedicine(id){
-
-const medicine=medicines.find(m=>m.id===id);
-
-if(!medicine)return;
-
-if(!confirm("Delete "+medicine.name+" from Medicine Tracker?"))return;
-
-medicines=medicines.filter(m=>m.id!==id);
-
-saveMedicines();
-render();
-
-}
-
-openForm.addEventListener("click",function(){
-
-form.style.display=form.style.display==="none"?"block":"none";
-
-if(form.style.display==="block"){
-
-nameInput.focus();
-
-}
-
-});
-
-cancelBtn.addEventListener("click",function(){
-
-form.style.display="none";
-nameInput.value="";
-timeInput.value="";
-
-});
-
-saveBtn.addEventListener("click",function(){
-
-const name=nameInput.value.trim();
-const time=timeInput.value;
-
-if(!name){
-
-alert("Please enter medicine name.");
-nameInput.focus();
-return;
-
-}
-
-if(!time){
-
-alert("Please select medicine time.");
-timeInput.focus();
-return;
-
-}
-
-medicines.push({
-
-id:createId(),
-name:name,
-time:time,
-status:"Pending",
-missedReason:"",
-createdAt:new Date().toISOString()
-
-});
-
-saveMedicines();
-
-nameInput.value="";
-timeInput.value="";
-form.style.display="none";
-
-render();
-
-});
-
-function beep(){
-
-try{
-
-audioContext=
-audioContext||
-new(window.AudioContext||window.webkitAudioContext)();
-
-if(audioContext.state==="suspended"){
-audioContext.resume();
-}
-
-const oscillator=audioContext.createOscillator();
-const gain=audioContext.createGain();
-
-oscillator.frequency.value=880;
-gain.gain.value=.08;
-
-oscillator.connect(gain);
-gain.connect(audioContext.destination);
-
-oscillator.start();
-
-oscillator.stop(audioContext.currentTime+.35);
-
-}catch(e){}
-
-}
-
-async function enableAlarmSound(){
-
-try{
-
-audioContext=
-audioContext||
-new(window.AudioContext||window.webkitAudioContext)();
-
-await audioContext.resume();
-
-beep();
-
-localStorage.setItem(
-"zevaCareMedicineAlarmEnabled",
-"1"
-);
-
-if("Notification"in window){
-
-if(Notification.permission==="default"){
-
-try{
-
-await Notification.requestPermission();
-
-}catch(e){}
-
-}
-
-}
-
-alarmText.textContent=
-"🔔 Medicine alarm is enabled.";
-
-}catch(e){
-
-alarmText.textContent=
-"Tap Enable Alarm again to activate sound.";
-
-}
-
-}
-
-function stopAlarmSound(){
-
-clearInterval(alarmTimer);
-alarmTimer=null;
-
-alarmText.textContent=
-"Medicine alarm ready.";
-
-}
-
-enableAlarm.addEventListener(
-"click",
-enableAlarmSound
-);
-
-stopAlarm.addEventListener(
-"click",
-stopAlarmSound
-);
-
-function showNotification(medicine){
-
-if(
-"Notification"in window &&
-Notification.permission==="granted"
-){
-
-try{
-
-new Notification(
-"💊 Medicine Reminder",
-{
-body:medicine.name+
-" is scheduled now."
-}
-);
-
-}catch(e){}
-
-}
-
-}
-
-function checkMedicineAlarms(){
-
-if(localStorage.getItem(
-"zevaCareMedicineAlarmEnabled"
-)!=="1")return;
-
-const now=new Date();
-
-const currentHour=
-String(now.getHours()).padStart(2,"0");
-
-const currentMinute=
-String(now.getMinutes()).padStart(2,"0");
-
-const currentTime=
-currentHour+":"+currentMinute;
-
-medicines.forEach(medicine=>{
-
-if(
-medicine.time===currentTime &&
-medicine.status==="Pending"
-){
-
-const today=
-now.getFullYear()+"-"+
-String(now.getMonth()+1).padStart(2,"0")+"-"+
-String(now.getDate()).padStart(2,"0");
-
-const alarmKey=
-today+"_"+medicine.id+"_"+currentTime;
-
-if(medicine.lastAlarm!==alarmKey){
-
-medicine.lastAlarm=alarmKey;
-
-saveMedicines();
-
-beep();
-
-clearInterval(alarmTimer);
-
-alarmTimer=setInterval(beep,1200);
-
-alarmText.textContent=
-"🚨 Take "+medicine.name+
-" — Alarm is ringing.";
-
-showNotification(medicine);
-
-}
-
-}
-
-});
-
-}
-
-setInterval(checkMedicineAlarms,15000);
-
-loadMedicines();
-
-})();
-</script>
-main {
-  max-width: 1000px;
-  margin: auto;
-  padding: 45px 7%;
-}
-
-.hero {
-  margin-bottom: 30px;
-}
-
-.hero h1 {
-  margin: 0 0 8px;
-  color: #20394f;
-  font-size: 32px;
-}
-
-.hero p {
-  color: #6d7d8b;
-  line-height: 1.6;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
-}
-
-.box {
-  background: white;
-  border: 1px solid #e1e8ee;
-  border-radius: 16px;
-  padding: 26px;
-}
-
-.box h2 {
-  margin-top: 0;
-  color: #20394f;
-}
-
-.box-description {
-  color: #6d7d8b;
-  line-height: 1.5;
-  font-size: 14px;
-}
-
-label {
-  display: block;
-  margin: 15px 0 6px;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-input,
-select {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #d9e2e9;
-  border-radius: 8px;
-  font-size: 15px;
-  background: white;
-}
-
-.btn {
-  width: 100%;
-  padding: 13px;
-  margin-top: 20px;
-  border: none;
-  border-radius: 8px;
-  background: #1f6fae;
-  color: white;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.records-section {
-  margin-top: 28px;
-  background: white;
-  border: 1px solid #e1e8ee;
-  border-radius: 16px;
-  padding: 26px;
-}
-
-.records-section h2 {
-  margin-top: 0;
-}
-
-.record {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  padding: 17px 0;
-  border-bottom: 1px solid #edf1f4;
-}
-
-.record:last-child {
-  border-bottom: none;
-}
-
-.record-info {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.record-info strong {
-  font-size: 15px;
-}
-
-.record-info span {
-  color: #6d7d8b;
-  font-size: 13px;
-}
-
-.delete {
-  border: none;
-  padding: 9px 14px;
-  border-radius: 7px;
-  cursor: pointer;
-  font-weight: bold;
-  background: #f0f3f6;
-  color: #647484;
-}
-
-.done {
-  border: none;
-  padding: 9px 14px;
-  border-radius: 7px;
-  cursor: pointer;
-  font-weight: bold;
-  background: #e7f5ed;
-  color: #247a4b;
-}
-
-.skip {
-  border: none;
-  padding: 9px 14px;
-  border-radius: 7px;
-  cursor: pointer;
-  font-weight: bold;
-  background: #fff0f0;
-  color: #b34444;
-}
-
-.reminder-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.reminder-status {
-  font-size: 12px;
-  font-weight: bold;
-  margin-top: 5px;
-}
-
-.empty {
-  text-align: center;
-  padding: 25px;
-  color: #7a8995;
-}
-
-.note {
-  margin-top: 25px;
-  padding: 18px;
-  background: #edf4f9;
-  border-radius: 12px;
-  color: #627382;
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-/* =========================
-   🔔 REMINDER POPUP
-========================= */
-
-.reminder-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(20, 40, 55, 0.58);
-  z-index: 9999;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.reminder-popup {
-  width: 100%;
-  max-width: 430px;
-  background: white;
-  border-radius: 20px;
-  padding: 28px;
-  text-align: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,.25);
-  animation: popupIn .3s ease;
-}
-
-.reminder-icon {
-  font-size: 58px;
-  animation: alarmPulse 1s infinite;
-}
-
-.reminder-popup h2 {
-  margin: 8px 0;
-  color: #20394f;
-}
-
-.reminder-popup p {
-  color: #6d7d8b;
-  line-height: 1.6;
-}
-
-.alarm-time {
-  margin: 12px 0;
-  font-weight: bold;
-  color: #1f6fae;
-}
-
-.stop-alarm,
-.reminder-done {
-  width: 100%;
-  border: none;
-  padding: 13px;
-  border-radius: 9px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.stop-alarm {
-  background: #b34444;
-  color: white;
-}
-
-.reminder-done {
-  background: #247a4b;
-  color: white;
-}
-
-@keyframes popupIn {
-  from {
-    transform: scale(.9);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes alarmPulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.15);
-  }
-}
-
-/* =========================
-   📱 MOBILE
-========================= */
-
-@media(max-width:650px) {
-
-  header {
-    padding: 14px 6%;
+  .stats{
+    grid-template-columns:1fr;
   }
 
-  main {
-    padding: 35px 6%;
+  .medicine-summary{
+    grid-template-columns:1fr 1fr;
   }
 
-  .hero h1 {
-    font-size: 27px;
+  .section{
+    padding:14px;
   }
 
-  .record {
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .reminder-actions {
-    flex-direction: column;
-  }
 }
 </style>
 </head>
 
 <body>
 
-<header>
+<div class="page">
+
+<!-- HEADER -->
+
+<header class="header">
 
   <div class="brand">
-
-    <div class="logo">+</div>
-
-    <div class="brand-name">
-      Zeva<span>Care</span>
+    <div class="logo">Z</div>
+    <div>
+      <h2><span>Zeva</span>Care</h2>
+      <small>SMART HEALTHCARE</small>
     </div>
-
   </div>
 
-  <a href="dashboard.html" class="back">
-    ← Dashboard
-  </a>
+  <div class="header-actions">
+    <a href="dashboard.html" class="header-btn">← Dashboard</a>
+    <a href="health-report.html" class="header-btn">📋 Reports</a>
+  </div>
 
 </header>
 
-<main>
 
-  <section class="hero">
+<!-- HERO -->
 
-    <h1>My Health Tracker 📊</h1>
+<section class="hero">
 
-    <p>
-      Keep a personal record of selected health measurements
-      and manage your reminders.
-    </p>
+  <div class="hero-label">📊 PERSONAL HEALTH MANAGEMENT</div>
 
-  </section>
+  <h1>My Health Tracker</h1>
+
+  <p>
+    Keep your health records, daily reminders and medicines organized
+    in one place. Your data is stored locally on this device.
+  </p>
+
+  <div class="hero-date" id="todayDate"></div>
+
+</section>
 
 
-  <section class="grid">
+<!-- STATS -->
 
-    <!-- =========================
-         HEALTH RECORD
-    ========================== -->
+<section class="stats">
 
-    <div class="box">
+  <div class="stat">
+    <div class="stat-icon">⚖️</div>
+    <span>Current Weight</span>
+    <strong id="statWeight">--</strong>
+    <small>Latest record</small>
+  </div>
 
+  <div class="stat">
+    <div class="stat-icon">🩸</div>
+    <span>Blood Pressure</span>
+    <strong id="statBP">--</strong>
+    <small>Latest reading</small>
+  </div>
+
+  <div class="stat">
+    <div class="stat-icon">❤️</div>
+    <span>Pulse</span>
+    <strong id="statPulse">--</strong>
+    <small>BPM</small>
+  </div>
+
+  <div class="stat">
+    <div class="stat-icon">😴</div>
+    <span>Sleep</span>
+    <strong id="statSleep">--</strong>
+    <small>Latest sleep</small>
+  </div>
+
+  <div class="stat">
+    <div class="stat-icon">📝</div>
+    <span>Total Records</span>
+    <strong id="statRecords">0</strong>
+    <small>Saved records</small>
+  </div>
+
+</section>
+
+
+<!-- ADD HEALTH RECORD -->
+
+<section class="section">
+
+  <div class="section-head">
+    <div>
       <h2>📊 Add Health Record</h2>
-
-      <p class="box-description">
-        Save a personal measurement for your own tracking
-        and awareness.
+      <p>
+        Save your measurements and add an optional note.
       </p>
+    </div>
 
+    <span class="badge">HEALTH LOG</span>
+  </div>
+
+  <div class="form-grid">
+
+    <div class="field">
       <label>Record Type</label>
-
       <select id="recordType">
-
-        <option value="Weight">
-          ⚖️ Weight
-        </option>
-
-        <option value="Blood Pressure">
-          🩸 Blood Pressure
-        </option>
-
-        <option value="Pulse">
-          ❤️ Pulse
-        </option>
-
+        <option value="Weight">⚖️ Weight</option>
+        <option value="Blood Pressure">🩸 Blood Pressure</option>
+        <option value="Pulse">❤️ Pulse</option>
+        <option value="Sleep">😴 Sleep</option>
+        <option value="Temperature">🌡️ Temperature</option>
+        <option value="Blood Sugar">🧪 Blood Sugar</option>
+        <option value="Steps">🚶 Steps</option>
+        <option value="Water">💧 Water Intake</option>
       </select>
+    </div>
 
-
+    <div class="field">
       <label>Value</label>
-
-      <input
-        type="text"
-        id="recordValue"
-        placeholder="Example: 65 kg or 120/80"
-      >
-
-
-      <button
-        class="btn"
-        onclick="addRecord()"
-      >
-        Save Record
-      </button>
-
+      <input id="recordValue" placeholder="Example: 68.5 kg">
     </div>
 
-
-    <!-- =========================
-         REMINDER
-    ========================== -->
-
-    <div class="box">
-
-      <h2>🔔 Add Reminder</h2>
-
-      <p class="box-description">
-        Create a personal reminder for your daily routine.
-      </p>
-
-
-      <label>Reminder</label>
-
-      <select id="reminderType">
-
-        <option value="Drink Water 💧">
-          Drink Water 💧
-        </option>
-
-        <option value="Exercise 🚶">
-          Exercise 🚶
-        </option>
-
-        <option value="Medicine Reminder 💊">
-          Medicine Reminder 💊
-        </option>
-
-        <option value="Appointment 📅">
-          Appointment 📅
-        </option>
-
-      </select>
-
-
-      <label>Reminder Time</label>
-
-      <input
-        type="time"
-        id="reminderTime"
-      >
-
-
-      <button
-        class="btn"
-        onclick="addReminder()"
-      >
-        Add Reminder
-      </button>
-
+    <div class="field">
+      <label>Date & Time</label>
+      <input id="recordDateTime" type="datetime-local">
     </div>
 
-  </section>
-
-
-  <!-- =========================
-       RECORDS
-  ========================== -->
-
-  <section class="records-section">
-
-    <h2>📋 My Health Records</h2>
-
-    <div id="recordsList"></div>
-
-  </section>
-
-
-  <!-- =========================
-       REMINDERS
-  ========================== -->
-
-  <section class="records-section">
-
-    <h2>🔔 My Reminders</h2>
-
-    <div id="remindersList"></div>
-
-  </section>
-
-
-  <div class="note">
-
-    <strong>Important:</strong>
-    This tracker is for personal record keeping and general awareness only.
-    It does not diagnose a health condition or replace professional medical advice.
-    For urgent or concerning symptoms, seek appropriate medical care.
-    Reminders in this demo work only while you are using the website and are not
-    guaranteed to function as background alarms.
+    <div class="field full">
+      <label>Notes</label>
+      <textarea
+        id="recordNote"
+        placeholder="Optional note about this measurement..."
+      ></textarea>
+    </div>
 
   </div>
 
-</main>
+  <div class="form-actions">
+    <button class="btn btn-light" id="clearRecordForm">
+      Clear
+    </button>
+
+    <button class="btn btn-blue" id="saveRecord">
+      💾 Save Health Record
+    </button>
+  </div>
+
+</section>
 
 
-<!-- =========================
-     🔔 ALARM POPUP
-========================= -->
+<!-- HEALTH RECORDS -->
 
-<div
-  class="reminder-overlay"
-  id="reminderOverlay"
->
+<section class="section">
 
-  <div class="reminder-popup">
-
-    <div class="reminder-icon">
-      🔔
+  <div class="section-head">
+    <div>
+      <h2>📝 Health Records</h2>
+      <p>
+        Search, edit or delete your saved health measurements.
+      </p>
     </div>
 
-    <h2>
-      Health Reminder
-    </h2>
+    <span class="badge" id="recordCountBadge">0 RECORDS</span>
+  </div>
 
-    <p id="reminderMessage">
-      It's time for your reminder.
-    </p>
+  <div class="record-tools">
 
-    <div
-      class="alarm-time"
-      id="reminderAlarmTime"
-    ></div>
-
-
-    <button
-      class="stop-alarm"
-      onclick="stopAlarm()"
+    <input
+      class="search"
+      id="recordSearch"
+      placeholder="🔎 Search records..."
     >
-      🔕 Stop Alarm
+
+    <select class="filter" id="recordFilter">
+      <option value="All">All Types</option>
+      <option value="Weight">Weight</option>
+      <option value="Blood Pressure">Blood Pressure</option>
+      <option value="Pulse">Pulse</option>
+      <option value="Sleep">Sleep</option>
+      <option value="Temperature">Temperature</option>
+      <option value="Blood Sugar">Blood Sugar</option>
+      <option value="Steps">Steps</option>
+      <option value="Water">Water</option>
+    </select>
+
+  </div>
+
+  <div class="record-list" id="recordList"></div>
+
+</section>
+
+
+<!-- REMINDERS -->
+
+<section class="section">
+
+  <div class="section-head">
+    <div>
+      <h2>⏰ Daily Reminders</h2>
+      <p>
+        Create reminders for water, exercise, appointments, medicines
+        and other daily activities.
+      </p>
+    </div>
+
+    <span class="badge">REMINDERS</span>
+  </div>
+
+  <div class="reminder-grid">
+
+    <div>
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Reminder</label>
+          <input
+            id="reminderName"
+            placeholder="Example: Drink Water"
+          >
+        </div>
+
+        <div class="field">
+          <label>Time</label>
+          <input id="reminderTime" type="time">
+        </div>
+
+        <div class="field">
+          <label>Category</label>
+          <select id="reminderCategory">
+            <option>Water</option>
+            <option>Exercise</option>
+            <option>Medicine</option>
+            <option>Appointment</option>
+            <option>Sleep</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Repeat</label>
+          <select id="reminderRepeat">
+            <option value="Once">Once</option>
+            <option value="Daily">Every Day</option>
+            <option value="Weekdays">Weekdays</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+
+        <button class="btn btn-blue" id="addReminder">
+          + Add Reminder
+        </button>
+
+      </div>
+
+    </div>
+
+    <div>
+
+      <div class="reminder-list" id="reminderList"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- MEDICINE TRACKER -->
+
+<section class="section">
+
+  <div class="section-head">
+
+    <div>
+      <h2>💊 Medicine Tracker</h2>
+      <p>
+        MediTrack is now integrated directly into My Health Tracker.
+      </p>
+    </div>
+
+    <span class="badge">MEDITRACK</span>
+
+  </div>
+
+
+  <!-- Medicine Summary -->
+
+  <div class="medicine-summary">
+
+    <div class="med-stat">
+      <span>Total Medicines</span>
+      <strong id="medTotal">0</strong>
+    </div>
+
+    <div class="med-stat med-taken">
+      <span>✅ Taken</span>
+      <strong id="medTaken">0</strong>
+    </div>
+
+    <div class="med-stat med-pending">
+      <span>⏳ Pending</span>
+      <strong id="medPending">0</strong>
+    </div>
+
+    <div class="med-stat med-missed">
+      <span>❌ Missed</span>
+      <strong id="medMissed">0</strong>
+    </div>
+
+    <div class="med-stat med-adherence">
+      <span>📊 Adherence</span>
+      <strong id="medAdherence">0%</strong>
+    </div>
+
+  </div>
+
+
+  <!-- Medicine Form -->
+
+  <div class="form-grid">
+
+    <div class="field">
+      <label>Medicine Name</label>
+      <input
+        id="medicineName"
+        placeholder="Example: Paracetamol 500mg"
+      >
+    </div>
+
+    <div class="field">
+      <label>Scheduled Time</label>
+      <input id="medicineTime" type="time">
+    </div>
+
+    <div class="field">
+      <label>Frequency</label>
+      <select id="medicineFrequency">
+        <option>Once Daily</option>
+        <option>Twice Daily</option>
+        <option>Three Times Daily</option>
+        <option>As Needed</option>
+      </select>
+    </div>
+
+    <div class="field full">
+      <label>Medicine Notes</label>
+      <input
+        id="medicineNote"
+        placeholder="Example: After breakfast"
+      >
+    </div>
+
+  </div>
+
+  <div class="form-actions">
+
+    <button class="btn btn-blue" id="addMedicine">
+      + Add Medicine
     </button>
 
+  </div>
 
-    <button
-      class="reminder-done"
-      onclick="completeReminderFromPopup()"
-    >
-      ✅ Done
-    </button>
+
+  <!-- Medicine List -->
+
+  <div class="medicine-list" id="medicineList"></div>
+
+</section>
+
+
+<!-- ALARM -->
+
+<section class="section">
+
+  <div class="section-head">
+
+    <div>
+      <h2>🔔 Alarm & Notifications</h2>
+      <p>
+        Enable browser sound and notifications for reminders and medicines.
+      </p>
+    </div>
+
+    <span class="badge">ALARM SYSTEM</span>
+
+  </div>
+
+  <div class="alarm-box">
+
+    <div class="alarm-info">
+
+      <strong id="alarmTitle">
+        🔔 Alarm system ready
+      </strong>
+
+      <p>
+        Keep this page open for the most reliable reminder checking.
+        Browser notification permission may be required.
+      </p>
+
+    </div>
+
+    <div class="alarm-buttons">
+
+      <button class="btn btn-blue" id="enableAlarm">
+        🔔 Enable Alarm
+      </button>
+
+      <button class="btn btn-light" id="stopAlarm">
+        🔕 Stop Alarm
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="alarm-status" id="alarmStatus">
+    Alarm is not enabled yet.
+  </div>
+
+</section>
+
+
+<!-- TRENDS -->
+
+<section class="section">
+
+  <div class="section-head">
+
+    <div>
+      <h2>📈 Health Trends</h2>
+      <p>
+        Your recent health activity at a glance.
+      </p>
+    </div>
+
+    <span class="badge">LAST 7 RECORDS</span>
+
+  </div>
+
+  <div class="trend-grid">
+
+    <div>
+
+      <div class="chart" id="trendChart"></div>
+
+    </div>
+
+    <div class="trend-info">
+
+      <div class="trend-card">
+        <span>Health Records</span>
+        <strong id="trendRecords">0</strong>
+      </div>
+
+      <div class="trend-card">
+        <span>Medicines</span>
+        <strong id="trendMedicines">0</strong>
+      </div>
+
+      <div class="trend-card">
+        <span>Reminders</span>
+        <strong id="trendReminders">0</strong>
+      </div>
+
+      <div class="trend-card">
+        <span>Completed</span>
+        <strong id="trendCompleted">0</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<footer>
+  © 2025 ZevaCare • My Health Tracker • Medicine Tracker • Reminder System
+</footer>
+
+</div>
+
+
+<!-- EDIT RECORD MODAL -->
+
+<div class="modal" id="editRecordModal">
+
+  <div class="modal-card">
+
+    <div class="modal-head">
+
+      <h2>✏️ Edit Health Record</h2>
+
+      <button class="close" id="closeEditRecord">
+        ×
+      </button>
+
+    </div>
+
+    <input type="hidden" id="editRecordId">
+
+    <div class="form-grid">
+
+      <div class="field">
+        <label>Record Type</label>
+
+        <select id="editRecordType">
+          <option>Weight</option>
+          <option>Blood Pressure</option>
+          <option>Pulse</option>
+          <option>Sleep</option>
+          <option>Temperature</option>
+          <option>Blood Sugar</option>
+          <option>Steps</option>
+          <option>Water</option>
+        </select>
+
+      </div>
+
+      <div class="field">
+        <label>Value</label>
+        <input id="editRecordValue">
+      </div>
+
+      <div class="field">
+        <label>Date & Time</label>
+        <input id="editRecordDateTime" type="datetime-local">
+      </div>
+
+      <div class="field full">
+        <label>Notes</label>
+        <textarea id="editRecordNote"></textarea>
+      </div>
+
+    </div>
+
+    <div class="form-actions">
+
+      <button class="btn btn-light" id="cancelEditRecord">
+        Cancel
+      </button>
+
+      <button class="btn btn-blue" id="saveEditedRecord">
+        Save Changes
+      </button>
+
+    </div>
 
   </div>
 
 </div>
 
 
-<footer>
-
-  © 2026 ZevaCare | Educational Healthcare Platform
-
-</footer>
-
-
 <script>
 
-/* =====================================================
-   EXISTING DATA
-===================================================== */
+/* =========================================================
+   ZEVACARE HEALTH TRACKER
+   ========================================================= */
 
-let records =
-  JSON.parse(
-    localStorage.getItem("zevaCareRecords")
-  ) || [];
-
-
-let reminders =
-  JSON.parse(
-    localStorage.getItem("zevaCareReminders")
-  ) || [];
+const RECORD_KEY = "zevaCareRecords";
+const REMINDER_KEY = "zevaCareReminders";
+const MEDICINE_KEY = "zevaCareMedicines";
 
 
-/* =====================================================
-   ALARM VARIABLES
-===================================================== */
+/* =========================================================
+   DATA
+   ========================================================= */
+
+let records = [];
+let reminders = [];
+let medicines = [];
+
+let editingRecordId = null;
 
 let audioContext = null;
 let alarmInterval = null;
-let activeReminderId = null;
-let lastReminderKey = null;
+let alarmEnabled = false;
+let alarmKeys = new Set();
 
 
-/* =====================================================
-   SAVE DATA
-===================================================== */
+/* =========================================================
+   HELPERS
+   ========================================================= */
 
-function saveData() {
+function createId(){
+
+  return Date.now().toString(36) +
+    Math.random().toString(36).slice(2);
+
+}
+
+
+function safeLoad(key){
+
+  try{
+
+    const data = JSON.parse(
+      localStorage.getItem(key) || "[]"
+    );
+
+    return Array.isArray(data) ? data : [];
+
+  }catch(e){
+
+    return [];
+
+  }
+
+}
+
+
+function saveAll(){
 
   localStorage.setItem(
-    "zevaCareRecords",
+    RECORD_KEY,
     JSON.stringify(records)
   );
 
   localStorage.setItem(
-    "zevaCareReminders",
+    REMINDER_KEY,
     JSON.stringify(reminders)
+  );
+
+  localStorage.setItem(
+    MEDICINE_KEY,
+    JSON.stringify(medicines)
   );
 
 }
 
 
-/* =====================================================
-   ADD HEALTH RECORD
-===================================================== */
+function formatDate(value){
 
-function addRecord() {
+  if(!value)return "--";
+
+  const d = new Date(value);
+
+  if(Number.isNaN(d.getTime()))return value;
+
+  return d.toLocaleString(
+    "en-IN",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric",
+      hour:"2-digit",
+      minute:"2-digit"
+    }
+  );
+
+}
+
+
+function formatTime(time){
+
+  if(!time)return "--";
+
+  const p = time.split(":");
+
+  let hour = Number(p[0]);
+  const minute = p[1];
+
+  const suffix = hour >= 12 ? "PM" : "AM";
+
+  hour = hour % 12 || 12;
+
+  return hour + ":" + minute + " " + suffix;
+
+}
+
+
+function iconFor(type){
+
+  const icons = {
+
+    "Weight":"⚖️",
+    "Blood Pressure":"🩸",
+    "Pulse":"❤️",
+    "Sleep":"😴",
+    "Temperature":"🌡️",
+    "Blood Sugar":"🧪",
+    "Steps":"🚶",
+    "Water":"💧"
+
+  };
+
+  return icons[type] || "📊";
+
+}
+
+
+/* =========================================================
+   DATE
+   ========================================================= */
+
+function showToday(){
+
+  const now = new Date();
+
+  document.getElementById("todayDate").textContent =
+    now.toLocaleDateString(
+      "en-IN",
+      {
+        weekday:"long",
+        day:"numeric",
+        month:"long",
+        year:"numeric"
+      }
+    );
+
+}
+
+showToday();
+
+
+/* =========================================================
+   RECORD FORM
+   ========================================================= */
+
+function setDefaultRecordDate(){
+
+  const now = new Date();
+
+  now.setMinutes(
+    now.getMinutes() -
+    now.getTimezoneOffset()
+  );
+
+  document.getElementById("recordDateTime").value =
+    now.toISOString().slice(0,16);
+
+}
+
+setDefaultRecordDate();
+
+
+document.getElementById("clearRecordForm")
+.addEventListener("click",function(){
+
+  document.getElementById("recordValue").value="";
+  document.getElementById("recordNote").value="";
+
+  setDefaultRecordDate();
+
+});
+
+
+document.getElementById("saveRecord")
+.addEventListener("click",function(){
 
   const type =
-    document.getElementById(
-      "recordType"
-    ).value;
+    document.getElementById("recordType").value;
 
   const value =
-    document.getElementById(
-      "recordValue"
-    ).value.trim();
+    document.getElementById("recordValue").value.trim();
+
+  const date =
+    document.getElementById("recordDateTime").value;
+
+  const note =
+    document.getElementById("recordNote").value.trim();
 
 
-  if (!value) {
+  if(!value){
 
-    alert("Please enter a value.");
+    alert("Please enter the health record value.");
 
     return;
+
+  }
+
+
+  if(!date){
+
+    alert("Please select date and time.");
+
+    return;
+
   }
 
 
   records.unshift({
 
-    id: Date.now(),
+    id:createId(),
 
-    type: type,
+    type:type,
 
-    value: value,
+    value:value,
 
-    date: new Date().toLocaleString()
+    date:date,
+
+    note:note,
+
+    createdAt:new Date().toISOString()
 
   });
 
 
-  document.getElementById(
-    "recordValue"
-  ).value = "";
+  saveAll();
+
+  document.getElementById("recordValue").value="";
+  document.getElementById("recordNote").value="";
+
+  setDefaultRecordDate();
+
+  renderAll();
+
+  alert("Health record saved successfully.");
+
+});
 
 
-  saveData();
+/* =========================================================
+   RECORD RENDER
+   ========================================================= */
 
-  renderRecords();
+function renderRecords(){
+
+  const list =
+    document.getElementById("recordList");
+
+  const search =
+    document.getElementById("recordSearch")
+    .value
+    .toLowerCase()
+    .trim();
+
+  const filter =
+    document.getElementById("recordFilter").value;
+
+
+  list.innerHTML="";
+
+
+  const filtered = records.filter(record=>{
+
+    const matchesType =
+      filter==="All" ||
+      record.type===filter;
+
+    const text =
+      (
+        record.type+" "+
+        record.value+" "+
+        record.note
+      ).toLowerCase();
+
+    const matchesSearch =
+      !search ||
+      text.includes(search);
+
+    return matchesType && matchesSearch;
+
+  });
+
+
+  if(filtered.length===0){
+
+    list.innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">📊</div>
+        <strong>No health records found</strong>
+        <p>Add a health record or change your search.</p>
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  filtered.forEach(record=>{
+
+    const item =
+      document.createElement("div");
+
+    item.className="record";
+
+
+    const main =
+      document.createElement("div");
+
+    main.className="record-main";
+
+
+    const icon =
+      document.createElement("div");
+
+    icon.className="record-icon";
+
+    icon.textContent =
+      iconFor(record.type);
+
+
+    const info =
+      document.createElement("div");
+
+    info.className="record-info";
+
+
+    const strong =
+      document.createElement("strong");
+
+    strong.textContent =
+      record.type+" — "+record.value;
+
+
+    const date =
+      document.createElement("span");
+
+    date.textContent =
+      formatDate(record.date);
+
+
+    info.appendChild(strong);
+    info.appendChild(date);
+
+
+    if(record.note){
+
+      const note =
+        document.createElement("div");
+
+      note.className="record-note";
+
+      note.textContent =
+        "Note: "+record.note;
+
+      info.appendChild(note);
+
+    }
+
+
+    main.appendChild(icon);
+    main.appendChild(info);
+
+
+    const actions =
+      document.createElement("div");
+
+    actions.className="record-actions";
+
+
+    const edit =
+      document.createElement("button");
+
+    edit.className="btn btn-light";
+
+    edit.textContent="✏️ Edit";
+
+    edit.onclick=()=>openEditRecord(record.id);
+
+
+    const del =
+      document.createElement("button");
+
+    del.className="btn btn-red";
+
+    del.textContent="🗑 Delete";
+
+    del.onclick=()=>deleteRecord(record.id);
+
+
+    actions.appendChild(edit);
+    actions.appendChild(del);
+
+
+    item.appendChild(main);
+    item.appendChild(actions);
+
+    list.appendChild(item);
+
+  });
 
 }
 
 
-/* =====================================================
-   DELETE RECORD
-===================================================== */
+document.getElementById("recordSearch")
+.addEventListener("input",renderRecords);
 
-function deleteRecord(id) {
+
+document.getElementById("recordFilter")
+.addEventListener("change",renderRecords);
+
+
+/* =========================================================
+   EDIT RECORD
+   ========================================================= */
+
+function openEditRecord(id){
+
+  const record =
+    records.find(r=>r.id===id);
+
+  if(!record)return;
+
+  editingRecordId=id;
+
+  document.getElementById("editRecordId").value=id;
+
+  document.getElementById("editRecordType").value =
+    record.type;
+
+  document.getElementById("editRecordValue").value =
+    record.value;
+
+  document.getElementById("editRecordDateTime").value =
+    record.date;
+
+  document.getElementById("editRecordNote").value =
+    record.note || "";
+
+
+  document.getElementById("editRecordModal")
+    .classList.add("show");
+
+}
+
+
+function closeEditRecord(){
+
+  document.getElementById("editRecordModal")
+    .classList.remove("show");
+
+  editingRecordId=null;
+
+}
+
+
+document.getElementById("closeEditRecord")
+.addEventListener("click",closeEditRecord);
+
+
+document.getElementById("cancelEditRecord")
+.addEventListener("click",closeEditRecord);
+
+
+document.getElementById("saveEditedRecord")
+.addEventListener("click",function(){
+
+  if(!editingRecordId)return;
+
+  const record =
+    records.find(r=>r.id===editingRecordId);
+
+  if(!record)return;
+
+
+  record.type =
+    document.getElementById("editRecordType").value;
+
+  record.value =
+    document.getElementById("editRecordValue").value.trim();
+
+  record.date =
+    document.getElementById("editRecordDateTime").value;
+
+  record.note =
+    document.getElementById("editRecordNote").value.trim();
+
+
+  if(!record.value){
+
+    alert("Value cannot be empty.");
+
+    return;
+
+  }
+
+
+  saveAll();
+
+  closeEditRecord();
+
+  renderAll();
+
+});
+
+
+function deleteRecord(id){
+
+  const record =
+    records.find(r=>r.id===id);
+
+  if(!record)return;
+
+
+  if(!confirm(
+    "Delete this health record?"
+  ))return;
+
 
   records =
-    records.filter(
-      record => record.id !== id
-    );
+    records.filter(r=>r.id!==id);
 
+  saveAll();
 
-  saveData();
-
-  renderRecords();
+  renderAll();
 
 }
 
 
-/* =====================================================
-   RENDER RECORDS
-===================================================== */
+/* =========================================================
+   STATS
+   ========================================================= */
 
-function renderRecords() {
+function getLatest(type){
 
-  const list =
-    document.getElementById(
-      "recordsList"
-    );
-
-
-  if (records.length === 0) {
-
-    list.innerHTML =
-      '<div class="empty">No health records added yet.</div>';
-
-    return;
-  }
-
-
-  list.innerHTML =
-    records.map(record => `
-
-      <div class="record">
-
-        <div class="record-info">
-
-          <strong>
-            ${escapeHTML(record.type)}:
-            ${escapeHTML(record.value)}
-          </strong>
-
-          <span>
-            ${escapeHTML(record.date)}
-          </span>
-
-        </div>
-
-        <button
-          class="delete"
-          onclick="deleteRecord(${record.id})"
-        >
-          Delete
-        </button>
-
-      </div>
-
-    `).join("");
+  return records
+    .filter(r=>r.type===type)
+    .sort(
+      (a,b)=>
+        new Date(b.date)-new Date(a.date)
+    )[0];
 
 }
 
 
-/* =====================================================
-   ADD REMINDER
-===================================================== */
+function renderStats(){
 
-function addReminder() {
+  const weight=getLatest("Weight");
+  const bp=getLatest("Blood Pressure");
+  const pulse=getLatest("Pulse");
+  const sleep=getLatest("Sleep");
 
-  const type =
-    document.getElementById(
-      "reminderType"
-    ).value;
+
+  document.getElementById("statWeight")
+    .textContent =
+      weight ? weight.value : "--";
+
+
+  document.getElementById("statBP")
+    .textContent =
+      bp ? bp.value : "--";
+
+
+  document.getElementById("statPulse")
+    .textContent =
+      pulse ? pulse.value : "--";
+
+
+  document.getElementById("statSleep")
+    .textContent =
+      sleep ? sleep.value : "--";
+
+
+  document.getElementById("statRecords")
+    .textContent =
+      records.length;
+
+
+  document.getElementById("recordCountBadge")
+    .textContent =
+      records.length+" RECORDS";
+
+}
+
+
+/* =========================================================
+   REMINDER
+   ========================================================= */
+
+document.getElementById("addReminder")
+.addEventListener("click",function(){
+
+  const name =
+    document.getElementById("reminderName")
+    .value.trim();
 
   const time =
-    document.getElementById(
-      "reminderTime"
-    ).value;
+    document.getElementById("reminderTime")
+    .value;
+
+  const category =
+    document.getElementById("reminderCategory")
+    .value;
+
+  const repeat =
+    document.getElementById("reminderRepeat")
+    .value;
 
 
-  if (!time) {
+  if(!name){
 
-    alert(
-      "Please select a reminder time."
-    );
+    alert("Please enter reminder name.");
 
     return;
+
   }
 
 
-  reminders.unshift({
+  if(!time){
 
-    id: Date.now(),
+    alert("Please select reminder time.");
 
-    type: type,
+    return;
 
-    time: time,
+  }
 
-    status: "Pending"
+
+  reminders.push({
+
+    id:createId(),
+
+    name:name,
+
+    time:time,
+
+    category:category,
+
+    repeat:repeat,
+
+    status:"Pending",
+
+    lastTriggered:"",
+
+    createdAt:new Date().toISOString()
 
   });
 
 
-  document.getElementById(
-    "reminderTime"
-  ).value = "";
+  saveAll();
+
+  document.getElementById("reminderName").value="";
+  document.getElementById("reminderTime").value="";
+
+  renderAll();
+
+});
 
 
-  saveData();
-
-  renderReminders();
-
-
-  alert(
-    "Reminder added successfully. 🔔"
-  );
-
-}
-
-
-/* =====================================================
-   DELETE REMINDER
-===================================================== */
-
-function deleteReminder(id) {
-
-  if (
-    !confirm(
-      "Delete this reminder?"
-    )
-  ) {
-
-    return;
-  }
-
-
-  reminders =
-    reminders.filter(
-      reminder => reminder.id !== id
-    );
-
-
-  saveData();
-
-  renderReminders();
-
-}
-
-
-/* =====================================================
-   COMPLETE REMINDER
-===================================================== */
-
-function completeReminder(id) {
-
-  reminders =
-    reminders.map(reminder => {
-
-      if (reminder.id === id) {
-
-        reminder.status = "Done";
-
-      }
-
-      return reminder;
-
-    });
-
-
-  saveData();
-
-  renderReminders();
-
-}
-
-
-/* =====================================================
-   SKIP REMINDER
-===================================================== */
-
-function skipReminder(id) {
-
-  reminders =
-    reminders.map(reminder => {
-
-      if (reminder.id === id) {
-
-        reminder.status = "Skipped";
-
-      }
-
-      return reminder;
-
-    });
-
-
-  saveData();
-
-  renderReminders();
-
-}
-
-
-/* =====================================================
-   RENDER REMINDERS
-===================================================== */
-
-function renderReminders() {
+function renderReminders(){
 
   const list =
-    document.getElementById(
-      "remindersList"
-    );
+    document.getElementById("reminderList");
+
+  list.innerHTML="";
 
 
-  if (reminders.length === 0) {
+  if(reminders.length===0){
 
-    list.innerHTML =
-      '<div class="empty">No reminders added yet.</div>';
+    list.innerHTML=`
+      <div class="empty">
+        <div class="empty-icon">⏰</div>
+        <strong>No reminders yet</strong>
+        <p>Create your first daily reminder.</p>
+      </div>
+    `;
 
     return;
-  }
-
-
-  list.innerHTML =
-    reminders.map(reminder => {
-
-      let statusText = "⏳ Pending";
-
-
-      if (reminder.status === "Done") {
-        statusText = "✅ Done";
-      }
-
-
-      if (reminder.status === "Skipped") {
-        statusText = "⏭️ Skipped";
-      }
-
-
-      return `
-
-        <div class="record">
-
-          <div class="record-info">
-
-            <strong>
-              ${escapeHTML(reminder.type)}
-            </strong>
-
-            <span>
-              ⏰ ${escapeHTML(reminder.time)}
-            </span>
-
-            <div class="reminder-status">
-              ${statusText}
-            </div>
-
-          </div>
-
-
-          <div class="reminder-actions">
-
-            <button
-              class="done"
-              onclick="completeReminder(${reminder.id})"
-            >
-              ✓ Done
-            </button>
-
-
-            <button
-              class="skip"
-              onclick="skipReminder(${reminder.id})"
-            >
-              Skip
-            </button>
-
-
-            <button
-              class="delete"
-              onclick="deleteReminder(${reminder.id})"
-            >
-              Delete
-            </button>
-
-          </div>
-
-        </div>
-
-      `;
-
-    }).join("");
-
-}
-
-
-/* =====================================================
-   🔊 CREATE ALARM SOUND
-===================================================== */
-
-function playAlarmSound() {
-
-  try {
-
-    if (!audioContext) {
-
-      audioContext =
-        new (
-          window.AudioContext ||
-          window.webkitAudioContext
-        )();
-
-    }
-
-
-    if (
-      audioContext.state === "suspended"
-    ) {
-
-      audioContext.resume();
-
-    }
-
-
-    const oscillator =
-      audioContext.createOscillator();
-
-
-    const gain =
-      audioContext.createGain();
-
-
-    oscillator.type = "sine";
-
-
-    oscillator.frequency.setValueAtTime(
-      880,
-      audioContext.currentTime
-    );
-
-
-    gain.gain.setValueAtTime(
-      0.001,
-      audioContext.currentTime
-    );
-
-
-    gain.gain.exponentialRampToValueAtTime(
-      0.3,
-      audioContext.currentTime + 0.05
-    );
-
-
-    gain.gain.exponentialRampToValueAtTime(
-      0.001,
-      audioContext.currentTime + 0.5
-    );
-
-
-    oscillator.connect(gain);
-
-    gain.connect(
-      audioContext.destination
-    );
-
-
-    oscillator.start();
-
-
-    oscillator.stop(
-      audioContext.currentTime + 0.5
-    );
 
   }
 
-  catch(error) {
 
-    console.log(
-      "Alarm sound error:",
-      error
+  reminders
+  .slice()
+  .sort((a,b)=>a.time.localeCompare(b.time))
+  .forEach(reminder=>{
+
+    const item =
+      document.createElement("div");
+
+    item.className="reminder";
+
+
+    const main =
+      document.createElement("div");
+
+    main.className="reminder-main";
+
+
+    const strong =
+      document.createElement("strong");
+
+    strong.textContent =
+      reminder.name;
+
+
+    const info =
+      document.createElement("span");
+
+    info.textContent =
+      "⏰ "+
+      formatTime(reminder.time)+
+      " • "+
+      reminder.category+
+      " • "+
+      reminder.repeat;
+
+
+    const status =
+      document.createElement("span");
+
+    status.className =
+      "reminder-status "+
+      (
+        reminder.status==="Done"
+        ? "status-done"
+        :
+        reminder.status==="Skipped"
+        ? "status-skipped"
+        : "status-pending"
+      );
+
+
+    status.textContent =
+      reminder.status;
+
+
+    main.appendChild(strong);
+    main.appendChild(info);
+    main.appendChild(status);
+
+
+    const actions =
+      document.createElement("div");
+
+    actions.className="reminder-actions";
+
+
+    const done =
+      document.createElement("button");
+
+    done.className="btn btn-green";
+
+    done.textContent="✓ Done";
+
+    done.onclick=()=>setReminderStatus(
+      reminder.id,
+      "Done"
     );
 
-  }
 
-}
+    const skip =
+      document.createElement("button");
 
+    skip.className="btn btn-orange";
 
-/* =====================================================
-   🔔 CHECK REMINDERS EVERY SECOND
-===================================================== */
+    skip.textContent="Skip";
 
-function checkReminders() {
-
-  const now = new Date();
-
-
-  const hour =
-    String(
-      now.getHours()
-    ).padStart(2, "0");
+    skip.onclick=()=>setReminderStatus(
+      reminder.id,
+      "Skipped"
+    );
 
 
-  const minute =
-    String(
-      now.getMinutes()
-    ).padStart(2, "0");
+    const reset =
+      document.createElement("button");
+
+    reset.className="btn btn-light";
+
+    reset.textContent="↻ Pending";
+
+    reset.onclick=()=>setReminderStatus(
+      reminder.id,
+      "Pending"
+    );
 
 
-  const currentTime =
-    `${hour}:${minute}`;
+    const del =
+      document.createElement("button");
+
+    del.className="btn btn-red";
+
+    del.textContent="🗑";
+
+    del.onclick=()=>deleteReminder(
+      reminder.id
+    );
 
 
-  const today =
-    `${now.getFullYear()}-${String(
-      now.getMonth() + 1
-    ).padStart(2, "0")}-${String(
-      now.getDate()
-    ).padStart(2, "0")}`;
+    actions.appendChild(done);
+    actions.appendChild(skip);
+    actions.appendChild(reset);
+    actions.appendChild(del);
 
 
-  reminders.forEach(reminder => {
-
-    const reminderKey =
-      `${today}-${reminder.id}-${reminder.time}`;
+    item.appendChild(main);
+    item.appendChild(actions);
 
 
-    if (
-
-      reminder.time === currentTime &&
-
-      reminder.status !== "Done" &&
-
-      reminder.status !== "Skipped" &&
-
-      lastReminderKey !== reminderKey
-
-    ) {
-
-      lastReminderKey =
-        reminderKey;
-
-
-      showReminder(reminder);
-
-    }
+    list.appendChild(item);
 
   });
 
 }
 
 
-/* =====================================================
-   SHOW REMINDER POPUP
-===================================================== */
+function setReminderStatus(id,status){
 
-function showReminder(reminder) {
+  const reminder =
+    reminders.find(r=>r.id===id);
 
-  activeReminderId =
-    reminder.id;
+  if(!reminder)return;
 
+  reminder.status=status;
 
-  document.getElementById(
-    "reminderMessage"
-  ).innerHTML =
-    `It's time for <strong>${escapeHTML(
-      reminder.type
-    )}</strong>.`;
+  saveAll();
 
+  renderAll();
 
-  document.getElementById(
-    "reminderAlarmTime"
-  ).textContent =
-    `⏰ Scheduled time: ${reminder.time}`;
-
-
-  document.getElementById(
-    "reminderOverlay"
-  ).style.display =
-    "flex";
-
-
-  playAlarmSound();
-
-
-  if (alarmInterval) {
-
-    clearInterval(
-      alarmInterval
-    );
-
-  }
-
-
-  alarmInterval =
-    setInterval(
-      playAlarmSound,
-      1500
-    );
-
-}
-
-
-/* =====================================================
-   STOP ALARM
-===================================================== */
-
-function stopAlarm() {
-
-  if (alarmInterval) {
-
-    clearInterval(
-      alarmInterval
-    );
-
-    alarmInterval = null;
-
+  if(status==="Done"){
+    stopAlarm();
   }
 
 }
 
 
-/* =====================================================
-   DONE FROM POPUP
-===================================================== */
+function deleteReminder(id){
 
-function completeReminderFromPopup() {
+  if(!confirm(
+    "Delete this reminder?"
+  ))return;
 
-  if (
-    activeReminderId !== null
-  ) {
 
-    completeReminder(
-      activeReminderId
-    );
+  reminders =
+    reminders.filter(r=>r.id!==id);
+
+  saveAll();
+
+  renderAll();
+
+}
+
+
+/* =========================================================
+   MEDICINES
+   ========================================================= */
+
+document.getElementById("addMedicine")
+.addEventListener("click",function(){
+
+  const name =
+    document.getElementById("medicineName")
+    .value.trim();
+
+  const time =
+    document.getElementById("medicineTime")
+    .value;
+
+  const frequency =
+    document.getElementById("medicineFrequency")
+    .value;
+
+  const note =
+    document.getElementById("medicineNote")
+    .value.trim();
+
+
+  if(!name){
+
+    alert("Please enter medicine name.");
+
+    return;
 
   }
 
 
-  stopAlarm();
+  if(!time){
+
+    alert("Please select medicine time.");
+
+    return;
+
+  }
 
 
-  document.getElementById(
-    "reminderOverlay"
-  ).style.display =
-    "none";
+  medicines.push({
+
+    id:createId(),
+
+    name:name,
+
+    time:time,
+
+    frequency:frequency,
+
+    note:note,
+
+    status:"Pending",
+
+    missedReason:"",
+
+    lastAlarm:"",
+
+    createdAt:new Date().toISOString()
+
+  });
 
 
-  activeReminderId =
-    null;
+  saveAll();
 
-}
+  document.getElementById("medicineName").value="";
+  document.getElementById("medicineTime").value="";
+  document.getElementById("medicineNote").value="";
+
+  renderAll();
+
+});
 
 
-/* =====================================================
-   SAFE TEXT
-===================================================== */
+function renderMedicines(){
 
-function escapeHTML(text) {
+  const list =
+    document.getElementById("medicineList");
 
-  return String(text)
+  list.innerHTML="";
 
-    .replace(
-      /&/g,
-      "&amp;"
-    )
 
-    .replace(
-      /</g,
-      "&lt;"
-    )
+  const total=medicines.length;
 
-    .replace(
-      />/g,
-      "&gt;"
-    )
+  const taken=
+    medicines.filter(m=>m.status==="Taken").length;
 
-    .replace(
-      /"/g,
-      "&quot;"
-    )
+  const missed=
+    medicines.filter(m=>m.status==="Missed").length;
 
-    .replace(
-      /'/g,
-      "&#039;"
+  const pending=
+    medicines.filter(m=>m.status==="Pending").length;
+
+  const completed=taken+missed;
+
+  const adherence=
+    completed===0
+    ? 0
+    : Math.round((taken/completed)*100);
+
+
+  document.getElementById("medTotal")
+    .textContent=total;
+
+  document.getElementById("medTaken")
+    .textContent=taken;
+
+  document.getElementById("medPending")
+    .textContent=pending;
+
+  document.getElementById("medMissed")
+    .textContent=missed;
+
+  document.getElementById("medAdherence")
+    .textContent=adherence+"%";
+
+
+  if(medicines.length===0){
+
+    list.innerHTML=`
+      <div class="empty">
+        <div class="empty-icon">💊</div>
+        <strong>No medicines added</strong>
+        <p>Add your medicine above to start MediTrack.</p>
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  medicines
+  .slice()
+  .sort((a,b)=>a.time.localeCompare(b.time))
+  .forEach(medicine=>{
+
+    const item =
+      document.createElement("div");
+
+    item.className="medicine";
+
+
+    const info =
+      document.createElement("div");
+
+    info.className="medicine-info";
+
+
+    const strong =
+      document.createElement("strong");
+
+    strong.textContent =
+      medicine.name;
+
+
+    const time =
+      document.createElement("span");
+
+    time.textContent =
+      "⏰ "+
+      formatTime(medicine.time)+
+      " • "+
+      medicine.frequency;
+
+
+    const status =
+      document.createElement("span");
+
+    status.className="med-status";
+
+
+    if(medicine.status==="Taken"){
+
+      status.classList.add("status-done");
+
+    }else if(medicine.status==="Missed"){
+
+      status.classList.add("status-skipped");
+
+    }else{
+
+      status.classList.add("status-pending");
+
+    }
+
+
+    status.textContent =
+      medicine.status;
+
+
+    info.appendChild(strong);
+    info.appendChild(time);
+    info.appendChild(status);
+
+
+    if(medicine.note){
+
+      const note =
+        document.createElement("div");
+
+      note.className="medicine-note";
+
+      note.textContent =
+        "📝 "+medicine.note;
+
+      info.appendChild(note);
+
+    }
+
+
+    if(medicine.missedReason){
+
+      const reason =
+        document.createElement("div");
+
+      reason.className="medicine-note";
+
+      reason.textContent =
+        "Reason: "+
+        medicine.missedReason;
+
+      info.appendChild(reason);
+
+    }
+
+
+    const actions =
+      document.createElement("div");
+
+    actions.className="med-actions";
+
+
+    const takenBtn =
+      document.createElement("button");
+
+    takenBtn.className="btn btn-green";
+
+    takenBtn.textContent="✓ Taken";
+
+    takenBtn.onclick=()=>setMedicineStatus(
+      medicine.id,
+      "Taken"
     );
 
+
+    const pendingBtn =
+      document.createElement("button");
+
+    pendingBtn.className="btn btn-orange";
+
+    pendingBtn.textContent="⏳ Pending";
+
+    pendingBtn.onclick=()=>setMedicineStatus(
+      medicine.id,
+      "Pending"
+    );
+
+
+    const missedBtn =
+      document.createElement("button");
+
+    missedBtn.className="btn btn-red";
+
+    missedBtn.textContent="✕ Missed";
+
+    missedBtn.onclick=()=>markMedicineMissed(
+      medicine.id
+    );
+
+
+    const deleteBtn =
+      document.createElement("button");
+
+    deleteBtn.className="btn btn-light";
+
+    deleteBtn.textContent="🗑 Delete";
+
+    deleteBtn.onclick=()=>deleteMedicine(
+      medicine.id
+    );
+
+
+    actions.appendChild(takenBtn);
+    actions.appendChild(pendingBtn);
+    actions.appendChild(missedBtn);
+    actions.appendChild(deleteBtn);
+
+
+    item.appendChild(info);
+    item.appendChild(actions);
+
+    list.appendChild(item);
+
+  });
+
 }
 
 
-/* =====================================================
-   START REMINDER SYSTEM
-===================================================== */
+function setMedicineStatus(id,status){
 
-setInterval(
-  checkReminders,
-  1000
-);
+  const medicine =
+    medicines.find(m=>m.id===id);
+
+  if(!medicine)return;
 
 
-/* =====================================================
-   INITIAL LOAD
-===================================================== */
+  medicine.status=status;
 
-renderRecords();
+  medicine.updatedAt =
+    new Date().toISOString();
 
-renderReminders();
 
-</script>
+  if(status==="Taken"){
 
-</body>
-</html>
+    medicine.missedReason="";
