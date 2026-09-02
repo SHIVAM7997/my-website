@@ -6,83 +6,396 @@
 <title>Smart Health System | ZevaCare</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
-body{background:#f5f8fb;color:#263b4d}
-header{background:#fff;padding:15px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e1e8ee}
-.brand{display:flex;align-items:center;gap:10px}
-.logo{width:43px;height:43px;background:#1f6fae;color:#fff;border-radius:12px;display:grid;place-items:center;font-size:25px;font-weight:bold}
-.brand-name{font-size:22px;font-weight:bold;color:#20394f}
-.brand-name span{color:#1f6fae}
-.back{background:#1f6fae;color:#fff;text-decoration:none;padding:10px 15px;border-radius:8px;font-size:13px;font-weight:bold}
-
-main{max-width:950px;margin:auto;padding:30px 5% 55px}
-.hero{text-align:center;margin-bottom:25px}
-.hero h1{color:#20394f;margin-bottom:10px}
-.hero p{color:#71808d;line-height:1.6;max-width:700px;margin:auto}
-
-.card{background:#fff;border:1px solid #e1e8ee;border-radius:18px;padding:24px;margin-bottom:20px}
-.card h2{font-size:19px;color:#20394f;margin-bottom:8px}
-.card-sub{font-size:13px;color:#71808d;margin-bottom:18px}
-
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
-.full{grid-column:1/-1}
-
-label{font-size:13px;font-weight:bold;color:#405466;display:block;margin-bottom:6px}
-input,select,textarea{
- width:100%;padding:12px;border:1px solid #d7e0e6;border-radius:9px;
- font-size:14px;background:#fff;outline:none
+*{
+ box-sizing:border-box;
+ margin:0;
+ padding:0;
+ font-family:Arial,Helvetica,sans-serif
 }
-input:focus,select:focus,textarea:focus{border-color:#1f6fae}
-textarea{resize:vertical;min-height:90px}
 
-.hidden{display:none!important}
+body{
+ background:#f5f8fb;
+ color:#263b4d
+}
 
-.symptoms{
- display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+header{
+ background:#fff;
+ padding:15px 7%;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ border-bottom:1px solid #e1e8ee
+}
+
+.brand{
+ display:flex;
+ align-items:center;
  gap:10px
 }
-.symptom-item{
- border:1px solid #dce5ea;border-radius:10px;padding:11px;
- display:flex;align-items:center;gap:9px;background:#fafcfd;
- cursor:pointer;font-size:13px
+
+.logo{
+ width:43px;
+ height:43px;
+ background:#1f6fae;
+ color:#fff;
+ border-radius:12px;
+ display:grid;
+ place-items:center;
+ font-size:25px;
+ font-weight:bold
 }
-.symptom-item:hover{border-color:#1f6fae}
-.symptom-item input{width:auto;accent-color:#1f6fae}
+
+.brand-name{
+ font-size:22px;
+ font-weight:bold;
+ color:#20394f
+}
+
+.brand-name span{
+ color:#1f6fae
+}
+
+.back{
+ background:#1f6fae;
+ color:#fff;
+ text-decoration:none;
+ padding:10px 15px;
+ border-radius:8px;
+ font-size:13px;
+ font-weight:bold
+}
+
+main{
+ max-width:950px;
+ margin:auto;
+ padding:30px 5% 55px
+}
+
+.hero{
+ text-align:center;
+ margin-bottom:25px
+}
+
+.hero h1{
+ color:#20394f;
+ margin-bottom:10px
+}
+
+.hero p{
+ color:#71808d;
+ line-height:1.6;
+ max-width:700px;
+ margin:auto
+}
+
+.card{
+ background:#fff;
+ border:1px solid #e1e8ee;
+ border-radius:18px;
+ padding:24px;
+ margin-bottom:20px
+}
+
+.card h2{
+ font-size:19px;
+ color:#20394f;
+ margin-bottom:8px
+}
+
+.card-sub{
+ font-size:13px;
+ color:#71808d;
+ margin-bottom:18px
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:15px
+}
+
+.full{
+ grid-column:1/-1
+}
+
+label{
+ font-size:13px;
+ font-weight:bold;
+ color:#405466;
+ display:block;
+ margin-bottom:6px
+}
+
+input,select,textarea{
+ width:100%;
+ padding:12px;
+ border:1px solid #d7e0e6;
+ border-radius:9px;
+ font-size:14px;
+ background:#fff;
+ outline:none
+}
+
+input:focus,select:focus,textarea:focus{
+ border-color:#1f6fae
+}
+
+textarea{
+ resize:vertical;
+ min-height:90px
+}
+
+.hidden{
+ display:none!important
+}
+
+/* SYMPTOM SEARCH */
+
+.symptom-search-box{
+ position:relative;
+ margin-bottom:15px
+}
+
+.symptom-search-box input{
+ padding:14px 15px 14px 42px;
+ font-size:15px
+}
+
+.search-icon{
+ position:absolute;
+ left:14px;
+ top:13px;
+ font-size:18px;
+ color:#71808d;
+ pointer-events:none
+}
+
+.symptom-help{
+ font-size:12px;
+ color:#71808d;
+ margin-top:7px
+}
+
+.symptom-suggestions{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+ gap:9px;
+ margin-top:14px
+}
+
+.symptom-suggestion{
+ border:1px solid #dce5ea;
+ border-radius:10px;
+ padding:11px;
+ background:#fafcfd;
+ cursor:pointer;
+ font-size:13px;
+ transition:.15s
+}
+
+.symptom-suggestion:hover{
+ border-color:#1f6fae;
+ background:#f2f8fc
+}
+
+.symptom-suggestion strong{
+ color:#20394f
+}
+
+.no-results{
+ padding:13px;
+ background:#f7fafc;
+ border:1px solid #e0e8ed;
+ border-radius:9px;
+ color:#71808d;
+ font-size:13px;
+ margin-top:12px
+}
+
+.custom-add{
+ display:flex;
+ gap:8px;
+ margin-top:12px
+}
+
+.custom-add input{
+ flex:1
+}
+
+.custom-add button{
+ padding:11px 15px
+}
+
+/* SELECTED SYMPTOMS */
+
+.selected-title{
+ margin-top:20px;
+ margin-bottom:9px;
+ font-size:13px;
+ font-weight:bold;
+ color:#405466
+}
+
+.selected-symptoms{
+ display:flex;
+ flex-wrap:wrap;
+ gap:8px;
+ min-height:20px
+}
+
+.symptom-chip{
+ display:flex;
+ align-items:center;
+ gap:7px;
+ background:#edf4f9;
+ border:1px solid #cbdfea;
+ color:#20394f;
+ padding:8px 10px;
+ border-radius:20px;
+ font-size:12px;
+ font-weight:bold
+}
+
+.symptom-chip button{
+ background:transparent;
+ color:#6b7d8b;
+ padding:0;
+ font-size:15px;
+ line-height:1;
+ border-radius:50%
+}
+
+.symptom-chip button:hover{
+ opacity:1;
+ color:#8a1f1f
+}
+
+.empty-selected{
+ color:#71808d;
+ font-size:12px;
+ padding:8px 0
+}
 
 .question-box{
- background:#f7fafc;border:1px solid #e0e8ed;border-radius:12px;
- padding:18px;margin-top:15px
+ background:#f7fafc;
+ border:1px solid #e0e8ed;
+ border-radius:12px;
+ padding:18px;
+ margin-top:15px
 }
-.question-box h3{font-size:16px;margin-bottom:14px;color:#20394f}
+
+.question-box h3{
+ font-size:16px;
+ margin-bottom:14px;
+ color:#20394f
+}
 
 .alert{
- padding:15px;border-radius:10px;margin-bottom:15px;line-height:1.5;
+ padding:15px;
+ border-radius:10px;
+ margin-bottom:15px;
+ line-height:1.5;
  font-size:14px
 }
-.warning{background:#fff4e5;border:1px solid #f0c36d;color:#704d00}
-.danger{background:#fff0f0;border:1px solid #f0aaaa;color:#8a1f1f}
-.success{background:#eef8f1;border:1px solid #b8dfc1;color:#24663a}
+
+.warning{
+ background:#fff4e5;
+ border:1px solid #f0c36d;
+ color:#704d00
+}
+
+.danger{
+ background:#fff0f0;
+ border:1px solid #f0aaaa;
+ color:#8a1f1f
+}
+
+.success{
+ background:#eef8f1;
+ border:1px solid #b8dfc1;
+ color:#24663a
+}
 
 button{
- border:none;background:#1f6fae;color:white;padding:13px 20px;
- border-radius:9px;font-size:14px;font-weight:bold;cursor:pointer
+ border:none;
+ background:#1f6fae;
+ color:white;
+ padding:13px 20px;
+ border-radius:9px;
+ font-size:14px;
+ font-weight:bold;
+ cursor:pointer
 }
-button:hover{opacity:.9}
 
-.result{display:none}
-.summary-box{background:#f7fafc;padding:18px;border-radius:12px;margin-bottom:15px}
-.summary-box p{margin:7px 0;font-size:14px;line-height:1.5}
-.guidance{background:#edf4f9;border-radius:12px;padding:18px;line-height:1.7;font-size:14px}
-.guidance h3{margin-bottom:8px}
+button:hover{
+ opacity:.9
+}
 
-.disclaimer{font-size:12px;color:#71808d;line-height:1.6;margin-top:18px}
+.result{
+ display:none
+}
+
+.summary-box{
+ background:#f7fafc;
+ padding:18px;
+ border-radius:12px;
+ margin-bottom:15px
+}
+
+.summary-box p{
+ margin:7px 0;
+ font-size:14px;
+ line-height:1.5
+}
+
+.guidance{
+ background:#edf4f9;
+ border-radius:12px;
+ padding:18px;
+ line-height:1.7;
+ font-size:14px
+}
+
+.guidance h3{
+ margin-bottom:8px
+}
+
+.disclaimer{
+ font-size:12px;
+ color:#71808d;
+ line-height:1.6;
+ margin-top:18px
+}
 
 @media(max-width:650px){
- .grid{grid-template-columns:1fr}
- .full{grid-column:auto}
- header{padding:13px 5%}
- main{padding:25px 5% 45px}
- .symptoms{grid-template-columns:1fr}
+
+ .grid{
+  grid-template-columns:1fr
+ }
+
+ .full{
+  grid-column:auto
+ }
+
+ header{
+  padding:13px 5%
+ }
+
+ main{
+  padding:25px 5% 45px
+ }
+
+ .symptom-suggestions{
+  grid-template-columns:1fr
+ }
+
+ .custom-add{
+  flex-direction:column
+ }
+
+ .custom-add button{
+  width:100%
+ }
 }
 </style>
 </head>
@@ -94,6 +407,7 @@ button:hover{opacity:.9}
    <div class="logo">+</div>
    <div class="brand-name">Zeva<span>Care</span></div>
  </div>
+
  <a href="dashboard.html" class="back">← Dashboard</a>
 </header>
 
@@ -101,359 +415,1832 @@ button:hover{opacity:.9}
 
 <section class="hero">
  <h1>🩺 Smart Health System</h1>
- <p>Share your symptoms and health information to receive general health guidance and important safety alerts.</p>
+ <p>
+ Share your symptoms and health information to receive general health guidance
+ and important safety alerts.
+ </p>
 </section>
 
 <form id="healthForm">
 
 <!-- PATIENT DETAILS -->
+
 <section class="card">
+
  <h2>👤 Patient Details</h2>
- <p class="card-sub">Please enter basic patient information.</p>
+
+ <p class="card-sub">
+ Please enter basic patient information.
+ </p>
 
  <div class="grid">
+
   <div>
    <label>Full Name</label>
-   <input type="text" id="name" required placeholder="Enter patient name">
+   <input
+    type="text"
+    id="name"
+    required
+    placeholder="Enter patient name">
   </div>
 
   <div>
    <label>Age</label>
-   <input type="number" id="age" min="0" max="120" required placeholder="Enter age">
+   <input
+    type="number"
+    id="age"
+    min="0"
+    max="120"
+    required
+    placeholder="Enter age">
   </div>
 
   <div>
    <label>Gender</label>
+
    <select id="gender" required>
+
     <option value="">Select gender</option>
-    <option value="Male">Male</option>
-    <option value="Female">Female</option>
-    <option value="Other">Other / Prefer not to say</option>
+
+    <option value="Male">
+     Male
+    </option>
+
+    <option value="Female">
+     Female
+    </option>
+
+    <option value="Other">
+     Other / Prefer not to say
+    </option>
+
    </select>
   </div>
+
  </div>
 
- <!-- PREGNANCY: PROJECT RULE -->
+
+ <!-- PREGNANCY -->
+
  <div id="pregnancyBox" class="question-box hidden">
+
   <h3>👩 Pregnancy Information</h3>
-  <label>Is the patient currently pregnant?</label>
+
+  <label>
+   Is the patient currently pregnant?
+  </label>
+
   <select id="pregnancy">
-   <option value="">Select</option>
-   <option value="Yes">Yes</option>
-   <option value="No">No</option>
-   <option value="Not sure">Not sure</option>
+
+   <option value="">
+    Select
+   </option>
+
+   <option value="Yes">
+    Yes
+   </option>
+
+   <option value="No">
+    No
+   </option>
+
+   <option value="Not sure">
+    Not sure
+   </option>
+
   </select>
+
  </div>
+
 </section>
+
 
 <!-- MEDICAL HISTORY -->
+
 <section class="card">
- <h2>📋 Medical History & Safety Information</h2>
- <p class="card-sub">This information helps identify situations where professional medical advice may be important.</p>
+
+ <h2>
+  📋 Medical History & Safety Information
+ </h2>
+
+ <p class="card-sub">
+ This information helps identify situations where professional
+ medical advice may be important.
+ </p>
 
  <div class="grid">
+
   <div>
-   <label>Do you have any existing medical condition?</label>
+
+   <label>
+    Do you have any existing medical condition?
+   </label>
+
    <select id="condition">
-    <option value="No">No</option>
-    <option value="Yes">Yes</option>
-    <option value="Not sure">Not sure</option>
+
+    <option value="No">
+     No
+    </option>
+
+    <option value="Yes">
+     Yes
+    </option>
+
+    <option value="Not sure">
+     Not sure
+    </option>
+
    </select>
+
   </div>
+
 
   <div>
-   <label>Any known medicine allergy or previous reaction?</label>
+
+   <label>
+    Any known medicine allergy or previous reaction?
+   </label>
+
    <select id="allergy">
-    <option value="No">No</option>
-    <option value="Yes">Yes</option>
-    <option value="Not sure">Not sure</option>
+
+    <option value="No">
+     No
+    </option>
+
+    <option value="Yes">
+     Yes
+    </option>
+
+    <option value="Not sure">
+     Not sure
+    </option>
+
    </select>
+
   </div>
 
-  <div class="full">
-   <label>Existing condition, allergy, or important health information (if any)</label>
-   <textarea id="history" placeholder="Example: diabetes, asthma, known medicine allergy, etc."></textarea>
-  </div>
 
   <div class="full">
-   <label>Regular medicines currently being taken (if any)</label>
-   <textarea id="regularMeds" placeholder="Enter medicine names if known"></textarea>
+
+   <label>
+    Existing condition, allergy, or important health information
+   </label>
+
+   <textarea
+    id="history"
+    placeholder="Example: diabetes, asthma, known medicine allergy, etc."></textarea>
+
   </div>
+
+
+  <div class="full">
+
+   <label>
+    Regular medicines currently being taken (if any)
+   </label>
+
+   <textarea
+    id="regularMeds"
+    placeholder="Enter medicine names if known"></textarea>
+
+  </div>
+
  </div>
+
 </section>
 
-<!-- SYMPTOMS -->
+
+<!-- SEARCHABLE SYMPTOMS -->
+
 <section class="card">
- <h2>🩺 Select Current Symptoms</h2>
- <p class="card-sub">You can select one or more symptoms.</p>
 
- <div class="symptoms">
-  <label class="symptom-item"><input type="checkbox" value="Headache"> 🤕 Headache</label>
-  <label class="symptom-item"><input type="checkbox" value="Fever"> 🤒 Fever</label>
-  <label class="symptom-item"><input type="checkbox" value="Nausea or Vomiting"> 🤢 Nausea / Vomiting</label>
-  <label class="symptom-item"><input type="checkbox" value="Cough"> 😷 Cough</label>
-  <label class="symptom-item"><input type="checkbox" value="Cold or Runny Nose"> 🤧 Cold / Runny Nose</label>
-  <label class="symptom-item"><input type="checkbox" value="Difficulty Breathing"> 😮‍💨 Difficulty Breathing</label>
-  <label class="symptom-item"><input type="checkbox" value="Stomach Pain"> 💢 Stomach Pain</label>
-  <label class="symptom-item"><input type="checkbox" value="Diarrhea"> 💩 Diarrhea</label>
-  <label class="symptom-item"><input type="checkbox" value="Constipation"> 🚽 Constipation</label>
-  <label class="symptom-item"><input type="checkbox" value="Dizziness"> 😵 Dizziness</label>
-  <label class="symptom-item"><input type="checkbox" value="Fatigue or Weakness"> 😴 Fatigue / Weakness</label>
-  <label class="symptom-item"><input type="checkbox" value="Chest Discomfort"> 💓 Chest Discomfort</label>
-  <label class="symptom-item"><input type="checkbox" value="Body Pain"> 🦵 Body Pain</label>
-  <label class="symptom-item"><input type="checkbox" value="Sore Throat"> 🔥 Sore Throat</label>
-  <label class="symptom-item"><input type="checkbox" value="Unusual Bleeding"> 🩸 Unusual Bleeding</label>
-  <label class="symptom-item"><input type="checkbox" value="Skin Rash or Itching"> 🟡 Skin Rash / Itching</label>
-  <label class="symptom-item"><input type="checkbox" value="Swelling"> 🦶 Swelling</label>
-  <label class="symptom-item"><input type="checkbox" value="Anxiety or Restlessness"> 😰 Anxiety / Restlessness</label>
-  <label class="symptom-item"><input type="checkbox" value="Loss of Appetite"> 🥵 Loss of Appetite</label>
-  <label class="symptom-item"><input type="checkbox" value="Dehydration or Excessive Thirst"> 💧 Excessive Thirst / Dehydration</label>
+ <h2>
+  🩺 Search Current Symptoms
+ </h2>
+
+ <p class="card-sub">
+  Search for a symptom and select one or more symptoms from the suggestions.
+ </p>
+
+
+ <div class="symptom-search-box">
+
+  <span class="search-icon">🔍</span>
+
+  <input
+   type="text"
+   id="symptomSearch"
+   placeholder="Search symptoms e.g. headache, cough, stomach pain..."
+   autocomplete="off">
+
  </div>
+
+ <p class="symptom-help">
+ You can type words such as <strong>pain</strong>, <strong>fever</strong>,
+ <strong>breathing</strong>, <strong>stomach</strong>, <strong>period</strong>,
+ <strong>skin</strong>, etc.
+ </p>
+
+
+ <div id="symptomSuggestions" class="symptom-suggestions"></div>
+
+
+ <div class="custom-add">
+
+  <input
+   type="text"
+   id="customSymptom"
+   placeholder="Can't find your symptom? Add it here">
+
+  <button
+   type="button"
+   id="addCustomSymptom">
+   + Add Symptom
+  </button>
+
+ </div>
+
+
+ <div class="selected-title">
+  Selected Symptoms
+ </div>
+
+ <div
+  id="selectedSymptoms"
+  class="selected-symptoms">
+
+  <div class="empty-selected">
+   No symptoms selected yet.
+  </div>
+
+ </div>
+
 </section>
+
 
 <!-- GENERAL DETAILS -->
+
 <section class="card">
- <h2>⏱️ Symptom Details</h2>
+
+ <h2>
+  ⏱️ Symptom Details
+ </h2>
 
  <div class="grid">
-  <div>
-   <label>How long have the symptoms been present?</label>
-   <select id="duration">
-    <option value="">Select duration</option>
-    <option>Less than 24 hours</option>
-    <option>1–3 days</option>
-    <option>4–7 days</option>
-    <option>More than 1 week</option>
-   </select>
-  </div>
 
   <div>
-   <label>Overall severity</label>
-   <select id="severity">
-    <option value="">Select severity</option>
-    <option value="Mild">🟢 Mild</option>
-    <option value="Moderate">🟡 Moderate</option>
-    <option value="Severe">🔴 Severe</option>
+
+   <label>
+    How long have the symptoms been present?
+   </label>
+
+   <select id="duration">
+
+    <option value="">
+     Select duration
+    </option>
+
+    <option>
+     Less than 24 hours
+    </option>
+
+    <option>
+     1–3 days
+    </option>
+
+    <option>
+     4–7 days
+    </option>
+
+    <option>
+     More than 1 week
+    </option>
+
    </select>
+
   </div>
+
+
+  <div>
+
+   <label>
+    Overall severity
+   </label>
+
+   <select id="severity">
+
+    <option value="">
+     Select severity
+    </option>
+
+    <option value="Mild">
+     🟢 Mild
+    </option>
+
+    <option value="Moderate">
+     🟡 Moderate
+    </option>
+
+    <option value="Severe">
+     🔴 Severe
+    </option>
+
+   </select>
+
+  </div>
+
 
   <div class="full">
-   <label>Describe what is happening or any possible trigger</label>
-   <textarea id="description" placeholder="Example: pain started after eating, symptoms occur at night, etc."></textarea>
+
+   <label>
+    Describe what is happening or any possible trigger
+   </label>
+
+   <textarea
+    id="description"
+    placeholder="Example: pain started after eating, symptoms occur at night, etc."></textarea>
+
   </div>
+
  </div>
 
- <!-- Dynamic questions appear here -->
+
  <div id="followUpArea"></div>
+
 </section>
 
-<button type="submit">🔍 Get Smart Health Guidance</button>
+
+<button type="submit">
+ 🔍 Get Smart Health Guidance
+</button>
 
 </form>
 
-<!-- RESULTS -->
-<section id="resultSection" class="card result">
 
- <h2>📊 Your Health Summary</h2>
+<!-- RESULTS -->
+
+<section
+ id="resultSection"
+ class="card result">
+
+ <h2>
+  📊 Your Health Summary
+ </h2>
 
  <div id="alertArea"></div>
 
- <div class="summary-box" id="summary"></div>
+ <div
+  class="summary-box"
+  id="summary"></div>
 
  <div class="guidance">
-  <h3>💡 General Health Guidance</h3>
+
+  <h3>
+   💡 General Health Guidance
+  </h3>
+
   <div id="guidanceText"></div>
+
  </div>
 
+
  <p class="disclaimer">
- ⚠️ <strong>Important:</strong> This Smart Health System provides general educational guidance only. It cannot diagnose a disease or replace a doctor, nurse, pharmacist, or emergency service. If symptoms are severe, worsening, or you are concerned, seek professional medical care.
+
+ ⚠️ <strong>Important:</strong>
+ This Smart Health System provides general educational guidance only.
+ It cannot diagnose a disease or replace a doctor, nurse, pharmacist,
+ or emergency service. If symptoms are severe, worsening, or you are
+ concerned, seek professional medical care.
+
  </p>
 
 </section>
 
 </main>
 
+
 <script>
+
+/* =========================
+   BASIC ELEMENTS
+========================= */
+
 const age = document.getElementById("age");
 const gender = document.getElementById("gender");
-const pregnancyBox = document.getElementById("pregnancyBox");
-const pregnancy = document.getElementById("pregnancy");
-const symptomChecks = document.querySelectorAll('.symptom-item input[type="checkbox"]');
-const followUpArea = document.getElementById("followUpArea");
 
-/* Pregnancy visibility according to requested project rule */
-function updatePregnancy() {
-  const patientAge = Number(age.value);
-  if (gender.value === "Female" && patientAge >= 21) {
-    pregnancyBox.classList.remove("hidden");
-  } else {
-    pregnancyBox.classList.add("hidden");
-    pregnancy.value = "";
-  }
+const pregnancyBox =
+ document.getElementById("pregnancyBox");
+
+const pregnancy =
+ document.getElementById("pregnancy");
+
+const symptomSearch =
+ document.getElementById("symptomSearch");
+
+const symptomSuggestions =
+ document.getElementById("symptomSuggestions");
+
+const selectedSymptomsBox =
+ document.getElementById("selectedSymptoms");
+
+const customSymptom =
+ document.getElementById("customSymptom");
+
+const addCustomSymptom =
+ document.getElementById("addCustomSymptom");
+
+const followUpArea =
+ document.getElementById("followUpArea");
+
+
+/* =========================
+   PREGNANCY
+   AGE RESTRICTION REMOVED
+========================= */
+
+function updatePregnancy(){
+
+ /*
+  Pregnancy option is now based on Female gender only.
+  There is NO 21-year restriction.
+ */
+
+ if(gender.value === "Female"){
+
+   pregnancyBox.classList.remove("hidden");
+
+ }else{
+
+   pregnancyBox.classList.add("hidden");
+
+   pregnancy.value = "";
+
+ }
+
 }
 
-age.addEventListener("input", updatePregnancy);
-gender.addEventListener("change", updatePregnancy);
+gender.addEventListener(
+ "change",
+ updatePregnancy
+);
 
-/* Follow-up questions for selected symptoms */
+
+/* =========================
+   LARGE SYMPTOM DATABASE
+========================= */
+
+const symptoms = [
+
+ "Headache",
+ "Migraine",
+ "Head heaviness",
+ "Fever",
+ "Chills",
+ "Night sweats",
+ "Cough",
+ "Dry cough",
+ "Cough with mucus",
+ "Cold",
+ "Runny nose",
+ "Blocked nose",
+ "Sneezing",
+ "Sore throat",
+ "Difficulty swallowing",
+ "Hoarseness",
+ "Facial pain",
+ "Sinus pressure",
+
+ "Difficulty breathing",
+ "Shortness of breath",
+ "Wheezing",
+ "Chest discomfort",
+ "Chest pain",
+ "Palpitations",
+ "Fast heartbeat",
+ "Slow heartbeat",
+
+ "Nausea",
+ "Vomiting",
+ "Loss of appetite",
+ "Stomach pain",
+ "Abdominal pain",
+ "Upper abdominal pain",
+ "Lower abdominal pain",
+ "Bloating",
+ "Gas",
+ "Acidity",
+ "Heartburn",
+ "Indigestion",
+ "Diarrhea",
+ "Constipation",
+ "Blood in stool",
+ "Black stool",
+
+ "Dizziness",
+ "Lightheadedness",
+ "Fainting",
+ "Near fainting",
+ "Fatigue",
+ "Weakness",
+ "Extreme weakness",
+ "Sleepiness",
+ "Difficulty sleeping",
+ "Insomnia",
+ "Confusion",
+ "Difficulty concentrating",
+
+ "Body pain",
+ "Muscle pain",
+ "Joint pain",
+ "Back pain",
+ "Neck pain",
+ "Shoulder pain",
+ "Leg pain",
+ "Arm pain",
+ "Knee pain",
+ "Muscle cramps",
+
+ "Skin rash",
+ "Skin itching",
+ "Dry skin",
+ "Red skin",
+ "Skin swelling",
+ "Face swelling",
+ "Lip swelling",
+ "Hives",
+ "Skin irritation",
+
+ "Eye pain",
+ "Red eyes",
+ "Watery eyes",
+ "Dry eyes",
+ "Blurred vision",
+ "Eye discharge",
+ "Light sensitivity",
+
+ "Ear pain",
+ "Ringing in ears",
+ "Hearing difficulty",
+ "Ear discharge",
+
+ "Tooth pain",
+ "Mouth pain",
+ "Mouth ulcers",
+ "Bad breath",
+
+ "Painful urination",
+ "Frequent urination",
+ "Burning urination",
+ "Blood in urine",
+ "Difficulty urinating",
+ "Reduced urination",
+ "Excessive urination",
+
+ "Excessive thirst",
+ "Dry mouth",
+ "Dehydration",
+
+ "Unusual bleeding",
+ "Easy bruising",
+ "Nose bleeding",
+
+ "Anxiety",
+ "Restlessness",
+ "Feeling stressed",
+ "Panic feeling",
+ "Low mood",
+ "Irritability",
+
+ "Menstrual cramps",
+ "Painful periods",
+ "Heavy periods",
+ "Irregular periods",
+ "Missed period",
+ "Unusual vaginal bleeding",
+ "Unusual vaginal discharge",
+ "Pelvic pain",
+ "Breast pain",
+ "Breast tenderness",
+
+ "Pregnancy-related nausea",
+ "Pregnancy-related fatigue",
+ "Pregnancy-related dizziness",
+
+ "Swelling of feet",
+ "Swelling of legs",
+ "Sudden swelling",
+
+ "Loss of smell",
+ "Loss of taste",
+
+ "Tremor",
+ "Numbness",
+ "Tingling",
+ "Balance problems",
+
+ "Hair loss",
+ "Unusual sweating",
+ "Feeling cold",
+ "Feeling unusually hot",
+
+ "Weight loss",
+ "Unexplained weight gain",
+
+ "Fever with rash",
+ "Fever with chills",
+ "Persistent pain",
+ "Sudden severe pain",
+
+ "Other symptom"
+];
+
+
+/* =========================
+   FOLLOW-UP QUESTIONS
+========================= */
+
 const followUps = {
- "Headache": "Did the headache start suddenly or gradually? Any vision changes or fainting?",
- "Fever": "Do you know the temperature? Are there chills, rash, or worsening symptoms?",
- "Nausea or Vomiting": "How often is vomiting happening? Are you able to keep fluids down?",
- "Cough": "Is the cough dry or with mucus? Is there breathing difficulty?",
- "Cold or Runny Nose": "Are there other symptoms such as fever, sore throat, or facial pain?",
- "Difficulty Breathing": "Is breathing difficulty present at rest or getting worse? This may need urgent assessment.",
- "Stomach Pain": "Where is the pain located? Is it constant or intermittent? Is there vomiting, fever, or change in bowel habits?",
- "Diarrhea": "How frequent are the stools? Are you able to drink fluids and are there signs of dehydration?",
- "Constipation": "How long has constipation been present? Is there severe pain, vomiting, or abdominal swelling?",
- "Dizziness": "Did you faint or nearly faint? Does dizziness happen when standing up?",
- "Fatigue or Weakness": "Is the weakness sudden or gradually developing? Is it affecting normal activities?",
- "Chest Discomfort": "When did it start? Is there shortness of breath, sweating, fainting, or pain spreading elsewhere?",
- "Body Pain": "Which body areas are affected? Is there fever, injury, or recent unusual physical activity?",
- "Sore Throat": "How long has it been present? Is swallowing or breathing difficult?",
- "Unusual Bleeding": "Where is the bleeding from and how much bleeding is occurring? Sudden or heavy bleeding needs urgent assessment.",
- "Skin Rash or Itching": "When did the rash start? Is there swelling of the face/lips or difficulty breathing?",
- "Swelling": "Where is the swelling? Did it appear suddenly and is there breathing difficulty or severe pain?",
- "Anxiety or Restlessness": "Is the feeling sudden or persistent? Is it affecting daily activities or safety?",
- "Loss of Appetite": "How long has appetite been reduced? Is there weight loss, vomiting, or other symptoms?",
- "Dehydration or Excessive Thirst": "Are you drinking enough fluids? Is there reduced urination, dizziness, or extreme weakness?"
+
+ "Headache":
+ "Did the headache start suddenly or gradually? Any vision changes or fainting?",
+
+ "Migraine":
+ "Is the headache one-sided or associated with nausea, vomiting, or sensitivity to light?",
+
+ "Head heaviness":
+ "When did the heaviness start? Is it associated with dizziness, headache, or vision changes?",
+
+ "Fever":
+ "Do you know the temperature? Are there chills, rash, or worsening symptoms?",
+
+ "Chills":
+ "Are the chills associated with fever, sweating, or feeling very unwell?",
+
+ "Night sweats":
+ "How long have night sweats been occurring? Are they associated with fever or unexplained weight loss?",
+
+ "Cough":
+ "Is the cough dry or with mucus? Is there breathing difficulty?",
+
+ "Dry cough":
+ "How long has the dry cough been present? Any breathing difficulty or chest discomfort?",
+
+ "Cough with mucus":
+ "What color is the mucus? Is there fever, chest pain, or breathing difficulty?",
+
+ "Cold":
+ "Are there fever, sore throat, cough, or breathing problems?",
+
+ "Runny nose":
+ "Is the nasal discharge clear or thick? Any fever or facial pain?",
+
+ "Blocked nose":
+ "Is there facial pain, fever, or difficulty breathing through the nose?",
+
+ "Sneezing":
+ "Are there itching, watery eyes, or exposure to dust/allergens?",
+
+ "Sore throat":
+ "How long has it been present? Is swallowing or breathing difficult?",
+
+ "Difficulty swallowing":
+ "Is swallowing painful or difficult? Any swelling of the throat or breathing difficulty?",
+
+ "Hoarseness":
+ "How long has the voice change been present? Any difficulty breathing or swallowing?",
+
+ "Facial pain":
+ "Where is the facial pain located? Is there nasal blockage or fever?",
+
+ "Sinus pressure":
+ "Are there nasal blockage, facial pain, fever, or thick nasal discharge?",
+
+ "Difficulty breathing":
+ "Is breathing difficulty present at rest or getting worse? This may need urgent assessment.",
+
+ "Shortness of breath":
+ "Did shortness of breath start suddenly? Is there chest discomfort, dizziness, or fainting?",
+
+ "Wheezing":
+ "Is wheezing associated with breathing difficulty, cough, or known asthma?",
+
+ "Chest discomfort":
+ "When did it start? Is there shortness of breath, sweating, fainting, or pain spreading elsewhere?",
+
+ "Chest pain":
+ "Did the pain start suddenly? Is there breathing difficulty, sweating, fainting, or pain spreading to the arm, jaw, or back?",
+
+ "Palpitations":
+ "Does the heartbeat feel fast, irregular, or pounding? Any dizziness, fainting, or chest discomfort?",
+
+ "Fast heartbeat":
+ "Did the fast heartbeat start suddenly? Any chest discomfort, dizziness, or fainting?",
+
+ "Slow heartbeat":
+ "Is there dizziness, fainting, unusual weakness, or chest discomfort?",
+
+ "Nausea":
+ "Is nausea associated with vomiting, abdominal pain, fever, or inability to keep fluids down?",
+
+ "Vomiting":
+ "How often is vomiting happening? Are you able to keep fluids down?",
+
+ "Loss of appetite":
+ "How long has appetite been reduced? Is there weight loss, vomiting, or other symptoms?",
+
+ "Stomach pain":
+ "Where is the pain located? Is it constant or intermittent? Is there vomiting, fever, or change in bowel habits?",
+
+ "Abdominal pain":
+ "Where is the pain located? Is it severe, sudden, or associated with vomiting or fever?",
+
+ "Upper abdominal pain":
+ "Is the pain related to eating? Any vomiting, acidity, or chest discomfort?",
+
+ "Lower abdominal pain":
+ "Is there fever, vomiting, bowel changes, urinary symptoms, or pelvic pain?",
+
+ "Bloating":
+ "How long has bloating been present? Is it related to meals or constipation?",
+
+ "Gas":
+ "Is gas associated with bloating, abdominal pain, diarrhea, or constipation?",
+
+ "Acidity":
+ "Does burning occur after meals or when lying down? Any chest discomfort or difficulty swallowing?",
+
+ "Heartburn":
+ "Does the burning happen after meals or when lying down? Any difficulty swallowing?",
+
+ "Indigestion":
+ "Are there abdominal pain, bloating, nausea, or symptoms after particular foods?",
+
+ "Diarrhea":
+ "How frequent are the stools? Are you able to drink fluids and are there signs of dehydration?",
+
+ "Constipation":
+ "How long has constipation been present? Is there severe pain, vomiting, or abdominal swelling?",
+
+ "Blood in stool":
+ "Is the bleeding bright red or dark/black? Is there dizziness, weakness, or heavy bleeding?",
+
+ "Black stool":
+ "Have you noticed repeated black/tarry stools? Any dizziness, weakness, or unusual bleeding?",
+
+ "Dizziness":
+ "Did you faint or nearly faint? Does dizziness happen when standing up?",
+
+ "Lightheadedness":
+ "Does it happen after standing, skipping meals, dehydration, or with other symptoms?",
+
+ "Fainting":
+ "Did the person completely lose consciousness? Any chest discomfort, breathing difficulty, injury, or seizure-like activity?",
+
+ "Near fainting":
+ "What were you doing when it happened? Any chest discomfort, palpitations, or breathing difficulty?",
+
+ "Fatigue":
+ "Is the fatigue sudden or gradually developing? Is it affecting normal activities?",
+
+ "Weakness":
+ "Is the weakness sudden or gradual? Is it affecting one side of the body or the whole body?",
+
+ "Extreme weakness":
+ "Is the weakness sudden or associated with fainting, breathing difficulty, chest discomfort, or confusion?",
+
+ "Sleepiness":
+ "Is excessive sleepiness new? Are you sleeping normally or taking any medicines that can cause drowsiness?",
+
+ "Difficulty sleeping":
+ "How long have sleep problems been present? Is stress, pain, caffeine, or another issue affecting sleep?",
+
+ "Insomnia":
+ "How long has insomnia been occurring? Is anxiety, stress, pain, or another symptom affecting sleep?",
+
+ "Confusion":
+ "Did confusion start suddenly? Sudden confusion needs prompt medical assessment.",
+
+ "Difficulty concentrating":
+ "How long has this been happening? Any sleep problems, stress, fatigue, or other symptoms?",
+
+ "Body pain":
+ "Which body areas are affected? Is there fever, injury, or recent unusual physical activity?",
+
+ "Muscle pain":
+ "Did it start after exercise, injury, infection, or another trigger?",
+
+ "Joint pain":
+ "Which joints are affected? Is there swelling, redness, fever, or injury?",
+
+ "Back pain":
+ "Where is the back pain? Any injury, weakness, numbness, fever, or bladder/bowel changes?",
+
+ "Neck pain":
+ "Did it follow an injury? Any severe headache, weakness, numbness, or fever?",
+
+ "Shoulder pain":
+ "Was there an injury or unusual activity? Any chest discomfort or breathing difficulty?",
+
+ "Leg pain":
+ "Is the pain in one leg or both? Any swelling, redness, injury, or breathing difficulty?",
+
+ "Arm pain":
+ "Is there injury or chest discomfort? Any weakness or numbness?",
+
+ "Knee pain":
+ "Was there an injury? Is there swelling, redness, or difficulty walking?",
+
+ "Muscle cramps":
+ "Where do cramps occur? Are they associated with exercise, dehydration, or new medicines?",
+
+ "Skin rash":
+ "When did the rash start? Is there facial swelling or difficulty breathing?",
+
+ "Skin itching":
+ "Is there a rash, new food, medicine, soap, or other possible trigger?",
+
+ "Dry skin":
+ "How long has dryness been present? Any itching, rash, or other skin changes?",
+
+ "Red skin":
+ "Is redness painful, warm, swollen, itchy, or spreading?",
+
+ "Skin swelling":
+ "Did swelling start suddenly? Any facial swelling or difficulty breathing?",
+
+ "Face swelling":
+ "Did facial swelling start suddenly? Any lip/tongue swelling or breathing difficulty?",
+
+ "Lip swelling":
+ "Did swelling start suddenly? Any tongue swelling, hives, or difficulty breathing?",
+
+ "Hives":
+ "Did hives appear after a food, medicine, insect bite, or other possible trigger?",
+
+ "Skin irritation":
+ "Was there contact with a new soap, cosmetic, chemical, plant, or medicine?",
+
+ "Eye pain":
+ "Is there blurred vision, redness, injury, discharge, or sensitivity to light?",
+
+ "Red eyes":
+ "Is there eye pain, discharge, vision change, or recent exposure to an irritant?",
+
+ "Watery eyes":
+ "Are there itching, redness, allergies, or discharge?",
+
+ "Dry eyes":
+ "How long has dryness been present? Any pain or vision changes?",
+
+ "Blurred vision":
+ "Did blurred vision start suddenly? Sudden vision changes need prompt medical assessment.",
+
+ "Eye discharge":
+ "What is the discharge like? Is there redness, pain, or vision change?",
+
+ "Light sensitivity":
+ "Is light sensitivity associated with headache, eye pain, fever, or vision changes?",
+
+ "Ear pain":
+ "Is there fever, hearing difficulty, discharge, or recent cold symptoms?",
+
+ "Ringing in ears":
+ "Is ringing in one or both ears? Any hearing loss or dizziness?",
+
+ "Hearing difficulty":
+ "Did hearing change suddenly or gradually? Any ear pain or discharge?",
+
+ "Ear discharge":
+ "What does the discharge look like? Any pain, fever, or hearing changes?",
+
+ "Tooth pain":
+ "Is there swelling, fever, sensitivity, or difficulty opening the mouth?",
+
+ "Mouth pain":
+ "Where is the pain located? Any ulcers, swelling, or difficulty swallowing?",
+
+ "Mouth ulcers":
+ "How long have the ulcers been present? Are they recurring or unusually large?",
+
+ "Bad breath":
+ "Is there dental pain, gum bleeding, dry mouth, or throat symptoms?",
+
+ "Painful urination":
+ "Is there frequent urination, fever, lower abdominal pain, or blood in urine?",
+
+ "Frequent urination":
+ "Is there excessive thirst, burning, fever, or changes in urine?",
+
+ "Burning urination":
+ "Any fever, lower abdominal pain, back pain, or blood in urine?",
+
+ "Blood in urine":
+ "Is the bleeding visible every time? Any pain, fever, or difficulty urinating?",
+
+ "Difficulty urinating":
+ "Did difficulty start suddenly? Any severe pain, swelling, or inability to pass urine?",
+
+ "Reduced urination":
+ "Have you been drinking enough fluids? Any dizziness, swelling, or severe weakness?",
+
+ "Excessive urination":
+ "Is it associated with excessive thirst, weight changes, or nighttime urination?",
+
+ "Excessive thirst":
+ "Is thirst associated with frequent urination, dry mouth, weakness, or dizziness?",
+
+ "Dry mouth":
+ "Is dry mouth associated with dehydration, medicines, or excessive thirst?",
+
+ "Dehydration":
+ "Are there reduced urination, dizziness, dry mouth, or extreme weakness?",
+
+ "Unusual bleeding":
+ "Where is the bleeding from and how much bleeding is occurring? Sudden or heavy bleeding needs urgent assessment.",
+
+ "Easy bruising":
+ "Has bruising increased recently? Any new medicines or unusual bleeding elsewhere?",
+
+ "Nose bleeding":
+ "How heavy or frequent is the bleeding? Does it stop with simple first aid?",
+
+ "Anxiety":
+ "Is anxiety sudden or persistent? Is it affecting daily activities or safety?",
+
+ "Restlessness":
+ "Is restlessness associated with anxiety, medicines, pain, or sleep problems?",
+
+ "Feeling stressed":
+ "What seems to trigger the stress? Is it affecting sleep, appetite, or daily activities?",
+
+ "Panic feeling":
+ "Did it start suddenly? Any chest discomfort, breathing difficulty, or fainting?",
+
+ "Low mood":
+ "How long has low mood been present? Is it affecting sleep, appetite, or daily activities?",
+
+ "Irritability":
+ "How long has irritability been present? Any sleep problems, stress, pain, or other symptoms?",
+
+ "Menstrual cramps":
+ "When do cramps occur in relation to the menstrual period? How severe are they?",
+
+ "Painful periods":
+ "How severe is the pain? Is bleeding unusually heavy or different from usual?",
+
+ "Heavy periods":
+ "How heavy is the bleeding and how long does it last? Any dizziness or weakness?",
+
+ "Irregular periods":
+ "How long have periods been irregular? Any major stress, weight changes, or pregnancy possibility?",
+
+ "Missed period":
+ "Could pregnancy be possible? Any stress, weight changes, or other symptoms?",
+
+ "Unusual vaginal bleeding":
+ "How much bleeding is occurring? Is it sudden, heavy, or associated with pain or pregnancy possibility?",
+
+ "Unusual vaginal discharge":
+ "What is the color/odor/amount? Is there itching, pain, or fever?",
+
+ "Pelvic pain":
+ "Is pain sudden or persistent? Any bleeding, discharge, fever, or pregnancy possibility?",
+
+ "Breast pain":
+ "Is pain in one or both breasts? Any lump, redness, discharge, or recent injury?",
+
+ "Breast tenderness":
+ "Is tenderness related to the menstrual cycle or possible pregnancy?",
+
+ "Pregnancy-related nausea":
+ "Are you able to keep fluids down? Any severe vomiting, dizziness, or weakness?",
+
+ "Pregnancy-related fatigue":
+ "Is fatigue mild or severe? Any dizziness, bleeding, pain, or difficulty maintaining fluids?",
+
+ "Pregnancy-related dizziness":
+ "Does dizziness occur when standing? Any fainting, bleeding, severe weakness, or breathing difficulty?",
+
+ "Swelling of feet":
+ "Is swelling in one or both feet? Did it start suddenly? Any breathing difficulty?",
+
+ "Swelling of legs":
+ "Is swelling in one or both legs? Any pain, redness, or breathing difficulty?",
+
+ "Sudden swelling":
+ "Where did the swelling start? Any facial swelling, breathing difficulty, or severe pain?",
+
+ "Loss of smell":
+ "Did loss of smell occur with a cold, nasal blockage, infection, or suddenly?",
+
+ "Loss of taste":
+ "Did loss of taste occur with nasal symptoms, infection, or suddenly?",
+
+ "Tremor":
+ "Did shaking start suddenly? Is it associated with weakness, dizziness, anxiety, or medicines?",
+
+ "Numbness":
+ "Where is the numbness? Did it start suddenly or affect one side of the body?",
+
+ "Tingling":
+ "Where is tingling occurring? Is it persistent or associated with weakness or numbness?",
+
+ "Balance problems":
+ "Did balance problems start suddenly? Any dizziness, weakness, vision changes, or fainting?",
+
+ "Hair loss":
+ "How long has hair loss been occurring? Any recent illness, stress, diet changes, or medicines?",
+
+ "Unusual sweating":
+ "Is sweating occurring at rest or at night? Any fever, chest discomfort, or palpitations?",
+
+ "Feeling cold":
+ "Is feeling cold associated with fever, fatigue, weight changes, or other symptoms?",
+
+ "Feeling unusually hot":
+ "Is there measured fever, sweating, dehydration, or another trigger?",
+
+ "Weight loss":
+ "Was weight loss intentional? How much weight has been lost and over what period?",
+
+ "Unexplained weight gain":
+ "How quickly did weight change? Any swelling, appetite changes, or medication changes?",
+
+ "Fever with rash":
+ "How high is the fever? Is the rash spreading or associated with breathing difficulty?",
+
+ "Fever with chills":
+ "What is the measured temperature? Any severe weakness, breathing difficulty, or other worsening symptoms?",
+
+ "Persistent pain":
+ "Where is the pain and how long has it been present? Is it worsening?",
+
+ "Sudden severe pain":
+ "Did the pain begin suddenly? Sudden severe pain can require urgent medical assessment.",
+
+ "Other symptom":
+ "Please describe the symptom, when it started, and whether it is getting better or worse."
+
 };
 
-function updateFollowUps() {
-  const selected = [...symptomChecks].filter(c => c.checked).map(c => c.value);
 
-  if (!selected.length) {
-    followUpArea.innerHTML = "";
-    return;
-  }
+/* =========================
+   SELECTED SYMPTOMS
+========================= */
 
-  let html = `<div class="question-box">
-    <h3>🤖 Smart Follow-up Questions</h3>
-    <p style="font-size:13px;color:#657686;margin-bottom:12px">
-      Please consider these questions and add relevant details in the description above.
-    </p>`;
+let selectedSymptoms = [];
 
-  selected.forEach(symptom => {
-    html += `<div style="margin:12px 0;padding:12px;background:#fff;border-radius:8px;border-left:3px solid #1f6fae">
-      <strong>${symptom}</strong><br>
-      <span style="font-size:13px;color:#657686">${followUps[symptom]}</span>
-    </div>`;
-  });
 
-  html += `</div>`;
-  followUpArea.innerHTML = html;
-}
+/* =========================
+   RENDER SEARCH RESULTS
+========================= */
 
-symptomChecks.forEach(check => check.addEventListener("change", updateFollowUps));
+function renderSuggestions(){
 
-/* Form submission and safety screening */
-document.getElementById("healthForm").addEventListener("submit", function(e) {
- e.preventDefault();
+ const query =
+  symptomSearch.value.trim().toLowerCase();
 
- const selected = [...symptomChecks].filter(c => c.checked).map(c => c.value);
+ if(!query){
 
- if (!selected.length) {
-   alert("Please select at least one symptom.");
+   symptomSuggestions.innerHTML = `
+    <div class="no-results">
+     🔍 Start typing to search through
+     ${symptoms.length}+ symptoms.
+    </div>
+   `;
+
    return;
  }
 
- const name = document.getElementById("name").value;
- const patientAge = age.value;
- const patientGender = gender.value;
- const severity = document.getElementById("severity").value;
- const duration = document.getElementById("duration").value;
- const allergy = document.getElementById("allergy").value;
- const condition = document.getElementById("condition").value;
- const pregnant = pregnancy.value;
 
- let urgent = false;
- let alerts = [];
+ const matches = symptoms
+  .filter(symptom =>
+   symptom.toLowerCase().includes(query)
+  )
+  .filter(symptom =>
+   !selectedSymptoms.includes(symptom)
+  )
+  .slice(0,30);
 
- /* Red flag screening */
- const emergencySymptoms = [
-   "Difficulty Breathing",
-   "Chest Discomfort",
-   "Unusual Bleeding"
- ];
 
- if (selected.some(s => emergencySymptoms.includes(s))) {
-   urgent = true;
-   alerts.push("Some selected symptoms can sometimes be associated with serious conditions and should be assessed promptly, especially if severe or worsening.");
+ if(!matches.length){
+
+   symptomSuggestions.innerHTML = `
+    <div class="no-results">
+     No matching symptom found.
+     You can add your own symptom below.
+    </div>
+   `;
+
+   return;
  }
 
- if (severity === "Severe") {
-   urgent = true;
-   alerts.push("Severe symptoms should not be ignored. Consider urgent professional medical assessment.");
- }
 
- if (pregnant === "Yes" || pregnant === "Not sure") {
-   alerts.push("Pregnancy status may affect health decisions. Avoid self-prescribing medicines and consult a qualified healthcare professional for personalised advice.");
- }
+ symptomSuggestions.innerHTML =
+  matches.map(symptom => {
 
- if (allergy === "Yes" || condition === "Yes") {
-   alerts.push("Existing medical conditions or medicine allergies should be considered before taking any new medicine.");
- }
+   return `
+    <div
+     class="symptom-suggestion"
+     data-symptom="${escapeHTML(symptom)}">
 
- const summary = document.getElementById("summary");
- summary.innerHTML = `
-   <p><strong>Patient:</strong> ${escapeHTML(name)}</p>
-   <p><strong>Age / Gender:</strong> ${escapeHTML(patientAge)} years / ${escapeHTML(patientGender)}</p>
-   <p><strong>Selected Symptoms:</strong> ${selected.map(escapeHTML).join(", ")}</p>
-   <p><strong>Duration:</strong> ${escapeHTML(duration || "Not specified")}</p>
-   <p><strong>Severity:</strong> ${escapeHTML(severity || "Not specified")}</p>
- `;
+     ➕ <strong>${escapeHTML(symptom)}</strong>
 
- const alertArea = document.getElementById("alertArea");
- alertArea.innerHTML = "";
+    </div>
+   `;
 
- if (urgent) {
-   alertArea.innerHTML += `<div class="alert danger">🚨 <strong>Urgent Attention Recommended:</strong> Based on the information selected, please seek prompt assessment from a qualified healthcare professional or local emergency service, especially if symptoms are severe, sudden, or worsening.</div>`;
- }
+  }).join("");
 
- if (alerts.length && !urgent) {
-   alertArea.innerHTML += `<div class="alert warning">⚠️ ${alerts.join("<br><br>")}</div>`;
- } else if (alerts.length && urgent) {
-   alertArea.innerHTML += `<div class="alert warning">⚠️ ${alerts.filter(a => !a.includes("serious") && !a.includes("Severe symptoms")).join("<br><br>")}</div>`;
- }
 
- const guidanceText = document.getElementById("guidanceText");
+ document
+  .querySelectorAll(".symptom-suggestion")
+  .forEach(item => {
 
- let guidance = `
-   <p>• Monitor your symptoms and note any changes or worsening.</p>
-   <p>• Rest and maintain appropriate fluid intake unless a healthcare professional has advised otherwise.</p>
-   <p>• Avoid assuming that one symptom has only one cause; proper assessment may be needed to identify the reason.</p>
- `;
+   item.addEventListener(
+    "click",
+    function(){
 
- if (duration === "More than 1 week") {
-   guidance += `<p>• Because symptoms have been present for more than one week, consider discussing them with a qualified healthcare professional.</p>`;
- }
+     addSymptom(
+      this.dataset.symptom
+     );
 
- if (pregnant === "Yes" || pregnant === "Not sure") {
-   guidance += `<p>• Because pregnancy may be relevant, do not rely on this system for medicine selection. Consult a qualified healthcare professional or pharmacist before taking medicines.</p>`;
- }
+     symptomSearch.value = "";
 
- if (condition === "Yes" || allergy === "Yes") {
-   guidance += `<p>• Tell your healthcare professional about existing conditions, allergies and regular medicines before starting any new treatment.</p>`;
- }
+     renderSuggestions();
 
- if (!urgent) {
-   guidance += `<p>• If symptoms become severe, sudden, or concerning, seek medical care promptly.</p>`;
- }
+    }
+   );
 
- guidanceText.innerHTML = guidance;
+  });
 
- document.getElementById("resultSection").style.display = "block";
- document.getElementById("resultSection").scrollIntoView({behavior:"smooth"});
-});
-
-function escapeHTML(value) {
- return String(value)
-  .replaceAll("&","&amp;")
-  .replaceAll("<","&lt;")
-  .replaceAll(">","&gt;")
-  .replaceAll('"',"&quot;")
-  .replaceAll("'","&#039;");
 }
+
+
+/* =========================
+   ADD SYMPTOM
+========================= */
+
+function addSymptom(symptom){
+
+ if(!symptom){
+  return;
+ }
+
+ symptom = symptom.trim();
+
+ if(!symptom){
+  return;
+ }
+
+ if(selectedSymptoms.includes(symptom)){
+  return;
+ }
+
+ selectedSymptoms.push(symptom);
+
+ renderSelectedSymptoms();
+
+ updateFollowUps();
+
+}
+
+
+/* =========================
+   REMOVE SYMPTOM
+========================= */
+
+function removeSymptom(symptom){
+
+ selectedSymptoms =
+  selectedSymptoms.filter(
+   item => item !== symptom
+  );
+
+ renderSelectedSymptoms();
+
+ renderSuggestions();
+
+ updateFollowUps();
+
+}
+
+
+/* =========================
+   RENDER SELECTED SYMPTOMS
+========================= */
+
+function renderSelectedSymptoms(){
+
+ if(!selectedSymptoms.length){
+
+  selectedSymptomsBox.innerHTML = `
+   <div class="empty-selected">
+    No symptoms selected yet.
+   </div>
+  `;
+
+  return;
+ }
+
+
+ selectedSymptomsBox.innerHTML =
+  selectedSymptoms.map(symptom => {
+
+   return `
+    <div class="symptom-chip">
+
+     ${escapeHTML(symptom)}
+
+     <button
+      type="button"
+      title="Remove symptom"
+      data-remove="${escapeHTML(symptom)}">
+      ×
+     </button>
+
+    </div>
+   `;
+
+  }).join("");
+
+
+ document
+  .querySelectorAll("[data-remove]")
+  .forEach(button => {
+
+   button.addEventListener(
+    "click",
+    function(){
+
+     removeSymptom(
+      this.dataset.remove
+     );
+
+    }
+   );
+
+  });
+
+}
+
+
+/* =========================
+   CUSTOM SYMPTOM
+========================= */
+
+addCustomSymptom.addEventListener(
+ "click",
+ function(){
+
+  const value =
+   customSymptom.value.trim();
+
+  if(!value){
+
+   alert("Please enter a symptom.");
+
+   return;
+  }
+
+  addSymptom(value);
+
+  customSymptom.value = "";
+
+  symptomSearch.value = "";
+
+  renderSuggestions();
+
+ }
+);
+
+
+customSymptom.addEventListener(
+ "keydown",
+ function(e){
+
+  if(e.key === "Enter"){
+
+   e.preventDefault();
+
+   addCustomSymptom.click();
+
+  }
+
+ }
+);
+
+
+/* =========================
+   LIVE SEARCH
+========================= */
+
+symptomSearch.addEventListener(
+ "input",
+ renderSuggestions
+);
+
+
+/* =========================
+   FOLLOW-UP QUESTIONS
+========================= */
+
+function updateFollowUps(){
+
+ if(!selectedSymptoms.length){
+
+  followUpArea.innerHTML = "";
+
+  return;
+ }
+
+
+ let html = `
+  <div class="question-box">
+
+   <h3>
+    🤖 Smart Follow-up Questions
+   </h3>
+
+   <p
+    style="
+     font-size:13px;
+     color:#657686;
+     margin-bottom:12px
+    ">
+
+    Please consider these questions and
+    add relevant details in the description above.
+
+   </p>
+ `;
+
+
+ selectedSymptoms.forEach(symptom => {
+
+  const question =
+   followUps[symptom] ||
+   "Please describe this symptom, when it started, and whether it is getting better or worse.";
+
+  html += `
+
+   <div
+    style="
+     margin:12px 0;
+     padding:12px;
+     background:#fff;
+     border-radius:8px;
+     border-left:3px solid #1f6fae
+    ">
+
+    <strong>
+     ${escapeHTML(symptom)}
+    </strong>
+
+    <br>
+
+    <span
+     style="
+      font-size:13px;
+      color:#657686
+     ">
+
+     ${escapeHTML(question)}
+
+    </span>
+
+   </div>
+  `;
+
+ });
+
+
+ html += `</div>`;
+
+ followUpArea.innerHTML = html;
+
+}
+
+
+/* =========================
+   FORM SUBMISSION
+========================= */
+
+document
+ .getElementById("healthForm")
+ .addEventListener(
+  "submit",
+  function(e){
+
+   e.preventDefault();
+
+
+   if(!selectedSymptoms.length){
+
+    alert(
+     "Please search and select at least one symptom."
+    );
+
+    symptomSearch.focus();
+
+    return;
+   }
+
+
+   const name =
+    document.getElementById("name").value;
+
+   const patientAge =
+    age.value;
+
+   const patientGender =
+    gender.value;
+
+   const severity =
+    document.getElementById("severity").value;
+
+   const duration =
+    document.getElementById("duration").value;
+
+   const allergy =
+    document.getElementById("allergy").value;
+
+   const condition =
+    document.getElementById("condition").value;
+
+   const pregnant =
+    pregnancy.value;
+
+
+   let urgent = false;
+
+   let alerts = [];
+
+
+   /* =========================
+      RED FLAG SCREENING
+   ========================= */
+
+   const emergencySymptoms = [
+
+    "Difficulty breathing",
+    "Shortness of breath",
+    "Chest discomfort",
+    "Chest pain",
+    "Fainting",
+    "Confusion",
+    "Sudden severe pain",
+    "Unusual bleeding",
+    "Blood in stool",
+    "Black stool",
+    "Blood in urine",
+    "Face swelling",
+    "Lip swelling",
+    "Sudden swelling",
+    "Blurred vision",
+    "Balance problems"
+
+   ];
+
+
+   if(
+    selectedSymptoms.some(
+     s => emergencySymptoms.includes(s)
+    )
+   ){
+
+    urgent = true;
+
+    alerts.push(
+     "Some selected symptoms can sometimes be associated with serious conditions and should be assessed promptly, especially if severe or worsening."
+    );
+
+   }
+
+
+   if(severity === "Severe"){
+
+    urgent = true;
+
+    alerts.push(
+     "Severe symptoms should not be ignored. Consider urgent professional medical assessment."
+    );
+
+   }
+
+
+   if(
+    pregnant === "Yes" ||
+    pregnant === "Not sure"
+   ){
+
+    alerts.push(
+     "Pregnancy status may affect health decisions. Avoid self-prescribing medicines and consult a qualified healthcare professional for personalised advice."
+    );
+
+   }
+
+
+   if(
+    allergy === "Yes" ||
+    condition === "Yes"
+   ){
+
+    alerts.push(
+     "Existing medical conditions or medicine allergies should be considered before taking any new medicine."
+    );
+
+   }
+
+
+   /* =========================
+      SUMMARY
+   ========================= */
+
+   const summary =
+    document.getElementById("summary");
+
+
+   summary.innerHTML = `
+
+    <p>
+     <strong>Patient:</strong>
+     ${escapeHTML(name)}
+    </p>
+
+    <p>
+     <strong>Age / Gender:</strong>
+     ${escapeHTML(patientAge)}
+     years /
+     ${escapeHTML(patientGender)}
+    </p>
+
+    <p>
+     <strong>Selected Symptoms:</strong>
+     ${selectedSymptoms
+      .map(escapeHTML)
+      .join(", ")}
+    </p>
+
+    <p>
+     <strong>Duration:</strong>
+     ${escapeHTML(
+      duration || "Not specified"
+     )}
+    </p>
+
+    <p>
+     <strong>Severity:</strong>
+     ${escapeHTML(
+      severity || "Not specified"
+     )}
+    </p>
+
+   `;
+
+
+   /* =========================
+      ALERT AREA
+   ========================= */
+
+   const alertArea =
+    document.getElementById("alertArea");
+
+   alertArea.innerHTML = "";
+
+
+   if(urgent){
+
+    alertArea.innerHTML += `
+
+     <div class="alert danger">
+
+      🚨
+      <strong>
+       Urgent Attention Recommended:
+      </strong>
+
+      Based on the information selected,
+      please seek prompt assessment from a
+      qualified healthcare professional or
+      local emergency service, especially if
+      symptoms are severe, sudden, or worsening.
+
+     </div>
+
+    `;
+
+   }
+
+
+   if(alerts.length && !urgent){
+
+    alertArea.innerHTML += `
+
+     <div class="alert warning">
+
+      ⚠️
+      ${alerts.join("<br><br>")}
+
+     </div>
+
+    `;
+
+   }
+   else if(alerts.length && urgent){
+
+    const extraAlerts =
+     alerts.filter(
+      a =>
+       !a.includes("serious conditions") &&
+       !a.includes("Severe symptoms")
+     );
+
+
+    if(extraAlerts.length){
+
+     alertArea.innerHTML += `
+
+      <div class="alert warning">
+
+       ⚠️
+       ${extraAlerts.join("<br><br>")}
+
+      </div>
+
+     `;
+
+    }
+
+   }
+
+
+   /* =========================
+      GENERAL GUIDANCE
+   ========================= */
+
+   const guidanceText =
+    document.getElementById("guidanceText");
+
+
+   let guidance = `
+
+    <p>
+     • Monitor your symptoms and note any
+     changes or worsening.
+    </p>
+
+    <p>
+     • Rest and maintain appropriate fluid
+     intake unless a healthcare professional
+     has advised otherwise.
+    </p>
+
+    <p>
+     • Avoid assuming that one symptom has
+     only one cause; proper assessment may
+     be needed to identify the reason.
+    </p>
+
+   `;
+
+
+   if(
+    duration === "More than 1 week"
+   ){
+
+    guidance += `
+
+     <p>
+      • Because symptoms have been present
+      for more than one week, consider
+      discussing them with a qualified
+      healthcare professional.
+     </p>
+
+    `;
+
+   }
+
+
+   if(
+    pregnant === "Yes" ||
+    pregnant === "Not sure"
+   ){
+
+    guidance += `
+
+     <p>
+      • Because pregnancy may be relevant,
+      do not rely on this system for medicine
+      selection. Consult a qualified healthcare
+      professional or pharmacist before taking
+      medicines.
+     </p>
+
+    `;
+
+   }
+
+
+   if(
+    condition === "Yes" ||
+    allergy === "Yes"
+   ){
+
+    guidance += `
+
+     <p>
+      • Tell your healthcare professional
+      about existing conditions, allergies and
+      regular medicines before starting any
+      new treatment.
+     </p>
+
+    `;
+
+   }
+
+
+   if(!urgent){
+
+    guidance += `
+
+     <p>
+      • If symptoms become severe, sudden,
+      or concerning, seek medical care promptly.
+     </p>
+
+    `;
+
+   }
+
+
+   guidanceText.innerHTML =
+    guidance;
+
+
+   /* =========================
+      SHOW RESULTS
+   ========================= */
+
+   document
+    .getElementById("resultSection")
+    .style.display = "block";
+
+
+   document
+    .getElementById("resultSection")
+    .scrollIntoView({
+     behavior:"smooth"
+    });
+
+  }
+ );
+
+
+/* =========================
+   HTML ESCAPE
+========================= */
+
+function escapeHTML(value){
+
+ return String(value)
+
+  .replaceAll(
+   "&",
+   "&amp;"
+  )
+
+  .replaceAll(
+   "<",
+   "&lt;"
+  )
+
+  .replaceAll(
+   ">",
+   "&gt;"
+  )
+
+  .replaceAll(
+   '"',
+   "&quot;"
+  )
+
+  .replaceAll(
+   "'",
+   "&#039;"
+  );
+
+}
+
+
+/* =========================
+   INITIAL DISPLAY
+========================= */
+
+renderSuggestions();
+renderSelectedSymptoms();
+
 </script>
 
 </body>
